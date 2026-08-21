@@ -1,0 +1,47 @@
+generated: '2026-08-21'
+method: searched
+source: npm registry search, PyPI, RubyGems, crates.io, pkg.go.dev, GitHub org github.com/geniemode
+package_count: 0
+packages: []
+note: >-
+  Geniemode publishes no client libraries in any public registry, and no SDK is referenced anywhere
+  on its site or in its contract. No SDKs pointer is emitted in apis.yml.
+registries_searched:
+- registry: npm
+  query: https://registry.npmjs.org/-/v1/search?text=geniemode
+  status: 200
+  results: 0
+- registry: pypi
+  query: https://pypi.org/pypi/geniemode/json
+  status: 404
+  results: 0
+- registry: rubygems
+  query: https://rubygems.org/api/v1/gems/geniemode.json
+  status: 404
+  results: 0
+- registry: crates.io
+  query: https://crates.io/api/v1/crates/geniemode
+  status: 403
+  results: 0
+  note: crates.io rejects unauthenticated User-Agent-less queries; no Rust client is plausible for
+    this provider and none is referenced anywhere.
+source_repositories:
+  github_org: https://github.com/geniemode
+  org_name: GENIEMODE GLOBAL PVT LTD
+  org_created: '2021-07-22'
+  public_repos: 3
+  repos:
+  - name: erpnext-release-14
+    url: https://github.com/geniemode/erpnext-release-14
+    first_party_client: false
+    note: a fork/copy of the third-party ERPNext v14 release, not a Geniemode client library
+  - name: ftp-server
+    url: https://github.com/geniemode/ftp-server
+    first_party_client: false
+  - name: Research
+    url: https://github.com/geniemode/Research
+    first_party_client: false
+  note: >-
+    The organisation is real and first-party, but none of its three public repositories is an API
+    client library for the Geniemode API. version/published are recorded as null for the repos
+    because a GitHub repository has no package-registry release metadata to read.

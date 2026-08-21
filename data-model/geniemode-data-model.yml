@@ -1,0 +1,158 @@
+generated: '2026-08-21'
+method: derived
+source: openapi/geniemode-cataloguing-api-swagger-2.0.json
+note: >-
+  Derived from $ref edges between the 934 schema definitions and from *Id reference fields on their
+  properties. Geniemode publishes no object reference, so no id-prefix or domain naming scheme could
+  be searched; entity names below are the literal Springfox-generated DTO names.
+stats:
+  definitions: 934
+  operations: 1140
+  paths: 1042
+  ref_edges_note: computed over every $ref inside definitions
+domains:
+- name: Orders
+  description: The central entity. Orders group into order groups, split into sub-orders, carry
+    products/SKUs, workflow steps (TNA), documents, risk and traceability.
+  controllers: [order-controller, order-v-2-controller, order-v-3-controller, order-group-finance-controller,
+    order-group-founder-controller, order-status-history-controller, order-traceability-controller,
+    order-risk-controller, order-handling-controller, order-carton-controller, order-dna-summary-controller]
+  operations: 200
+- name: Quality Control
+  description: The largest single surface - inspections, audits, checklists, defect capture, tech
+    packs, sampling and audio recordings of QC calls.
+  controllers: [qc-controller, qc-tech-controller, qc-audit-controller, qc-dump-controller,
+    qc-file-check-list-controller, quality-defects-controller, admin-qc-audio-recording-controller]
+  operations: 210
+- name: Supply base
+  description: Manufacturers, factories, mills, raw material and work-in-progress.
+  controllers: [manufacturer-controller, manufacturer-v-2-controller, manufacturer-v-2-login-less-controller,
+    manufacturer-brand-approval-controller, factory-controller, factory-finance-controller,
+    factory-raw-material-controller, factory-wip-controller, mill-controller, mill-details-controller,
+    pre-order-rm-controller]
+- name: Finance and invoicing
+  description: Proforma invoices, final invoices, commission invoices, payments, banks, margins,
+    currency conversion, payment calendar, HTS duty codes.
+  controllers: [invoice-controller, invoice-finance-controller, invoice-logistics-controller,
+    invoice-payments-controller, final-invoice-controller, commission-invoice-controller,
+    pi-controller, pi-finance-controller, order-finance-controller, pre-order-finance-controller,
+    pre-order-po-finance-controller, bank-controller, margin-controller, currency-conversion-controller,
+    payment-calendar-controller, hts-code-duty-controller]
+- name: Logistics
+  description: Shipments, cartons, packaging, couriers and courier budgets, EDI monitoring.
+  controllers: [shipment-controller, carton-controller, packaging-controller, courier-controller,
+    courier-entity-controller, courier-partner-controller, courier-budget-controller,
+    possible-shipments-controller, logistics-dashboard-controller, edi-monitoring-controller]
+- name: Commercial
+  description: Clients/buyers, leads, business owners, designers, brands, commissions.
+  controllers: [client-controller, lead-controller, business-owner-controller, designer-controller]
+- name: Platform
+  description: Admin, auth, users, documents, dashboards, KPIs, Excel export, FTP, indexer, audit.
+  controllers: [admin-controller, authorisation, documents-controller, dashboard-controller,
+    kpi-controller, excel-controller, ftp-client-controller, indexer-service-controller,
+    audit-controller, generic-utils-controller, geniemode-entity-controller, back-fill-controller]
+hub_entities:
+- name: UMSUserResponsePayload
+  inbound_refs: 17
+  role: User Management System user; referenced by more schemas than any other entity
+- name: AddressSubmitResponsePayload
+  inbound_refs: 14
+- name: GeniemodeEntityDto
+  inbound_refs: 12
+  role: generic entity wrapper used across domains
+- name: OrderDetail
+  inbound_refs: 12
+  role: the order aggregate
+- name: VariantRequestPayload
+  inbound_refs: 10
+  role: product/SKU variant
+- name: OrderDocDto
+  inbound_refs: 9
+- name: DocDto
+  inbound_refs: 9
+- name: Manufacturer
+  inbound_refs: 9
+- name: Shipment
+  inbound_refs: 7
+- name: LeadPageDTO
+  inbound_refs: 7
+relationships:
+- from: OrderDetail
+  to: Manufacturer
+  type: belongs_to
+  via: manufacturerAssigneeId
+- from: OrderDetail
+  to: OrderGroup
+  type: belongs_to
+  via: orderGroupId
+- from: OrderDetail
+  to: OrderDetail
+  type: belongs_to
+  via: splitFromOrderId
+  note: an order can be split from a parent order
+- from: OrderDetail
+  to: OrderDetail
+  type: belongs_to
+  via: copyFromOrderId
+- from: OrderDetail
+  to: PreOrder
+  type: belongs_to
+  via: preOrderId
+- from: OrderDetail
+  to: Sku
+  type: belongs_to
+  via: skuId
+- from: OrderDetail
+  to: TechPack
+  type: belongs_to
+  via: techPackId
+- from: OrderDetail
+  to: WorkflowTemplate
+  type: belongs_to
+  via: wfTemplateId
+- from: OrderDetail
+  to: UMSUser
+  type: belongs_to
+  via: buyerAssigneeId
+- from: OrderDetail
+  to: OrderDocDto
+  type: has_many
+  via: $ref
+- from: Client
+  to: Brand
+  type: has_many
+  via: brandId
+- from: Client
+  to: Lead
+  type: belongs_to
+  via: leadId
+- from: UMSUser
+  to: AddressSubmitResponsePayload
+  type: has_many
+  via: addressId
+- from: Invoice
+  to: OrderDetail
+  type: belongs_to
+  via: orderId
+- from: Shipment
+  to: Carton
+  type: has_many
+  via: $ref
+- from: Product
+  to: Sku
+  type: has_many
+  via: productSkuId
+- from: QcAudit
+  to: UMSUser
+  type: belongs_to
+  via: auditorId
+- from: Catalogue
+  to: Product
+  type: has_many
+  via: catalougeId
+  note: field name is misspelled "catalougeId" in the published contract
+identifier_scheme:
+  style: opaque integers
+  evidence: user_id is int64 in AuthorisationResponsePayload; path ids are numeric
+  prefixes_published: false
+render: null

@@ -1,0 +1,80 @@
+generated: '2026-08-21'
+method: derived
+source: openapi/geniemode-cataloguing-api-swagger-2.0.json + probes of geniemode.com
+standards:
+- id: openapi
+  conforms: false
+  evidence: >-
+    The contract is Swagger 2.0 (`"swagger": "2.0"`), not OpenAPI 3.x. It is a valid, machine-readable
+    contract and counts as one, but it predates the OpenAPI Specification 3.0 line by design -
+    Springfox 2.x emits Swagger 2.0.
+- id: swagger-2.0
+  conforms: true
+  evidence: 'root key `swagger: "2.0"`; 1,042 paths, 1,140 operations, 934 definitions parse cleanly'
+- id: oauth2
+  conforms: false
+  evidence: No securityDefinitions of type oauth2; /.well-known/oauth-authorization-server returns the SPA shell.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns the SPA shell, not a discovery document.
+- id: rfc9457
+  conforms: false
+  evidence: No application/problem+json media type anywhere; error responses declare no schema.
+- id: rfc9116
+  conforms: false
+  evidence: No security.txt is served on either host (catch-all 200s only).
+- id: rfc8594
+  conforms: false
+  evidence: No Sunset or Deprecation header is declared or returned.
+- id: idempotency
+  conforms: false
+  evidence: Zero occurrences of /idempoten/i across the whole contract.
+- id: pagination
+  conforms: false
+  evidence: >-
+    Five different paging/sorting parameter names across only 17 occurrences in 1,140 operations;
+    no uniform convention.
+- id: json-api
+  conforms: false
+  evidence: Plain JSON DTOs; no JSON:API media type or document structure.
+- id: scim
+  conforms: false
+  evidence: >-
+    User management runs through a bespoke "UMS" (UMSUserResponsePayload et al), not
+    urn:ietf:params:scim:schemas:* URNs.
+- id: odata
+  conforms: false
+  evidence: No $metadata surface, no OData query options.
+domain_standards:
+  market: apparel, home textile and furniture sourcing / cross-border trade
+  probed:
+  - id: edifact
+    conforms: unknown
+    evidence: >-
+      An `edi-monitoring-controller` tag with EDI operations exists in the contract, which shows
+      Geniemode exchanges EDI with trading partners, but the contract names no message type or
+      standard family (no EDIFACT segment, X12 transaction-set number or version identifier is
+      declared in any path, parameter or schema). The standard in use cannot be established from
+      published material, so no conformance is asserted either way.
+  - id: x12
+    conforms: unknown
+    evidence: same as edifact - EDI is present, the dialect is not declared
+  - id: gs1
+    conforms: false
+    evidence: No GTIN/GLN/SSCC identifier scheme appears in any schema property.
+  - id: hs-hts
+    conforms: true
+    evidence: >-
+      An `hts-code-duty-controller` tag exposes Harmonized Tariff Schedule code and duty operations.
+      HTS/HS is the World Customs Organization commodity-classification standard and is the correct
+      domain standard for cross-border sourcing; the contract declares it by name as a first-class
+      resource.
+  note: >-
+    REWARD-ONLY per the 0.12.0 rubric. HTS is a genuine declared domain standard. EDI is present but
+    undeclared as to family, so it is recorded `unknown` rather than credited or penalised.
+certifications:
+  published: false
+  note: >-
+    No trust centre, SOC 2, ISO 27001, PCI or other certification is published. The site's
+    sustainability section covers supplier social/environmental compliance, not information-security
+    certification, so no Compliance pointer is emitted.

@@ -1,0 +1,64 @@
+generated: '2026-08-21'
+method: derived
+source: openapi/geniemode-cataloguing-api-swagger-2.0.json + live 401 probes of https://portal.geniemode.com/api/*
+note: >-
+  The Swagger 2.0 document declares NO securityDefinitions block and no operation carries a
+  security requirement, so the machine-readable contract does not describe how to authenticate.
+  The auth model below is derived from the authorisation operations the spec DOES declare plus the
+  live, unauthenticated response behaviour observed on 2026-08-21. Geniemode publishes no public
+  authentication documentation.
+spec_declares_security: false
+schemes:
+- id: bearer-jwt
+  type: http
+  scheme: bearer
+  bearer_format: JWT
+  declared_in_spec: false
+  confidence: medium
+  evidence: >-
+    GET /api/auth/login (operationId loginUsingGET) returns AuthorisationResponsePayload, whose
+    properties are access_token, refresh_token, token, user_id, user_name and roles[] - the shape of
+    a JWT access/refresh pair with role claims. No securityScheme is declared for it.
+flows:
+- name: password-login
+  operation_id: loginUsingGET
+  method: GET
+  path: /api/auth/login
+  parameters:
+  - name: encodedAuthString
+    in: query
+    required: false
+    type: string
+    note: >-
+      Credentials are passed as a single encoded string in the QUERY STRING of a GET request.
+      Query strings are logged by proxies, browsers and server access logs; a credential-bearing
+      GET is a materially weaker pattern than a POST body and is recorded here as an observation of
+      the published contract, not a recommendation.
+  returns: AuthorisationResponsePayload
+- name: forgot-password
+  operation_id: forgotPasswordUsingGET
+  path: /api/auth/ForgotPassword
+- name: reset-password
+  operation_id: resetPasswordUsingGET
+  path: /api/auth/ResetPassword
+authorization:
+  model: role-based
+  evidence: AuthorisationResponsePayload.roles is an array of role strings.
+  scopes_published: false
+  note: >-
+    No OAuth 2.0 or OpenID Connect surface was found. /.well-known/openid-configuration and
+    /.well-known/oauth-authorization-server return the portal SPA shell, not a discovery document.
+    There is therefore no scopes/ artifact - this is a key/session provider, not an OAuth provider.
+observed_behaviour:
+- probe: https://portal.geniemode.com/api/
+  status: 401
+  body: '{"timestamp":...,"status":401,"error":"Unauthorized","path":"/api/"}'
+- probe: https://portal.geniemode.com/api/v1/orders
+  status: 401
+- probe: https://portal.geniemode.com/api/v1/skus/elastic-search
+  status: 401
+public_access: none
+public_access_note: >-
+  Every operation in the contract requires an authenticated portal session. Geniemode operates no
+  self-service developer signup for the API; portal accounts are provisioned to buyers, suppliers,
+  sales agents and internal staff.

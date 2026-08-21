@@ -1,0 +1,81 @@
+# Geniemode
+
+> Geniemode (Geniemode Global Pvt Ltd) is a Gurugram, India based B2B cross-border sourcing and
+> supply-chain technology company founded in 2021 by Amit Sharma and Tanuj Gangwani. It runs an
+> asset-light platform connecting global retail buyers in home textiles, furniture, apparel and
+> accessories with a vetted manufacturer network, covering design collaboration, sampling, quality
+> control, factory and raw-material management, logistics, customs and invoicing.
+
+Generated: 2026-08-21
+Method: generated (from apis.yml and the artifacts in this repository)
+Source: https://raw.githubusercontent.com/api-evangelist/geniemode/refs/heads/main/apis.yml
+
+## Important for agents
+
+Geniemode does NOT operate a public API program. There is no developer portal, no documentation
+site, no self-service signup, no SDK, no CLI, no MCP server and no published pricing. A
+machine-readable contract IS publicly readable (see below), but every operation it describes
+returns HTTP 401 without an authenticated portal session, and portal accounts are provisioned by
+Geniemode to buyers, suppliers, sales agents and staff. An agent cannot call this API.
+
+## API
+
+- [Geniemode Cataloguing API](https://portal.geniemode.com/): the Spring Boot interface behind the
+  Geniemode operations and partner portal. Swagger 2.0, 1,042 paths, 1,140 operations, 934 schema
+  definitions. Contract served anonymously at https://portal.geniemode.com/api/v2/api-docs; all
+  operations require authentication.
+
+Functional areas in the contract: orders and order groups, quality control and audits,
+manufacturers, factories and mills, raw material and work-in-progress, cartons, packaging and
+shipments, couriers, proforma and final invoicing, payments, commissions and margins, currency
+conversion, HTS duty codes, EDI monitoring, dashboards and KPIs, Excel export, and user/admin
+management.
+
+## Contract facts
+
+- Specification: Swagger 2.0 (not OpenAPI 3.x)
+- Authentication: bearer JWT from GET /api/auth/login; NOT declared in the contract
+- Security schemes declared: 0
+- Operations with a description: 0 of 1,140
+- Operations with an example: 0 of 1,140
+- Operations declaring no error response: 522 of 1,140
+- Error format: Spring Boot default {timestamp, status, error, path}; not RFC 9457
+- Idempotency: none
+- Rate limits: none published, no rate-limit headers returned
+- Webhooks / events / AsyncAPI: none
+- Versioning: /api, /api/v1 and /api/v2 families coexist; info.version is the placeholder "API V"
+
+## Company pages
+
+- [Home](https://geniemode.com/)
+- [About](https://geniemode.com/about-us)
+- [Services](https://geniemode.com/services)
+- [Technology](https://geniemode.com/technology)
+- [Sustainability](https://geniemode.com/sustainability)
+- [Careers](https://geniemode.com/careers)
+- [Contact](https://geniemode.com/contact-us)
+- [Grievance redressal](https://geniemode.com/grievance)
+- [Terms and conditions](https://geniemode.com/tnc)
+- [Privacy policy](https://geniemode.com/privacy-policy)
+- [Sign up](https://geniemode.com/signup)
+- [Sign in](https://geniemode.com/signin)
+- [Portal](https://portal.geniemode.com/)
+- [Blog (Medium)](https://medium.com/@Geniemode)
+- [GitHub organisation](https://github.com/geniemode)
+- [LinkedIn](https://www.linkedin.com/company/geniemode/)
+
+## Artifacts in this profile
+
+- openapi/geniemode-cataloguing-api-swagger-2.0.json - the provider's contract, saved verbatim
+- authentication/geniemode-authentication.yml - derived auth profile
+- conventions/geniemode-conventions.yml - pagination, versioning, idempotency, reversibility
+- errors/geniemode-problem-types.yml - error catalog derived from the contract
+- data-model/geniemode-data-model.yml - entity graph derived from schema $refs
+- lifecycle/geniemode-lifecycle.yml - versioning and deprecation posture
+- conformance/geniemode-conformance.yml - standards conformance, including HTS
+- security/geniemode-domain-security.yml - probed TLS/DNS posture
+- overlays/geniemode-cataloguing-api-overlay.yaml - API Evangelist enhancements
+- well-known/geniemode-well-known.yml - .well-known probe record (no hits)
+- packages/geniemode-packages.yml - registry search (no SDKs)
+- plans/geniemode-plans-pricing.yml - no published plans
+- rate-limits/geniemode-rate-limits.yml - no published limits

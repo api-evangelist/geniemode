@@ -1,0 +1,55 @@
+generated: '2026-08-21'
+method: derived
+source: openapi/geniemode-cataloguing-api-swagger-2.0.json + probes of geniemode.com and portal.geniemode.com
+versioning:
+  policy_published: false
+  scheme: path segment, non-uniform
+  observed_families: ['/api/*', '/api/v1/*', '/api/v2/*']
+  info_version: 'API V'
+  note: >-
+    info.version is the unreplaced Springfox placeholder string "API V", so the contract does not
+    identify its own version. Three path-version families and controller-level v2/v3 suffixes
+    coexist in one document with no stated support policy.
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594_compliant: false
+  deprecated_operations_flagged: 0
+  note: >-
+    No operation carries the Swagger `deprecated: true` flag. The only retirement signal in the
+    entire contract is an HTTP 410 "No longer supported" response declared on two operations, which
+    is a runtime signal rather than a policy. No Deprecation pointer is emitted.
+  retired_operations:
+  - path: /api/v1/path/generic_qc/getManufactureIdsForQC
+    method: post
+    signal: 'declares 410 "No longer supported"'
+  - path: /api/v1/path/qc/getManufactureIdsForQC
+    method: post
+    signal: 'declares 410 "No longer supported"'
+status_page:
+  published: false
+  probed:
+  - url: https://status.geniemode.com/
+    status: 000
+    result: >-
+      connection failed - the name resolves only via the *.geniemode.com wildcard ACM validation
+      CNAME and no service listens on it
+  note: >-
+    Geniemode operates no public status page. A Spring Boot actuator health endpoint is reachable
+    anonymously at https://portal.geniemode.com/api/actuator/health (HTTP 200, {"status":"UP"}), but
+    that is an internal liveness probe, not a published status page, and no StatusPage pointer is
+    emitted for it.
+  actuator_health:
+    url: https://portal.geniemode.com/api/actuator/health
+    status: 200
+    body: '{"status":"UP","components":{"livenessState":{"status":"UP"},"ping":{"status":"UP"},"readinessState":{"status":"UP"}...}'
+sla:
+  published: false
+changelog:
+  published: false
+  note: >-
+    No dated changelog, release-notes page or versioning history is published on geniemode.com or
+    the portal. No changelog/ artifact is written because there is nothing to record.
+support_window:
+  published: false

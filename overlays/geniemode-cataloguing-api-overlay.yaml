@@ -1,0 +1,92 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Geniemode Cataloguing API
+  version: 1.0.0
+extends: ../openapi/geniemode-cataloguing-api-swagger-2.0.json
+x-generated: '2026-08-21'
+x-method: generated
+x-source: >-
+  Derived from analysis of the provider's own Swagger 2.0 document fetched from
+  https://portal.geniemode.com/api/v2/api-docs on 2026-08-21. This overlay records API Evangelist's
+  enhancements only; the original contract in openapi/ is never mutated. NOTE the base document is
+  Swagger 2.0, so these actions describe corrections to a Swagger 2.0 tree (securityDefinitions,
+  not components.securitySchemes).
+actions:
+- target: $.info
+  description: >-
+    Replace the four unreplaced Springfox placeholder values. As published, info.version is the
+    literal string "API V", termsOfService is "Terms of service", and license is
+    {name: "License of API", url: "API license URL"} - none identifies anything.
+  update:
+    version: unknown
+    x-version-note: >-
+      The provider publishes no version identifier. Three path families (/api, /api/v1, /api/v2)
+      coexist in this single document.
+    x-terms-of-service-actual: https://geniemode.com/tnc
+    x-privacy-policy: https://geniemode.com/privacy-policy
+    x-provider: Geniemode Global Pvt Ltd
+    x-provider-site: https://geniemode.com/
+- target: $.info
+  description: Remove the placeholder license block, which names no licence.
+  remove: false
+  update:
+    x-license-note: >-
+      The published license block is the Springfox default placeholder ("License of API" /
+      "API license URL") and names no actual licence. Treat the contract as all rights reserved.
+- target: $
+  description: >-
+    Add the schemes and basePath the document omits. The document declares host
+    portal.geniemode.com but no schemes[] and no basePath; every path already carries its own /api
+    prefix.
+  update:
+    schemes:
+    - https
+    x-base-url: https://portal.geniemode.com
+- target: $
+  description: >-
+    Add the securityDefinitions the contract omits entirely. Every one of the 1,140 operations
+    returns HTTP 401 without a session, yet the document declares no securityDefinitions and no
+    operation carries a security requirement - a client generated from this contract cannot
+    authenticate. The scheme below is DERIVED from AuthorisationResponsePayload
+    (access_token/refresh_token/roles), not published by the provider.
+  update:
+    securityDefinitions:
+      bearerAuth:
+        type: apiKey
+        name: Authorization
+        in: header
+        description: >-
+          DERIVED, NOT PUBLISHED. Bearer JWT obtained from GET /api/auth/login, which returns
+          AuthorisationResponsePayload {access_token, refresh_token, token, roles[], user_id}.
+          Geniemode publishes no authentication documentation.
+- target: $.paths[?(@)]..responses
+  description: >-
+    Record that 401 is undeclared everywhere. 618 operations declare 403/500 and 522 declare no
+    error response at all, but 401 - the status the API actually returns to every unauthenticated
+    caller - is declared on none of the 1,140.
+  update:
+    x-undeclared-401:
+      description: Unauthorized - returned by the live API on every operation without a session
+      x-observed-envelope:
+        timestamp: integer
+        status: integer
+        error: string
+        path: string
+      x-note: added by API Evangelist from observation; not in the provider's contract
+- target: $.info
+  description: Record the contract-quality gaps measured against the published document.
+  update:
+    x-contract-quality:
+      operations: 1140
+      with_summary: 1140
+      with_description: 0
+      with_operation_id: 1140
+      with_examples: 0
+      with_error_responses: 618
+      without_any_error_response: 522
+      definitions: 934
+      security_schemes_declared: 0
+      note: >-
+        Summaries are present on all 1,140 operations but are Springfox-generated method names
+        (e.g. "cancelOrder"), not prose. Zero operations carry a description and zero carry an
+        example.

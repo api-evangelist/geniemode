@@ -1,0 +1,24 @@
+generated: '2026-08-21'
+method: probed
+source: live unauthenticated responses from https://portal.geniemode.com + openapi/geniemode-cataloguing-api-swagger-2.0.json
+limit_count: 0
+rate_limits: []
+headers:
+  published: false
+  observed: []
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header was returned on any observed response, and
+    no rate-limit header is declared on any of the 1,140 operations in the contract.
+exhaustion_status_code: null
+note: >-
+  Geniemode documents no rate limits. There is no developer documentation site in which limits
+  could be stated, and no 429 response is declared anywhere in the contract - the only declared
+  error statuses are 403, 410 and 500. An agent has no runtime signal to back off on.
+evidence:
+- url: https://portal.geniemode.com/api/
+  status: 401
+  headers_seen: [timestamp, status, error, path]
+  rate_limit_headers: none
+- url: https://portal.geniemode.com/api/v2/api-docs
+  status: 200
+  rate_limit_headers: none

@@ -1,0 +1,138 @@
+generated: '2026-08-21'
+method: derived
+source: openapi/geniemode-cataloguing-api-swagger-2.0.json + live probes of https://portal.geniemode.com
+note: >-
+  Derived entirely from the published Swagger 2.0 contract and observed responses. Geniemode
+  publishes no developer documentation, so there is no prose convention guide to search; every
+  statement below is grounded in the contract or a probe.
+auth_style:
+  model: bearer token from a login endpoint, role-based
+  see: authentication/geniemode-authentication.yml
+  declared_in_spec: false
+idempotency:
+  supported: false
+  header: null
+  evidence: >-
+    Zero occurrences of /idempoten/i across all 1,042 paths, 1,140 operations and 934 definitions.
+    No Idempotency-Key header parameter is declared on any operation.
+  risk: >-
+    239 POST and 249 PUT operations exist with no replay-safety mechanism, so a retried write is a
+    duplicate write. No `Idempotency` pointer is emitted in apis.yml because the capability is absent.
+pagination:
+  style: inconsistent
+  documented: false
+  params_observed:
+    sort: 6
+    count: 5
+    limit: 4
+    page: 1
+    size: 1
+  note: >-
+    Only 17 parameter occurrences across 1,140 operations relate to paging or sorting, and they use
+    five different names. There is no uniform pagination convention: most collection endpoints
+    return unbounded arrays. A handful of endpoints carry a `/paginated` path suffix
+    (e.g. /api/dashboard/GetDashboardLeads/paginated) alongside an unpaginated twin, which is a
+    per-endpoint opt-in rather than a convention.
+  response_envelope: >-
+    A Spring Data `Sort` definition is referenced by 6 schemas, indicating Spring Pageable is used
+    on some endpoints, but no Page envelope is declared consistently.
+field_expansion:
+  supported: false
+sparse_fieldsets:
+  supported: false
+metadata:
+  supported: false
+request_id_tracing:
+  supported: false
+  evidence: No X-Request-Id / correlation-id header parameter is declared on any operation.
+versioning:
+  style: path-segment, non-uniform
+  evidence: >-
+    Three version families coexist in ONE contract - unversioned /api/*, /api/v1/*, and /api/v2/*
+    - and controller tags carry their own suffixes (order-controller, order-v-2-controller,
+    order-v-3-controller; manufacturer-controller, manufacturer-v-2-controller). Older and newer
+    variants of the same resource are served simultaneously with no declared migration path.
+  info_version_field: 'API V'
+  info_version_note: >-
+    info.version is the literal string "API V" - the Springfox default placeholder was never
+    replaced, so the contract does not state which version of the API it describes.
+error_envelope:
+  see: errors/geniemode-problem-types.yml
+  declared_in_spec: false
+  observed: Spring Boot default {timestamp, status, error, path}
+rate_limit_signaling:
+  headers_published: false
+  see: rate-limits/geniemode-rate-limits.yml
+dry_run_mode:
+  supported: false
+  evidence: No preview/simulate/dry-run parameter or operation is declared.
+reversibility:
+  grade: documented
+  grade_basis: >-
+    Reversal operations exist and are named in the contract, but NO window, deadline or
+    precondition is stated anywhere - Geniemode publishes no documentation in which a window could
+    be stated. Per the 0.12.0 rubric a reversal path without a stated window grades `documented`,
+    not `verified`. No window is asserted here because none is published.
+  window_source: null
+  operations:
+  - action: cancel an order
+    operation_id: cancelOrderUsingPUT
+    method: put
+    path: /api/v2/new/orders/cancel/{orderId}
+    window: not stated
+  - action: cancel an order and optionally its sub-orders
+    operation_id: cancelOrderUsingPUT_1
+    method: put
+    path: /api/v2/new/orders/cancel/{orderId}/{shouldCancelSubOrder}
+    window: not stated
+  - action: cancel multiple orders in bulk
+    operation_id: cancelMultipleOrdersUsingPUT
+    method: put
+    path: /api/v2/new/orders/cancel
+    window: not stated
+  - action: restore a cancelled order
+    operation_id: restoreOrderUsingPUT
+    method: put
+    path: /api/v2/new/orders/restore/{orderId}
+    window: not stated
+    note: >-
+      The only true undo in the contract - it reverses cancelOrder. Whether it works after a given
+      elapsed time or order state is not published.
+  - action: cancel an invoice
+    operation_id: cancelUsingPUT
+    method: put
+    path: /api/v1/path/invoice/cancel/{invoiceId}
+    window: not stated
+  - action: cancel a courier booking
+    operation_id: deleteUsingPUT
+    method: put
+    path: /api/v1/courier/cancel/{id}
+    window: not stated
+  - action: revert a completed workflow step on an order
+    operation_id: revertCompletedStepUsingPUT
+    method: put
+    path: /api/orders/UpdateOrder/revertCompletedStep
+    window: not stated
+  - action: revert a QC result
+    operation_id: revertQcUsingPOST
+    method: post
+    path: /api/v1/path/generic_qc/revertQc
+    window: not stated
+  audit_trail:
+  - operation_id: cancellationHistoryUsingGET
+    path: /api/v1/path/qc_tech/cancellationHistory/{id}
+    note: reads the cancellation history for a QC tech record
+  - path: /api/v1/order-status-history
+    note: order-status-history-controller exposes state transitions
+  hard_deletes:
+    count: 34
+    note: >-
+      34 DELETE operations exist (factories, invoices, couriers, purchase orders, QC checklists,
+      raw materials, order-traceability rows). None has a documented restore counterpart, and no
+      soft-delete or retention window is published, so those 34 must be treated as irreversible.
+cross_links:
+  errors: errors/geniemode-problem-types.yml
+  lifecycle: lifecycle/geniemode-lifecycle.yml
+  authentication: authentication/geniemode-authentication.yml
+  rate_limits: rate-limits/geniemode-rate-limits.yml
+  data_model: data-model/geniemode-data-model.yml

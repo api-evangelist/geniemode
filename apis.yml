@@ -1,18 +1,64 @@
 aid: geniemode
 name: Geniemode
-description: 'Geniemode is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Geniemode (Geniemode Global Pvt Ltd) is a Gurugram, India based B2B cross-border
+  sourcing and supply-chain technology company founded in 2021 by Amit Sharma and Tanuj Gangwani.
+  It runs an asset-light sourcing platform that connects global retail buyers in home textiles,
+  furniture, apparel and accessories with a vetted manufacturer network, covering product discovery
+  and design collaboration, sampling, quality control, factory and raw-material management,
+  logistics, customs and invoicing. Its technology surface is an internal operations and partner
+  portal at portal.geniemode.com, built on Spring Boot, whose Springfox-generated Swagger 2.0
+  contract is served publicly while every operation itself sits behind authentication. Geniemode
+  publishes no developer program, SDKs, pricing or public API documentation.'
 url: https://raw.githubusercontent.com/api-evangelist/geniemode/refs/heads/main/apis.yml
+image: https://assets.geniemode.com/geniemode-assets/websiteImages/MainLogoMinified.png
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-21'
 modified: '2026-08-21'
 tags:
 - Company
-apis: []
+- Sourcing
+- Supply Chain
+- Procurement
+- B2B Commerce
+- Manufacturing
+- Logistics
+- Textiles
+- Apparel
+- Furniture
+- Quality Control
+- India
+apis:
+- name: Geniemode Cataloguing API
+  description: 'The Spring Boot application programming interface behind portal.geniemode.com, the
+    Geniemode operations and partner portal. Its Springfox-generated Swagger 2.0 contract is served
+    anonymously at /api/v2/api-docs and describes 1,042 paths and 1,140 operations across order
+    management, quality control, manufacturer and factory management, raw materials, cartons and
+    packaging, shipments and couriers, invoicing and finance, commissions, dashboards and Excel
+    export. Every operation itself returns HTTP 401 without a session, so the contract is readable
+    but the API is not callable by the public.'
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - Sourcing
+  - Order Management
+  - Quality Control
+  - Logistics
+  - Invoicing
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-cataloguing-api-swagger-2.0.json
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+  - type: Overlay
+    url: overlays/geniemode-cataloguing-api-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +66,37 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://geniemode.com/
+- type: TermsOfService
+  url: https://geniemode.com/tnc
+- type: PrivacyPolicy
+  url: https://geniemode.com/privacy-policy
+- type: SignUp
+  url: https://geniemode.com/signup
+- type: Login
+  url: https://geniemode.com/signin
+- type: Support
+  url: https://geniemode.com/contact-us
+- type: Blog
+  url: https://medium.com/@Geniemode
+- type: GitHubOrganization
+  url: https://github.com/geniemode
+- type: Packages
+  url: packages/geniemode-packages.yml
+- type: LLMsTxt
+  url: llms/geniemode-llms.txt
+- type: Conformance
+  url: conformance/geniemode-conformance.yml
+- type: Lifecycle
+  url: lifecycle/geniemode-lifecycle.yml
+- type: DomainSecurity
+  url: security/geniemode-domain-security.yml
+- type: Plans
+  url: plans/geniemode-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/geniemode-rate-limits.yml
+x-enrichment:
+  date: '2026-08-21'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v1

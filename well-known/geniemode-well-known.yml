@@ -1,0 +1,75 @@
+generated: '2026-08-21'
+method: probed
+source: direct HTTP probes 2026-08-21
+hit_count: 0
+soft_404_control:
+  note: >-
+    BOTH hosts are single-page-app catch-alls. Every path under /.well-known/ returns HTTP 200 with
+    the application's HTML shell, byte-for-byte identical to the response for a deliberately
+    nonsense path. These 200s are NOT documents and no WellKnown or SecurityTxt pointer is emitted.
+  probes:
+  - host: https://geniemode.com
+    path: /definitely-not-a-real-path-9f8a7b
+    status: 200
+    bytes: 17178
+    content_type: text/html
+  - host: https://portal.geniemode.com
+    path: /definitely-not-a-real-path-9f8a7b
+    status: 200
+    bytes: 31687
+    content_type: text/html
+hosts:
+- host: https://geniemode.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    note: catch-all SPA shell, 17178 bytes - not a document
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    note: catch-all SPA shell, 17178 bytes - not a document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    note: catch-all SPA shell, 17178 bytes - not a document
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    note: catch-all SPA shell, 17178 bytes - not a document
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    note: catch-all SPA shell, 17178 bytes - not a document
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    note: catch-all SPA shell, 17178 bytes - not an agent card
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    note: catch-all SPA shell, 17178 bytes - not an agent card
+- host: https://portal.geniemode.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    note: catch-all SPA shell, 31687 bytes - not a document
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    note: catch-all SPA shell, 31687 bytes - not a document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    note: catch-all SPA shell, 31687 bytes - not a document
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    note: catch-all SPA shell, 31687 bytes - not an agent card
+robots_txt:
+  url: https://geniemode.com/robots.txt
+  status: 200
+  bytes: 67
+  content: 'User-agent: * / Disallow: (empty - nothing disallowed)'
+  note: The only real static text document served from either host root.

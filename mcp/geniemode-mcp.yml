@@ -1,0 +1,39 @@
+generated: '2026-08-21'
+method: searched
+source: web search + direct probes of geniemode.com and portal.geniemode.com
+status: none
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: probed
+note: >-
+  Geniemode ships no MCP server, hosted or local. No npm/PyPI package exists (see
+  packages/geniemode-packages.yml), no /mcp or /sse endpoint responds on either host, and no MCP
+  reference appears on the company site or in its GitHub organisation. No MCPServer pointer is
+  emitted in apis.yml, because emitting one would assert an agent surface the provider does not
+  operate.
+probes:
+- url: https://geniemode.com/mcp
+  method: POST
+  body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  status: 405
+  result: nginx "405 Not Allowed" - the host serves static files only and accepts no POST anywhere
+- url: https://portal.geniemode.com/mcp
+  method: POST
+  body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  status: 405
+  result: nginx "405 Not Allowed"
+- url: https://geniemode.com/sse
+  method: POST
+  status: 405
+- url: https://portal.geniemode.com/sse
+  method: POST
+  status: 405
+candidate_tools_derived: false
+candidate_tools_note: >-
+  A candidate tool list was deliberately NOT derived from the 1,140 OpenAPI operations. Every
+  operation returns HTTP 401 to any unauthenticated caller and Geniemode operates no developer
+  signup, so a derived tool list would describe an agent surface that no agent can reach.

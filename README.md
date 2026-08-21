@@ -42,5 +42,26 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Geniemode is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+Geniemode (Geniemode Global Pvt Ltd) is a Gurugram, India based B2B cross-border sourcing and
+supply-chain technology company founded in 2021 by Amit Sharma and Tanuj Gangwani. It runs an
+asset-light sourcing platform connecting global retail buyers in home textiles, furniture, apparel
+and accessories with a vetted manufacturer network, covering product discovery and design
+collaboration, sampling, quality control, factory and raw-material management, logistics, customs
+and invoicing.
+
+## API surface
+
+Geniemode operates **no public API program** — no developer portal, documentation site,
+self-service signup, SDK, CLI, MCP server or published pricing.
+
+It does serve a **machine-readable contract anonymously**: the Springfox-generated Swagger 2.0
+document for the portal at `portal.geniemode.com` is readable at
+`https://portal.geniemode.com/api/v2/api-docs` (HTTP 200, 1.3 MB, 1,042 paths, 1,140 operations,
+934 schema definitions). Every operation it describes returns HTTP 401 without an authenticated
+portal session, so the contract is readable but the API is not callable by the public.
+
+- Website — https://geniemode.com/
+- Portal — https://portal.geniemode.com/
+- GitHub — https://github.com/geniemode
+- Blog — https://medium.com/@Geniemode
+

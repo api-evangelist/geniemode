@@ -1,0 +1,83 @@
+generated: '2026-08-21'
+method: derived
+source: openapi/geniemode-cataloguing-api-swagger-2.0.json
+format: none
+format_note: >-
+  Not RFC 9457. No operation declares application/problem+json, and the contract defines no error
+  schema at all - grep of all 934 definitions returns zero matching /error|problem|fault|exception/.
+  Error responses in the spec carry a description string and NO schema, so a client cannot learn the
+  error envelope from the contract.
+envelope:
+  documented_in_spec: false
+  observed:
+    source: live 401 responses from https://portal.geniemode.com/api/*
+    media_type: application/json
+    fields:
+    - name: timestamp
+      type: integer
+      note: epoch milliseconds
+    - name: status
+      type: integer
+    - name: error
+      type: string
+      note: HTTP reason phrase, e.g. "Unauthorized", "Not Found"
+    - name: path
+      type: string
+    shape: Spring Boot default DefaultErrorAttributes envelope, not a Geniemode-authored contract
+  note: >-
+    The envelope actually returned on the wire is the Spring Boot framework default. It is not
+    described anywhere in the published contract, and it carries no machine-readable error code -
+    only an HTTP status and its reason phrase.
+coverage:
+  operations_total: 1140
+  with_4xx_or_5xx: 618
+  without_any_error_response: 522
+  note: >-
+    522 of 1,140 operations (46%) declare no error response whatsoever - only a 200. A client
+    generated from this contract has no declared failure path for nearly half the surface.
+problem_types:
+- status: 401
+  title: Unauthorized
+  declared_in_spec: false
+  observed: true
+  occurrences_in_spec: 0
+  meaning: No valid portal session or bearer token was presented.
+  remediation: Authenticate via GET /api/auth/login and present the returned token.
+  note: >-
+    This is the status the API actually returns to an unauthenticated caller on every operation,
+    and it is the one status the contract never declares.
+- status: 403
+  title: Forbidden
+  declared_in_spec: true
+  occurrences_in_spec: 618
+  spec_description: 'Forbidden!!!!!'
+  meaning: >-
+    Declared on every operation that declares any error at all. The description is the Springfox
+    boilerplate string as published, punctuation included; it carries no remediation guidance.
+  remediation: Not documented by the provider.
+- status: 410
+  title: Gone
+  declared_in_spec: true
+  occurrences_in_spec: 2
+  spec_description: No longer supported
+  meaning: The operation has been retired.
+  operations:
+  - path: /api/v1/path/generic_qc/getManufactureIdsForQC
+    method: post
+  - path: /api/v1/path/qc/getManufactureIdsForQC
+    method: post
+  note: >-
+    These two are the only deprecation signal anywhere in the contract - see
+    lifecycle/geniemode-lifecycle.yml.
+- status: 500
+  title: Internal Server Error
+  declared_in_spec: true
+  occurrences_in_spec: 618
+  spec_description: '500 message'
+  meaning: Springfox boilerplate placeholder; no error taxonomy is published.
+  remediation: Not documented by the provider.
+error_code_registry:
+  published: false
+  note: >-
+    Geniemode publishes no numeric or symbolic error-code registry. There is no public error
+    reference page to enrich these titles from - the company has no developer documentation site.

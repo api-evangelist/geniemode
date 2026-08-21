@@ -1,0 +1,18 @@
+generated: '2026-08-21'
+method: searched
+source: https://geniemode.com/ (full SPA route map extracted from asset-manifest.json chunks) + web search
+plan_count: 0
+plans: []
+note: >-
+  Geniemode publishes no pricing page and no plans of any kind. The company is a B2B sourcing
+  intermediary that earns on sourcing margin and commission per order, negotiated per buyer; there
+  is no self-service product to price. The application's own router (68 JS chunks enumerated from
+  asset-manifest.json) defines no /pricing or /plans route, and the contract exposes commission and
+  margin controllers that are internal finance surfaces, not published rate cards. The API has no
+  price because it is not sold - it is the internal interface of the portal.
+pricing_page: null
+commercial_model: negotiated per-buyer sourcing margin and commission
+evidence:
+- url: https://geniemode.com/
+  status: 200
+  note: no pricing route exists in the SPA router
