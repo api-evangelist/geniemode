@@ -30,25 +30,16 @@ tags:
 - Quality Control
 - India
 apis:
-- name: Geniemode Cataloguing API
-  description: 'The Spring Boot application programming interface behind portal.geniemode.com, the
-    Geniemode operations and partner portal. Its Springfox-generated Swagger 2.0 contract is served
-    anonymously at /api/v2/api-docs and describes 1,042 paths and 1,140 operations across order
-    management, quality control, manufacturer and factory management, raw materials, cartons and
-    packaging, shipments and couriers, invoicing and finance, commissions, dashboards and Excel
-    export. Every operation itself returns HTTP 401 without a session, so the contract is readable
-    but the API is not callable by the public.'
+- aid: geniemode:geniemode-admin-api
+  name: Geniemode Admin API
+  description: Admin
   humanURL: https://portal.geniemode.com/
   baseURL: https://portal.geniemode.com
   tags:
-  - Sourcing
-  - Order Management
-  - Quality Control
-  - Logistics
-  - Invoicing
+  - admin
   properties:
   - type: OpenAPI
-    url: openapi/geniemode-cataloguing-api-swagger-2.0.json
+    url: openapi/geniemode-admin-api-openapi.yml
   - type: Authentication
     url: authentication/geniemode-authentication.yml
   - type: ErrorCatalog
@@ -57,14 +48,1706 @@ apis:
     url: conventions/geniemode-conventions.yml
   - type: DataModel
     url: data-model/geniemode-data-model.yml
-  - type: Overlay
-    url: overlays/geniemode-cataloguing-api-overlay.yaml
+- aid: geniemode:geniemode-admin-controller-api
+  name: Geniemode Admin Controller API
+  description: Admin Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - admin-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-admin-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-admin-qc-audio-recording-controller-api
+  name: Geniemode Admin Qc Audio Recording Controller API
+  description: Admin QC Audio Recording Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - admin-qc-audio-recording-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-admin-qc-audio-recording-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-audit-controller-api
+  name: Geniemode Audit Controller API
+  description: Audit Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - audit-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-audit-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-audit-order-product-attribution-controller-api
+  name: Geniemode Audit Order Product Attribution Controller API
+  description: Audit Order Product Attribution Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - audit-order-product-attribution-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-audit-order-product-attribution-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-authorisation-api
+  name: Geniemode Authorisation API
+  description: Authorisation
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - authorisation
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-authorisation-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-back-fill-controller-api
+  name: Geniemode Back Fill Controller API
+  description: Back Fill Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - back-fill-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-back-fill-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-bank-controller-api
+  name: Geniemode Bank Controller API
+  description: Bank Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - bank-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-bank-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-business-owner-controller-api
+  name: Geniemode Business Owner Controller API
+  description: Business Owner Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - business-owner-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-business-owner-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-carton-controller-api
+  name: Geniemode Carton Controller API
+  description: Carton Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - carton-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-carton-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-change-tna-request-controller-api
+  name: Geniemode Change Tna Request Controller API
+  description: Change Tna Request Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - change-tna-request-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-change-tna-request-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-client-controller-api
+  name: Geniemode Client Controller API
+  description: Client Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - client-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-client-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-commission-invoice-controller-api
+  name: Geniemode Commission Invoice Controller API
+  description: Commission Invoice Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - commission-invoice-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-commission-invoice-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-courier-budget-controller-api
+  name: Geniemode Courier Budget Controller API
+  description: Courier Budget Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - courier-budget-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-courier-budget-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-courier-controller-api
+  name: Geniemode Courier Controller API
+  description: Courier Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - courier-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-courier-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-courier-entity-controller-api
+  name: Geniemode Courier Entity Controller API
+  description: Courier Entity Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - courier-entity-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-courier-entity-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-courier-partner-controller-api
+  name: Geniemode Courier Partner Controller API
+  description: Courier Partner Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - courier-partner-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-courier-partner-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-currency-conversion-controller-api
+  name: Geniemode Currency Conversion Controller API
+  description: Currency Conversion Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - currency-conversion-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-currency-conversion-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-dashboard-controller-api
+  name: Geniemode Dashboard Controller API
+  description: Dashboard Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - dashboard-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-dashboard-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-designer-controller-api
+  name: Geniemode Designer Controller API
+  description: Designer Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - designer-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-designer-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-documents-controller-api
+  name: Geniemode Documents Controller API
+  description: Documents Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - documents-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-documents-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-dpr-controller-api
+  name: Geniemode Dpr Controller API
+  description: Dpr Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - dpr-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-dpr-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-edi-monitoring-controller-api
+  name: Geniemode Edi Monitoring Controller API
+  description: Edi Monitoring Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - edi-monitoring-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-edi-monitoring-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-excel-controller-api
+  name: Geniemode Excel Controller API
+  description: Excel Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - excel-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-excel-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-factory-controller-api
+  name: Geniemode Factory Controller API
+  description: Factory Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - factory-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-factory-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-factory-finance-controller-api
+  name: Geniemode Factory Finance Controller API
+  description: Factory Finance Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - factory-finance-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-factory-finance-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-factory-raw-material-controller-api
+  name: Geniemode Factory Raw Material Controller API
+  description: Factory Raw Material Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - factory-raw-material-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-factory-raw-material-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-factory-wip-controller-api
+  name: Geniemode Factory Wip Controller API
+  description: Factory Wip Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - factory-wip-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-factory-wip-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-final-invoice-controller-api
+  name: Geniemode Final Invoice Controller API
+  description: Final Invoice Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - final-invoice-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-final-invoice-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-finance-dashboard-controller-api
+  name: Geniemode Finance Dashboard Controller API
+  description: Finance Dashboard Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - finance-dashboard-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-finance-dashboard-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-ftp-client-controller-api
+  name: Geniemode Ftp Client Controller API
+  description: Ftp Client Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - ftp-client-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-ftp-client-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-generic-utils-controller-api
+  name: Geniemode Generic Utils Controller API
+  description: Generic Utils Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - generic-utils-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-generic-utils-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-geniemode-entity-controller-api
+  name: Geniemode Geniemode Entity Controller API
+  description: Geniemode Entity Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - geniemode-entity-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-geniemode-entity-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-hts-code-duty-controller-api
+  name: Geniemode Hts Code Duty Controller API
+  description: Hts Code Duty Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - hts-code-duty-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-hts-code-duty-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-indexer-service-controller-api
+  name: Geniemode Indexer Service Controller API
+  description: Indexer Service Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - indexer-service-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-indexer-service-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-invoice-controller-api
+  name: Geniemode Invoice Controller API
+  description: Invoice Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - invoice-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-invoice-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-invoice-finance-controller-api
+  name: Geniemode Invoice Finance Controller API
+  description: Invoice Finance Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - invoice-finance-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-invoice-finance-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-invoice-logistics-controller-api
+  name: Geniemode Invoice Logistics Controller API
+  description: Invoice Logistics Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - invoice-logistics-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-invoice-logistics-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-invoice-payments-controller-api
+  name: Geniemode Invoice Payments Controller API
+  description: Invoice Payments Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - invoice-payments-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-invoice-payments-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-kpi-controller-api
+  name: Geniemode Kpi Controller API
+  description: Kpi Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - kpi-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-kpi-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-lead-controller-api
+  name: Geniemode Lead Controller API
+  description: Lead Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - lead-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-lead-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-loginless-tn-a-controller-api
+  name: Geniemode Loginless Tn A Controller API
+  description: Loginless Tn A Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - loginless-tn-a-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-loginless-tn-a-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-logistics-dashboard-controller-api
+  name: Geniemode Logistics Dashboard Controller API
+  description: Logistics Dashboard Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - logistics-dashboard-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-logistics-dashboard-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-manufacturer-brand-approval-controller-api
+  name: Geniemode Manufacturer Brand Approval Controller API
+  description: Manufacturer Brand Approval Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - manufacturer-brand-approval-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-manufacturer-brand-approval-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-manufacturer-controller-api
+  name: Geniemode Manufacturer Controller API
+  description: Manufacturer Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - manufacturer-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-manufacturer-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-manufacturer-v-2-controller-api
+  name: Geniemode Manufacturer V 2 Controller API
+  description: Manufacturer V 2 Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - manufacturer-v-2-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-manufacturer-v-2-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-manufacturer-v-2-login-less-controller-api
+  name: Geniemode Manufacturer V 2 Login Less Controller API
+  description: Manufacturer V 2 Login Less Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - manufacturer-v-2-login-less-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-manufacturer-v-2-login-less-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-margin-controller-api
+  name: Geniemode Margin Controller API
+  description: Margin Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - margin-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-margin-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-mill-controller-api
+  name: Geniemode Mill Controller API
+  description: Mill Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - mill-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-mill-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-mill-details-controller-api
+  name: Geniemode Mill Details Controller API
+  description: Mill Details Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - mill-details-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-mill-details-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-carton-controller-api
+  name: Geniemode Order Carton Controller API
+  description: Order Carton Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-carton-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-carton-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-controller-api
+  name: Geniemode Order Controller API
+  description: Order Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-dna-summary-controller-api
+  name: Geniemode Order Dna Summary Controller API
+  description: Order Dna Summary Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-dna-summary-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-dna-summary-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-finance-controller-api
+  name: Geniemode Order Finance Controller API
+  description: Order Finance Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-finance-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-finance-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-generic-utils-controller-api
+  name: Geniemode Order Generic Utils Controller API
+  description: Order Generic Utils Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-generic-utils-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-generic-utils-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-group-finance-controller-api
+  name: Geniemode Order Group Finance Controller API
+  description: Order Group Finance Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-group-finance-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-group-finance-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-group-founder-controller-api
+  name: Geniemode Order Group Founder Controller API
+  description: Order Group Founder Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-group-founder-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-group-founder-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-handling-controller-api
+  name: Geniemode Order Handling Controller API
+  description: Order Handling Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-handling-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-handling-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-product-attribution-controller-api
+  name: Geniemode Order Product Attribution Controller API
+  description: Order Product Attribution Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-product-attribution-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-product-attribution-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-risk-controller-api
+  name: Geniemode Order Risk Controller API
+  description: Order Risk Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-risk-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-risk-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-risk-founder-controller-api
+  name: Geniemode Order Risk Founder Controller API
+  description: Order Risk Founder Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-risk-founder-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-risk-founder-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-status-history-controller-api
+  name: Geniemode Order Status History Controller API
+  description: Order Status History Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-status-history-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-status-history-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-traceability-controller-api
+  name: Geniemode Order Traceability Controller API
+  description: Order Traceability Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-traceability-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-traceability-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-v-2-controller-api
+  name: Geniemode Order V 2 Controller API
+  description: Order V 2 Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-v-2-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-v-2-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-order-v-3-controller-api
+  name: Geniemode Order V 3 Controller API
+  description: Order V 3 Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - order-v-3-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-order-v-3-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-packaging-controller-api
+  name: Geniemode Packaging Controller API
+  description: Packaging Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - packaging-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-packaging-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-payment-calendar-controller-api
+  name: Geniemode Payment Calendar Controller API
+  description: Payment Calendar Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - payment-calendar-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-payment-calendar-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-pi-controller-api
+  name: Geniemode Pi Controller API
+  description: Pi Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - pi-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-pi-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-pi-finance-controller-api
+  name: Geniemode Pi Finance Controller API
+  description: Pi Finance Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - pi-finance-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-pi-finance-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-po-controller-api
+  name: Geniemode Po Controller API
+  description: Po Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - po-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-po-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-possible-shipments-controller-api
+  name: Geniemode Possible Shipments Controller API
+  description: Possible Shipments Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - possible-shipments-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-possible-shipments-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-pre-order-finance-controller-api
+  name: Geniemode Pre Order Finance Controller API
+  description: Pre Order Finance Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - pre-order-finance-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-pre-order-finance-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-pre-order-po-finance-controller-api
+  name: Geniemode Pre Order Po Finance Controller API
+  description: Pre Order Po Finance Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - pre-order-po-finance-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-pre-order-po-finance-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-pre-order-rm-controller-api
+  name: Geniemode Pre Order Rm Controller API
+  description: Pre Order Rm Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - pre-order-rm-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-pre-order-rm-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-qc-audit-controller-api
+  name: Geniemode Qc Audit Controller API
+  description: QC Audit Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - qc-audit-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-qc-audit-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-qc-controller-api
+  name: Geniemode Qc Controller API
+  description: QC Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - qc-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-qc-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-qc-dump-controller-api
+  name: Geniemode Qc Dump Controller API
+  description: Qc Dump Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - qc-dump-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-qc-dump-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-qc-file-check-list-controller-api
+  name: Geniemode Qc File Check List Controller API
+  description: QC File Check List Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - qc-file-check-list-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-qc-file-check-list-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-qc-tech-controller-api
+  name: Geniemode Qc Tech Controller API
+  description: QC Tech Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - qc-tech-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-qc-tech-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-quality-defects-controller-api
+  name: Geniemode Quality Defects Controller API
+  description: Quality Defects Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - quality-defects-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-quality-defects-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-rm-controller-api
+  name: Geniemode Rm Controller API
+  description: RM Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - rm-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-rm-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-shipment-controller-api
+  name: Geniemode Shipment Controller API
+  description: Shipment Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - shipment-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-shipment-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-shipment-tracking-controller-api
+  name: Geniemode Shipment Tracking Controller API
+  description: Shipment Tracking Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - shipment-tracking-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-shipment-tracking-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-tna-dashboard-controller-api
+  name: Geniemode Tna Dashboard Controller API
+  description: Tna Dashboard Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - tna-dashboard-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-tna-dashboard-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-user-api
+  name: Geniemode User API
+  description: User
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - user
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-user-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-user-qc-audio-recording-controller-api
+  name: Geniemode User Qc Audio Recording Controller API
+  description: User QC Audio Recording Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - user-qc-audio-recording-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-user-qc-audio-recording-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-user-tnc-controller-api
+  name: Geniemode User Tnc Controller API
+  description: User Tnc Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - user-tnc-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-user-tnc-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-users-controller-api
+  name: Geniemode Users Controller API
+  description: Users Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - users-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-users-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-vapi-call-controller-api
+  name: Geniemode Vapi Call Controller API
+  description: Vapi Call Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - vapi-call-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-vapi-call-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-variant-controller-api
+  name: Geniemode Variant Controller API
+  description: Variant Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - variant-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-variant-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-vp-dashboard-controller-api
+  name: Geniemode Vp Dashboard Controller API
+  description: Vp Dashboard Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - vp-dashboard-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-vp-dashboard-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-web-engage-controller-api
+  name: Geniemode Web Engage Controller API
+  description: Web Engage Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - web-engage-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-web-engage-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-workflow-controller-api
+  name: Geniemode Workflow Controller API
+  description: Workflow Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - workflow-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-workflow-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-workflow-step-controller-api
+  name: Geniemode Workflow Step Controller API
+  description: Workflow Step Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - workflow-step-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-workflow-step-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-workflow-step-order-map-controller-api
+  name: Geniemode Workflow Step Order Map Controller API
+  description: Workflow Step Order Map Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - workflow-step-order-map-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-workflow-step-order-map-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/geniemode-cataloguing-api-overlay.yaml
 - type: Website
   url: https://geniemode.com/
 - type: TermsOfService
