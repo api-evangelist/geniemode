@@ -10,6 +10,17 @@ description: 'Geniemode (Geniemode Global Pvt Ltd) is a Gurugram, India based B2
   contract is served publicly while every operation itself sits behind authentication. Geniemode
   publishes no developer program, SDKs, pricing or public API documentation.'
 url: https://raw.githubusercontent.com/api-evangelist/geniemode/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://assets.geniemode.com/geniemode-assets/websiteImages/MainLogoMinified.png
 x-type: company
 x-source: harvest:secondary-market
@@ -1746,6 +1757,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/geniemode-capability-edges.yml
+  name: Geniemode Business Capability Map
 - type: Overlay
   url: overlays/geniemode-cataloguing-api-overlay.yaml
 - type: Website
