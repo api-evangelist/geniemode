@@ -47,6 +47,8 @@ apis:
   humanURL: https://portal.geniemode.com/
   baseURL: https://portal.geniemode.com
   tags:
+  - Admin
+  tags_raw:
   - admin
   properties:
   - type: OpenAPI
@@ -137,6 +139,8 @@ apis:
   humanURL: https://portal.geniemode.com/
   baseURL: https://portal.geniemode.com
   tags:
+  - Authorisation
+  tags_raw:
   - authorisation
   properties:
   - type: OpenAPI
@@ -479,6 +483,8 @@ apis:
   humanURL: https://portal.geniemode.com/
   baseURL: https://portal.geniemode.com
   tags:
+  - FactoryController
+  tags_raw:
   - factory-controller
   properties:
   - type: OpenAPI
@@ -1559,6 +1565,8 @@ apis:
   humanURL: https://portal.geniemode.com/
   baseURL: https://portal.geniemode.com
   tags:
+  - User
+  tags_raw:
   - user
   properties:
   - type: OpenAPI
@@ -1613,6 +1621,8 @@ apis:
   humanURL: https://portal.geniemode.com/
   baseURL: https://portal.geniemode.com
   tags:
+  - UsersController
+  tags_raw:
   - users-controller
   properties:
   - type: OpenAPI
@@ -1649,6 +1659,8 @@ apis:
   humanURL: https://portal.geniemode.com/
   baseURL: https://portal.geniemode.com
   tags:
+  - VariantController
+  tags_raw:
   - variant-controller
   properties:
   - type: OpenAPI
@@ -1703,6 +1715,8 @@ apis:
   humanURL: https://portal.geniemode.com/
   baseURL: https://portal.geniemode.com
   tags:
+  - work-flow-controller
+  tags_raw:
   - workflow-controller
   properties:
   - type: OpenAPI
