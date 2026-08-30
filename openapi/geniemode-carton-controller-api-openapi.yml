@@ -1,0 +1,52 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Carton Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: carton-controller
+  description: Carton Controller
+paths:
+  /api/v1/carton/info/cartons:
+    post:
+      tags:
+      - carton-controller
+      summary: getCarton
+      operationId: getCartonUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartonRequestPayload'
+        description: cartonRequestPaylaod
+        required: true
+components:
+  schemas:
+    CartonRequestPayload:
+      type: object
+      properties:
+        carton_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: CartonRequestPayload

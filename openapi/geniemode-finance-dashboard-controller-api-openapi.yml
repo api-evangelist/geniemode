@@ -1,0 +1,1675 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Finance Dashboard Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: finance-dashboard-controller
+  description: Finance Dashboard Controller
+paths:
+  /api/v1/dashboard/finance/buyAndSellARAP:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: buyAndSellARAP
+      operationId: buyAndSellARAPUsingGET
+      parameters:
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: countries
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: endDateTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: geniemodeEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: startDateTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: vpId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ARAPGraphDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/dashboard/finance/cohortBuyers:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: getCohortBuyers
+      operationId: getCohortBuyersUsingGET
+      parameters:
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/dashboard/finance/cohortSuppliers:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: getCohortSuppliers
+      operationId: getCohortSuppliersUsingGET
+      parameters:
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/dashboard/finance/commissionARAP:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: commissionARAP
+      operationId: commissionARAPUsingGET
+      parameters:
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: countries
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: endDateTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: geniemodeEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: startDateTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: vpId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ARAPGraphDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/dashboard/finance/getMonthlyCohortBuyerCoreData:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: getMonthlyBuyerCohortData
+      operationId: getMonthlyBuyerCohortDataUsingGET
+      parameters:
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonthlyCohortBuyerCoreDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/dashboard/finance/getMonthlyCohortBuyerCoreDebugData:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: getMonthlyBuyerCoreCohortData
+      operationId: getMonthlyBuyerCoreCohortDataUsingGET
+      parameters:
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonthlyCohortBuyerCoreDebugDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/dashboard/finance/getMonthlyCohortBuyerInternationalFashionData:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: getMonthlyCohortBuyerInternationalFashionData
+      operationId: getMonthlyCohortBuyerInternationalFashionDataUsingGET
+      parameters:
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonthlyCohortBuyerInternationalFashionDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/dashboard/finance/getMonthlyCohortBuyerInternationalFashionDebugData:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: getMonthlyCohortBuyerInternationalFashionDebugData
+      operationId: getMonthlyCohortBuyerInternationalFashionDebugDataUsingGET
+      parameters:
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonthlyCohortBuyerInternationalFashionDebugDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/dashboard/finance/getMonthlyCohortSupplierCategoryData:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: getMonthlyCohortSupplierCategoryData
+      operationId: getMonthlyCohortSupplierCategoryDataUsingGET
+      parameters:
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonthlyCohortSupplierCategoryDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/dashboard/finance/getMonthlyCohortSupplierCategoryDebugData:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: getMonthlyCohortSupplierCategoryDebugData
+      operationId: getMonthlyCohortSupplierCategoryDebugDataUsingGET
+      parameters:
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonthlyCohortSupplierCategoryDebugDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/dashboard/finance/getMonthlyEngagementCohortData:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: getMonthlyEngagementCohortData
+      operationId: getMonthlyEngagementCohortDataUsingGET
+      parameters:
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: countries
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: endDateTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: geniemodeEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: startDateTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: vpId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonthlyEngagementCohortDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/dashboard/finance/getMonthlyEngagementCohortData/query:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: getMonthlyEngagementCohortDataQuery
+      operationId: getMonthlyEngagementCohortDataQueryUsingGET
+      parameters:
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: countries
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: endDateTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: geniemodeEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: startDateTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: vpId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/dashboard/finance/revenueAndProfitGraph:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: revenueAndProfitGraph
+      operationId: revenueAndProfitGraphUsingGET
+      parameters:
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: countries
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: endDateTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: geniemodeEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: startDateTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: vpId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RevenueAndProfitGraphDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/dashboard/finance/revenueGraph:
+    get:
+      tags:
+      - finance-dashboard-controller
+      summary: revenueGraph
+      operationId: revenueGraphUsingGET
+      parameters:
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: countries
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: endDateTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: geniemodeEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selectedMonthEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: selectedMonths
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: startDateTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: suppliers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: vpId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RevenueGraphDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    MonthlyCohortSupplierCategoryDto:
+      type: object
+      properties:
+        amt_flag:
+          type: string
+        first_ship_group_month:
+          type: string
+        ship_group_month:
+          type: string
+        total_order_value_usd:
+          type: number
+        umesh_category:
+          type: string
+      title: MonthlyCohortSupplierCategoryDto
+    RevenueGraphDto:
+      type: object
+      properties:
+        col1:
+          type: string
+        col2:
+          type: string
+        currency:
+          type: string
+        revenue:
+          type: number
+        vp_name:
+          type: string
+      title: RevenueGraphDto
+    MonthlyCohortSupplierCategoryDebugDto:
+      type: object
+      properties:
+        amt_flag:
+          type: string
+        first_ship_group_month:
+          type: string
+        ship_group_month:
+          type: string
+        supplier:
+          type: string
+        total_order_value_usd:
+          type: number
+        umesh_category:
+          type: string
+      title: MonthlyCohortSupplierCategoryDebugDto
+    ARAPGraphDto:
+      type: object
+      properties:
+        age_bucket:
+          type: string
+        age_bucket_index:
+          type: integer
+          format: int32
+        buyer_amount_in_dollars:
+          type: number
+        factory_amount_in_dollars:
+          type: number
+      title: ARAPGraphDto
+    MonthlyCohortBuyerInternationalFashionDebugDto:
+      type: object
+      properties:
+        buyer_cohort:
+          type: string
+        first_ship_group_month:
+          type: string
+        international_fashion:
+          type: boolean
+        ship_group_month:
+          type: string
+        total_order_value_usd:
+          type: number
+      title: MonthlyCohortBuyerInternationalFashionDebugDto
+    MonthlyCohortBuyerCoreDebugDto:
+      type: object
+      properties:
+        buyer_cohort:
+          type: string
+        core_non_core:
+          type: string
+        first_ship_group_month:
+          type: string
+        ship_group_month:
+          type: string
+        total_order_value_usd:
+          type: number
+        umesh_category:
+          type: string
+      title: MonthlyCohortBuyerCoreDebugDto
+    MonthlyCohortBuyerInternationalFashionDto:
+      type: object
+      properties:
+        buyer_count:
+          type: integer
+          format: int64
+        first_ship_group_month:
+          type: string
+        international_fashion:
+          type: boolean
+        ship_group_month:
+          type: string
+        total_order_value_usd:
+          type: number
+      title: MonthlyCohortBuyerInternationalFashionDto
+    MonthlyCohortBuyerCoreDto:
+      type: object
+      properties:
+        buyer_count:
+          type: integer
+          format: int64
+        core_non_core:
+          type: string
+        first_ship_group_month:
+          type: string
+        ship_group_month:
+          type: string
+        total_order_value_usd:
+          type: number
+      title: MonthlyCohortBuyerCoreDto
+    RevenueAndProfitGraphDto:
+      type: object
+      properties:
+        col1:
+          type: string
+        col2:
+          type: string
+        margin_percentage:
+          type: number
+        profit:
+          type: number
+        revenue:
+          type: number
+      title: RevenueAndProfitGraphDto
+    MonthlyEngagementCohortDto:
+      type: object
+      properties:
+        active:
+          type: integer
+          format: int64
+        active_mapped_factories:
+          type: integer
+          format: int64
+        eligible:
+          type: integer
+          format: int64
+        eligible_brands_dnd_true:
+          type: integer
+          format: int64
+        eligible_mapped_factories:
+          type: integer
+          format: int64
+        month:
+          type: string
+        percent_active:
+          type: number
+          format: double
+        percent_active_mapped_factories:
+          type: number
+          format: double
+        percent_total_active:
+          type: number
+          format: double
+        total_active:
+          type: integer
+          format: int64
+        total_brands_dnd_true:
+          type: integer
+          format: int64
+        total_eligible:
+          type: integer
+          format: int64
+      title: MonthlyEngagementCohortDto

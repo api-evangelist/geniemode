@@ -1,0 +1,1269 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Vp Dashboard Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: vp-dashboard-controller
+  description: Vp Dashboard Controller
+paths:
+  /api/v1/vp/dashboard:
+    get:
+      tags:
+      - vp-dashboard-controller
+      summary: vpDashboard
+      operationId: vpDashboardUsingGET
+      parameters:
+      - name: approvalStatus
+        in: query
+        description: approvalStatus
+        required: false
+        schema:
+          type: string
+          default: pending
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: fieldName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: getDataFor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: groupBy
+        in: query
+        description: groupBy
+        required: true
+        schema:
+          type: string
+          enum:
+          - ASSIGNEE
+          - BUYER
+          - COMPANY
+          - MANUFACTURER
+          - RM_OPS
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        description: search
+        required: false
+        schema:
+          type: string
+      - name: searchList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: object
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/vp/dashboard/listing:
+    get:
+      tags:
+      - vp-dashboard-controller
+      summary: vpListingDashboard
+      operationId: vpListingDashboardUsingGET
+      parameters:
+      - name: approvalStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: businessOwnerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: buyerExFactoryEndDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: buyerExFactoryStartDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: confirmationDateEndDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: confirmationDateStartDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: draftOrders
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: fieldName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filters
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: financeApprovedOnce
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: financialStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: forPo
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: fromDb
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: getDataFor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: havingShipmentsOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: inventoryCreated
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: parentOrderOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: object
+      - name: skipList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: typeOfDelivery
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/vp/dashboard/manufacturer/buyer/compliance/index:
+    get:
+      tags:
+      - vp-dashboard-controller
+      summary: index
+      operationId: indexUsingGET_31
+      parameters:
+      - name: pageType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^(approved|pending|rejected)$
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/vp/dashboard/manufacturer/buyer/compliance/{manufacturerUnitBuyerComplianceId}:
+    put:
+      tags:
+      - vp-dashboard-controller
+      summary: changeManufactuerBuyerComplianceStatus
+      operationId: changeManufactuerBuyerComplianceStatusUsingPUT_2
+      parameters:
+      - name: manufacturerUnitBuyerComplianceId
+        in: path
+        description: manufacturerUnitBuyerComplianceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerApprovalRequestPayload'
+        description: manufacturerApprovalPayload
+        required: true
+  /api/v1/vp/dashboard/order/bulk/change/status/{statusType}:
+    put:
+      tags:
+      - vp-dashboard-controller
+      summary: bulkChangeStatus
+      operationId: bulkChangeStatusUsingPUT
+      parameters:
+      - name: statusType
+        in: path
+        description: statusType
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpBulkChangeStatusResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VpBulkChangeStatusRequestPayload'
+        description: requestPayload
+        required: true
+  /api/v1/vp/dashboard/order/listing:
+    get:
+      tags:
+      - vp-dashboard-controller
+      summary: vpOrderListing
+      operationId: vpOrderListingUsingGET
+      parameters:
+      - name: approvalStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: fieldName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: getDataFor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: object
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/vp/dashboard/order/{orderId}:
+    get:
+      tags:
+      - vp-dashboard-controller
+      summary: getVpDashboardOrderView
+      operationId: getVpDashboardOrderViewUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpDashboardOrderViewDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/vp/dashboard/order/{orderId}/change/status/{statusType}:
+    put:
+      tags:
+      - vp-dashboard-controller
+      summary: changeStatus
+      operationId: changeStatusUsingPUT
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: statusType
+        in: path
+        description: statusType
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VpChangeStatusRequestPayload'
+        description: requestPayload
+        required: true
+  /api/v1/vp/dashboard/summary:
+    get:
+      tags:
+      - vp-dashboard-controller
+      summary: vpDashboardSummary
+      operationId: vpDashboardSummaryUsingGET
+      parameters:
+      - name: approvalStatus
+        in: query
+        description: approvalStatus
+        required: false
+        schema:
+          type: string
+          default: pending
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: fieldName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: getDataFor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        description: search
+        required: false
+        schema:
+          type: string
+      - name: searchList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: object
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpDashboardSummaryResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/vp/dashboard/{groupBy}/{entityId}/orders:
+    get:
+      tags:
+      - vp-dashboard-controller
+      summary: vpDashboardEntityOrders
+      operationId: vpDashboardEntityOrdersUsingGET
+      parameters:
+      - name: approvalStatus
+        in: query
+        description: approvalStatus
+        required: false
+        schema:
+          type: string
+          default: pending
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: entityId
+        in: path
+        description: entityId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: fieldName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: getDataFor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: groupBy
+        in: path
+        description: groupBy
+        required: true
+        schema:
+          type: string
+          enum:
+          - ASSIGNEE
+          - BUYER
+          - COMPANY
+          - MANUFACTURER
+          - RM_OPS
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: object
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    CompanyDTO:
+      type: object
+      properties:
+        ask_buyer_wip_on_order:
+          type: boolean
+        company_name:
+          type: string
+        compliances:
+          type: array
+          items:
+            type: string
+        id:
+          type: integer
+          format: int64
+        min_buy_sell_margin:
+          type: number
+        min_commission_margin:
+          type: number
+        min_trading_margin:
+          type: number
+      title: CompanyDTO
+    VpDashboardDelayBreakdown:
+      type: object
+      properties:
+        order_count:
+          type: integer
+          format: int64
+        penalty_sum:
+          type: number
+          format: double
+        reason:
+          type: string
+      title: VpDashboardDelayBreakdown
+    VpBulkChangeStatusFailureItem:
+      type: object
+      properties:
+        order_id:
+          type: integer
+          format: int64
+        reason:
+          type: string
+      title: VpBulkChangeStatusFailureItem
+    VpDashboardOrderCostDetailsDto:
+      type: object
+      properties:
+        changed_shipment_mode:
+          type: string
+        cm_cost:
+          type: number
+        factory_margin_amount:
+          type: number
+        factory_margin_percentage:
+          type: number
+        final_price_quoted_to_buyer_in_buyer_currency:
+          type: number
+        final_price_quoted_to_buyer_in_factory_currency:
+          type: number
+        finishing_charges:
+          type: number
+        handling_charges:
+          type: number
+        margin_amount:
+          type: number
+        margin_percentage:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+        overhead_cost:
+          type: number
+        packaging_charges:
+          type: number
+        planned_shipment_mode:
+          type: string
+        sku:
+          type: string
+        sku_img:
+          type: array
+          items:
+            $ref: '#/components/schemas/SkuIdUrlResponse'
+        testing_charges:
+          type: number
+        total_direct_cost:
+          type: number
+        total_fabric_cost:
+          type: number
+        total_factory_cost:
+          type: number
+        total_factory_price:
+          type: number
+        total_print_embroidery_cost:
+          type: number
+        total_trim_cost:
+          type: number
+        total_washing_cost:
+          type: number
+      title: VpDashboardOrderCostDetailsDto
+    VpChangeStatusRequestPayload:
+      type: object
+      properties:
+        margin_approval_doc:
+          type: string
+        reason:
+          type: string
+        sku_logistic_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLogisticsDetailSkusVpEditRequestPayload'
+      title: VpChangeStatusRequestPayload
+    VpDashboardSummaryResponse:
+      type: object
+      properties:
+        avg_pending_days:
+          type: number
+          format: double
+        buyer_days_pushed:
+          type: integer
+          format: int64
+        complete_count:
+          type: integer
+          format: int64
+        delay_breakdown:
+          type: array
+          items:
+            $ref: '#/components/schemas/VpDashboardDelayBreakdown'
+        delayed_count:
+          type: integer
+          format: int64
+        factory_days_pushed:
+          type: integer
+          format: int64
+        on_time_count:
+          type: integer
+          format: int64
+        penalty_count:
+          type: integer
+          format: int64
+        penalty_sum:
+          type: number
+          format: double
+        tna_days_pushed:
+          type: integer
+          format: int64
+        total_order_value:
+          type: number
+          format: double
+        total_orders:
+          type: integer
+          format: int64
+        total_pending_days:
+          type: integer
+          format: int64
+      title: VpDashboardSummaryResponse
+    ManufacturerApprovalRequestPayload:
+      type: object
+      properties:
+        page_type:
+          type: string
+        rejection_reason:
+          type: string
+        status:
+          type: string
+          pattern: ^(approved|pending|rejected)$
+      title: ManufacturerApprovalRequestPayload
+    VpDashboardOrderViewDto:
+      type: object
+      properties:
+        buyer_currency:
+          type: string
+        buyer_po_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetailBuyerPODocResponseDto'
+        buyer_shipment_type:
+          type: string
+        company:
+          $ref: '#/components/schemas/CompanyDTO'
+        conversion_date_floor:
+          type: integer
+          format: int64
+        costing_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/VpDashboardOrderCostDetailsDto'
+        factory_conversion_rate:
+          type: number
+        factory_currency:
+          type: string
+        factory_po_doc:
+          $ref: '#/components/schemas/OrderDocDto'
+        factory_shipment_type:
+          type: string
+        geniemode_entity:
+          $ref: '#/components/schemas/GeniemodeEntityDto'
+        manufacturer_id:
+          type: integer
+          format: int64
+        manufacturer_name:
+          type: string
+        model_type:
+          type: string
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        parent_order_id:
+          type: integer
+          format: int64
+        parents_buyer_po_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetailBuyerPODocResponseDto'
+        planned_order_shipment_mode:
+          type: string
+        qc_hold:
+          type: boolean
+        total_orders:
+          type: integer
+          format: int64
+        total_quantity:
+          type: integer
+          format: int64
+      title: VpDashboardOrderViewDto
+    GeniemodeEntityDto:
+      type: object
+      properties:
+        address:
+          type: object
+        address_id:
+          type: integer
+          format: int64
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        compliance:
+          type: string
+        currency:
+          type: string
+        id:
+          type: integer
+          format: int64
+        invoice_declaration:
+          type: string
+        label:
+          type: string
+        legal_name:
+          type: string
+        tally_currency:
+          type: string
+        value:
+          type: string
+      title: GeniemodeEntityDto
+    OrderLogisticsDetailSkusVpEditRequestPayload:
+      type: object
+      properties:
+        management_approval_url:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+      title: OrderLogisticsDetailSkusVpEditRequestPayload
+    DocDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+      title: DocDto
+    SkuIdUrlResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        url:
+          type: string
+      title: SkuIdUrlResponse
+    OrderDetailBuyerPODocResponseDto:
+      type: object
+      properties:
+        buyer_doc:
+          $ref: '#/components/schemas/OrderDocDto'
+        buyer_po_id:
+          type: integer
+          format: int64
+        buyer_po_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+        po_type:
+          type: string
+      title: OrderDetailBuyerPODocResponseDto
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload
+    VpBulkChangeStatusResponse:
+      type: object
+      properties:
+        failure_count:
+          type: integer
+          format: int32
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/VpBulkChangeStatusFailureItem'
+        success_count:
+          type: integer
+          format: int32
+        success_order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: VpBulkChangeStatusResponse
+    VpBulkChangeStatusRequestPayload:
+      type: object
+      properties:
+        margin_approval_doc:
+          type: string
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        reason:
+          type: string
+        sku_logistic_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLogisticsDetailSkusVpEditRequestPayload'
+      title: VpBulkChangeStatusRequestPayload
+    OrderDocDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        doc_no:
+          type: string
+        doc_type:
+          type: string
+        docs:
+          $ref: '#/components/schemas/DocDto'
+        id:
+          type: integer
+          format: int64
+        is_additional_doc:
+          type: boolean
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+      title: OrderDocDto

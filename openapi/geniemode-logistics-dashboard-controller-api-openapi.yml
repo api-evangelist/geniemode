@@ -1,0 +1,2251 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Logistics Dashboard Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: logistics-dashboard-controller
+  description: Logistics Dashboard Controller
+paths:
+  /api/v1/logistics/dashboard:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: getDashBoardShipments
+      operationId: getDashBoardShipmentsUsingGET
+      parameters:
+      - name: actualDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: assignees
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: assignStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: completionStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - delayed
+            - done
+            - pending
+          enum:
+          - delayed
+          - done
+          - pending
+      - name: confirmationDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: exFactoryDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: factories
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: groupBy
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - assignee
+          - buyer
+          - factory
+          - payment_mode
+          - shipping_term
+          - stage
+      - name: hsnCodes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeCompletedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeNotFinanceApprovedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeRejectedInvoice
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: paymentModes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: projectionDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: rejectedGrn
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchBy
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: shippingTerms
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: statusChangeDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/logistics/dashboard/assign/commission_invoice/{entityId}:
+    put:
+      tags:
+      - logistics-dashboard-controller
+      summary: getOrderShipments
+      operationId: getOrderShipmentsUsingPUT
+      parameters:
+      - name: entityId
+        in: path
+        description: entityId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommissionModelFinalInvoiceLogisticsAssigneeRequestPayload'
+        description: requestPayload
+        required: true
+  /api/v1/logistics/dashboard/assign/manufacturer/{manufacturerId}/logistics/executive/{userId}:
+    put:
+      tags:
+      - logistics-dashboard-controller
+      summary: addUpdateLogisticsExecutive
+      operationId: addUpdateLogisticsExecutiveUsingPUT
+      parameters:
+      - name: manufacturerId
+        in: path
+        description: manufacturerId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/v1/logistics/dashboard/commission/invoice:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: index
+      operationId: indexUsingGET_13
+      parameters:
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: companyName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: endApprovedTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: endRaisedOnTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: geniemodeEntityId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: paymentAddedEndTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentAddedStartTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentCompleted
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: paymentEndTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentStartTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: startApprovedTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: startRaisedOnTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^(approved|rejected|pending)$
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/logistics/dashboard/commission/invoice/{invoiceId}/{status}:
+    put:
+      tags:
+      - logistics-dashboard-controller
+      summary: logisticsEdit
+      operationId: logisticsEditUsingPUT
+      parameters:
+      - name: invoiceId
+        in: path
+        description: invoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: status
+        in: path
+        description: status
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommissionModelFinalInvoiceLogisticsRequestPayload'
+        description: requestPayload
+        required: true
+  /api/v1/logistics/dashboard/excel-types:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: getExcelTypes
+      operationId: getExcelTypesUsingGET_1
+      parameters:
+      - name: pageType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - cohort
+          - dashboard_order
+          - dashboard_sample_order
+          - final_invoice
+          - finance_commission_invoice
+          - logistics_dashboard_shipments
+          - possible_shipments
+      - name: showHidden
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExcelTypesPayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/logistics/dashboard/filters:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: getDashboardFilters
+      operationId: getDashboardFiltersUsingGET
+      parameters:
+      - name: actualDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: assignees
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: assignStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: completionStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - delayed
+            - done
+            - pending
+          enum:
+          - delayed
+          - done
+          - pending
+      - name: confirmationDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: exFactoryDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: factories
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: groupBy
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - assignee
+          - buyer
+          - factory
+          - payment_mode
+          - shipping_term
+          - stage
+      - name: hsnCodes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeCompletedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeNotFinanceApprovedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeRejectedInvoice
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: paymentModes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: projectionDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: rejectedGrn
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchBy
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: shippingTerms
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: statusChangeDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogisticsDashboardFiltersResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/logistics/dashboard/lite:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: getDashBoardShipmentsLite
+      operationId: getDashBoardShipmentsLiteUsingGET
+      parameters:
+      - name: actualDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: assignees
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: assignStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: completionStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - delayed
+            - done
+            - pending
+          enum:
+          - delayed
+          - done
+          - pending
+      - name: confirmationDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: exFactoryDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: factories
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: groupBy
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - assignee
+          - buyer
+          - factory
+          - payment_mode
+          - shipping_term
+          - stage
+      - name: hsnCodes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeCompletedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeNotFinanceApprovedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeRejectedInvoice
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: paymentModes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: projectionDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: rejectedGrn
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchBy
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: shippingTerms
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: statusChangeDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/logistics/dashboard/manufacturer/logistics/executive/mapping:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: getManufacturerLogisticsExecutiveMapping
+      operationId: getManufacturerLogisticsExecutiveMappingUsingGET
+      parameters:
+      - name: logisticsExecutiveId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/logistics/dashboard/order/excel-query:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: getLogisticOrderExcelQuery
+      operationId: getLogisticOrderExcelQueryUsingGET
+      parameters:
+      - name: approvalStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fieldName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: getDataFor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: object
+      - name: showOnlyHtsCodeRequiredOrder
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: showOnlyLogisticDetailsRequiredOrder
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/logistics/dashboard/order/listing:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: getOrdersForApproval
+      operationId: getOrdersForApprovalUsingGET
+      parameters:
+      - name: approvalStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fieldName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: getDataFor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: object
+      - name: showOnlyHtsCodeRequiredOrder
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: showOnlyLogisticDetailsRequiredOrder
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/logistics/dashboard/order/{orderId}:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: getLogisticsDashboardOrderDetails
+      operationId: getLogisticsDashboardOrderDetailsUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderLogisticsDetailsLogisticViewDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/logistics/dashboard/order/{orderId}/approval:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: getLogisticsDashboardOrder
+      operationId: getLogisticsDashboardOrderUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderLogisticsDetailsLogisticViewDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/logistics/dashboard/order/{orderId}/{status}:
+    put:
+      tags:
+      - logistics-dashboard-controller
+      summary: editLogisticsDashboardOrder
+      operationId: editLogisticsDashboardOrderUsingPUT
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: status
+        in: path
+        description: status
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderLogisticsDetailsLogisticViewDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderLogisticsDetailsLogisticEditRequestPayload'
+        description: logisticsEditRequestPayload
+        required: true
+  /api/v1/logistics/dashboard/possible-shipments/excel-types:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: getExcelTypesOnPossibleShipmentPage
+      operationId: getExcelTypesOnPossibleShipmentPageUsingGET
+      parameters:
+      - name: pageType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - cohort
+          - dashboard_order
+          - dashboard_sample_order
+          - final_invoice
+          - finance_commission_invoice
+          - logistics_dashboard_shipments
+          - possible_shipments
+      - name: showHidden
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExcelTypesPayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/logistics/dashboard/shipments:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: getOrderShipments
+      operationId: getOrderShipmentsUsingGET
+      parameters:
+      - name: actualDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: assignees
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: assignStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: completionStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - delayed
+            - done
+            - pending
+          enum:
+          - delayed
+          - done
+          - pending
+      - name: confirmationDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: deliveryDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: exFactoryDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: factories
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: groupBy
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - assignee
+          - buyer
+          - factory
+          - payment_mode
+          - shipping_term
+          - stage
+      - name: groupByValue
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: hsnCodes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeCompletedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeNotFinanceApprovedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeRejectedInvoice
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: paymentModes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: projectionDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchBy
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: shipmentStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - booked
+          - complete
+          - deliveryDate
+          - paymentFollowup
+          - preplanned
+          - shipped
+      - name: shipmentSubStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - delayed
+          - done
+          - pending
+      - name: shippingTerms
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: statusChangeDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/logistics/dashboard/shipments/lite:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: getOrderShipmentsLite
+      operationId: getOrderShipmentsLiteUsingGET
+      parameters:
+      - name: actualDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: assignees
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: assignStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: completionStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - delayed
+            - done
+            - pending
+          enum:
+          - delayed
+          - done
+          - pending
+      - name: confirmationDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: deliveryDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: exFactoryDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: factories
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: groupBy
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - assignee
+          - buyer
+          - factory
+          - payment_mode
+          - shipping_term
+          - stage
+      - name: groupByValue
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: hsnCodes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeCompletedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeNotFinanceApprovedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeRejectedInvoice
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: paymentModes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: projectionDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchBy
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: shipmentStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - booked
+          - complete
+          - deliveryDate
+          - paymentFollowup
+          - preplanned
+          - shipped
+      - name: shipmentSubStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - delayed
+          - done
+          - pending
+      - name: shippingTerms
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: statusChangeDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/logistics/dashboard/summary:
+    get:
+      tags:
+      - logistics-dashboard-controller
+      summary: getDashBoardShipmentsSummary
+      operationId: getDashBoardShipmentsSummaryUsingGET
+      parameters:
+      - name: actualDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: assignees
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: assignStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: completionStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - delayed
+            - done
+            - pending
+          enum:
+          - delayed
+          - done
+          - pending
+      - name: confirmationDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: exFactoryDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: factories
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: groupBy
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - assignee
+          - buyer
+          - factory
+          - payment_mode
+          - shipping_term
+          - stage
+      - name: hsnCodes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeCompletedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeNotFinanceApprovedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeRejectedInvoice
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: paymentModes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: projectionDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: rejectedGrn
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchBy
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: shippingTerms
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: statusChangeDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentDashboardSummaryResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    OrderLogisticDocsDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int64
+        s3_url:
+          type: string
+        type:
+          type: string
+        version:
+          type: integer
+          format: int64
+      title: OrderLogisticDocsDto
+    CommissionModelFinalInvoiceLogisticsRequestPayload:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateCommissionModelInvoiceRequestPayload'
+        logistics_remark:
+          type: string
+      title: CommissionModelFinalInvoiceLogisticsRequestPayload
+    OrderDocDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        doc_no:
+          type: string
+        doc_type:
+          type: string
+        docs:
+          $ref: '#/components/schemas/DocDto'
+        id:
+          type: integer
+          format: int64
+        is_additional_doc:
+          type: boolean
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+      title: OrderDocDto
+    OrderLogisticsDetailDto:
+      type: object
+      required:
+      - total_ctns
+      - total_gross_weight
+      properties:
+        changed_shipment_mode:
+          type: string
+        ctns:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        packaging_list_url:
+          type: string
+        port_of_discharge:
+          type: string
+        port_of_loading:
+          type: string
+        remarks:
+          type: string
+        shipment_mode:
+          type: string
+        total_cbm:
+          type: number
+        total_ctns:
+          type: number
+        total_gross_weight:
+          type: number
+        total_net_weight:
+          type: number
+        total_volumetric_weight:
+          type: number
+      title: OrderLogisticsDetailDto
+    OrderLogisticsDetailSkusLogisticsEditRequestPayload:
+      type: object
+      properties:
+        custom_duty:
+          type: number
+        delivery_charges:
+          type: number
+        freight_cost:
+          type: number
+        harbor_merchandise_fee:
+          type: number
+        hsn_code:
+          type: string
+        hts_code:
+          type: string
+        logistic_cost:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+        packaging_list_url:
+          type: string
+        reciprocal_tariff:
+          type: number
+        sku:
+          type: string
+        total_cbm:
+          type: number
+        total_custom_duty:
+          type: number
+        total_net_weight:
+          type: number
+        total_volumetric_weight:
+          type: number
+      title: OrderLogisticsDetailSkusLogisticsEditRequestPayload
+    ExcelTypesPayload:
+      type: object
+      properties:
+        display_name:
+          type: string
+        hide:
+          type: boolean
+        key:
+          type: string
+        show_price_dropdown:
+          type: boolean
+      title: ExcelTypesPayload
+    OrderWiseApprovalReason:
+      type: object
+      properties:
+        approval_reasons:
+          type: array
+          items:
+            type: string
+        order_id:
+          type: integer
+          format: int64
+      title: OrderWiseApprovalReason
+    FilterResponsePayload:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+        filter_display_name:
+          type: string
+        filter_key:
+          type: string
+        filter_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterValuesDto'
+      title: FilterResponsePayload
+    DocDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+      title: DocDto
+    CreateCommissionModelInvoiceRequestPayload:
+      type: object
+      properties:
+        bls:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
+        id:
+          type: integer
+          format: int64
+        shipment_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        shipping_docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
+        supplier_invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
+      title: CreateCommissionModelInvoiceRequestPayload
+    FilterValuesDto:
+      type: object
+      properties:
+        count:
+          type: string
+        display_name:
+          type: object
+        extras:
+          type: object
+        id:
+          type: string
+      title: FilterValuesDto
+    AddressResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+      title: AddressResponsePayload
+    OrderAddressDto:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressResponsePayload'
+        address_id:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+      title: OrderAddressDto
+    ShipmentDashboardSummaryResponse:
+      type: object
+      properties:
+        cbm:
+          type: number
+          format: float
+        clients:
+          type: integer
+          format: int32
+        factories:
+          type: integer
+          format: int32
+        shipments:
+          type: integer
+          format: int32
+      title: ShipmentDashboardSummaryResponse
+    OrderLogisticsDetailSkusLogisticsViewDto:
+      type: object
+      properties:
+        buyer_currency:
+          type: string
+        buyer_eta_date:
+          type: string
+          format: date-time
+        buying_price:
+          type: number
+        buying_price_total:
+          type: number
+        custom_duty:
+          type: number
+        custom_duty_entry_required:
+          type: boolean
+        delivery_charges:
+          type: number
+        discount_charges:
+          type: number
+        discount_charges_percent:
+          type: number
+        discount_charges_type:
+          type: string
+        factory_discount_charges:
+          type: number
+        factory_discount_charges_percent:
+          type: number
+        factory_discount_charges_type:
+          type: string
+        factory_eta_date:
+          type: string
+          format: date-time
+        factory_price:
+          type: number
+        factory_price_total:
+          type: number
+        freight_cost:
+          type: number
+        harbor_merchandise_fee:
+          type: number
+        is_hts_code_input_required:
+          type: boolean
+        is_hts_code_verified:
+          type: boolean
+        logistic_cost:
+          type: number
+        logistic_cost_entry_required:
+          type: boolean
+        logistic_details:
+          $ref: '#/components/schemas/OrderLogisticsDetailDto'
+        logistic_input_required:
+          type: boolean
+        order_id:
+          type: integer
+          format: int64
+        port_of_discharge:
+          type: string
+        port_of_loading:
+          type: string
+        product_details:
+          type: object
+        quantity:
+          type: integer
+          format: int64
+        reciprocal_tariff:
+          type: number
+        reciprocal_tariff_entry_required:
+          type: boolean
+        ship_qty_negative_tolerance:
+          type: integer
+          format: int64
+        ship_qty_positive_tolerance:
+          type: integer
+          format: int64
+        show_freight_keyword:
+          type: boolean
+        sizes:
+          type: string
+        sku:
+          type: string
+        style_code:
+          type: string
+        total_custom_duty:
+          type: number
+      title: OrderLogisticsDetailSkusLogisticsViewDto
+    OrderLogisticsDetailsLogisticViewDto:
+      type: object
+      properties:
+        bill_to_address:
+          type: object
+        bill_to_id:
+          type: integer
+          format: int64
+        buyer_currency:
+          type: string
+        buyer_payment_type:
+          type: string
+        buyer_po_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetailBuyerPODocResponseDto'
+        buyer_shipment_type:
+          type: string
+        company_address:
+          type: object
+        company_address_id:
+          type: integer
+          format: int64
+        factory_payment_type:
+          type: string
+        factory_shipment_type:
+          type: string
+        financial_status:
+          type: string
+        lead_id:
+          type: integer
+          format: int64
+        lead_info:
+          type: object
+        logistics_docs:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/OrderLogisticDocsDto'
+        manufacturer_id:
+          type: integer
+          format: int64
+        manufacturer_name:
+          type: string
+        model_type:
+          type: string
+        order_wise_approval_reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderWiseApprovalReason'
+        shipping_address:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderAddressDto'
+        skus:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLogisticsDetailSkusLogisticsViewDto'
+        total_orders:
+          type: integer
+          format: int32
+        total_price:
+          type: number
+        total_quantity:
+          type: integer
+          format: int64
+      title: OrderLogisticsDetailsLogisticViewDto
+    CommissionModelFinalInvoiceLogisticsAssigneeRequestPayload:
+      type: object
+      properties:
+        user_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: CommissionModelFinalInvoiceLogisticsAssigneeRequestPayload
+    LogisticsDashboardFiltersResponsePayload:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterResponsePayload'
+      title: LogisticsDashboardFiltersResponsePayload
+    CommissionInvoiceDocsDto:
+      type: object
+      properties:
+        document_name:
+          type: string
+        document_type:
+          type: string
+        document_url:
+          type: string
+        id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+      title: CommissionInvoiceDocsDto
+    OrderDetailBuyerPODocResponseDto:
+      type: object
+      properties:
+        buyer_doc:
+          $ref: '#/components/schemas/OrderDocDto'
+        buyer_po_id:
+          type: integer
+          format: int64
+        buyer_po_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+        po_type:
+          type: string
+      title: OrderDetailBuyerPODocResponseDto
+    OrderLogisticsDetailsLogisticEditRequestPayload:
+      type: object
+      properties:
+        costing_sheet:
+          type: string
+        forwarder_email:
+          type: string
+        sku_logistic_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLogisticsDetailSkusLogisticsEditRequestPayload'
+      title: OrderLogisticsDetailsLogisticEditRequestPayload

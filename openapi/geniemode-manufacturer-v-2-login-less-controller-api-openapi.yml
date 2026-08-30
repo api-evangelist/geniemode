@@ -1,0 +1,1043 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Manufacturer V 2 Login Less Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: manufacturer-v-2-login-less-controller
+  description: Manufacturer V 2 Login Less Controller
+paths:
+  /api/v2/loginless/manufacturer:
+    post:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: create
+      operationId: createUsingPOST_10
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerBasicDetailsDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerBasicDetailsDto'
+        description: requestPayload
+        required: true
+  /api/v2/loginless/manufacturer/updateGaId:
+    put:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: updateGaId
+      operationId: updateGaIdUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerBasicDetailsDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerBasicDetailsDto'
+        description: requestPayload
+        required: true
+  /api/v2/loginless/manufacturer/uploadDocs:
+    post:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: upload
+      operationId: uploadUsingPOST_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponsePayload'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: string
+              format: binary
+        description: file
+        required: true
+  /api/v2/loginless/manufacturer/{gaId}:
+    get:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: getManufacturer
+      operationId: getManufacturerUsingGET_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerBasicDetailsDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    delete:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: delete
+      operationId: deleteUsingDELETE_5
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      - name: pin
+        in: query
+        description: pin
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v2/loginless/manufacturer/{gaId}/add-contact-person:
+    put:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: addContactPerson
+      operationId: addContactPersonUsingPUT
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerContactPersonRequestPayload'
+        description: requestPayload
+        required: true
+  /api/v2/loginless/manufacturer/{gaId}/contact-persons:
+    get:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: getContactPersons
+      operationId: getContactPersonsUsingGET
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupUserResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v2/loginless/manufacturer/{gaId}/factories:
+    get:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: getPage7
+      operationId: getPage7UsingGET_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerPage7Dto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: addUpdateFactories
+      operationId: addUpdateFactoriesUsingPUT_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerPage7Dto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerPage7Dto'
+        description: requestPayload
+        required: true
+  /api/v2/loginless/manufacturer/{gaId}/page/1:
+    put:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: updatePage1
+      operationId: updatePage1UsingPUT_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerBasicDetailsDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerBasicDetailsDto'
+        description: requestPayload
+        required: true
+  /api/v2/loginless/manufacturer/{gaId}/page/2:
+    get:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: getPage2
+      operationId: getPage2UsingGET_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerPage2Dto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: updatePage2
+      operationId: updatePage2UsingPUT_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerPage2Dto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerPage2Dto'
+        description: requestPayload
+        required: true
+  /api/v2/loginless/manufacturer/{gaId}/page/3:
+    get:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: getPage3
+      operationId: getPage3UsingGET_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerPage3Dto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: updatePage3
+      operationId: updatePage3UsingPUT_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerPage3Dto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerPage3Dto'
+        description: requestPayload
+        required: true
+  /api/v2/loginless/manufacturer/{gaId}/page/4:
+    get:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: getPage4
+      operationId: getPage4UsingGET_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerPage4Dto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: updatePage4
+      operationId: updatePage4UsingPUT_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerPage4Dto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerPage4Dto'
+        description: requestPayload
+        required: true
+  /api/v2/loginless/manufacturer/{gaId}/page/5:
+    get:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: getPage5
+      operationId: getPage5UsingGET_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerPage5Dto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: updatePage5
+      operationId: updatePage5UsingPUT_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerPage5Dto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerPage5Dto'
+        description: requestPayload
+        required: true
+  /api/v2/loginless/manufacturer/{gaId}/page/6:
+    get:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: getPage6
+      operationId: getPage6UsingGET_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerPage6Dto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: updatePage6
+      operationId: updatePage6UsingPUT_1
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerPage6Dto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerPage6Dto'
+        description: requestPayload
+        required: true
+  /api/v2/loginless/manufacturer/{gaId}/submit:
+    put:
+      tags:
+      - manufacturer-v-2-login-less-controller
+      summary: finalSubmit
+      operationId: finalSubmitUsingPUT
+      parameters:
+      - name: gaId
+        in: path
+        description: gaId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    ManufacturerPage6Dto:
+      type: object
+      properties:
+        article_of_association_doc_url:
+          type: string
+        authorization_letter_doc_url:
+          type: string
+        br_authorizing_signing_auth_doc_url:
+          type: string
+        certificate_of_incorporation_doc_url:
+          type: string
+        company_pan_doc_url:
+          type: string
+        directors_on_letterhead_doc_url:
+          type: string
+        huf_authority_letter_on_letterhead_doc_url:
+          type: string
+        huf_deed_doc_url:
+          type: string
+        list_of_partners_on_letterhead_doc_url:
+          type: string
+        memorandum_of_association_doc_url:
+          type: string
+        need_advance_payment:
+          type: boolean
+        partnership_deed_doc_url:
+          type: string
+        steps_completed:
+          type: integer
+          format: int64
+      title: ManufacturerPage6Dto
+    ManufacturerPage2Dto:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressMiniRequestPayload'
+        proof_doc_url:
+          type: string
+        proof_sub_type:
+          type: string
+        proof_type:
+          type: string
+        steps_completed:
+          type: integer
+          format: int64
+      title: ManufacturerPage2Dto
+    ManufacturerDirectorNewDto:
+      type: object
+      properties:
+        aadhar_doc_url:
+          type: string
+        aadhar_no:
+          type: string
+        din:
+          type: string
+        dpin:
+          type: string
+        father_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        is_primary:
+          type: boolean
+        name:
+          type: string
+        pan:
+          type: string
+        pan_doc_url:
+          type: string
+        passport_no:
+          type: string
+      title: ManufacturerDirectorNewDto
+    ManufacturerPage3Dto:
+      type: object
+      properties:
+        aadhar_doc_url:
+          type: string
+        aadhar_no:
+          type: integer
+          format: int64
+        export_license_doc_url:
+          type: string
+        export_license_no:
+          type: string
+        gst_doc_url:
+          type: string
+        gst_number:
+          type: string
+        letter_head_doc_url:
+          type: string
+        nid:
+          type: string
+        nid_card_doc_url:
+          type: string
+        nid_company_relation_card_doc_url:
+          type: string
+        pan:
+          type: string
+        pan_doc_url:
+          type: string
+        registration_certificate_doc_url:
+          type: string
+        registration_no:
+          type: string
+        steps_completed:
+          type: integer
+          format: int64
+        tan:
+          type: string
+        tin:
+          type: string
+        tin_certificate_doc_url:
+          type: string
+        udyam_registration_certificate_doc_url:
+          type: string
+        udyam_registration_certificate_present:
+          type: boolean
+        vat:
+          type: string
+        vat_doc_url:
+          type: string
+      title: ManufacturerPage3Dto
+    ManufacturerPage4Dto:
+      type: object
+      properties:
+        bank_account_number:
+          type: string
+        bank_name:
+          type: string
+        cancelled_cheque_doc_url:
+          type: string
+        ifsc_code:
+          type: string
+        intermediate_bank_account_number:
+          type: string
+        intermediate_bank_ifsc_code:
+          type: string
+        intermediate_bank_name:
+          type: string
+        intermediate_bank_swift_code:
+          type: string
+        steps_completed:
+          type: integer
+          format: int64
+        swift_code:
+          type: string
+      title: ManufacturerPage4Dto
+    ManufacturerContactPersonRequestPayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        department:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        manufacturer_id:
+          type: integer
+          format: int64
+        phone_number:
+          type: string
+        username:
+          type: string
+      title: ManufacturerContactPersonRequestPayload
+    AddressMiniRequestPayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+      title: AddressMiniRequestPayload
+    UserResponsePayload:
+      type: object
+      properties:
+        created_by:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+      title: UserResponsePayload
+    GroupUserResponsePayload:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSimpleDTO'
+      title: GroupUserResponsePayload
+    ManufacturerAddressesDto:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressMiniRequestPayload'
+        id:
+          type: integer
+          format: int64
+        proof_doc_url:
+          type: string
+        proof_sub_type:
+          type: string
+        proof_type:
+          type: string
+      title: ManufacturerAddressesDto
+    ManufacturerProductsDTO:
+      type: object
+      properties:
+        category:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        sub_type:
+          type: string
+        type:
+          type: string
+      title: ManufacturerProductsDTO
+    ManufacturerUnitDto:
+      type: object
+      properties:
+        aadhar_doc_url:
+          type: string
+        aadhar_no:
+          type: integer
+          format: int64
+        bank_account_number:
+          type: string
+        bank_name:
+          type: string
+        cancelled_cheque_doc_url:
+          type: string
+        capacity_per_month:
+          type: integer
+          format: int64
+        capacity_to_geniemode:
+          type: string
+        capacity_utilization:
+          type: string
+        compliances:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerDocsDto'
+        expired_compliances:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerDocsDto'
+        export_license_doc_url:
+          type: string
+        export_license_no:
+          type: string
+        factory_addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerAddressesDto'
+        factory_image_url:
+          type: string
+        gst_doc_url:
+          type: string
+        gst_number:
+          type: string
+        id:
+          type: integer
+          format: int64
+        ifsc_code:
+          type: string
+        intermediate_bank_account_number:
+          type: string
+        intermediate_bank_ifsc_code:
+          type: string
+        intermediate_bank_name:
+          type: string
+        intermediate_bank_swift_code:
+          type: string
+        machine_details_doc_url:
+          type: string
+        name:
+          type: string
+        nid:
+          type: string
+        nid_card_doc_url:
+          type: string
+        nid_company_relation_card_doc_url:
+          type: string
+        no_of_machines:
+          type: integer
+          format: int64
+        no_of_workers:
+          type: integer
+          format: int64
+        pan:
+          type: string
+        pan_doc_url:
+          type: string
+        preferred_factory:
+          type: boolean
+        registration_certificate_doc_url:
+          type: string
+        registration_no:
+          type: string
+        swift_code:
+          type: string
+        tan:
+          type: string
+        tin:
+          type: string
+        tin_certificate_doc_url:
+          type: string
+        type_of_current_buyer:
+          type: string
+        vat:
+          type: string
+        vat_doc_url:
+          type: string
+        worker_type:
+          type: string
+      title: ManufacturerUnitDto
+    ManufacturerPage5Dto:
+      type: object
+      required:
+      - prev_year_turnover
+      properties:
+        brand_name:
+          type: string
+        buyer_name:
+          type: string
+        capacity_per_month:
+          type: integer
+          format: int64
+        capacity_to_geniemode:
+          type: string
+        capacity_utilization:
+          type: string
+        catalouge_shoot_image_available:
+          type: string
+        catalouge_size:
+          type: string
+        directors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerDirectorNewDto'
+        financial_backing:
+          type: string
+        has_own_label:
+          type: boolean
+        id:
+          type: integer
+          format: int64
+        need_advance_payment:
+          type: boolean
+        prev_year_turnover:
+          type: number
+          format: float
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerProductsDTO'
+        steps_completed:
+          type: integer
+          format: int64
+        type_of_current_buyer:
+          type: string
+      title: ManufacturerPage5Dto
+    UploadResponsePayload:
+      type: object
+      properties:
+        bucket_name:
+          type: string
+        doc_id:
+          type: integer
+          format: int64
+        error_file:
+          type: string
+          format: byte
+        error_messages:
+          type: array
+          items:
+            type: string
+        filename:
+          type: string
+        key:
+          type: string
+        status:
+          type: string
+        url:
+          type: string
+      title: UploadResponsePayload
+    ManufacturerBasicDetailsDto:
+      type: object
+      properties:
+        country_code:
+          type: string
+        email:
+          type: string
+        firm_type:
+          type: string
+        first_name:
+          type: string
+        ga_id:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        name:
+          type: string
+        on_boarding_team_member_name:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+        region:
+          type: string
+        steps_completed:
+          type: integer
+          format: int64
+        supplier_sub_type:
+          type: string
+        supplier_type:
+          type: string
+        website:
+          type: string
+      title: ManufacturerBasicDetailsDto
+    UserSimpleDTO:
+      type: object
+      properties:
+        country_code:
+          type: string
+        department:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        is_primary:
+          type: boolean
+        last_name:
+          type: string
+        phone_number:
+          type: string
+        username:
+          type: string
+      title: UserSimpleDTO
+    ManufacturerPage7Dto:
+      type: object
+      properties:
+        steps_completed:
+          type: integer
+          format: int64
+        units:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerUnitDto'
+      title: ManufacturerPage7Dto
+    ManufacturerDocsDto:
+      type: object
+      required:
+      - doc_expiry
+      properties:
+        doc_category:
+          type: string
+        doc_expiry:
+          type: integer
+          format: int64
+        doc_sub_category:
+          type: string
+        doc_url:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: ManufacturerDocsDto

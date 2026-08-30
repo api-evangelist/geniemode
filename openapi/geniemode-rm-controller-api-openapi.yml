@@ -1,0 +1,221 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Rm Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: rm-controller
+  description: RM Controller
+paths:
+  /api/rm/CreateRM:
+    post:
+      tags:
+      - rm-controller
+      summary: create_rm
+      operationId: create_rmUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRMDto'
+        description: createRMDto
+        required: true
+  /api/rm/CreateRmUms:
+    post:
+      tags:
+      - rm-controller
+      summary: create_rm_ums
+      operationId: create_rm_umsUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRMDto'
+        description: createRMDto
+        required: true
+  /api/rm/DeleteRM:
+    put:
+      tags:
+      - rm-controller
+      summary: delete_rm
+      operationId: delete_rmUsingPUT
+      parameters:
+      - name: rmId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRmResponsePayload'
+  /api/rm/GetAllRM:
+    post:
+      tags:
+      - rm-controller
+      summary: get_all_rm
+      operationId: get_all_rmUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMResponse'
+  /api/rm/GetRM:
+    post:
+      tags:
+      - rm-controller
+      summary: get_rm
+      operationId: get_rmUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMResponseDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRmRequestPayload'
+        description: getRmRequestPayload
+        required: true
+  /api/rm/UpdateRm:
+    put:
+      tags:
+      - rm-controller
+      summary: update_rm
+      operationId: update_rmUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRmResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRmRequestPayload'
+        description: updateRmRequestPayload
+        required: true
+components:
+  schemas:
+    UpdateRmResponsePayload:
+      type: object
+      properties:
+        message:
+          type: string
+        status_code:
+          type: integer
+          format: int32
+      title: UpdateRmResponsePayload
+    RMResponseDto:
+      type: object
+      properties:
+        contact_info:
+          type: string
+        country_code:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        rm_id:
+          type: integer
+          format: int64
+        soft_delete:
+          type: string
+        status:
+          type: boolean
+        user_email:
+          type: string
+      title: RMResponseDto
+    RMResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMResponseDto'
+      title: RMResponse
+    GetRmRequestPayload:
+      type: object
+      properties:
+        rm_id:
+          type: integer
+          format: int64
+      title: GetRmRequestPayload
+    UpdateRmRequestPayload:
+      type: object
+      properties:
+        contact_info:
+          type: string
+        country_code:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        rm_id:
+          type: integer
+          format: int64
+        user_email:
+          type: string
+      title: UpdateRmRequestPayload
+    DeleteRmResponsePayload:
+      type: object
+      properties:
+        message:
+          type: string
+      title: DeleteRmResponsePayload
+    CreateRMDto:
+      type: object
+      properties:
+        contact_info:
+          type: string
+        country_code:
+          type: string
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        ums_id:
+          type: integer
+          format: int64
+      title: CreateRMDto

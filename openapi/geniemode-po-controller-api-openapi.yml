@@ -1,0 +1,1087 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Po Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: po-controller
+  description: Po Controller
+paths:
+  /api/po/allPoHistory/{orderId}:
+    get:
+      tags:
+      - po-controller
+      summary: allPoHistory
+      operationId: allPoHistoryUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoGetHistoryOrderListResponsePayloadDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/po/all_buyer:
+    get:
+      tags:
+      - po-controller
+      summary: all_po_buyer_type
+      operationId: all_po_buyer_typeUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - Importer
+                  - Large_Retailer
+                  - Online_Retailer
+                  - Small_Medium_Retailer
+                  - Small_Mom_And_Pop_Store
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/po/create:
+    post:
+      tags:
+      - po-controller
+      summary: create_po
+      operationId: create_poUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePoRequestPayload'
+        description: poRequestPayload
+        required: true
+  /api/po/create_new:
+    post:
+      tags:
+      - po-controller
+      summary: create_po_new
+      operationId: create_po_newUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePoRequestPayload'
+        description: poRequestPayload
+        required: true
+  /api/po/get_all:
+    get:
+      tags:
+      - po-controller
+      summary: index
+      operationId: indexUsingGET_22
+      parameters:
+      - name: clientIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: count
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: financeImpact
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: financeStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: leadIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: rmIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/po/get_po:
+    get:
+      tags:
+      - po-controller
+      summary: get_po
+      operationId: get_poUsingGET
+      parameters:
+      - name: forFactory
+        in: query
+        description: forFactory
+        required: false
+        schema:
+          type: boolean
+      - name: id
+        in: query
+        description: id
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: orderId
+        in: query
+        description: orderId
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: showOriginal
+        in: query
+        description: showOriginal
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoGetResponsePayloadDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/po/get_po_history:
+    get:
+      tags:
+      - po-controller
+      summary: get_po_history
+      operationId: get_po_historyUsingGET
+      parameters:
+      - name: orderId
+        in: query
+        description: orderId
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoGetHistoryResponsePayloadDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - po-controller
+      summary: getPoHistoryOrderList
+      operationId: getPoHistoryOrderListUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PoGetHistoryOrderListResponsePayloadDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PoHistoryListRequest'
+        description: request
+        required: true
+  /api/po/get_po_new:
+    get:
+      tags:
+      - po-controller
+      summary: get_po_new
+      operationId: get_po_newUsingGET
+      parameters:
+      - name: orderId
+        in: query
+        description: orderId
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoResponsePayloadDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/po/update_po:
+    put:
+      tags:
+      - po-controller
+      summary: update_po
+      operationId: update_poUsingPUT
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePoResponePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePoRequestPayload'
+        description: updatePoRequest
+        required: true
+  /api/po/view_po:
+    get:
+      tags:
+      - po-controller
+      summary: view_po
+      operationId: view_poUsingGET_1
+      parameters:
+      - name: orderId
+        in: query
+        description: orderId
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: showOriginal
+        in: query
+        description: showOriginal
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoResponsePayloadWithHistoryDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    PoResponsePayloadDto:
+      type: object
+      properties:
+        bill_address:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        bill_contact_number:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        bill_to:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        buyer_gstin:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        buyer_name:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        buyer_po_number:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        cgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        cgst_percentage:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        conversion_rate:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        country_of_destination:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        country_of_origin:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        created_by:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        created_on:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        currency:
+          type: string
+        current_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        delivery_addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoListDeliveryAddressDto'
+        delivery_date:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_currency:
+          type: string
+        factory_currency_purchase_cgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_currency_purchase_cgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_currency_purchase_gst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_currency_purchase_gst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_currency_purchase_igst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_currency_purchase_igst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_currency_purchase_sgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_currency_purchase_sgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_dollar_purchase_cgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_dollar_purchase_cgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_dollar_purchase_gst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_dollar_purchase_gst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_dollar_purchase_igst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_dollar_purchase_igst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_dollar_purchase_sgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_dollar_purchase_sgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        geniemode_entity_name:
+          type: string
+        grand_buying_total:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        grand_buying_total_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        grand_buying_total_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        grand_factory_total:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        grand_factory_total_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        grand_factory_total_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        grand_total:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        igst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        igst_percentage:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        inco_terms:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        last_modified_by:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        modified_on:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        multiple_delivery_dates:
+          type: boolean
+        no_of_deliveries:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        only_qty_changed:
+          type: boolean
+        order_hierarchy_net_margin:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        order_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoOrder'
+        payment_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        planned_order_shipment_mode:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        po_date:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        po_number:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        po_wise_skus:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoSkus'
+        port_of_discharge:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        port_of_loading:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_cgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_cgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_cgst_amount_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_cgst_amount_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_gst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_gst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_gst_amount_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_gst_amount_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_gst_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_gst_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_igst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_igst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_igst_amount_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_igst_amount_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_sgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_sgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_sgst_amount_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_sgst_amount_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        round_off:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        round_off_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        round_off_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        round_off_factory_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        round_off_factory_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_cgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_cgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_gst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_gst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_igst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_igst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_sgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_sgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        sgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        sgst_percentage:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        ship_qty_negative_tolerance:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        ship_qty_positive_tolerance:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        sku_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoSkus'
+        special_instruction:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        supplier_address:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        supplier_gst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        supplier_name:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        supplier_unit_address:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        supplier_unit_name:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        terms_condition:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_amount_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_amount_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_buying_price_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_factory_currency_price_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_factory_dollar_price_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_quantity:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_selling_price_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+      title: PoResponsePayloadDto
+    PoMapPayloadDto:
+      type: object
+      properties:
+        change_type:
+          $ref: '#/components/schemas/PoChangeTypeDto'
+        value:
+          type: string
+      title: PoMapPayloadDto
+    PoOrder:
+      type: object
+      properties:
+        buyer_price_in_buyer_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_duty_cost:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_duty_cost_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_duty_per_piece:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_unique_id:
+          type: string
+        delivery_charges:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        logistic_cost:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        logistic_cost_per_piece:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        logistic_cost_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        net_margin:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        order_id:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        quantity:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        reciprocal_tariff:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        reciprocal_tariff_cost_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        reciprocal_tariff_per_piece:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        sku:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        style_code:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_custom_duty:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+      title: PoOrder
+    PoGetHistoryResponsePayloadDto:
+      type: object
+      properties:
+        po_history_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoGetResponsePayloadDto'
+      title: PoGetHistoryResponsePayloadDto
+    PoGetResponsePayloadDto:
+      type: object
+      properties:
+        created_by:
+          type: string
+        date:
+          type: string
+        diff:
+          $ref: '#/components/schemas/PoResponsePayloadDto'
+        id:
+          type: integer
+          format: int64
+        is_latest:
+          type: boolean
+        rejected_reason:
+          type: string
+        status:
+          type: string
+        status_change_time:
+          type: integer
+          format: int64
+      title: PoGetResponsePayloadDto
+    PoOrderwiseDetails:
+      type: object
+      properties:
+        amount_factory_currency_price:
+          type: number
+        changed_shipment_mode:
+          type: string
+        count:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        planned_shipment_mode:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+        ship_qty_negative_tolerance:
+          type: integer
+          format: int64
+        ship_qty_positive_tolerance:
+          type: integer
+          format: int64
+        total_buyer_price_in_buyer_currency:
+          type: number
+      title: PoOrderwiseDetails
+    PoHistoryListRequest:
+      type: object
+      properties:
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: PoHistoryListRequest
+    PoChangeDataDto:
+      type: object
+      properties:
+        previous_value:
+          type: string
+      title: PoChangeDataDto
+    CreatePoResponePayload:
+      type: object
+      properties:
+        bill_address:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        bill_contact_number:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        bill_gst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        bill_to:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        buyer_po_number:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        cgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        country_of_destination:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        country_of_origin:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        delivery_addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoListDeliveryAddressDto'
+        delivery_date:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        grand_total:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        igst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        inco_terms:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        no_of_deliveries:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        payment_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        po_date:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        po_number:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        sgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        sku_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoSkus'
+        supplier_address:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        supplier_gst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        supplier_name:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        supplier_unit_address:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        supplier_unit_name:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+      title: CreatePoResponePayload
+    CreatePoRequestPayload:
+      type: object
+      properties:
+        auto_approved:
+          type: boolean
+        order_id:
+          type: integer
+          format: int64
+        reason:
+          type: string
+        status:
+          type: string
+      title: CreatePoRequestPayload
+    PoGetHistoryOrderListResponsePayloadDto:
+      type: object
+      properties:
+        order_id:
+          type: integer
+          format: int64
+        po_history_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoGetResponsePayloadDto'
+      title: PoGetHistoryOrderListResponsePayloadDto
+    PoChangeTypeDto:
+      type: object
+      properties:
+        added:
+          $ref: '#/components/schemas/PoChangeDataDto'
+        modify:
+          $ref: '#/components/schemas/PoChangeDataDto'
+        subtracted:
+          $ref: '#/components/schemas/PoChangeDataDto'
+      title: PoChangeTypeDto
+    BundleSkuDto:
+      type: object
+      properties:
+        bundle_sku_id:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        price:
+          type: number
+          format: double
+        product_sku_id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        sku:
+          type: string
+        style_code:
+          type: string
+      title: BundleSkuDto
+    PoSkusMapping:
+      type: object
+      properties:
+        buyer_po_number:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        id:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        quantity:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+      title: PoSkusMapping
+    PoListDeliveryAddressDto:
+      type: object
+      properties:
+        address_id:
+          type: integer
+          format: int64
+        delivery_address:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        delivery_contact:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+      title: PoListDeliveryAddressDto
+    PoSkus:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        amount_factory_currency_price:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        amount_factory_currency_price_with_gst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        amount_price_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        amount_price_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        attribution:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        bar_code:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        bundle_data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BundleSkuDto'
+        business_model:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        buyer_net_margin:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        buyer_po_number:
+          type: string
+        buying_price:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        buying_price_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        buying_price_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        category_id:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        category_name:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        changed_shipment_mode:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        color:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_duty_cost:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_duty_cost_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_duty_per_piece:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_unique_id:
+          type: string
+        custom_unique_id_with_po:
+          type: string
+        delivery_charges:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        delivery_date:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_currency_price:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_currency_selling_price:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        factory_dollar_price:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        gross_margin:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        hsn_code:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        hts_code:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        invoice_quantity:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        logistic_cost:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        logistic_cost_per_piece:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        logistic_cost_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        margin:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        material:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        net_margin:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        order_id:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        planned_shipment_mode:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        po_skus_mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoSkusMapping'
+        price:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        product_name:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_cgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_cgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_cgst_amount_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_cgst_suggestion:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_gst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_gst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_igst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_igst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_igst_amount_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_igst_suggestion:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_sgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_sgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_sgst_amount_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        purchase_sgst_suggestion:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        quantity:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        raw_material_margin:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        reciprocal_tariff:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        reciprocal_tariff_cost_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        reciprocal_tariff_per_piece:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_cgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_cgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_cgst_amount_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_cgst_suggestion:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_igst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_igst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_igst_amount_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_igst_suggestion:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_price:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_price_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_price_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_sgst:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_sgst_amount:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_sgst_amount_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        selling_sgst_suggestion:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        ship_qty_negative_tolerance:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        ship_qty_positive_tolerance:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        size:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        sku:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        sku_image:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        style_code:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_buyer_price_in_buyer_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_buyer_price_in_dollar:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_buyer_price_in_factory_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_custom_duty:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        unit:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        variant_id:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        variant_margin_percentage:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+      title: PoSkus
+    PoMeasurementChartResponsePayloadDto:
+      type: object
+      properties:
+        product_image:
+          type: string
+        product_name:
+          type: string
+        size_chart:
+          type: string
+        sku:
+          type: string
+        style_code:
+          type: string
+      title: PoMeasurementChartResponsePayloadDto
+    PoResponsePayloadWithHistoryDto:
+      type: object
+      properties:
+        diff:
+          $ref: '#/components/schemas/PoResponsePayloadDto'
+        history:
+          $ref: '#/components/schemas/PoGetHistoryResponsePayloadDto'
+        is_legacy_order:
+          type: boolean
+        orders:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/PoOrderwiseDetails'
+        rejected_reason:
+          type: string
+        size_chart:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoMeasurementChartResponsePayloadDto'
+        status:
+          type: string
+        status_change_time:
+          type: integer
+          format: int64
+      title: PoResponsePayloadWithHistoryDto

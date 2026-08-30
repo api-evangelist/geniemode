@@ -1,0 +1,269 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Courier Budget Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: courier-budget-controller
+  description: Courier Budget Controller
+paths:
+  /api/v1/courier-budget:
+    get:
+      tags:
+      - courier-budget-controller
+      summary: index
+      operationId: indexUsingGET_3
+      parameters:
+      - name: dateRange
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/courier-budget/getVpSpends:
+    get:
+      tags:
+      - courier-budget-controller
+      summary: getVpSpends
+      operationId: getVpSpendsUsingGET
+      parameters:
+      - name: endTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: startTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetVpCourierSpendDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/courier-budget/refreshVpSpends:
+    put:
+      tags:
+      - courier-budget-controller
+      summary: refreshVpSpends
+      operationId: refreshVpSpendsUsingPUT
+      parameters:
+      - name: endTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: startTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetVpCourierSpendDto'
+  /api/v1/courier-budget/usage:
+    get:
+      tags:
+      - courier-budget-controller
+      summary: usageIndex
+      operationId: usageIndexUsingGET
+      parameters:
+      - name: dateRange
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/courier-budget/{userId}:
+    put:
+      tags:
+      - courier-budget-controller
+      summary: put
+      operationId: putUsingPUT
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourierBudgetDto'
+        description: budgetDto
+        required: true
+    delete:
+      tags:
+      - courier-budget-controller
+      summary: delete
+      operationId: deleteUsingDELETE_1
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    UMSUserResponsePayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        created_by:
+          type: string
+        first_name:
+          type: string
+        group_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        whatsapp_opt_in:
+          type: boolean
+      title: UMSUserResponsePayload
+    GetVpCourierSpendDto:
+      type: object
+      properties:
+        spend:
+          type: number
+        vp:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+      title: GetVpCourierSpendDto
+    CourierBudgetDto:
+      type: object
+      properties:
+        budget:
+          type: number
+        current_month_spend:
+          type: number
+        default_budget:
+          type: number
+        id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        vp:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+      title: CourierBudgetDto

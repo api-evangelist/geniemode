@@ -1,0 +1,199 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Workflow Step Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: workflow-step-controller
+  description: Workflow Step Controller
+paths:
+  /api/workflowsteps/CreateWorkflowStep:
+    post:
+      tags:
+      - workflow-step-controller
+      summary: create_wf_step
+      operationId: create_wf_stepUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkFlowStepResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkFlowStepRequestPayload'
+        description: createWFStep
+        required: true
+  /api/workflowsteps/GetAllWorkflowStep:
+    post:
+      tags:
+      - workflow-step-controller
+      summary: get_all_wf_step
+      operationId: get_all_wf_stepUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkFlowStepResponse'
+  /api/workflowsteps/GetWorkflowStep:
+    post:
+      tags:
+      - workflow-step-controller
+      summary: get_wf_step
+      operationId: get_wf_stepUsingPOST
+      parameters:
+      - name: stepTemplateId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkFlowStepResponse'
+  /api/workflowsteps/HideWorkflowStep:
+    post:
+      tags:
+      - workflow-step-controller
+      summary: hide_wf_step
+      operationId: hide_wf_stepUsingPOST
+      parameters:
+      - name: stepTemplateId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkFlowStepResponse'
+  /api/workflowsteps/SearchWorkflow:
+    post:
+      tags:
+      - workflow-step-controller
+      summary: index
+      operationId: indexUsingPOST_2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkFlowStepSearchRequestPayload'
+        description: wfstepSearchRequestPayload
+        required: true
+components:
+  schemas:
+    GetWorkFlowStepResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkFlowStepDto'
+        message:
+          type: string
+      title: GetWorkFlowStepResponse
+    CreateWorkFlowStepRequestPayload:
+      type: object
+      properties:
+        require_approver:
+          type: string
+        require_due_date:
+          type: string
+        rm_id:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        visible_to_client:
+          type: string
+        visible_to_manufacturer:
+          type: string
+      title: CreateWorkFlowStepRequestPayload
+    WorkFlowStepSearchRequestPayload:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        require_approver:
+          type: string
+        require_due_date:
+          type: string
+        search:
+          type: string
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        visible_to_client:
+          type: string
+        visible_to_manufacturer:
+          type: string
+      title: WorkFlowStepSearchRequestPayload
+    CreateWorkFlowStepResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        step_template_id:
+          type: integer
+          format: int64
+      title: CreateWorkFlowStepResponse
+    WorkFlowStepDto:
+      type: object
+      properties:
+        require_approver:
+          type: string
+        require_due_date:
+          type: string
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        step_template_id:
+          type: integer
+          format: int64
+        visible_to_client:
+          type: string
+        visible_to_manufacturer:
+          type: string
+      title: WorkFlowStepDto

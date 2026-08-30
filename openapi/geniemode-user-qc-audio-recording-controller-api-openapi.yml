@@ -1,0 +1,99 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing User Qc Audio Recording Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: user-qc-audio-recording-controller
+  description: User QC Audio Recording Controller
+paths:
+  /api/v1/path/qc-audio-recordings/users/{userId}/recording-flag:
+    get:
+      tags:
+      - user-qc-audio-recording-controller
+      summary: getUserRecordingFlag
+      operationId: getUserRecordingFlagUsingGET
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/qc-audio-recordings/users/{userId}/upload:
+    post:
+      tags:
+      - user-qc-audio-recording-controller
+      summary: uploadAudio
+      operationId: uploadAudioUsingPOST
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QcAudioRecordingDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QcAudioRecordingDto'
+        description: qcAudioRecordingDto
+        required: true
+components:
+  schemas:
+    QcAudioRecordingDto:
+      type: object
+      properties:
+        data:
+          type: object
+        duration:
+          type: integer
+          format: int64
+        end_epoch:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        location:
+          type: string
+        start_epoch:
+          type: integer
+          format: int64
+        url:
+          type: string
+        user_id:
+          type: integer
+          format: int64
+      title: QcAudioRecordingDto

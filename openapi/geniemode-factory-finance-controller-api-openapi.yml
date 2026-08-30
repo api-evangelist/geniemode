@@ -1,0 +1,269 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Factory Finance Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: factory-finance-controller
+  description: Factory Finance Controller
+paths:
+  /api/factory_finance/Create:
+    post:
+      tags:
+      - factory-finance-controller
+      summary: create
+      operationId: createUsingPOST_4
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFactoryFinanceResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFactoryFinanceRequestPayload'
+        description: factoryFinanceRequestPayload
+        required: true
+  /api/factory_finance/delete:
+    delete:
+      tags:
+      - factory-finance-controller
+      summary: deleteFactory
+      operationId: deleteFactoryUsingDELETE_1
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/factory_finance/get:
+    get:
+      tags:
+      - factory-finance-controller
+      summary: getFactoryFinance
+      operationId: getFactoryFinanceUsingGET
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetFactoryFinanceResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/factory_finance/update:
+    put:
+      tags:
+      - factory-finance-controller
+      summary: updateFactoryFinance
+      operationId: updateFactoryFinanceUsingPUT
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetFactoryFinanceResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFactoryFinanceRequestPayload'
+        description: createFactoryFinanceRequestPayload
+        required: true
+components:
+  schemas:
+    UMSUserResponsePayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        created_by:
+          type: string
+        first_name:
+          type: string
+        group_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        whatsapp_opt_in:
+          type: boolean
+      title: UMSUserResponsePayload
+    DocDetailsDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+      title: DocDetailsDto
+    CreateFactoryFinanceDocRequest:
+      type: object
+      properties:
+        doc_data:
+          $ref: '#/components/schemas/DocDetailsDto'
+        doc_id:
+          type: integer
+          format: int64
+        doc_type:
+          type: string
+        doc_value:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: CreateFactoryFinanceDocRequest
+    CreateFactoryFinanceRequestPayload:
+      type: object
+      properties:
+        collateral:
+          type: boolean
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateFactoryFinanceDocRequest'
+        factory_id:
+          type: integer
+          format: int64
+        loan_amount:
+          type: integer
+          format: int64
+        loan_type:
+          type: string
+      title: CreateFactoryFinanceRequestPayload
+    GetFactoryResponsePayload:
+      type: object
+      properties:
+        agent_user_data:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        agent_user_id:
+          type: integer
+          format: int64
+        business_type:
+          type: string
+        doc_data:
+          $ref: '#/components/schemas/DocDetailsDto'
+        factory_agent_user_id:
+          type: integer
+          format: int64
+        factory_name:
+          type: string
+        factory_nature:
+          type: string
+        factory_poc_address:
+          type: string
+        factory_poc_email:
+          type: string
+        factory_poc_name:
+          type: string
+        factory_poc_phone:
+          type: string
+        factory_poc_pincode:
+          type: string
+        finance_raw_material_interest:
+          type: boolean
+        finance_support_interest:
+          type: boolean
+        id:
+          type: integer
+          format: int64
+        operation_years:
+          type: integer
+          format: int64
+        profit_last_year:
+          type: integer
+          format: int64
+        revenue_current_year:
+          type: integer
+          format: int64
+        revenue_last_year:
+          type: integer
+          format: int64
+      title: GetFactoryResponsePayload
+    GetFactoryFinanceResponse:
+      type: object
+      properties:
+        collateral:
+          type: boolean
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateFactoryFinanceDocRequest'
+        factory:
+          $ref: '#/components/schemas/GetFactoryResponsePayload'
+        id:
+          type: integer
+          format: int64
+        loan_amount:
+          type: integer
+          format: int64
+        loan_type:
+          type: string
+      title: GetFactoryFinanceResponse

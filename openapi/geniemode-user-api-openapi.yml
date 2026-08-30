@@ -1,0 +1,178 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing User API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: user
+  description: User
+paths:
+  /api/v1/siren-events/user:
+    post:
+      tags:
+      - user
+      summary: record
+      operationId: recordUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordSirenEventsRequestPayload'
+        description: payload
+        required: true
+  /api/v1/user-lock-state/user:
+    get:
+      tags:
+      - user
+      summary: getMyStates
+      operationId: getMyStatesUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - user
+      summary: setMyState
+      operationId: setMyStateUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLockState'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetUserLockStateRequestPayload'
+        description: requestPayload
+        required: true
+    delete:
+      tags:
+      - user
+      summary: clearMyState
+      operationId: clearMyStateUsingDELETE
+      parameters:
+      - name: key
+        in: query
+        description: key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/user-lock-state/user/raw:
+    get:
+      tags:
+      - user
+      summary: getMyRawStates
+      operationId: getMyRawStatesUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserLockState'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    UserLockState:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        expiresAt:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        keyName:
+          type: string
+        userId:
+          type: integer
+          format: int64
+        value:
+          $ref: '#/components/schemas/JsonNode'
+      title: UserLockState
+    RecordSirenEventsRequestPayload:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+      title: RecordSirenEventsRequestPayload
+    SetUserLockStateRequestPayload:
+      type: object
+      properties:
+        duration_seconds:
+          type: integer
+          format: int64
+        key:
+          type: string
+        user_id:
+          type: integer
+          format: int64
+        value:
+          type: object
+      title: SetUserLockStateRequestPayload
+    JsonNode:
+      type: object
+      title: JsonNode
+    Event:
+      type: object
+      properties:
+        event_type:
+          type: string
+        metrics:
+          $ref: '#/components/schemas/JsonNode'
+        occurred_at:
+          type: integer
+          format: int64
+        path:
+          type: string
+        siren_type:
+          type: string
+      title: Event

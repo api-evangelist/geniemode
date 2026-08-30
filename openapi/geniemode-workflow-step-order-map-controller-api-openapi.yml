@@ -1,0 +1,203 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Workflow Step Order Map Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: workflow-step-order-map-controller
+  description: Workflow Step Order Map Controller
+paths:
+  /api/v1/wf-step-order-map/aiAudit:
+    post:
+      tags:
+      - workflow-step-order-map-controller
+      summary: aiAudit
+      operationId: aiAuditUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/wf-step-order-map/aiAudit/{wfStepOrderMapId}:
+    post:
+      tags:
+      - workflow-step-order-map-controller
+      summary: aiAudit
+      operationId: aiAuditUsingPOST_1
+      parameters:
+      - name: wfStepOrderMapId
+        in: path
+        description: wfStepOrderMapId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/wf-step-order-map/aiAuditInvoiceBIL:
+    post:
+      tags:
+      - workflow-step-order-map-controller
+      summary: aiAuditInvoiceBIL
+      operationId: aiAuditInvoiceBILUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiAuditInvoiceBILDocPayload'
+        description: payload
+        required: true
+  /api/v1/wf-step-order-map/fixDueDates:
+    post:
+      tags:
+      - workflow-step-order-map-controller
+      summary: fixDueDates
+      operationId: fixDueDatesUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FixDueDatesDto'
+        description: payload
+        required: true
+  /api/v1/wf-step-order-map/{wfStepOrderMapId}/aiAudits:
+    get:
+      tags:
+      - workflow-step-order-map-controller
+      summary: getAiAudits
+      operationId: getAiAuditsUsingGET
+      parameters:
+      - name: wfStepOrderMapId
+        in: path
+        description: wfStepOrderMapId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WfStepOrderMapAiAuditDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/wf-step-order-map/{wfStepOrderMapId}/mark-at-risk:
+    post:
+      tags:
+      - workflow-step-order-map-controller
+      summary: markAtRisk
+      operationId: markAtRiskUsingPOST
+      parameters:
+      - name: wfStepOrderMapId
+        in: path
+        description: wfStepOrderMapId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/wf-step-order-map/{wfStepOrderMapId}/unmark-at-risk:
+    post:
+      tags:
+      - workflow-step-order-map-controller
+      summary: unmarkAtRisk
+      operationId: unmarkAtRiskUsingPOST
+      parameters:
+      - name: wfStepOrderMapId
+        in: path
+        description: wfStepOrderMapId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    WfStepOrderMapAiAuditDto:
+      type: object
+      properties:
+        date_accuracy:
+          type: integer
+          format: int32
+        document_accuracy:
+          type: integer
+          format: int32
+        file_urls:
+          type: string
+        id:
+          type: integer
+          format: int64
+        image_urls:
+          type: string
+        prompt:
+          type: string
+        reasoning:
+          type: string
+      title: WfStepOrderMapAiAuditDto
+    FixDueDatesDto:
+      type: object
+      properties:
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: FixDueDatesDto
+    AiAuditInvoiceBILDocPayload:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: AiAuditInvoiceBILDocPayload

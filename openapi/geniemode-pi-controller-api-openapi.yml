@@ -1,0 +1,1082 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Pi Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: pi-controller
+  description: Pi Controller
+paths:
+  /api/v1/path/pi/buyer/po:
+    get:
+      tags:
+      - pi-controller
+      summary: getBuyerPo
+      operationId: getBuyerPoUsingGET_1
+      parameters:
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/pi/createPiNew:
+    post:
+      tags:
+      - pi-controller
+      summary: createPiNew
+      operationId: createPiNewUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePiRequestPayload'
+        description: createPiRequestPayload
+        required: true
+  /api/v1/path/pi/deletePi:
+    delete:
+      tags:
+      - pi-controller
+      summary: deletePi
+      operationId: deletePiUsingDELETE
+      parameters:
+      - name: piId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPiForRmResponsePayload'
+  /api/v1/path/pi/deletePiForRm:
+    delete:
+      tags:
+      - pi-controller
+      summary: deletePiForRm
+      operationId: deletePiForRmUsingDELETE
+      parameters:
+      - name: piId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPiForRmResponsePayload'
+  /api/v1/path/pi/getLeadsFromBuyerPo:
+    get:
+      tags:
+      - pi-controller
+      summary: checkBuyerPo
+      operationId: checkBuyerPoUsingGET
+      parameters:
+      - name: buyerPoNo
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LeadPageDTO'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/pi/getMasterOrdersFromBuyerPoAndLead:
+    get:
+      tags:
+      - pi-controller
+      summary: getMasterOrdersFromBuyerPoAndLead
+      operationId: getMasterOrdersFromBuyerPoAndLeadUsingGET
+      parameters:
+      - name: buyerPoNo
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: leadId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int64
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/pi/getPi:
+    get:
+      tags:
+      - pi-controller
+      summary: getPiForRm
+      operationId: getPiForRmUsingGET
+      parameters:
+      - name: piId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPiForRmResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/pi/getPiValues:
+    post:
+      tags:
+      - pi-controller
+      summary: getPiValues
+      operationId: getPiValuesUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties:
+                    type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPiValueForOrdersRequestPayload'
+        description: requestPayload
+        required: true
+  /api/v1/path/pi/getPiWithoutId:
+    post:
+      tags:
+      - pi-controller
+      summary: getPiWithoutId
+      operationId: getPiWithoutIdUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PiListingResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePiRequestPayload'
+        description: createPiRequestPayload
+        required: true
+  /api/v1/path/pi/listing:
+    get:
+      tags:
+      - pi-controller
+      summary: listing
+      operationId: listingUsingGET
+      parameters:
+      - name: buyerPoNumberList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: leadIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: opsAssignee
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: piIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: rmId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: skipStatus
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/pi/piHistory:
+    get:
+      tags:
+      - pi-controller
+      summary: piHistory
+      operationId: piHistoryUsingGET
+      parameters:
+      - name: piId
+        in: query
+        description: piId
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PiHistoryResponsePayloadDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/pi/piHistoryById:
+    get:
+      tags:
+      - pi-controller
+      summary: piHistoryById
+      operationId: piHistoryByIdUsingGET
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PiHistoryResponsePayloadDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/pi/updatePiForRm:
+    put:
+      tags:
+      - pi-controller
+      summary: updatePiForRm
+      operationId: updatePiForRmUsingPUT
+      parameters:
+      - name: piId
+        in: query
+        description: piId
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePiRequestPayload'
+        description: createPiRequestPayload
+        required: true
+  /api/v1/path/pi/viewPi:
+    get:
+      tags:
+      - pi-controller
+      summary: viewPi
+      operationId: viewPiUsingGET
+      parameters:
+      - name: piId
+        in: query
+        description: piId
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: showOriginal
+        in: query
+        description: showOriginal
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PiResponsePayloadDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    piOtherChargeResponsePayloadDto:
+      type: object
+      properties:
+        charge:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        charge_type:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        id:
+          type: integer
+          format: int64
+      title: piOtherChargeResponsePayloadDto
+    PiChangeDataDto:
+      type: object
+      properties:
+        previous_value:
+          type: string
+      title: PiChangeDataDto
+    BrandVpDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        vp_email:
+          type: string
+        vp_id:
+          type: integer
+          format: int64
+        vp_name:
+          type: string
+      title: BrandVpDto
+    CreatePiRequestPayload:
+      type: object
+      properties:
+        bill_address_id:
+          type: integer
+          format: int64
+        buyer_gst_in:
+          type: string
+        buyer_po_no:
+          type: string
+        buyer_terms_condition:
+          type: string
+        geniemode_entity_id:
+          type: integer
+          format: int64
+        lead_id:
+          type: integer
+          format: int64
+        master_order_list:
+          type: array
+          items:
+            type: integer
+            format: int64
+        other_charges:
+          type: array
+          items:
+            $ref: '#/components/schemas/OtherChargesRequestPayload'
+      title: CreatePiRequestPayload
+    PiMapPayloadDto:
+      type: object
+      properties:
+        change_type:
+          $ref: '#/components/schemas/PiChangeTypeDto'
+        value:
+          type: string
+      title: PiMapPayloadDto
+    PiComplianceDto:
+      type: object
+      properties:
+        compliance:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: PiComplianceDto
+    LeadGenerationResponse:
+      type: object
+      properties:
+        brand:
+          $ref: '#/components/schemas/BrandResponse'
+        client_id:
+          type: integer
+          format: int64
+        company:
+          $ref: '#/components/schemas/CompanyDTO'
+        country:
+          type: string
+        email:
+          type: string
+        id:
+          type: integer
+          format: int64
+        lead_approval_status:
+          type: string
+        lead_projection_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeadProjectionDTO'
+        name:
+          type: string
+      title: LeadGenerationResponse
+    PiResponsePayloadDto:
+      type: object
+      properties:
+        acc_no:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        account_holder_name:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        bank_address:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        bank_details:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        bank_name:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        bill_to:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        brand:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        buyer_currency:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        buyer_gst_in:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        buyer_po_list:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        buyer_po_no:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        buyer_po_received_date:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        buyer_terms_condition:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        compliance_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PiComplianceResponsePayloadDto'
+        geniemode_entity_name:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        insurance_charges:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        other_charges:
+          type: array
+          items:
+            $ref: '#/components/schemas/piOtherChargeResponsePayloadDto'
+        pi_date:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        pi_no:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        reason:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        single_pi_response:
+          $ref: '#/components/schemas/PiListingResponsePayload'
+        sku_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PiSkuResponsePayloadDto'
+        sum_of_all_other_charges:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        sum_of_quantity:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        sum_of_tax_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        sum_of_taxable_value:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        sum_of_total_value:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        supplier_gst_in:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        total_cgst_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        total_gst_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        total_igst_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        total_invoice_value:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        total_sgst_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        total_tax_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+      title: PiResponsePayloadDto
+    PiListingResponsePayload:
+      type: object
+      properties:
+        acc_no:
+          type: string
+        bank_address:
+          type: string
+        bank_name:
+          type: string
+        bill_to:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        buyer_currency:
+          type: string
+        buyer_po_list:
+          type: string
+        buyer_po_no:
+          type: string
+        buyer_po_receive_date:
+          type: string
+          format: date-time
+        buyer_po_response:
+          $ref: '#/components/schemas/PiListingResponsePayload'
+        created_at:
+          type: string
+          format: date-time
+        geniemode_entity_name:
+          type: string
+        ifsc:
+          type: string
+        lead:
+          $ref: '#/components/schemas/LeadPageDTO'
+        lead_id:
+          type: integer
+          format: int64
+        master_orders:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
+        pi_id:
+          type: integer
+          format: int64
+        sku_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PiSkuResponsePayload'
+        status:
+          type: string
+        sum_of_quantity:
+          type: number
+          format: float
+        sum_of_tax_amount:
+          type: number
+          format: float
+        sum_of_taxable_value:
+          type: number
+          format: float
+        sum_of_total_value:
+          type: number
+          format: float
+        swift:
+          type: string
+        total_order_count:
+          type: integer
+          format: int64
+        total_order_price:
+          type: number
+          format: float
+        total_quantity:
+          type: integer
+          format: int64
+        total_value:
+          type: number
+          format: float
+      title: PiListingResponsePayload
+    PiComplianceResponsePayloadDto:
+      type: object
+      properties:
+        compliance:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        id:
+          type: integer
+          format: int64
+      title: PiComplianceResponsePayloadDto
+    GetPiValueForOrdersRequestPayload:
+      type: object
+      properties:
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: GetPiValueForOrdersRequestPayload
+    GeniemodeEntityDto:
+      type: object
+      properties:
+        address:
+          type: object
+        address_id:
+          type: integer
+          format: int64
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        compliance:
+          type: string
+        currency:
+          type: string
+        id:
+          type: integer
+          format: int64
+        invoice_declaration:
+          type: string
+        label:
+          type: string
+        legal_name:
+          type: string
+        tally_currency:
+          type: string
+        value:
+          type: string
+      title: GeniemodeEntityDto
+    LeadPageDTO:
+      type: object
+      properties:
+        current_stage_name:
+          type: string
+        current_user:
+          $ref: '#/components/schemas/UserResponsePayload'
+        last_stage_id:
+          type: integer
+          format: int64
+        lead_generation:
+          $ref: '#/components/schemas/LeadGenerationResponse'
+        time_difference:
+          type: integer
+          format: int64
+      title: LeadPageDTO
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload
+    BrandCategoryDto:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          format: int64
+        category_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: BrandCategoryDto
+    OtherChargesRequestPayload:
+      type: object
+      properties:
+        charge:
+          type: number
+        charge_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: OtherChargesRequestPayload
+    PiSkuResponsePayloadDto:
+      type: object
+      properties:
+        cgst_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        color:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        gst_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        gst_rate:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        hsn:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        hts:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        igst_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        item_description:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        price_per_unit:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        qty:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        sgst_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        size:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        sku_check_sum:
+          type: string
+        style_code:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        tax_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        taxable_value:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        total_value:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        uom:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+      title: PiSkuResponsePayloadDto
+    PiSkuResponsePayload:
+      type: object
+      properties:
+        color:
+          type: string
+        gst_rate:
+          type: string
+        hsn:
+          type: string
+        item_description:
+          type: string
+        price_per_unit:
+          type: number
+        qty:
+          type: integer
+          format: int64
+        size:
+          type: string
+        style_code:
+          type: string
+        tax_amount:
+          type: number
+          format: float
+        taxable_value:
+          type: number
+          format: float
+        total_value:
+          type: number
+          format: float
+        uom:
+          type: string
+      title: PiSkuResponsePayload
+    PiHistoryResponsePayloadDto:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int64
+        response:
+          $ref: '#/components/schemas/PiResponsePayloadDto'
+      title: PiHistoryResponsePayloadDto
+    BrandResponse:
+      type: object
+      properties:
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        ask_buyer_wip_on_order:
+          type: boolean
+        billing_address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        brand_name:
+          type: string
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/BrandCategoryDto'
+        compliances:
+          type: array
+          items:
+            type: string
+        created_by:
+          type: string
+        id:
+          type: integer
+          format: int64
+        legal_address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        legal_address_response:
+          type: string
+        legal_name:
+          type: string
+        vp_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/BrandVpDto'
+        vps:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: BrandResponse
+    UserResponsePayload:
+      type: object
+      properties:
+        created_by:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+      title: UserResponsePayload
+    LeadProjectionDTO:
+      type: object
+      properties:
+        achieved_business_value:
+          type: number
+        amount:
+          type: integer
+          format: int64
+        business_size:
+          type: number
+        id:
+          type: integer
+          format: int64
+        lead_probability:
+          type: integer
+          format: int32
+        probable_completion_date:
+          type: integer
+          format: int64
+      title: LeadProjectionDTO
+    PiChangeTypeDto:
+      type: object
+      properties:
+        added:
+          $ref: '#/components/schemas/PiChangeDataDto'
+        modify:
+          $ref: '#/components/schemas/PiChangeDataDto'
+        subtracted:
+          $ref: '#/components/schemas/PiChangeDataDto'
+      title: PiChangeTypeDto
+    GetPiForRmResponsePayload:
+      type: object
+      properties:
+        bill_to:
+          type: string
+        bill_to_id:
+          type: integer
+          format: int64
+        buyer_currency:
+          type: string
+        buyer_gst_in:
+          type: string
+        buyer_po_list:
+          type: string
+        buyer_po_response:
+          $ref: '#/components/schemas/PiListingResponsePayload'
+        buyer_terms_condition:
+          type: string
+        compliance_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PiComplianceDto'
+        geniemode_entity:
+          $ref: '#/components/schemas/GeniemodeEntityDto'
+        id:
+          type: integer
+          format: int64
+        insurance_charges:
+          type: number
+        other_charges:
+          type: array
+          items:
+            $ref: '#/components/schemas/OtherChargesRequestPayload'
+        reason:
+          type: string
+        sku_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PiSkuResponsePayload'
+        status:
+          type: string
+        sum_of_quantity:
+          type: number
+          format: float
+        sum_of_tax_amount:
+          type: number
+          format: float
+        sum_of_taxable_value:
+          type: number
+          format: float
+        sum_of_total_value:
+          type: number
+          format: float
+      title: GetPiForRmResponsePayload
+    CompanyDTO:
+      type: object
+      properties:
+        ask_buyer_wip_on_order:
+          type: boolean
+        company_name:
+          type: string
+        compliances:
+          type: array
+          items:
+            type: string
+        id:
+          type: integer
+          format: int64
+        min_buy_sell_margin:
+          type: number
+        min_commission_margin:
+          type: number
+        min_trading_margin:
+          type: number
+      title: CompanyDTO

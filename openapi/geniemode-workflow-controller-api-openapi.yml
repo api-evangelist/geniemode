@@ -1,0 +1,583 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Workflow Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: workflow-controller
+  description: Workflow Controller
+paths:
+  /api/workflow/CreateWorkflow:
+    post:
+      tags:
+      - workflow-controller
+      summary: create_wf
+      operationId: create_wfUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkFlowResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNewWorkflowRequest'
+        description: request
+        required: true
+  /api/workflow/DeleteWorkflow:
+    put:
+      tags:
+      - workflow-controller
+      summary: delete_wf
+      operationId: delete_wfUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkFlowResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetWorkFlowRequestPayload'
+        description: getWorkFlowRequestPayload
+        required: true
+  /api/workflow/GetAllSampleWorkflow:
+    get:
+      tags:
+      - workflow-controller
+      summary: get_sample_wf
+      operationId: get_sample_wfUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkAllFlowsResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/workflow/GetAllWorkflow:
+    post:
+      tags:
+      - workflow-controller
+      summary: get_all_wf
+      operationId: get_all_wfUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkAllFlowsResponse'
+  /api/workflow/GetWorkflow:
+    post:
+      tags:
+      - workflow-controller
+      summary: get_wf
+      operationId: get_wfUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkFlowResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetWorkFlowRequestPayload'
+        description: getWorkFlowRequestPayload
+        required: true
+  /api/workflow/GetWorkflow/AddValidation:
+    post:
+      tags:
+      - workflow-controller
+      summary: addValidation
+      operationId: addValidationUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WfStepMapValidationDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WfStepMapValidationDto'
+        description: wfStepMapValidationDto
+        required: true
+  /api/workflow/GetWorkflow/DeleteValidation/{id}:
+    delete:
+      tags:
+      - workflow-controller
+      summary: deleteValidation
+      operationId: deleteValidationUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/workflow/GetWorkflow/EditValidation/{id}:
+    put:
+      tags:
+      - workflow-controller
+      summary: editValidation
+      operationId: editValidationUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WfStepMapValidationDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WfStepMapValidationDto'
+        description: wfStepMapValidationDto
+        required: true
+  /api/workflow/GetWorkflow/copyRule/{id}:
+    post:
+      tags:
+      - workflow-controller
+      summary: copyRule
+      operationId: copyRuleUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WfStepMapValidationDto'
+  /api/workflow/GetWorkflow/{orderId}:
+    post:
+      tags:
+      - workflow-controller
+      summary: get_wf_by_order
+      operationId: get_wf_by_orderUsingPOST
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkFlowForOrderResponse'
+  /api/workflow/SearchWorkflow:
+    post:
+      tags:
+      - workflow-controller
+      summary: index
+      operationId: indexUsingPOST_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorfFlowSearchRequestPayload'
+        description: worfFlowSearchRequestPayload
+        required: true
+  /api/workflow/ShareWorkflow:
+    post:
+      tags:
+      - workflow-controller
+      summary: share_wf
+      operationId: share_wfUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkFlowResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareWorkFlowRequestPayload'
+        description: shareWorkFlowRequestPayload
+        required: true
+  /api/workflow/UpdateWorkflow:
+    put:
+      tags:
+      - workflow-controller
+      summary: update_wf
+      operationId: update_wfUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkFlowResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkFlowRequestPayload'
+        description: updateWf
+        required: true
+  /api/workflow/editOrderWorkflows:
+    post:
+      tags:
+      - workflow-controller
+      summary: editOrderWorkflows
+      operationId: editOrderWorkflowsUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkAllFlowsResponse'
+components:
+  schemas:
+    WorkFlowResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        insert_time:
+          type: string
+          format: date-time
+        name:
+          type: string
+        read_only:
+          type: string
+        reference_deviation_days:
+          type: integer
+          format: int64
+        reference_wf_step_map:
+          $ref: '#/components/schemas/WorkFlowResponseDto'
+        reference_wf_step_map_id:
+          type: integer
+          format: int64
+        require_approver:
+          type: string
+        require_due_date:
+          type: string
+        share_rm_id:
+          type: integer
+          format: int64
+        step_display_order:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        step_template_id:
+          type: integer
+          format: int64
+        validations:
+          type: array
+          items:
+            $ref: '#/components/schemas/WfStepMapValidationDto'
+        wf_template_id:
+          type: integer
+          format: int64
+        workflow_name:
+          type: string
+      title: WorkFlowResponseDto
+    WorfFlowSearchRequestPayload:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        rm_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        search:
+          type: string
+        shared_by_rms:
+          type: array
+          items:
+            type: integer
+            format: int64
+        type:
+          type: string
+        work_flow_name:
+          type: string
+      title: WorfFlowSearchRequestPayload
+    WfStepMapMinDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+      title: WfStepMapMinDto
+    GetWorkFlowForOrderResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkFlowResponseForOrderDto'
+        message:
+          type: string
+        workflow_id:
+          type: integer
+          format: int64
+      title: GetWorkFlowForOrderResponse
+    WfStepMapValidationDto:
+      type: object
+      properties:
+        depends_on:
+          type: string
+        depends_on_field:
+          type: string
+        depends_on_id:
+          type: integer
+          format: int64
+        deviation:
+          type: number
+          format: float
+        deviation_type:
+          type: string
+        field:
+          type: string
+        id:
+          type: integer
+          format: int64
+        type:
+          type: string
+        wf_step_map:
+          $ref: '#/components/schemas/WfStepMapMinDto'
+      title: WfStepMapValidationDto
+    GetWorkFlowRequestPayload:
+      type: object
+      properties:
+        wf_template_id:
+          type: integer
+          format: int64
+      title: GetWorkFlowRequestPayload
+    GetWorkAllFlowsResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        shared_workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetAllWorkFlowResponseDto'
+        workflow_id:
+          type: integer
+          format: int64
+        workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetAllWorkFlowResponseDto'
+      title: GetWorkAllFlowsResponse
+    GetAllWorkFlowResponseDto:
+      type: object
+      properties:
+        insert_time:
+          type: string
+          format: date-time
+        name:
+          type: string
+        read_only:
+          type: string
+        wf_template_id:
+          type: integer
+          format: int64
+        workflow_name:
+          type: string
+      title: GetAllWorkFlowResponseDto
+    ShareWorkFlowRequestPayload:
+      type: object
+      properties:
+        share_rm_id:
+          type: integer
+          format: int64
+        wf_template_id:
+          type: integer
+          format: int64
+      title: ShareWorkFlowRequestPayload
+    UpdateWorkFlowRequestPayload:
+      type: object
+      properties:
+        steps_map:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkFlowStepMapDto'
+        wf_template_id:
+          type: integer
+          format: int64
+        workflow_name:
+          type: string
+      title: UpdateWorkFlowRequestPayload
+    WorkFlowStepMapDto:
+      type: object
+      properties:
+        require_approver:
+          type: string
+        require_due_date:
+          type: string
+        rm_id:
+          type: integer
+          format: int64
+        step_display_order:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        step_template_id:
+          type: integer
+          format: int64
+        visible_to_client:
+          type: string
+        visible_to_manufacturer:
+          type: string
+      title: WorkFlowStepMapDto
+    StepDataForWorkFlow:
+      type: object
+      properties:
+        step_display_order:
+          type: integer
+          format: int64
+        step_template_id:
+          type: integer
+          format: int64
+      title: StepDataForWorkFlow
+    WorkFlowResponseForOrderDto:
+      type: object
+      properties:
+        buffer_date:
+          type: string
+          format: date-time
+        initial_due_date:
+          type: string
+          format: date-time
+        insert_time:
+          type: string
+          format: date-time
+        name:
+          type: string
+        read_only:
+          type: string
+        require_approver:
+          type: string
+        require_due_date:
+          type: string
+        share_rm_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+        step_display_order:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        step_template_id:
+          type: integer
+          format: int64
+        wf_template_id:
+          type: integer
+          format: int64
+        workflow_name:
+          type: string
+      title: WorkFlowResponseForOrderDto
+    GetWorkFlowResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkFlowResponseDto'
+        message:
+          type: string
+        workflow_id:
+          type: integer
+          format: int64
+      title: GetWorkFlowResponse
+    CreateNewWorkflowRequest:
+      type: object
+      properties:
+        rm_id:
+          type: integer
+          format: int64
+        step_template_data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepDataForWorkFlow'
+        workflow_name:
+          type: string
+      title: CreateNewWorkflowRequest

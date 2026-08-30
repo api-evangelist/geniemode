@@ -1,0 +1,114 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Loginless Tn A Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: loginless-tn-a-controller
+  description: Loginless Tn A Controller
+paths:
+  /api/loginless_tna/GetOrder:
+    get:
+      tags:
+      - loginless-tn-a-controller
+      summary: get_order
+      operationId: get_orderUsingGET
+      parameters:
+      - name: orderId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginLessResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    LoginLessResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoginLessMasterStepDTO'
+        eta_date:
+          type: string
+          format: date-time
+      title: LoginLessResponse
+    LoginLessMasterStepDTO:
+      type: object
+      properties:
+        due_date:
+          type: string
+          format: date-time
+        master_step_name:
+          type: string
+        state:
+          type: string
+        sub_step:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoginLessSubstepResponseDTO'
+      title: LoginLessMasterStepDTO
+    LoginLessSubstepResponseDTO:
+      type: object
+      properties:
+        approval_status:
+          type: string
+        buffer_date:
+          type: string
+          format: date-time
+        due_date:
+          type: string
+          format: date-time
+        initial_due_date:
+          type: string
+          format: date-time
+        order_id:
+          type: integer
+          format: int64
+        order_status:
+          type: string
+        require_approval:
+          type: string
+        require_due_date:
+          type: string
+        sku_id:
+          type: string
+        status:
+          type: string
+        step_display_order:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        style_code:
+          type: string
+        work_flow_status:
+          type: string
+      title: LoginLessSubstepResponseDTO

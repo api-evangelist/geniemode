@@ -1,0 +1,283 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Factory Raw Material Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: factory-raw-material-controller
+  description: Factory Raw Material Controller
+paths:
+  /api/factory_raw_material/Create:
+    post:
+      tags:
+      - factory-raw-material-controller
+      summary: create
+      operationId: createUsingPOST_5
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetFactoryRawMaterialResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFactoryRawMaterialRequest'
+        description: createFactoryRawMaterialRequest
+        required: true
+  /api/factory_raw_material/delete:
+    delete:
+      tags:
+      - factory-raw-material-controller
+      summary: deleteFactoryMaterial
+      operationId: deleteFactoryMaterialUsingDELETE
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/factory_raw_material/get:
+    get:
+      tags:
+      - factory-raw-material-controller
+      summary: getFactoryMaterial
+      operationId: getFactoryMaterialUsingGET
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetFactoryRawMaterialResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/factory_raw_material/update:
+    put:
+      tags:
+      - factory-raw-material-controller
+      summary: updateFactoryMaterial
+      operationId: updateFactoryMaterialUsingPUT
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetFactoryRawMaterialResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFactoryRawMaterialRequest'
+        description: updateFactoryRawMaterialRequest
+        required: true
+components:
+  schemas:
+    CreateFactoryRawMaterialRequest:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateFactoryFinanceDocRequest'
+        factory_id:
+          type: integer
+          format: int64
+      title: CreateFactoryRawMaterialRequest
+    DocDetailsDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+      title: DocDetailsDto
+    UMSUserResponsePayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        created_by:
+          type: string
+        first_name:
+          type: string
+        group_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        whatsapp_opt_in:
+          type: boolean
+      title: UMSUserResponsePayload
+    CreateFactoryFinanceDocRequest:
+      type: object
+      properties:
+        doc_data:
+          $ref: '#/components/schemas/DocDetailsDto'
+        doc_id:
+          type: integer
+          format: int64
+        doc_type:
+          type: string
+        doc_value:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: CreateFactoryFinanceDocRequest
+    UpdateFactoryRawMaterialRequest:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        doc_type:
+          type: string
+        doc_value:
+          type: string
+        factory_id:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+      title: UpdateFactoryRawMaterialRequest
+    GetFactoryRawMaterialResponse:
+      type: object
+      properties:
+        doc_data:
+          $ref: '#/components/schemas/DocDetailsDto'
+        doc_id:
+          type: integer
+          format: int64
+        doc_type:
+          type: string
+        doc_value:
+          type: string
+        factory:
+          $ref: '#/components/schemas/GetFactoryResponsePayload'
+        id:
+          type: integer
+          format: int64
+      title: GetFactoryRawMaterialResponse
+    GetFactoryResponsePayload:
+      type: object
+      properties:
+        agent_user_data:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        agent_user_id:
+          type: integer
+          format: int64
+        business_type:
+          type: string
+        doc_data:
+          $ref: '#/components/schemas/DocDetailsDto'
+        factory_agent_user_id:
+          type: integer
+          format: int64
+        factory_name:
+          type: string
+        factory_nature:
+          type: string
+        factory_poc_address:
+          type: string
+        factory_poc_email:
+          type: string
+        factory_poc_name:
+          type: string
+        factory_poc_phone:
+          type: string
+        factory_poc_pincode:
+          type: string
+        finance_raw_material_interest:
+          type: boolean
+        finance_support_interest:
+          type: boolean
+        id:
+          type: integer
+          format: int64
+        operation_years:
+          type: integer
+          format: int64
+        profit_last_year:
+          type: integer
+          format: int64
+        revenue_current_year:
+          type: integer
+          format: int64
+        revenue_last_year:
+          type: integer
+          format: int64
+      title: GetFactoryResponsePayload

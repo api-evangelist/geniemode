@@ -1,0 +1,303 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Variant Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: variant-controller
+  description: Variant Controller
+paths:
+  /api/v1/order/variants/single/{orderId}:
+    get:
+      tags:
+      - variant-controller
+      summary: getVariantsOrder
+      operationId: getVariantsOrderUsingGET_2
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VariantResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/order/variants/{orderId}:
+    get:
+      tags:
+      - variant-controller
+      summary: getVariants
+      operationId: getVariantsUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VariantResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - variant-controller
+      summary: updateVariant
+      operationId: updateVariantUsingPUT
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VariantResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VariantsRequestPayload'
+        description: variantsRequestPayload
+        required: true
+components:
+  schemas:
+    OrderBuyerPoBaseDto:
+      type: object
+      properties:
+        buyer_po_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: OrderBuyerPoBaseDto
+    VariantBuyerPoMappingResponsePayload:
+      type: object
+      properties:
+        created_at:
+          type: integer
+          format: int64
+        created_by:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_modified_at:
+          type: integer
+          format: int64
+        last_modified_by:
+          type: string
+        locked_quantity:
+          type: integer
+          format: int64
+        order_buyer_po:
+          $ref: '#/components/schemas/OrderBuyerPoBaseDto'
+        po_no:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+      title: VariantBuyerPoMappingResponsePayload
+    OrderMinifiedDto:
+      type: object
+      properties:
+        financial_status:
+          type: string
+        id:
+          type: integer
+          format: int64
+        lead_id:
+          type: integer
+          format: int64
+        sku:
+          type: string
+        style_code:
+          type: string
+      title: OrderMinifiedDto
+    VariantsRequestPayload:
+      type: object
+      properties:
+        check_overflow:
+          type: boolean
+        hold_qc:
+          type: boolean
+        qc_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+        sub_status:
+          type: string
+        update_by_qc:
+          type: boolean
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantRequestPayload'
+      title: VariantsRequestPayload
+    VariantRequestPayload:
+      type: object
+      properties:
+        buying_price:
+          type: number
+        color:
+          type: string
+        currency_price:
+          type: number
+        factory_currency_price:
+          type: number
+        factory_dollar_price:
+          type: number
+        final_currency_price:
+          type: number
+        final_price:
+          type: number
+        id:
+          type: integer
+          format: int64
+        identifier:
+          type: string
+        price:
+          type: number
+        qc_quantity:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        size:
+          type: string
+        through_qc:
+          type: boolean
+        uom:
+          type: string
+        variant_buyer_po_mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantBuyerPoMappingRequestPayload'
+      title: VariantRequestPayload
+    VariantBuyerPoMappingRequestPayload:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        locked_quantity:
+          type: integer
+          format: int64
+        order_buyer_po:
+          $ref: '#/components/schemas/OrderBuyerPoBaseDto'
+        po_no:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+      title: VariantBuyerPoMappingRequestPayload
+    VariantResponsePayload:
+      type: object
+      properties:
+        buying_price:
+          type: number
+        color:
+          type: string
+        currency_price:
+          type: number
+        factory_currency_price:
+          type: number
+        factory_dollar_price:
+          type: number
+        final_currency_price:
+          type: number
+        final_price:
+          type: number
+        id:
+          type: integer
+          format: int64
+        identifier:
+          type: string
+        is_quantity_same_to_proposed:
+          type: boolean
+        last_quantity_editor:
+          type: string
+        locked_quantity:
+          type: integer
+          format: int64
+        order:
+          $ref: '#/components/schemas/OrderMinifiedDto'
+        packaging_status:
+          type: string
+          enum:
+          - over_packed
+          - packed
+          - partially_packed
+          - unpacked
+        price:
+          type: number
+        price_locked:
+          type: boolean
+        proposed_quantity:
+          type: integer
+          format: int64
+        qc_quantity:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        quantity_finalized:
+          type: boolean
+        ship_qty_negative_tolerance:
+          type: integer
+          format: int64
+        ship_qty_positive_tolerance:
+          type: integer
+          format: int64
+        size:
+          type: string
+        uom:
+          type: string
+        variant_buyer_po_mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantBuyerPoMappingResponsePayload'
+      title: VariantResponsePayload

@@ -1,0 +1,3131 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Tna Dashboard Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: tna-dashboard-controller
+  description: Tna Dashboard Controller
+paths:
+  /api/v1/tna/dashboard:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_dashboard
+      operationId: tna_dashboardUsingGET
+      parameters:
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: groupBy
+        in: query
+        description: groupBy
+        required: true
+        schema:
+          type: string
+          enum:
+          - BUYER_TERM
+          - CLIENT
+          - FACTORY
+          - FACTORY_TERM
+          - OWNER
+          - RM
+          - RM_OPS
+          - VP
+      - name: orderStatus
+        in: query
+        description: orderStatus
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        description: search
+        required: false
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/dashboard/{groupBy}/{entityId}/orders:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_dashboard_entity_orders
+      operationId: tna_dashboard_entity_ordersUsingGET
+      parameters:
+      - name: entityId
+        in: path
+        description: entityId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: financialStatus
+        in: query
+        description: financialStatus
+        required: false
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: groupBy
+        in: path
+        description: groupBy
+        required: true
+        schema:
+          type: string
+          enum:
+          - BUYER_TERM
+          - CLIENT
+          - FACTORY
+          - FACTORY_TERM
+          - OWNER
+          - RM
+          - RM_OPS
+          - VP
+      - name: orderStatus
+        in: query
+        description: orderStatus
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/dashboard/{groupBy}/{entityId}/pending-counts:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_entity_pending_counts
+      operationId: tna_entity_pending_countsUsingGET
+      parameters:
+      - name: entityId
+        in: path
+        description: entityId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: groupBy
+        in: path
+        description: groupBy
+        required: true
+        schema:
+          type: string
+          enum:
+          - BUYER_TERM
+          - CLIENT
+          - FACTORY
+          - FACTORY_TERM
+          - OWNER
+          - RM
+          - RM_OPS
+          - VP
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyPendingCounts'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/delay-reasons:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_all_delay_reasons
+      operationId: tna_all_delay_reasonsUsingGET
+      parameters:
+      - name: category
+        in: query
+        description: category
+        required: false
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: page
+        in: query
+        description: page
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: search
+        in: query
+        description: search
+        required: false
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: size
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: status
+        required: false
+        schema:
+          type: string
+      - name: submitter
+        in: query
+        description: submitter
+        required: false
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpName
+        in: query
+        description: vpName
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DelayReasonRow'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_submit_delay_reason
+      operationId: tna_submit_delay_reasonUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DelayReasonPayload'
+        description: payload
+        required: true
+  /api/v1/tna/delay-reasons/ai-entities:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delay_ai_entities
+      operationId: tna_delay_ai_entitiesUsingGET
+      parameters:
+      - name: entityType
+        in: query
+        description: entityType
+        required: false
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpName
+        in: query
+        description: vpName
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/delay-reasons/ai-story:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delay_ai_story
+      operationId: tna_delay_ai_storyUsingGET
+      parameters:
+      - name: deep
+        in: query
+        description: deep
+        required: false
+        schema:
+          type: boolean
+      - name: entity
+        in: query
+        description: entity
+        required: false
+        schema:
+          type: string
+      - name: entityType
+        in: query
+        description: entityType
+        required: false
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: groupBy
+        in: query
+        description: groupBy
+        required: false
+        schema:
+          type: string
+      - name: refresh
+        in: query
+        description: refresh
+        required: false
+        schema:
+          type: boolean
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpName
+        in: query
+        description: vpName
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/delay-reasons/discovery:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delay_discovery
+      operationId: tna_delay_discoveryUsingGET
+      parameters:
+      - name: entity
+        in: query
+        description: entity
+        required: false
+        schema:
+          type: string
+      - name: entityType
+        in: query
+        description: entityType
+        required: false
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpName
+        in: query
+        description: vpName
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/delay-reasons/nudge:
+    post:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delay_nudge
+      operationId: tna_delay_nudgeUsingPOST
+      parameters:
+      - name: kind
+        in: query
+        description: kind
+        required: true
+        schema:
+          type: string
+      - name: targetUserId
+        in: query
+        description: targetUserId
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpEmail
+        in: query
+        description: vpEmail
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+  /api/v1/tna/delay-reasons/options:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delay_reason_options
+      operationId: tna_delay_reason_optionsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DelayReasonOption'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_add_delay_reason_option
+      operationId: tna_add_delay_reason_optionUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DelayReasonOptionPayload'
+        description: payload
+        required: true
+  /api/v1/tna/delay-reasons/options/{id}:
+    delete:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_remove_delay_reason_option
+      operationId: tna_remove_delay_reason_optionUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+  /api/v1/tna/delay-reasons/pending:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_pending_delay_items
+      operationId: tna_pending_delay_itemsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PendingDelayOrder'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/delay-reasons/recurring:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_recurring_delay_reasons
+      operationId: tna_recurring_delay_reasonsUsingGET
+      parameters:
+      - name: category
+        in: query
+        description: category
+        required: false
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        description: search
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: status
+        required: false
+        schema:
+          type: string
+      - name: submitter
+        in: query
+        description: submitter
+        required: false
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpName
+        in: query
+        description: vpName
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DelayReasonRow'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/delay-reasons/review:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delay_review_queue
+      operationId: tna_delay_review_queueUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReviewDelayOrder'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/delay-reasons/review-insights:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delay_review_insights
+      operationId: tna_delay_review_insightsUsingGET
+      parameters:
+      - name: vpName
+        in: query
+        description: vpName
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DelayReviewInsights'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/delay-reasons/review/eligibility:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delay_review_eligibility
+      operationId: tna_delay_review_eligibilityUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/delay-reasons/stats:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delay_reason_stats
+      operationId: tna_delay_reason_statsUsingGET
+      parameters:
+      - name: category
+        in: query
+        description: category
+        required: false
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        description: search
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: status
+        required: false
+        schema:
+          type: string
+      - name: submitter
+        in: query
+        description: submitter
+        required: false
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpName
+        in: query
+        description: vpName
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DelayReasonStats'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/delay-reasons/summary:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delay_reason_summary
+      operationId: tna_delay_reason_summaryUsingGET
+      parameters:
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: groupBy
+        in: query
+        description: groupBy
+        required: false
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpName
+        in: query
+        description: vpName
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DelayReasonSummaryRow'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/delay-reasons/timeline-segregation:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delay_timeline_segregation
+      operationId: tna_delay_timeline_segregationUsingGET
+      parameters:
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpName
+        in: query
+        description: vpName
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties:
+                    type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/delay-reasons/timeline-why:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delay_timeline_why
+      operationId: tna_delay_timeline_whyUsingGET
+      parameters:
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpName
+        in: query
+        description: vpName
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/delay-reasons/{id}:
+    delete:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delete_delay_reason
+      operationId: tna_delete_delay_reasonUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+  /api/v1/tna/delay-reasons/{id}/comment:
+    post:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_update_delay_reason_comment
+      operationId: tna_update_delay_reason_commentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: string
+        description: body
+        required: true
+  /api/v1/tna/delay-reasons/{id}/doc:
+    post:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_add_delay_reason_doc
+      operationId: tna_add_delay_reason_docUsingPOST
+      parameters:
+      - name: docUrl
+        in: query
+        description: docUrl
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+    delete:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_remove_delay_reason_doc
+      operationId: tna_remove_delay_reason_docUsingDELETE
+      parameters:
+      - name: docUrl
+        in: query
+        description: docUrl
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+  /api/v1/tna/delay-reasons/{orderId}/approve:
+    post:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_approve_delay
+      operationId: tna_approve_delayUsingPOST
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DelayReviewPayload'
+        description: payload
+        required: true
+  /api/v1/tna/delay-reasons/{orderId}/reject:
+    post:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_reject_delay
+      operationId: tna_reject_delayUsingPOST
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DelayReviewPayload'
+        description: payload
+        required: true
+  /api/v1/tna/delay-reasons/{orderId}/submit:
+    post:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_submit_order_for_review
+      operationId: tna_submit_order_for_reviewUsingPOST
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+  /api/v1/tna/dna/{orderId}:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_order_dna
+      operationId: tna_order_dnaUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderTnaDnaResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/handover-metrics:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_handover_metrics
+      operationId: tna_handover_metricsUsingGET
+      parameters:
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: groupBy
+        in: query
+        description: groupBy
+        required: true
+        schema:
+          type: string
+          enum:
+          - BUYER_TERM
+          - CLIENT
+          - FACTORY
+          - FACTORY_TERM
+          - OWNER
+          - RM
+          - RM_OPS
+          - VP
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HandoverMetricRow'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/my/orders:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: my_orders
+      operationId: my_ordersUsingGET
+      parameters:
+      - name: financialStatus
+        in: query
+        description: financialStatus
+        required: false
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: orderStatus
+        in: query
+        description: orderStatus
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/my/pending-counts:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: my_pending_counts
+      operationId: my_pending_countsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyPendingCounts'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/my/weekly-shifts:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: my_weekly_shifts
+      operationId: my_weekly_shiftsUsingGET
+      parameters:
+      - name: weeks
+        in: query
+        description: weeks
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 8
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TnaWeeklyShift'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/qc-performance:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_qc_performance
+      operationId: tna_qc_performanceUsingGET
+      parameters:
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: groupBy
+        in: query
+        description: groupBy
+        required: true
+        schema:
+          type: string
+          enum:
+          - BUYER_TERM
+          - CLIENT
+          - FACTORY
+          - FACTORY_TERM
+          - OWNER
+          - RM
+          - RM_OPS
+          - VP
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QcPerformanceRow'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/scorecard:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_scorecard
+      operationId: tna_scorecardUsingGET
+      parameters:
+      - name: businessOwner
+        in: query
+        description: businessOwner
+        required: false
+        schema:
+          type: string
+      - name: buyerTerms
+        in: query
+        description: buyerTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: completion
+        in: query
+        description: completion
+        required: false
+        schema:
+          type: string
+      - name: dateBasis
+        in: query
+        description: dateBasis
+        required: false
+        schema:
+          type: string
+          default: confirmation
+      - name: factoryTerms
+        in: query
+        description: factoryTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: groupBy
+        in: query
+        description: groupBy
+        required: true
+        schema:
+          type: string
+          enum:
+          - BUYER_TERM
+          - CLIENT
+          - FACTORY
+          - FACTORY_TERM
+          - OWNER
+          - RM
+          - RM_OPS
+          - VP
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpEmail
+        in: query
+        description: vpEmail
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScorecardRow'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/scorecard/air:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_scorecard_air
+      operationId: tna_scorecard_airUsingGET
+      parameters:
+      - name: businessOwner
+        in: query
+        description: businessOwner
+        required: false
+        schema:
+          type: string
+      - name: buyerTerms
+        in: query
+        description: buyerTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: completion
+        in: query
+        description: completion
+        required: false
+        schema:
+          type: string
+      - name: dateBasis
+        in: query
+        description: dateBasis
+        required: false
+        schema:
+          type: string
+          default: confirmation
+      - name: factoryTerms
+        in: query
+        description: factoryTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 2000
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpEmail
+        in: query
+        description: vpEmail
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AirOrderRow'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/scorecard/air/{orderId}/classify:
+    post:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_scorecard_air_classify
+      operationId: tna_scorecard_air_classifyUsingPOST
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AirClassifyPayload'
+        description: payload
+        required: true
+    delete:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_scorecard_air_unclassify
+      operationId: tna_scorecard_air_unclassifyUsingDELETE
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+  /api/v1/tna/scorecard/day-diff:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_scorecard_day_diff
+      operationId: tna_scorecard_day_diffUsingGET
+      parameters:
+      - name: businessOwner
+        in: query
+        description: businessOwner
+        required: false
+        schema:
+          type: string
+      - name: buyerTerms
+        in: query
+        description: buyerTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: completion
+        in: query
+        description: completion
+        required: false
+        schema:
+          type: string
+      - name: dateBasis
+        in: query
+        description: dateBasis
+        required: false
+        schema:
+          type: string
+          default: confirmation
+      - name: factoryTerms
+        in: query
+        description: factoryTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: groupBy
+        in: query
+        description: groupBy
+        required: true
+        schema:
+          type: string
+          enum:
+          - BUYER_TERM
+          - CLIENT
+          - FACTORY
+          - FACTORY_TERM
+          - OWNER
+          - RM
+          - RM_OPS
+          - VP
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpEmail
+        in: query
+        description: vpEmail
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScorecardDayDiffRow'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/scorecard/delivery-performance:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_delivery_performance
+      operationId: tna_delivery_performanceUsingGET
+      parameters:
+      - name: businessOwner
+        in: query
+        description: businessOwner
+        required: false
+        schema:
+          type: string
+      - name: buyerTerms
+        in: query
+        description: buyerTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: dateBasis
+        in: query
+        description: dateBasis
+        required: false
+        schema:
+          type: string
+          default: confirmation
+      - name: factoryTerms
+        in: query
+        description: factoryTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: groupBy
+        in: query
+        description: groupBy
+        required: false
+        schema:
+          type: string
+          default: REGION
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpEmail
+        in: query
+        description: vpEmail
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeliveryPerfRow'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/scorecard/monthly:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_scorecard_monthly
+      operationId: tna_scorecard_monthlyUsingGET
+      parameters:
+      - name: businessOwner
+        in: query
+        description: businessOwner
+        required: false
+        schema:
+          type: string
+      - name: buyerTerms
+        in: query
+        description: buyerTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: completion
+        in: query
+        description: completion
+        required: false
+        schema:
+          type: string
+      - name: dateBasis
+        in: query
+        description: dateBasis
+        required: false
+        schema:
+          type: string
+          default: confirmation
+      - name: factoryTerms
+        in: query
+        description: factoryTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpEmail
+        in: query
+        description: vpEmail
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScorecardMonth'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/scorecard/orders:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_scorecard_orders
+      operationId: tna_scorecard_ordersUsingGET
+      parameters:
+      - name: businessOwner
+        in: query
+        description: businessOwner
+        required: false
+        schema:
+          type: string
+      - name: buyerTerms
+        in: query
+        description: buyerTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: completion
+        in: query
+        description: completion
+        required: false
+        schema:
+          type: string
+      - name: dateBasis
+        in: query
+        description: dateBasis
+        required: false
+        schema:
+          type: string
+          default: confirmation
+      - name: factoryTerms
+        in: query
+        description: factoryTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1000
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpEmail
+        in: query
+        description: vpEmail
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScorecardOrderRow'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/scorecard/totals:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_scorecard_totals
+      operationId: tna_scorecard_totalsUsingGET
+      parameters:
+      - name: businessOwner
+        in: query
+        description: businessOwner
+        required: false
+        schema:
+          type: string
+      - name: buyerTerms
+        in: query
+        description: buyerTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: completion
+        in: query
+        description: completion
+        required: false
+        schema:
+          type: string
+      - name: dateBasis
+        in: query
+        description: dateBasis
+        required: false
+        schema:
+          type: string
+          default: confirmation
+      - name: factoryTerms
+        in: query
+        description: factoryTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpEmail
+        in: query
+        description: vpEmail
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScorecardTotals'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/scorecard/value-split:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_scorecard_value_split
+      operationId: tna_scorecard_value_splitUsingGET
+      parameters:
+      - name: businessOwner
+        in: query
+        description: businessOwner
+        required: false
+        schema:
+          type: string
+      - name: buyerTerms
+        in: query
+        description: buyerTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: completion
+        in: query
+        description: completion
+        required: false
+        schema:
+          type: string
+      - name: dateBasis
+        in: query
+        description: dateBasis
+        required: false
+        schema:
+          type: string
+          default: confirmation
+      - name: factoryTerms
+        in: query
+        description: factoryTerms
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromDate
+        in: query
+        description: fromDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toDate
+        in: query
+        description: toDate
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vpEmail
+        in: query
+        description: vpEmail
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScorecardValueSplit'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/tna/scorecard/vps:
+    get:
+      tags:
+      - tna-dashboard-controller
+      summary: tna_scorecard_vps
+      operationId: tna_scorecard_vpsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScorecardVp'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    ScorecardDayDiffRow:
+      type: object
+      properties:
+        big_avg_orig:
+          type: number
+          format: double
+        big_avg_tna:
+          type: number
+          format: double
+        big_med_orig:
+          type: number
+          format: double
+        big_med_tna:
+          type: number
+          format: double
+        big_orders:
+          type: integer
+          format: int64
+        entity_id:
+          type: integer
+          format: int64
+        entity_name:
+          type: string
+        median_value:
+          type: number
+          format: double
+        small_avg_orig:
+          type: number
+          format: double
+        small_avg_tna:
+          type: number
+          format: double
+        small_med_orig:
+          type: number
+          format: double
+        small_med_tna:
+          type: number
+          format: double
+        small_orders:
+          type: integer
+          format: int64
+      title: ScorecardDayDiffRow
+    AirClassifyPayload:
+      type: object
+      properties:
+        classification:
+          type: string
+      title: AirClassifyPayload
+    ScorecardMonth:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+        month:
+          type: string
+      title: ScorecardMonth
+    DelayReasonOption:
+      type: object
+      properties:
+        category:
+          type: string
+        id:
+          type: integer
+          format: int64
+        sort_order:
+          type: integer
+          format: int32
+        sub_category:
+          type: string
+      title: DelayReasonOption
+    OrderTnaDnaResponse:
+      type: object
+      properties:
+        buyer_days_pushed:
+          type: integer
+          format: int64
+        confirmed_factory_baseline:
+          type: integer
+          format: int64
+        current_factory_eta:
+          type: integer
+          format: int64
+        delay_reasons:
+          $ref: '#/components/schemas/OrderDelayReasons'
+        eta_shifts:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderTnaDnaEtaShift'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderTnaDnaEvent'
+        ex_factory_buyer_days_pushed:
+          type: integer
+          format: int64
+        ex_factory_factory_days_pushed:
+          type: integer
+          format: int64
+        ex_factory_pre_confirmation_days:
+          type: integer
+          format: int64
+        ex_factory_since_first_entry_days:
+          type: integer
+          format: int64
+        factory_days_pushed:
+          type: integer
+          format: int64
+        first_entry_factory_eta:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        step_summary:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderTnaDnaStepSummary'
+        tna_days_pushed:
+          type: integer
+          format: int64
+        total_events:
+          type: integer
+          format: int32
+        total_pushes:
+          type: integer
+          format: int32
+      title: OrderTnaDnaResponse
+    ReviewDelayOrder:
+      type: object
+      properties:
+        buyer_date:
+          type: integer
+          format: int64
+        client_name:
+          type: string
+        days_pushed:
+          type: integer
+          format: int64
+        ex_factory_date:
+          type: integer
+          format: int64
+        factory_name:
+          type: string
+        ops_name:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/DelayReasonItem'
+        rm_id:
+          type: integer
+          format: int64
+        rm_name:
+          type: string
+        style_code:
+          type: string
+        submitted_at:
+          type: integer
+          format: int64
+        submitted_by_name:
+          type: string
+        vp_name:
+          type: string
+      title: ReviewDelayOrder
+    DeliveryPerfRow:
+      type: object
+      properties:
+        entity_id:
+          type: string
+        entity_name:
+          type: string
+        late_orders:
+          type: integer
+          format: int64
+        late_qty:
+          type: integer
+          format: int64
+        ontime_orders:
+          type: integer
+          format: int64
+        ontime_pct_count:
+          type: number
+          format: double
+        ontime_pct_qty:
+          type: number
+          format: double
+        ontime_qty:
+          type: integer
+          format: int64
+      title: DeliveryPerfRow
+    OrderTnaDnaStepSummary:
+      type: object
+      properties:
+        buyer_days_pushed:
+          type: integer
+          format: int64
+        completed:
+          type: boolean
+        completion_date:
+          type: integer
+          format: int64
+        completion_delay:
+          type: integer
+          format: int64
+        current_buyer_date:
+          type: integer
+          format: int64
+        current_factory_date:
+          type: integer
+          format: int64
+        date_shift:
+          type: integer
+          format: int64
+        delayed_days:
+          type: integer
+          format: int64
+        due_date:
+          type: integer
+          format: int64
+        factory_days_pushed:
+          type: integer
+          format: int64
+        initial_due_date:
+          type: integer
+          format: int64
+        original_buyer_due_date:
+          type: integer
+          format: int64
+        original_factory_due_date:
+          type: integer
+          format: int64
+        status:
+          type: string
+        step_id:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+        tna_shift_days:
+          type: integer
+          format: int64
+      title: OrderTnaDnaStepSummary
+    OrderTnaDnaEvent:
+      type: object
+      properties:
+        approval_doc_id:
+          type: integer
+          format: int64
+        change_date_doc_id:
+          type: integer
+          format: int64
+        comment:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        finance_approval_status:
+          type: string
+        id:
+          type: integer
+          format: int64
+        initiated_by:
+          type: string
+        penalty:
+          type: string
+        raised_by:
+          type: string
+        raised_on_timestamp:
+          type: integer
+          format: int64
+        step_changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderTnaDnaStepChange'
+        type:
+          type: string
+        vp_approval_status:
+          type: string
+      title: OrderTnaDnaEvent
+    AirOrderRow:
+      type: object
+      properties:
+        classification:
+          type: string
+        client:
+          type: string
+        delivery_mode:
+          type: string
+        factory:
+          type: string
+        freight_cost:
+          type: number
+          format: double
+        marked_at:
+          type: string
+        marked_by:
+          type: string
+        ops:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        owner:
+          type: string
+        rm:
+          type: string
+        style_code:
+          type: string
+        value:
+          type: number
+          format: double
+        vp:
+          type: string
+      title: AirOrderRow
+    DelayReviewPayload:
+      type: object
+      properties:
+        approved_days:
+          type: integer
+          format: int32
+        note:
+          type: string
+      title: DelayReviewPayload
+    ScorecardValueSplit:
+      type: object
+      properties:
+        name:
+          type: string
+        orders:
+          type: integer
+          format: int64
+        pct:
+          type: number
+          format: double
+        rm:
+          type: string
+        type:
+          type: string
+        value:
+          type: number
+          format: double
+      title: ScorecardValueSplit
+    OrderTnaDnaEtaShift:
+      type: object
+      properties:
+        buyer_shift_days:
+          type: integer
+          format: int64
+        changed_by:
+          type: string
+        factory_shift_days:
+          type: integer
+          format: int64
+        new_buyer_eta:
+          type: integer
+          format: int64
+        new_factory_eta:
+          type: integer
+          format: int64
+        old_buyer_eta:
+          type: integer
+          format: int64
+        old_factory_eta:
+          type: integer
+          format: int64
+        reason:
+          type: string
+        ts:
+          type: integer
+          format: int64
+      title: OrderTnaDnaEtaShift
+    MyPendingCounts:
+      type: object
+      properties:
+        finance_pending:
+          type: integer
+          format: int64
+        logistics_pending:
+          type: integer
+          format: int64
+        vp_pending:
+          type: integer
+          format: int64
+      title: MyPendingCounts
+    DelayReasonOptionPayload:
+      type: object
+      properties:
+        category:
+          type: string
+        sort_order:
+          type: integer
+          format: int32
+        sub_category:
+          type: string
+      title: DelayReasonOptionPayload
+    DelayReasonPayload:
+      type: object
+      properties:
+        change_request_id:
+          type: integer
+          format: int64
+        comment:
+          type: string
+        days_pushed:
+          type: integer
+          format: int64
+        doc_id:
+          type: integer
+          format: int64
+        doc_url:
+          type: string
+        doc_urls:
+          type: array
+          items:
+            type: string
+        order_id:
+          type: integer
+          format: int64
+        reason_category:
+          type: string
+        reason_sub_category:
+          type: string
+        scope:
+          type: string
+        step_name:
+          type: string
+      title: DelayReasonPayload
+    ScorecardOrderRow:
+      type: object
+      properties:
+        bucket_latest:
+          type: string
+        bucket_original:
+          type: string
+        buyer_shipment_term:
+          type: string
+        client:
+          type: string
+        confirmed_date:
+          type: string
+        delivery_mode:
+          type: string
+        diff_latest:
+          type: integer
+          format: int64
+        diff_original:
+          type: integer
+          format: int64
+        ex_factory_date:
+          type: string
+        factory:
+          type: string
+        factory_shipment_term:
+          type: string
+        freight_cost:
+          type: number
+          format: double
+        logistics_cost:
+          type: number
+          format: double
+        order_id:
+          type: integer
+          format: int64
+        rm:
+          type: string
+        style_code:
+          type: string
+        value:
+          type: number
+          format: double
+      title: ScorecardOrderRow
+    DelayReasonRow:
+      type: object
+      properties:
+        approved_days:
+          type: integer
+          format: int32
+        client_name:
+          type: string
+        comment:
+          type: string
+        created_at:
+          type: integer
+          format: int64
+        days_pushed:
+          type: integer
+          format: int64
+        doc_id:
+          type: integer
+          format: int64
+        doc_url:
+          type: string
+        doc_urls:
+          type: array
+          items:
+            type: string
+        factory_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        ops_name:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        owner_name:
+          type: string
+        raised_by:
+          type: integer
+          format: int64
+        reason_category:
+          type: string
+        reason_sub_category:
+          type: string
+        review_note:
+          type: string
+        rm_name:
+          type: string
+        scope:
+          type: string
+        status:
+          type: string
+        step_name:
+          type: string
+        style_code:
+          type: string
+        submitter_name:
+          type: string
+        vp_name:
+          type: string
+      title: DelayReasonRow
+    PendingDelayOrder:
+      type: object
+      properties:
+        approved_days:
+          type: integer
+          format: int32
+        company_name:
+          type: string
+        confirmation_date:
+          type: integer
+          format: int64
+        confirmed_factory_date:
+          type: integer
+          format: int64
+        days_pushed:
+          type: integer
+          format: int64
+        delay_threshold_days:
+          type: integer
+          format: int32
+        ex_factory_date:
+          type: integer
+          format: int64
+        image_url:
+          type: string
+        last_step:
+          type: string
+        manufacturer_name:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        po_no:
+          type: string
+        reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/DelayReasonItem'
+        review_note:
+          type: string
+        status:
+          type: string
+        style_code:
+          type: string
+      title: PendingDelayOrder
+    ReviewerSplit:
+      type: object
+      properties:
+        approved:
+          type: integer
+          format: int64
+        avg_granted_days:
+          type: number
+          format: double
+        name:
+          type: string
+        rejected:
+          type: integer
+          format: int64
+      title: ReviewerSplit
+    HandoverMetricRow:
+      type: object
+      properties:
+        avg_confirmation_to_handover_days:
+          type: number
+          format: double
+        avg_handover_to_ex_factory_days:
+          type: number
+          format: double
+        entity_id:
+          type: integer
+          format: int64
+        entity_name:
+          type: string
+        entity_type:
+          type: string
+        pre_production_orders:
+          type: integer
+          format: int64
+        production_orders:
+          type: integer
+          format: int64
+      title: HandoverMetricRow
+    ScorecardRow:
+      type: object
+      properties:
+        air_orders:
+          type: integer
+          format: int64
+        air_penalized:
+          type: integer
+          format: int64
+        avg_slip_days:
+          type: number
+          format: double
+        buyer_term_orders:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        buyer_term_value:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+        entity_id:
+          type: integer
+          format: int64
+        entity_name:
+          type: string
+        factory_term_orders:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        factory_term_value:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+        median_slip_days:
+          type: number
+          format: double
+        orders:
+          type: integer
+          format: int64
+        orig_delayed_cnt:
+          type: number
+          format: double
+        orig_delayed_val:
+          type: number
+          format: double
+        orig_disaster_cnt:
+          type: number
+          format: double
+        orig_disaster_val:
+          type: number
+          format: double
+        orig_ontime_cnt:
+          type: number
+          format: double
+        orig_ontime_val:
+          type: number
+          format: double
+        sc_orig_delayed:
+          type: number
+          format: double
+        sc_orig_disaster:
+          type: number
+          format: double
+        sc_orig_ontime:
+          type: number
+          format: double
+        sc_tna_disaster:
+          type: number
+          format: double
+        tna_delayed_cnt:
+          type: number
+          format: double
+        tna_delayed_val:
+          type: number
+          format: double
+        tna_disaster_cnt:
+          type: number
+          format: double
+        tna_disaster_val:
+          type: number
+          format: double
+        tna_ontime_cnt:
+          type: number
+          format: double
+        tna_ontime_val:
+          type: number
+          format: double
+        total_value:
+          type: number
+          format: double
+      title: ScorecardRow
+    DelayReasonStats:
+      type: object
+      properties:
+        approved_days_total:
+          type: integer
+          format: int64
+        approved_orders:
+          type: integer
+          format: int64
+        by_category:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        by_category_recent:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        by_days_bucket:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        by_status:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        by_style:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        by_sub_category:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        by_submitter:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        by_vp:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        by_week:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        filed_other:
+          type: integer
+          format: int64
+        no_comment:
+          type: integer
+          format: int64
+        no_proof:
+          type: integer
+          format: int64
+        oldest_pending_days:
+          type: integer
+          format: int64
+        orders:
+          type: integer
+          format: int64
+        orders_by_status:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        pending_age_buckets:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        total:
+          type: integer
+          format: int64
+      title: DelayReasonStats
+    QcPerformanceRow:
+      type: object
+      properties:
+        entity_id:
+          type: integer
+          format: int64
+        entity_name:
+          type: string
+        entity_type:
+          type: string
+        on_time_rate:
+          type: number
+          format: double
+        qc_late:
+          type: integer
+          format: int64
+        qc_on_time:
+          type: integer
+          format: int64
+        qc_pending_overdue:
+          type: integer
+          format: int64
+        qc_total:
+          type: integer
+          format: int64
+      title: QcPerformanceRow
+    TnaWeeklyShift:
+      type: object
+      properties:
+        days_pushed:
+          type: integer
+          format: int64
+        orders_affected:
+          type: integer
+          format: int64
+        push_events:
+          type: integer
+          format: int64
+        steps_pushed:
+          type: integer
+          format: int64
+        week_start:
+          type: integer
+          format: int64
+      title: TnaWeeklyShift
+    DelayReasonItem:
+      type: object
+      properties:
+        comment:
+          type: string
+        created_at:
+          type: integer
+          format: int64
+        doc_id:
+          type: integer
+          format: int64
+        doc_url:
+          type: string
+        id:
+          type: integer
+          format: int64
+        reason_category:
+          type: string
+        reason_sub_category:
+          type: string
+      title: DelayReasonItem
+    OrderTnaDnaStepChange:
+      type: object
+      properties:
+        buffer_date:
+          type: integer
+          format: int64
+        delay_days:
+          type: integer
+          format: int64
+        initial_due_date:
+          type: integer
+          format: int64
+        step_id:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+      title: OrderTnaDnaStepChange
+    DelayReasonSummaryRow:
+      type: object
+      properties:
+        approved:
+          type: integer
+          format: int64
+        by_category:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        group_key:
+          type: string
+        group_label:
+          type: string
+        orders:
+          type: integer
+          format: int64
+        pending_approval:
+          type: integer
+          format: int64
+        reasons:
+          type: integer
+          format: int64
+        rejected:
+          type: integer
+          format: int64
+        total_days:
+          type: integer
+          format: int64
+      title: DelayReasonSummaryRow
+    OrderDelayReasons:
+      type: object
+      properties:
+        approved_days:
+          type: integer
+          format: int32
+        reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/DelayReasonItem'
+        review_note:
+          type: string
+        status:
+          type: string
+        submitted_at:
+          type: integer
+          format: int64
+      title: OrderDelayReasons
+    DelayReviewInsights:
+      type: object
+      properties:
+        approved_by_category:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        approved_days_total:
+          type: integer
+          format: int64
+        approved_orders:
+          type: integer
+          format: int64
+        avg_asked_days:
+          type: number
+          format: double
+        avg_decision_days:
+          type: number
+          format: double
+        avg_granted_days:
+          type: number
+          format: double
+        by_reviewer:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReviewerSplit'
+        grant_gap_buckets:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        granted_buckets:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        latency_buckets:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        median_decision_days:
+          type: number
+          format: double
+        overrun_orders:
+          type: integer
+          format: int64
+        overrun_worst_days:
+          type: integer
+          format: int64
+        pending_orders:
+          type: integer
+          format: int64
+        rejected_by_category:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        rejected_orders:
+          type: integer
+          format: int64
+        top_rejection_notes:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+      title: DelayReviewInsights
+    ScorecardVp:
+      type: object
+      properties:
+        rm_count:
+          type: integer
+          format: int64
+        vp_email:
+          type: string
+        vp_name:
+          type: string
+      title: ScorecardVp
+    ScorecardTotals:
+      type: object
+      properties:
+        air_freight_cost:
+          type: number
+          format: double
+        air_orders:
+          type: integer
+          format: int64
+        air_penalized:
+          type: integer
+          format: int64
+        air_planned:
+          type: integer
+          format: int64
+        air_value:
+          type: number
+          format: double
+        orig_delayed_cnt:
+          type: number
+          format: double
+        orig_delayed_val:
+          type: number
+          format: double
+        orig_disaster_cnt:
+          type: number
+          format: double
+        orig_disaster_val:
+          type: number
+          format: double
+        orig_ontime_cnt:
+          type: number
+          format: double
+        orig_ontime_val:
+          type: number
+          format: double
+        tna_delayed_cnt:
+          type: number
+          format: double
+        tna_delayed_val:
+          type: number
+          format: double
+        tna_disaster_cnt:
+          type: number
+          format: double
+        tna_disaster_val:
+          type: number
+          format: double
+        tna_ontime_cnt:
+          type: number
+          format: double
+        tna_ontime_val:
+          type: number
+          format: double
+        total_orders:
+          type: integer
+          format: int64
+        total_value:
+          type: number
+          format: double
+      title: ScorecardTotals

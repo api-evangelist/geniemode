@@ -1,0 +1,212 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Users Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: users-controller
+  description: Users Controller
+paths:
+  /api/v1/user/isPhoneDataAvailable/{userId}:
+    get:
+      tags:
+      - users-controller
+      summary: isPhoneData
+      operationId: isPhoneDataUsingGET
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UMSUserGetPhoneDataResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/user/updatePhoneNumber/{userId}:
+    put:
+      tags:
+      - users-controller
+      summary: updatePhoneData
+      operationId: updatePhoneDataUsingPUT
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UMSUserResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePhoneDataRequestPayload'
+        description: request
+        required: true
+  /api/v1/user/webGupShupRegister:
+    post:
+      tags:
+      - users-controller
+      summary: consumeTwoApis
+      operationId: consumeTwoApisUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebEngageGupShupResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebEngageGupShupRequest'
+        description: webEngageGupShupRequest
+        required: true
+components:
+  schemas:
+    WebEngageGupShupResponse:
+      type: object
+      properties:
+        gup_shup_response:
+          $ref: '#/components/schemas/GupShupResponse'
+        web_engage_phone_response:
+          $ref: '#/components/schemas/WebEngagePhoneResponse'
+      title: WebEngageGupShupResponse
+    UMSUserResponsePayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        created_by:
+          type: string
+        first_name:
+          type: string
+        group_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        whatsapp_opt_in:
+          type: boolean
+      title: UMSUserResponsePayload
+    WebEngagePhoneDTO:
+      type: object
+      properties:
+        status:
+          type: string
+      title: WebEngagePhoneDTO
+    GupShupDataDTO:
+      type: object
+      properties:
+        response_messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/GupShupResponseMessageDTO'
+      title: GupShupDataDTO
+    GupShupResponseDTO:
+      type: object
+      properties:
+        details:
+          type: string
+        id:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+      title: GupShupResponseDTO
+    WebEngagePhoneResponse:
+      type: object
+      properties:
+        response:
+          $ref: '#/components/schemas/WebEngagePhoneDTO'
+      title: WebEngagePhoneResponse
+    UpdatePhoneDataRequestPayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        phone_number:
+          type: string
+      title: UpdatePhoneDataRequestPayload
+    UMSUserGetPhoneDataResponse:
+      type: object
+      properties:
+        phone_number_present:
+          type: boolean
+        ums_user_response_payload:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+      title: UMSUserGetPhoneDataResponse
+    GupShupResponseMessageDTO:
+      type: object
+      properties:
+        details:
+          type: string
+        id:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+      title: GupShupResponseMessageDTO
+    GupShupResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GupShupDataDTO'
+        response:
+          $ref: '#/components/schemas/GupShupResponseDTO'
+      title: GupShupResponse
+    WebEngageGupShupRequest:
+      type: object
+      properties:
+        gup_shup_phone_number:
+          type: string
+        web_engage_user_id:
+          type: string
+        web_engage_whatsapp_opt_in:
+          type: boolean
+      title: WebEngageGupShupRequest

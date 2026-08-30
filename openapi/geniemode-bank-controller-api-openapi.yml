@@ -1,0 +1,253 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Bank Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: bank-controller
+  description: Bank Controller
+paths:
+  /api/v1/path/bank:
+    get:
+      tags:
+      - bank-controller
+      summary: getBanks
+      operationId: getBanksUsingGET
+      parameters:
+      - name: entityId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: entityType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: subType
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - bank-controller
+      summary: submitBank
+      operationId: submitBankUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitBanksRequestPayload'
+        description: payload
+        required: true
+  /api/v1/path/bank/migrate-manufacturer:
+    get:
+      tags:
+      - bank-controller
+      summary: migrateManufacturer
+      operationId: migrateManufacturerUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/bank/update-bank-details/{id}:
+    put:
+      tags:
+      - bank-controller
+      summary: toggleManufacturerBankDetails
+      operationId: toggleManufacturerBankDetailsUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateManufacturerBankDetailsRequest'
+        description: payload
+        required: true
+  /api/v1/path/bank/{id}:
+    put:
+      tags:
+      - bank-controller
+      summary: updateBank
+      operationId: updateBankUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BanksRequestPayload'
+        description: payload
+        required: true
+    delete:
+      tags:
+      - bank-controller
+      summary: deleteBank
+      operationId: deleteBankUsingDELETE
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    UpdateManufacturerBankDetailsRequest:
+      type: object
+      properties:
+        toggle:
+          type: boolean
+      title: UpdateManufacturerBankDetailsRequest
+    BanksRequestPayload:
+      type: object
+      properties:
+        account_holder_name:
+          type: string
+        account_no:
+          type: string
+        address_id:
+          type: integer
+          format: int64
+        bank_routing_number:
+          type: string
+        beneficiary_address_id:
+          type: integer
+          format: int64
+        beneficiary_name:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        iban_aba:
+          type: string
+        id:
+          type: integer
+          format: int64
+        ifsc:
+          type: string
+        name:
+          type: string
+        sort_code:
+          type: string
+        sub_type:
+          type: string
+        swift:
+          type: string
+      title: BanksRequestPayload
+    SubmitBanksRequestPayload:
+      type: object
+      properties:
+        account_holder_name:
+          type: string
+        account_no:
+          type: string
+        address_id:
+          type: integer
+          format: int64
+        bank_routing_number:
+          type: string
+        beneficiary_address_id:
+          type: integer
+          format: int64
+        beneficiary_name:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        iban_aba:
+          type: string
+        ifsc:
+          type: string
+        name:
+          type: string
+        sort_code:
+          type: string
+        sub_type:
+          type: string
+        swift:
+          type: string
+      title: SubmitBanksRequestPayload

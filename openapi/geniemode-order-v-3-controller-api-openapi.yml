@@ -1,0 +1,197 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Order V 3 Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: order-v-3-controller
+  description: Order V 3 Controller
+paths:
+  /api/v3/new/orders/GetOrderMargin/{orderId}:
+    get:
+      tags:
+      - order-v-3-controller
+      summary: getOrderMargin
+      operationId: getOrderMarginUsingGET_1
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderMarginDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    OrderLogisticsCostDto:
+      type: object
+      properties:
+        custom_duty:
+          type: number
+        custom_duty_cost_type:
+          type: string
+        custom_duty_per_piece:
+          type: number
+        delivery_charges:
+          type: number
+        freight_cost:
+          type: number
+        harbor_merchandise_fee:
+          type: number
+        logistic_cost:
+          type: number
+        logistic_cost_per_piece:
+          type: number
+        logistic_cost_type:
+          type: string
+        reciprocal_tariff:
+          type: number
+        reciprocal_tariff_cost_type:
+          type: string
+        reciprocal_tariff_per_piece:
+          type: number
+        reciprocal_tariff_type:
+          type: string
+        total_custom_duty:
+          type: number
+      title: OrderLogisticsCostDto
+    OrderMarginDto:
+      type: object
+      properties:
+        buyer_net_margin:
+          type: number
+        buyer_shipment_type:
+          type: string
+        buyer_type:
+          type: string
+        buying_price:
+          type: number
+        changed_shipment_mode:
+          type: string
+        custom_duty:
+          type: number
+        custom_duty_cost_type:
+          type: string
+        custom_duty_per_piece:
+          type: number
+        custom_duty_type:
+          type: string
+        delivery_charges:
+          type: number
+        discount_charges:
+          type: number
+        discount_charges_cost_type:
+          type: string
+        discount_charges_percent:
+          type: number
+        discount_charges_type:
+          type: string
+        factory_currency_price:
+          type: number
+        factory_discount_charges:
+          type: number
+        factory_discount_charges_cost_type:
+          type: string
+        factory_discount_charges_percent:
+          type: number
+        factory_discount_charges_type:
+          type: string
+        factory_dollar_price:
+          type: number
+        factory_net_margin:
+          type: number
+        factory_shipment_type:
+          type: string
+        geniemode_entity_name:
+          type: string
+        gross_margin:
+          type: number
+        harbor_merchandise_fee:
+          type: number
+        id:
+          type: integer
+          format: int64
+        logistic_cost:
+          type: number
+        logistic_cost_by_logistics:
+          $ref: '#/components/schemas/OrderLogisticsCostDto'
+        logistic_cost_per_piece:
+          type: number
+        logistic_cost_type:
+          type: string
+        logistic_type:
+          type: string
+        margin:
+          type: number
+        model_type:
+          type: string
+        net_margin:
+          type: number
+        order_cost:
+          type: number
+        order_revenue:
+          type: number
+        planned_order_shipment_mode:
+          type: string
+        purchase_cgst:
+          type: number
+        purchase_gst:
+          type: number
+        purchase_igst:
+          type: number
+        purchase_sgst:
+          type: number
+        raw_material_cost:
+          type: number
+        raw_material_cost_dollar:
+          type: number
+        raw_material_margin:
+          type: number
+        raw_material_margin_dollar:
+          type: number
+        reciprocal_tariff:
+          type: number
+        reciprocal_tariff_cost_type:
+          type: string
+        reciprocal_tariff_per_piece:
+          type: number
+        reciprocal_tariff_type:
+          type: string
+        selling_cgst:
+          type: number
+        selling_gst:
+          type: number
+        selling_igst:
+          type: number
+        selling_price:
+          type: number
+        selling_sgst:
+          type: number
+        shipment_type:
+          type: string
+        show_freight_keyword:
+          type: boolean
+        total_custom_duty:
+          type: number
+      title: OrderMarginDto

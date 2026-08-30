@@ -1,0 +1,126 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Payment Calendar Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: payment-calendar-controller
+  description: Payment Calendar Controller
+paths:
+  /api/calendar/Get:
+    get:
+      tags:
+      - payment-calendar-controller
+      summary: get_payment_term
+      operationId: get_payment_termUsingGET_1
+      parameters:
+      - name: fromDate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPaymentCalendarResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/calendar/GetAll:
+    get:
+      tags:
+      - payment-calendar-controller
+      summary: get_tna_request
+      operationId: get_tna_requestUsingGET_1
+      parameters:
+      - name: fromDate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllPaymentCalendarResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    MonthlyPaymentDto:
+      type: object
+      properties:
+        month:
+          type: string
+        month_and_year:
+          type: string
+        payment_pending:
+          type: integer
+          format: int64
+      title: MonthlyPaymentDto
+    GetAllPaymentCalendarResponse:
+      type: object
+      properties:
+        monthly_payment_dto:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonthlyPaymentDto'
+        year:
+          type: integer
+          format: int32
+      title: GetAllPaymentCalendarResponse
+    GetPaymentCalendarResponse:
+      type: object
+      properties:
+        client_data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentCalendarDto'
+        month:
+          type: string
+        year:
+          type: integer
+          format: int32
+      title: GetPaymentCalendarResponse
+    PaymentCalendarDto:
+      type: object
+      properties:
+        client_name:
+          type: string
+        due_date:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        value:
+          type: integer
+          format: int64
+      title: PaymentCalendarDto

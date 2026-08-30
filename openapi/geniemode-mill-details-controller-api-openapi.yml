@@ -1,0 +1,221 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Mill Details Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: mill-details-controller
+  description: Mill Details Controller
+paths:
+  /api/v1/details/mill:
+    get:
+      tags:
+      - mill-details-controller
+      summary: getMills
+      operationId: getMillsUsingGET
+      parameters:
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MillMiniDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/details/mill/index:
+    get:
+      tags:
+      - mill-details-controller
+      summary: index
+      operationId: indexUsingGET_17
+      parameters:
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/details/mill/manufacturer/index:
+    get:
+      tags:
+      - mill-details-controller
+      summary: millManufacturerIndex
+      operationId: millManufacturerIndexUsingGET
+      parameters:
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/details/mill/{millId}/docs:
+    get:
+      tags:
+      - mill-details-controller
+      summary: getMillDocs
+      operationId: getMillDocsUsingGET
+      parameters:
+      - name: millId
+        in: path
+        description: millId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MillDocsDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/details/mill/{millId}/users:
+    get:
+      tags:
+      - mill-details-controller
+      summary: getGroupUsers
+      operationId: getGroupUsersUsingGET
+      parameters:
+      - name: millId
+        in: path
+        description: millId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserSimpleDTO'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    UserSimpleDTO:
+      type: object
+      properties:
+        country_code:
+          type: string
+        department:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        is_primary:
+          type: boolean
+        last_name:
+          type: string
+        phone_number:
+          type: string
+        username:
+          type: string
+      title: UserSimpleDTO
+    MillDocsDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        type:
+          type: string
+        url:
+          type: string
+      title: MillDocsDto
+    MillMiniDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: MillMiniDto

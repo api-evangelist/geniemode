@@ -1,0 +1,79 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Order Carton Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: order-carton-controller
+  description: Order Carton Controller
+paths:
+  /api/v1/order/carton:
+    get:
+      tags:
+      - order-carton-controller
+      summary: index
+      operationId: indexUsingGET_18
+      parameters:
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/order/carton/add/{length}/{breadth}/{height}:
+    post:
+      tags:
+      - order-carton-controller
+      summary: change_order_status
+      operationId: change_order_statusUsingPOST
+      parameters:
+      - name: breadth
+        in: path
+        description: breadth
+        required: true
+        schema:
+          type: number
+          format: float
+      - name: height
+        in: path
+        description: height
+        required: true
+        schema:
+          type: number
+          format: float
+      - name: length
+        in: path
+        description: length
+        required: true
+        schema:
+          type: number
+          format: float
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string

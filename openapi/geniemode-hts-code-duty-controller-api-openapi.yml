@@ -1,0 +1,90 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Hts Code Duty Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: hts-code-duty-controller
+  description: Hts Code Duty Controller
+paths:
+  /api/v1/path/hts/duty:
+    get:
+      tags:
+      - hts-code-duty-controller
+      summary: getDutyByHtsCode
+      operationId: getDutyByHtsCodeUsingGET_1
+      parameters:
+      - name: htsCodes
+        in: query
+        description: htsCodes
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/HtsCodeDutyMappingDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/hts/{htsCode}/duty:
+    get:
+      tags:
+      - hts-code-duty-controller
+      summary: getDutyByHtsCode
+      operationId: getDutyByHtsCodeUsingGET
+      parameters:
+      - name: htsCode
+        in: path
+        description: htsCode
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HtsCodeDutyMappingDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    HtsCodeDutyMappingDto:
+      type: object
+      properties:
+        brief_description:
+          type: string
+        duty:
+          type: number
+        hts_code:
+          type: string
+        id:
+          type: integer
+          format: int64
+        mfn_text_rate:
+          type: string
+      title: HtsCodeDutyMappingDto

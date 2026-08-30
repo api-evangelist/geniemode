@@ -1,0 +1,2313 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Excel Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: excel-controller
+  description: Excel Controller
+paths:
+  /api/v1/excel/report/cohort-report-types:
+    get:
+      tags:
+      - excel-controller
+      summary: getCohortRawDataTypes
+      operationId: getCohortRawDataTypesUsingGET
+      parameters:
+      - name: pageType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - cohort
+          - dashboard_order
+          - dashboard_sample_order
+          - final_invoice
+          - finance_commission_invoice
+          - logistics_dashboard_shipments
+          - possible_shipments
+      - name: showHidden
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExcelTypesPayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/courier-query:
+    get:
+      tags:
+      - excel-controller
+      summary: getCourierReportQuery
+      operationId: getCourierReportQueryUsingGET
+      parameters:
+      - name: addressIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: costTimestampFrom
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: costTimestampTo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: dispatchedOnFrom
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: dispatchedOnTo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: fromEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: fromEntityType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: geniemodeEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: issuanceIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: requestedByIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: requestedOnFrom
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: requestedOnTo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: statuses
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: toEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: toEntityType
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/couriers:
+    get:
+      tags:
+      - excel-controller
+      summary: getCourierReport
+      operationId: getCourierReportUsingGET
+      parameters:
+      - name: addressIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: costTimestampFrom
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: costTimestampTo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: dispatchedOnFrom
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: dispatchedOnTo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: fromEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: fromEntityType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: geniemodeEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: issuanceIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: requestedByIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: requestedOnFrom
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: requestedOnTo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: statuses
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: toEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: toEntityType
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/getNumOfThreads:
+    get:
+      tags:
+      - excel-controller
+      summary: getNumOfThreads
+      operationId: getNumOfThreadsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int32
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/getQcFileName:
+    get:
+      tags:
+      - excel-controller
+      summary: getQcFileName
+      operationId: getQcFileNameUsingGET
+      parameters:
+      - name: calendarDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: cityList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: endDueDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: externalReport
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: forRm
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: isActivityRecorded
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: isDelayed
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: isReportEditable
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: jobName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: location
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: manufacturerId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: manufacturerIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: qcCompletionDateEnd
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: qcCompletionDateStart
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: qcDateEnd
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: qcDateStart
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: qcDelayDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: qcExecutiveIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: qcId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: qcIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: rmId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: startDueDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: stateList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: stepIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: stepsList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: zoneOffset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/ghostShipment:
+    get:
+      tags:
+      - excel-controller
+      summary: getGhostShipmentReport
+      operationId: getGhostShipmentReportUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/invoice/{shipmentId}:
+    get:
+      tags:
+      - excel-controller
+      summary: getInvoiceSpreadSheet
+      operationId: getInvoiceSpreadSheetUsingGET
+      parameters:
+      - name: shipmentId
+        in: path
+        description: shipmentId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/ordersheet:
+    get:
+      tags:
+      - excel-controller
+      summary: getOrderSheet
+      operationId: getOrderSheetUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/qc:
+    get:
+      tags:
+      - excel-controller
+      summary: getQc
+      operationId: getQcUsingGET
+      parameters:
+      - name: calendarDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: cityList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: endDueDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: externalReport
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: forRm
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: isActivityRecorded
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: isDelayed
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: isReportEditable
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: jobName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: location
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: manufacturerId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: manufacturerIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: qcCompletionDateEnd
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: qcCompletionDateStart
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: qcDateEnd
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: qcDateStart
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: qcDelayDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: qcExecutiveIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: qcId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: qcIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: rmId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: startDueDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: stateList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: stepIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: stepsList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: zoneOffset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/queries/commission/invoice/{queryType}:
+    get:
+      tags:
+      - excel-controller
+      summary: getCommissionInvoiceExcelQueries
+      operationId: getCommissionInvoiceExcelQueriesUsingGET
+      parameters:
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: companyName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: endApprovedTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: endRaisedOnTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: geniemodeEntityId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: paymentAddedEndTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentAddedStartTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentCompleted
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: paymentEndTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentStartTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: queryType
+        in: path
+        description: queryType
+        required: true
+        schema:
+          type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: startApprovedTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: startRaisedOnTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^(approved|rejected|pending)$
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/queries/dashboard/{type}:
+    get:
+      tags:
+      - excel-controller
+      summary: getDashboardExcelQueries
+      operationId: getDashboardExcelQueriesUsingGET
+      parameters:
+      - name: countSkipped
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: currency
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - buyer
+          - dollar
+          - factory
+      - name: type
+        in: path
+        description: type
+        required: true
+        schema:
+          type: string
+      - name: withPrice
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/queries/final/invoice/{queryType}:
+    get:
+      tags:
+      - excel-controller
+      summary: getFinalInvoiceExcelQueries
+      operationId: getFinalInvoiceExcelQueriesUsingGET
+      parameters:
+      - name: endRaisedOnTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: geniemodeEntityId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: grnStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: paymentAddedEndTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentAddedStartTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentCompleted
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: paymentEndTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentStartTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: queryType
+        in: path
+        description: queryType
+        required: true
+        schema:
+          type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: startRaisedOnTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/queries/logistics/dashboard/{type}:
+    get:
+      tags:
+      - excel-controller
+      summary: getLogisticsDashboardQueries
+      operationId: getLogisticsDashboardQueriesUsingGET
+      parameters:
+      - name: actualDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: assignees
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: assignStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: completionStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - delayed
+            - done
+            - pending
+          enum:
+          - delayed
+          - done
+          - pending
+      - name: confirmationDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: deliveryDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: exFactoryDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: factories
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: groupBy
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - assignee
+          - buyer
+          - factory
+          - payment_mode
+          - shipping_term
+          - stage
+      - name: groupByValue
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: hsnCodes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeCompletedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeNotFinanceApprovedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeRejectedInvoice
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: paymentModes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: projectionDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchBy
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: shipmentStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - booked
+          - complete
+          - deliveryDate
+          - paymentFollowup
+          - preplanned
+          - shipped
+      - name: shipmentSubStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - delayed
+          - done
+          - pending
+      - name: shippingTerms
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: statusChangeDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: type
+        in: path
+        description: type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/queries/possible/shipments/{type}:
+    get:
+      tags:
+      - excel-controller
+      summary: getPossibleShipmentsPageQueries
+      operationId: getPossibleShipmentsPageQueriesUsingGET
+      parameters:
+      - name: type
+        in: path
+        description: type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/shipment-booking/query:
+    get:
+      tags:
+      - excel-controller
+      summary: getShipmentBookingQuery
+      operationId: getShipmentBookingQueryUsingGET
+      parameters:
+      - name: approvalStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: businessOwnerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: buyerExFactoryEndDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: buyerExFactoryStartDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: confirmationDateEndDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: confirmationDateStartDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: draftOrders
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: fieldName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filters
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: financeApprovedOnce
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: financialStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: forPo
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: fromDb
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: getDataFor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: havingShipmentsOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: inventoryCreated
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: parentOrderOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: object
+      - name: skipList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: typeOfDelivery
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/shipment-status-report-query:
+    get:
+      tags:
+      - excel-controller
+      summary: getQueries
+      operationId: getQueriesUsingGET
+      parameters:
+      - name: approvalStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: businessOwnerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: buyerExFactoryEndDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: buyerExFactoryStartDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: confirmationDateEndDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: confirmationDateStartDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: draftOrders
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: fieldName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filters
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: financeApprovedOnce
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: financialStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: forPo
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: fromDb
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: getDataFor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: havingShipmentsOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: inventoryCreated
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: parentOrderOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: object
+      - name: skipList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: typeOfDelivery
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/shipments:
+    get:
+      tags:
+      - excel-controller
+      summary: getShipmentReport
+      operationId: getShipmentReportUsingGET
+      parameters:
+      - name: actualDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: assignees
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: assignStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: buyers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: completionStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - delayed
+            - done
+            - pending
+          enum:
+          - delayed
+          - done
+          - pending
+      - name: confirmationDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: deliveryDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: exFactoryDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: factories
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: groupBy
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - assignee
+          - buyer
+          - factory
+          - payment_mode
+          - shipping_term
+          - stage
+      - name: groupByValue
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: hsnCodes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeCompletedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeNotFinanceApprovedShipments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeRejectedInvoice
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: paymentModes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: projectionDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchBy
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: shipmentStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - booked
+          - complete
+          - deliveryDate
+          - paymentFollowup
+          - preplanned
+          - shipped
+      - name: shipmentSubStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - delayed
+          - done
+          - pending
+      - name: shippingTerms
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: statusChangeDate
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/tna/{type}:
+    get:
+      tags:
+      - excel-controller
+      summary: getCatalogExcel
+      operationId: getCatalogExcelUsingGET
+      parameters:
+      - name: countSkipped
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: currency
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - buyer
+          - dollar
+          - factory
+      - name: type
+        in: path
+        description: type
+        required: true
+        schema:
+          type: string
+      - name: withPrice
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/types:
+    get:
+      tags:
+      - excel-controller
+      summary: getExcelTypes
+      operationId: getExcelTypesUsingGET
+      parameters:
+      - name: pageType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - cohort
+          - dashboard_order
+          - dashboard_sample_order
+          - final_invoice
+          - finance_commission_invoice
+          - logistics_dashboard_shipments
+          - possible_shipments
+      - name: showHidden
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExcelTypesPayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/types/sample/orders:
+    get:
+      tags:
+      - excel-controller
+      summary: getSampleOrderExcelTypes
+      operationId: getSampleOrderExcelTypesUsingGET
+      parameters:
+      - name: pageType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - cohort
+          - dashboard_order
+          - dashboard_sample_order
+          - final_invoice
+          - finance_commission_invoice
+          - logistics_dashboard_shipments
+          - possible_shipments
+      - name: showHidden
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExcelTypesPayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/excel/report/{orderId}/costing/excel-query:
+    get:
+      tags:
+      - excel-controller
+      summary: getOrderCostingQuery
+      operationId: getOrderCostingQueryUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    ExcelTypesPayload:
+      type: object
+      properties:
+        display_name:
+          type: string
+        hide:
+          type: boolean
+        key:
+          type: string
+        show_price_dropdown:
+          type: boolean
+      title: ExcelTypesPayload

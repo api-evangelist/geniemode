@@ -1,0 +1,158 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Client Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: client-controller
+  description: Client Controller
+paths:
+  /api/client/CreateClient:
+    post:
+      tags:
+      - client-controller
+      summary: create_client
+      operationId: create_clientUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateClientResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClientDto'
+        description: requestPayload
+        required: true
+  /api/client/GetAllClient:
+    post:
+      tags:
+      - client-controller
+      summary: getAllClients
+      operationId: getAllClientsUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientDetailsResponse'
+  /api/client/get-buyer-pending-steps:
+    get:
+      tags:
+      - client-controller
+      summary: getBuyerPendingSteps
+      operationId: getBuyerPendingStepsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    ClientDetailsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientDetailsDTO'
+      title: ClientDetailsResponse
+    CreateClientDto:
+      type: object
+      properties:
+        brand_id:
+          type: integer
+          format: int64
+        brand_name:
+          type: string
+        client_spoc_first_name:
+          type: string
+        client_spoc_last_name:
+          type: string
+        company_name:
+          type: string
+        contact_info:
+          type: string
+        country:
+          type: string
+        country_code:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        password:
+          type: string
+        rm_id:
+          type: integer
+          format: int64
+        user_email:
+          type: string
+      title: CreateClientDto
+    CreateClientResponse:
+      type: object
+      properties:
+        client_id:
+          type: integer
+          format: int64
+        message:
+          type: string
+      title: CreateClientResponse
+    ClientDetailsDTO:
+      type: object
+      properties:
+        client_id:
+          type: integer
+          format: int64
+        client_spoc:
+          type: string
+        client_spoc_first_name:
+          type: string
+        client_spoc_last_name:
+          type: string
+        client_status:
+          type: boolean
+        company_name:
+          type: string
+        contact_info:
+          type: string
+        country:
+          type: string
+        data:
+          type: integer
+          format: int64
+        order_count:
+          type: integer
+          format: int64
+        rm_id:
+          type: integer
+          format: int64
+        rm_name:
+          type: string
+        soft_delete:
+          type: string
+        user_email:
+          type: string
+      title: ClientDetailsDTO

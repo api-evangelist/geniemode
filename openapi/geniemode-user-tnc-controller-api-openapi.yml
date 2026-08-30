@@ -1,0 +1,143 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing User Tnc Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: user-tnc-controller
+  description: User Tnc Controller
+paths:
+  /api/userTnc/GetAllManufacturer:
+    get:
+      tags:
+      - user-tnc-controller
+      summary: index
+      operationId: indexUsingGET_30
+      parameters:
+      - name: phrase
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/userTnc/GetManufacturer:
+    get:
+      tags:
+      - user-tnc-controller
+      summary: get_mf
+      operationId: get_mfUsingGET
+      parameters:
+      - name: manufacturerId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserTncResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/userTnc/isTncAccepted:
+    get:
+      tags:
+      - user-tnc-controller
+      summary: isTncAccepted
+      operationId: isTncAcceptedUsingGET
+      parameters:
+      - name: manufacturerId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserTncAcceptedResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    UserTncAcceptedResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      title: UserTncAcceptedResponse
+    UserTnc:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        isTncAccepted:
+          type: string
+        isTncMailSent:
+          type: string
+        userId:
+          type: integer
+          format: int64
+      title: UserTnc
+    ManufacturerTncDto:
+      type: object
+      properties:
+        company_registered_name:
+          type: string
+        contact_person1_email:
+          type: string
+        contact_person1_phone:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: ManufacturerTncDto
+    UserTncResponsePayload:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserTncDTO'
+      title: UserTncResponsePayload
+    UserTncDTO:
+      type: object
+      properties:
+        manufacturer_detail:
+          $ref: '#/components/schemas/ManufacturerTncDto'
+        user_tnc:
+          $ref: '#/components/schemas/UserTnc'
+      title: UserTncDTO

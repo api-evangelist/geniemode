@@ -1,0 +1,53 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Business Owner Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: business-owner-controller
+  description: Business Owner Controller
+paths:
+  /api/v1/business-owners:
+    get:
+      tags:
+      - business-owner-controller
+      summary: list
+      operationId: listUsingGET_1
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BusinessOwner'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    BusinessOwner:
+      type: object
+      properties:
+        active:
+          type: boolean
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: BusinessOwner

@@ -1,0 +1,197 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Qc Dump Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: qc-dump-controller
+  description: Qc Dump Controller
+paths:
+  /api/v1/path/qc/dump/user-log:
+    get:
+      tags:
+      - qc-dump-controller
+      summary: listUserLog
+      operationId: listUserLogUsingGET
+      parameters:
+      - name: fromTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - qc-dump-controller
+      summary: createUserLog
+      operationId: createUserLogUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QcLogDump'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QcLogDumpRequest'
+        description: request
+        required: true
+  /api/v1/path/qc/dump/{userId}:
+    get:
+      tags:
+      - qc-dump-controller
+      summary: get
+      operationId: getUsingGET_7
+      parameters:
+      - name: key
+        in: query
+        description: key
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QcDump'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - qc-dump-controller
+      summary: create
+      operationId: createUsingPOST_14
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QcDump'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QcDumpRequest'
+        description: request
+        required: true
+components:
+  schemas:
+    QcDump:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        data:
+          type: object
+        id:
+          type: integer
+          format: int64
+        key:
+          type: string
+        log:
+          type: string
+        userId:
+          type: integer
+          format: int64
+      title: QcDump
+    QcLogDumpRequest:
+      type: object
+      properties:
+        data:
+          type: object
+        log:
+          type: string
+        ts:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+      title: QcLogDumpRequest
+    QcDumpRequest:
+      type: object
+      properties:
+        data:
+          type: object
+        key:
+          type: string
+        log:
+          type: string
+      title: QcDumpRequest
+    QcLogDump:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        data:
+          type: object
+        id:
+          type: integer
+          format: int64
+        log:
+          type: string
+        ts:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+      title: QcLogDump

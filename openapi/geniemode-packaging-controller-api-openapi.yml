@@ -1,0 +1,204 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Packaging Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: packaging-controller
+  description: Packaging Controller
+paths:
+  /api/packaging/GetCartonsConfiguration:
+    get:
+      tags:
+      - packaging-controller
+      summary: getCartonsConfiguration
+      operationId: getCartonsConfigurationUsingGET
+      parameters:
+      - name: categories
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: categoryId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: city
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: companyName
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: complianceType
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: confirmationDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: contractStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - all
+          - completed_signature
+          - pending_signature
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: leadId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: orderStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active_orders
+          - all
+          - completed_orders
+      - name: pendingAudits
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: pincode
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: preferredFactory
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: ragRatings
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: regions
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchTerm
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: supplierType
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: type
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message

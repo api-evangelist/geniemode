@@ -1,0 +1,169 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Order Traceability Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: order-traceability-controller
+  description: Order Traceability Controller
+paths:
+  /api/v1/order-traceability:
+    post:
+      tags:
+      - order-traceability-controller
+      summary: create
+      operationId: createUsingPOST_11
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrderTraceabilityTreeNode'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderTraceabilityDto'
+        description: orderTraceabilityDto
+        required: true
+  /api/v1/order-traceability/order/{orderId}:
+    get:
+      tags:
+      - order-traceability-controller
+      summary: get
+      operationId: getUsingGET_6
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrderTraceabilityTreeNode'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/order-traceability/{id}:
+    put:
+      tags:
+      - order-traceability-controller
+      summary: update
+      operationId: updateUsingPUT_8
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrderTraceabilityTreeNode'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderTraceabilityDto'
+        description: orderTraceabilityDto
+        required: true
+    delete:
+      tags:
+      - order-traceability-controller
+      summary: delete
+      operationId: deleteUsingDELETE_7
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrderTraceabilityTreeNode'
+components:
+  schemas:
+    OrderTraceabilityDocDto:
+      type: object
+      properties:
+        doc_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        url:
+          type: string
+      title: OrderTraceabilityDocDto
+    OrderTraceabilityTreeNode:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OrderTraceabilityDto'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderTraceabilityTreeNode'
+        name:
+          type: string
+      title: OrderTraceabilityTreeNode
+    OrderTraceabilityDto:
+      type: object
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderTraceabilityDocDto'
+        entity_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        level:
+          type: integer
+          format: int64
+        name:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        parent_id:
+          type: integer
+          format: int64
+        state:
+          type: string
+        type:
+          type: string
+      title: OrderTraceabilityDto

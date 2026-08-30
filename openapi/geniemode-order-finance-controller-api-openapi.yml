@@ -1,0 +1,172 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Order Finance Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: order-finance-controller
+  description: Order Finance Controller
+paths:
+  /api/v1/path/finance/order/update-gst:
+    put:
+      tags:
+      - order-finance-controller
+      summary: updateGst
+      operationId: updateGstUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGstFromFinanceRequestPayload'
+        description: requestPayload
+        required: true
+  /api/v1/path/finance/order/{orderId}/update-business-owner:
+    put:
+      tags:
+      - order-finance-controller
+      summary: updateBusinessOwner
+      operationId: updateBusinessOwnerUsingPUT
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBusinessOwnerFromFinanceRequestPayload'
+        description: requestPayload
+        required: true
+  /api/v1/path/finance/order/{orderId}/update-discount:
+    put:
+      tags:
+      - order-finance-controller
+      summary: updateDiscount
+      operationId: updateDiscountUsingPUT
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDiscountsFromFinanceRequestPayload'
+        description: requestPayload
+        required: true
+components:
+  schemas:
+    UpdateDiscountsFromFinanceRequestPayload:
+      type: object
+      properties:
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateDiscountFromFinanceRequestPayload'
+      title: UpdateDiscountsFromFinanceRequestPayload
+    PoVariantRequestPayload:
+      type: object
+      properties:
+        hsn_code:
+          type: string
+        purchase_cgst:
+          type: number
+        purchase_igst:
+          type: number
+        purchase_sgst:
+          type: number
+        selling_cgst:
+          type: number
+        selling_igst:
+          type: number
+        selling_sgst:
+          type: number
+        variant_id:
+          type: integer
+          format: int64
+      title: PoVariantRequestPayload
+    UpdateDiscountFromFinanceRequestPayload:
+      type: object
+      properties:
+        discount_charges:
+          type: number
+        discount_charges_cost_type:
+          type: string
+        discount_charges_percent:
+          type: number
+        discount_charges_type:
+          type: string
+          enum:
+          - charges
+          - commission
+          - discount
+        factory_discount_charges:
+          type: number
+        factory_discount_charges_cost_type:
+          type: string
+        factory_discount_charges_percent:
+          type: number
+        factory_discount_charges_type:
+          type: string
+          enum:
+          - charges
+          - commission
+          - discount
+        order_id:
+          type: integer
+          format: int64
+      title: UpdateDiscountFromFinanceRequestPayload
+    UpdateBusinessOwnerFromFinanceRequestPayload:
+      type: object
+      properties:
+        business_owner_id:
+          type: integer
+          format: int64
+      title: UpdateBusinessOwnerFromFinanceRequestPayload
+    UpdateGstFromFinanceRequestPayload:
+      type: object
+      properties:
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoVariantRequestPayload'
+      title: UpdateGstFromFinanceRequestPayload

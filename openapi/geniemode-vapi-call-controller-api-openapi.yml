@@ -1,0 +1,269 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Vapi Call Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: vapi-call-controller
+  description: Vapi Call Controller
+paths:
+  /api/v1/vapi/call:
+    post:
+      tags:
+      - vapi-call-controller
+      summary: placeCall
+      operationId: placeCallUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VapiCallLog'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VapiCallRequestDto'
+        description: requestDto
+        required: true
+  /api/v1/vapi/call/reconcile-pending:
+    post:
+      tags:
+      - vapi-call-controller
+      summary: reconcilePending
+      operationId: reconcilePendingUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VapiCallLog'
+  /api/v1/vapi/call/{id}:
+    get:
+      tags:
+      - vapi-call-controller
+      summary: getCall
+      operationId: getCallUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VapiCallLog'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/vapi/call/{id}/reconcile:
+    post:
+      tags:
+      - vapi-call-controller
+      summary: reconcile
+      operationId: reconcileUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VapiCallLog'
+  /api/v1/vapi/calls:
+    get:
+      tags:
+      - vapi-call-controller
+      summary: listCalls
+      operationId: listCallsUsingGET
+      parameters:
+      - name: assistantId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: customerNumber
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: endedReason
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: phoneNumberId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: triggeredBy
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: vapiCallId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    VapiAssistantOverridesDto:
+      type: object
+      properties:
+        variableValues:
+          type: object
+      title: VapiAssistantOverridesDto
+    VapiCallRequestDto:
+      type: object
+      properties:
+        assistantId:
+          type: string
+        assistantOverrides:
+          $ref: '#/components/schemas/VapiAssistantOverridesDto'
+        customer:
+          $ref: '#/components/schemas/VapiCustomerDto'
+        phoneNumberId:
+          type: string
+        userId:
+          type: integer
+          format: int64
+      title: VapiCallRequestDto
+    VapiCallLog:
+      type: object
+      properties:
+        assistantId:
+          type: string
+        callStatus:
+          type: string
+        cost:
+          type: number
+          format: double
+        createdBy:
+          type: string
+        customerName:
+          type: string
+        customerNumber:
+          type: string
+        durationSeconds:
+          type: integer
+          format: int64
+        endedAt:
+          type: string
+          format: date-time
+        endedReason:
+          type: string
+        errorMessage:
+          type: string
+        id:
+          type: integer
+          format: int64
+        lastSyncedAt:
+          type: string
+          format: date-time
+        phoneNumberId:
+          type: string
+        recordingUrl:
+          type: string
+        responseBody:
+          type: string
+        responseStatusCode:
+          type: integer
+          format: int32
+        startedAt:
+          type: string
+          format: date-time
+        summary:
+          type: string
+        transcript:
+          type: string
+        triggeredBy:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        vapiCallId:
+          type: string
+        variableValues:
+          type: object
+      title: VapiCallLog
+    VapiCustomerDto:
+      type: object
+      properties:
+        name:
+          type: string
+        number:
+          type: string
+      title: VapiCustomerDto

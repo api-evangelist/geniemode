@@ -1,0 +1,1142 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Final Invoice Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: final-invoice-controller
+  description: Final Invoice Controller
+paths:
+  /api/v1/path/final-invoice:
+    get:
+      tags:
+      - final-invoice-controller
+      summary: index
+      operationId: indexUsingGET_8
+      parameters:
+      - name: endRaisedOnTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: geniemodeEntityId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: grnStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: paymentAddedEndTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentAddedStartTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentCompleted
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: paymentEndTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentStartTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: startRaisedOnTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - final-invoice-controller
+      summary: create
+      operationId: createUsingPOST_6
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinalInvoiceResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFinalInvoiceRequestPayload'
+        description: payload
+        required: true
+  /api/v1/path/final-invoice/invoiced/orders:
+    get:
+      tags:
+      - final-invoice-controller
+      summary: getOrderInvoices
+      operationId: getOrderInvoicesUsingGET
+      parameters:
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/final-invoice/order/{orderId}:
+    get:
+      tags:
+      - final-invoice-controller
+      summary: getAllInvoicesByOrderId
+      operationId: getAllInvoicesByOrderIdUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FinalInvoiceResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/final-invoice/orders-eligible-for-invoice:
+    get:
+      tags:
+      - final-invoice-controller
+      summary: findOrdersEligibleForInvoice
+      operationId: findOrdersEligibleForInvoiceUsingGET
+      parameters:
+      - name: geniemodeEntityId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: orderId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/final-invoice/recompute:
+    put:
+      tags:
+      - final-invoice-controller
+      summary: update
+      operationId: updateUsingPUT_4
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinalInvoiceRecomputeRequestPayload'
+        description: requestPayload
+        required: true
+  /api/v1/path/final-invoice/recompute/{finalInvoiceId}:
+    put:
+      tags:
+      - final-invoice-controller
+      summary: update
+      operationId: updateUsingPUT_3
+      parameters:
+      - name: finalInvoiceId
+        in: path
+        description: finalInvoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/path/final-invoice/updateTotalFactoryAmount:
+    get:
+      tags:
+      - final-invoice-controller
+      summary: updateTotalFactoryAmount
+      operationId: updateTotalFactoryAmountUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/final-invoice/{docId}/removeDoc:
+    put:
+      tags:
+      - final-invoice-controller
+      summary: removeDoc
+      operationId: removeDocUsingPUT
+      parameters:
+      - name: docId
+        in: path
+        description: docId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/path/final-invoice/{finalInvoiceId}:
+    get:
+      tags:
+      - final-invoice-controller
+      summary: get
+      operationId: getUsingGET_2
+      parameters:
+      - name: finalInvoiceId
+        in: path
+        description: finalInvoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinalInvoiceResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - final-invoice-controller
+      summary: update
+      operationId: updateUsingPUT_2
+      parameters:
+      - name: finalInvoiceId
+        in: path
+        description: finalInvoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinalInvoiceResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFinalInvoiceRequestPayload'
+        description: payload
+        required: true
+  /api/v1/path/final-invoice/{finalInvoiceId}/buyerDocs:
+    get:
+      tags:
+      - final-invoice-controller
+      summary: getBuyerDocs
+      operationId: getBuyerDocsUsingGET_1
+      parameters:
+      - name: finalInvoiceId
+        in: path
+        description: finalInvoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvoiceBuyerDocsResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/final-invoice/{finalInvoiceId}/docs:
+    get:
+      tags:
+      - final-invoice-controller
+      summary: getDocs
+      operationId: getDocsUsingGET
+      parameters:
+      - name: finalInvoiceId
+        in: path
+        description: finalInvoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - final-invoice-controller
+      summary: docsSubmit
+      operationId: docsSubmitUsingPOST
+      parameters:
+      - name: finalInvoiceId
+        in: path
+        description: finalInvoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFinalInvoiceListDocsRequestPayload'
+        description: payload
+        required: true
+  /api/v1/path/final-invoice/{finalInvoiceId}/factoryDocs:
+    get:
+      tags:
+      - final-invoice-controller
+      summary: getFactoryDocs
+      operationId: getFactoryDocsUsingGET_1
+      parameters:
+      - name: finalInvoiceId
+        in: path
+        description: finalInvoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvoiceFactoryDocsResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/final-invoice/{finalInvoiceId}/getDocTypes:
+    post:
+      tags:
+      - final-invoice-controller
+      summary: getDocTypes
+      operationId: getDocTypesUsingPOST
+      parameters:
+      - name: finalInvoiceId
+        in: path
+        description: finalInvoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentDocTypeResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentDocTypesRequestPayload'
+        description: requestPayload
+        required: true
+  /api/v1/path/final-invoice/{finalInvoiceId}/grn:
+    get:
+      tags:
+      - final-invoice-controller
+      summary: getGrnDocs
+      operationId: getGrnDocsUsingGET
+      parameters:
+      - name: finalInvoiceId
+        in: path
+        description: finalInvoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceGrnResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/final-invoice/{finalInvoiceId}/logistics/details:
+    get:
+      tags:
+      - final-invoice-controller
+      summary: invoiceLogisticsDetails
+      operationId: invoiceLogisticsDetailsUsingGET
+      parameters:
+      - name: finalInvoiceId
+        in: path
+        description: finalInvoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceLogisticsDetailsResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/final-invoice/{finalInvoiceId}/updateGrnStatus:
+    put:
+      tags:
+      - final-invoice-controller
+      summary: updateGrnStatus
+      operationId: updateGrnStatusUsingPUT
+      parameters:
+      - name: finalInvoiceId
+        in: path
+        description: finalInvoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceGrnResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFinalInvoiceGrnStatusRequestPayload'
+        description: payload
+        required: true
+components:
+  schemas:
+    ShipmentSingleDocTypeResponsePayload:
+      type: object
+      properties:
+        doc_type:
+          type: string
+        mandatory:
+          type: boolean
+        name:
+          type: string
+      title: ShipmentSingleDocTypeResponsePayload
+    InvoiceFactoryDocsResponsePayload:
+      type: object
+      properties:
+        order_id:
+          type: integer
+          format: int64
+        response:
+          $ref: '#/components/schemas/FactoryDocsResponsePayload'
+      title: InvoiceFactoryDocsResponsePayload
+    InvoiceLogisticsDetailsResponsePayload:
+      type: object
+      properties:
+        actual_logistic_cost_details:
+          $ref: '#/components/schemas/InvoiceActualLogisticsDetailsResponsePayload'
+        actual_shipment_mode:
+          type: string
+        planned_logistic_cost_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceOrderPlannedLogisticsDetailsResponsePayload'
+        planned_shipment_mode:
+          type: string
+        total_actual_logistics_cost:
+          type: number
+        total_planned_custom_duty:
+          type: number
+        total_planned_logistics_cost:
+          type: number
+      title: InvoiceLogisticsDetailsResponsePayload
+    ShipmentDocTypesRequestPayload:
+      type: object
+      properties:
+        final_invoice_id:
+          type: integer
+          format: int64
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        shipment_id:
+          type: integer
+          format: int64
+      title: ShipmentDocTypesRequestPayload
+    ManufacturerMiniResponsePayload:
+      type: object
+      properties:
+        billing_address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        billing_address_id:
+          type: integer
+          format: int64
+        gst:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        pan:
+          type: string
+      title: ManufacturerMiniResponsePayload
+    CreateFinalInvoiceRequestPayload:
+      type: object
+      properties:
+        bill_to_type:
+          type: string
+        currency:
+          type: string
+        discount_amount:
+          type: number
+        discount_percentage:
+          type: number
+        document_amount:
+          type: number
+        geniemode_entity_conversion:
+          type: number
+        internal_invoice_no:
+          type: string
+        invoice_doc_url:
+          type: string
+        invoice_no:
+          type: string
+        invoice_orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateFinalInvoiceOrderRequestPayload'
+        invoice_type:
+          type: string
+        raised_on_timestamp:
+          type: integer
+          format: int64
+        status:
+          type: string
+        type:
+          type: string
+      title: CreateFinalInvoiceRequestPayload
+    OrderDocDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        doc_no:
+          type: string
+        doc_type:
+          type: string
+        docs:
+          $ref: '#/components/schemas/DocDto'
+        id:
+          type: integer
+          format: int64
+        is_additional_doc:
+          type: boolean
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+      title: OrderDocDto
+    InvoiceInFinalInvoiceDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        invoice_no:
+          type: string
+        is_system_invoice_final:
+          type: boolean
+        status:
+          type: string
+      title: InvoiceInFinalInvoiceDto
+    GeniemodeEntityDto:
+      type: object
+      properties:
+        address:
+          type: object
+        address_id:
+          type: integer
+          format: int64
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        compliance:
+          type: string
+        currency:
+          type: string
+        id:
+          type: integer
+          format: int64
+        invoice_declaration:
+          type: string
+        label:
+          type: string
+        legal_name:
+          type: string
+        tally_currency:
+          type: string
+        value:
+          type: string
+      title: GeniemodeEntityDto
+    DocDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+      title: DocDto
+    ShipmentDocTypeResponsePayload:
+      type: object
+      properties:
+        booked:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
+        complete:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
+        delivery_date:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
+        is_delivery_date_step_required:
+          type: boolean
+        is_payment_followup_step_required:
+          type: boolean
+        payment_followup:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
+        preplanned:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
+        shipped:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
+      title: ShipmentDocTypeResponsePayload
+    UpdateFinalInvoiceGrnStatusRequestPayload:
+      type: object
+      properties:
+        comment:
+          type: string
+        status:
+          type: string
+      title: UpdateFinalInvoiceGrnStatusRequestPayload
+    BuyerDocsResponsePayload:
+      type: object
+      properties:
+        additional_docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDocDto'
+        buyer_po_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetailBuyerPODocResponseDto'
+        confirmation_mail_doc_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDocDto'
+        pi_id:
+          type: integer
+          format: int64
+      title: BuyerDocsResponsePayload
+    InvoiceBuyerDocsResponsePayload:
+      type: object
+      properties:
+        order_id:
+          type: integer
+          format: int64
+        response:
+          $ref: '#/components/schemas/BuyerDocsResponsePayload'
+      title: InvoiceBuyerDocsResponsePayload
+    InvoiceActualLogisticsDetailsResponsePayload:
+      type: object
+      properties:
+        clearance_charges:
+          type: number
+        cost_sheet_doc_url:
+          type: string
+        custom_duty:
+          type: number
+        local_freight:
+          type: number
+        management_approval_doc_url:
+          type: string
+        sea_freight:
+          type: number
+        total_shipping_cost:
+          type: number
+        wh_charges:
+          type: number
+      title: InvoiceActualLogisticsDetailsResponsePayload
+    FactoryDocsResponsePayload:
+      type: object
+      properties:
+        distro_docs:
+          type: array
+          items:
+            type: string
+        factory_email_docs:
+          type: array
+          items:
+            type: string
+        factory_invoice_docs:
+          type: array
+          items:
+            type: string
+        invoice_docs:
+          type: array
+          items:
+            type: string
+        packing_list_docs:
+          type: array
+          items:
+            type: string
+        payment_docs:
+          type: array
+          items:
+            type: string
+        po_id:
+          type: integer
+          format: int64
+        po_information_docs:
+          type: array
+          items:
+            type: string
+      title: FactoryDocsResponsePayload
+    CreateFinalInvoiceListDocsRequestPayload:
+      type: object
+      properties:
+        actual_date:
+          type: integer
+          format: int64
+        courier_partner_name:
+          type: string
+        doc_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateFinalInvoiceDocsRequestPayload'
+        remark:
+          type: string
+        shipment_mode:
+          type: string
+        stage:
+          type: string
+        tracking_id:
+          type: string
+      title: CreateFinalInvoiceListDocsRequestPayload
+    CreateFinalInvoiceDocsRequestPayload:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: string
+        type:
+          type: string
+      title: CreateFinalInvoiceDocsRequestPayload
+    OrderInFinalInvoiceOrderDto:
+      type: object
+      properties:
+        buyer_payment_type:
+          type: string
+        currency:
+          type: string
+        current_amount:
+          type: number
+        factory_currency:
+          type: string
+        geniemode_entity_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        lead_data:
+          type: object
+        lead_id:
+          type: integer
+          format: int64
+        manufacturer:
+          $ref: '#/components/schemas/ManufacturerMiniResponsePayload'
+        order_margin:
+          $ref: '#/components/schemas/OrderMarginInFinalInvoiceOrderDto'
+        quantity:
+          type: integer
+          format: int64
+        sku_data:
+          type: object
+        sku_id:
+          type: string
+        total_amount:
+          type: number
+      title: OrderInFinalInvoiceOrderDto
+    InvoiceOrderPlannedLogisticsDetailsResponsePayload:
+      type: object
+      properties:
+        custom_duty:
+          type: number
+        logistics_cost:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+        planned_shipment_mode:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+      title: InvoiceOrderPlannedLogisticsDetailsResponsePayload
+    FinalInvoiceOrderResponsePayload:
+      type: object
+      properties:
+        amount:
+          type: number
+        id:
+          type: integer
+          format: int64
+        order:
+          $ref: '#/components/schemas/OrderInFinalInvoiceOrderDto'
+      title: FinalInvoiceOrderResponsePayload
+    OrderMarginInFinalInvoiceOrderDto:
+      type: object
+      properties:
+        buyer_shipment_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: OrderMarginInFinalInvoiceOrderDto
+    InvoiceGrnResponsePayload:
+      type: object
+      properties:
+        comment:
+          type: string
+        grn_doc_url:
+          type: string
+        grn_status:
+          type: string
+        pod_doc_url:
+          type: string
+      title: InvoiceGrnResponsePayload
+    FinalInvoiceResponsePayload:
+      type: object
+      properties:
+        currency:
+          type: string
+        currency_exchange_rate:
+          type: number
+        document_amount:
+          type: number
+        geniemode_entity:
+          $ref: '#/components/schemas/GeniemodeEntityDto'
+        id:
+          type: integer
+          format: int64
+        internal_invoice_no:
+          type: string
+        invoice:
+          $ref: '#/components/schemas/InvoiceInFinalInvoiceDto'
+        invoice_doc_url:
+          type: string
+        invoice_no:
+          type: string
+        invoice_orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/FinalInvoiceOrderResponsePayload'
+        raised_on_timestamp:
+          type: integer
+          format: int64
+        status:
+          type: string
+        status_change_date:
+          type: integer
+          format: int64
+        total_amount:
+          type: number
+        total_factory_amount:
+          type: number
+        type:
+          type: string
+      title: FinalInvoiceResponsePayload
+    OrderDetailBuyerPODocResponseDto:
+      type: object
+      properties:
+        buyer_doc:
+          $ref: '#/components/schemas/OrderDocDto'
+        buyer_po_id:
+          type: integer
+          format: int64
+        buyer_po_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+        po_type:
+          type: string
+      title: OrderDetailBuyerPODocResponseDto
+    CreateFinalInvoiceOrderRequestPayload:
+      type: object
+      properties:
+        amount:
+          type: number
+        factory_amount:
+          type: number
+        final_invoice_id:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+      title: CreateFinalInvoiceOrderRequestPayload
+    FinalInvoiceRecomputeRequestPayload:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: FinalInvoiceRecomputeRequestPayload
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload

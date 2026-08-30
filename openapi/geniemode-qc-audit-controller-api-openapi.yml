@@ -1,0 +1,383 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Qc Audit Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: qc-audit-controller
+  description: QC Audit Controller
+paths:
+  /api/v1/path/generic_qc_audit/{qcId}/audit:
+    get:
+      tags:
+      - qc-audit-controller
+      summary: getAudit
+      operationId: getAuditUsingGET
+      parameters:
+      - name: qcId
+        in: path
+        description: qcId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QcAuditDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - qc-audit-controller
+      summary: audit
+      operationId: auditUsingPOST
+      parameters:
+      - name: qcId
+        in: path
+        description: qcId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QcAuditDto'
+        description: qcAuditDto
+        required: true
+  /api/v1/path/generic_qc_audit/{qcId}/line/{qcLineValueId}/audit:
+    post:
+      tags:
+      - qc-audit-controller
+      summary: audit
+      operationId: auditUsingPOST_2
+      parameters:
+      - name: qcId
+        in: path
+        description: qcId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: qcLineValueId
+        in: path
+        description: qcLineValueId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QcAuditLineValueDto'
+        description: qcAuditLineValueDto
+        required: true
+  /api/v1/path/generic_qc_audit/{qcId}/sample/{qcSamplingItemId}/audit:
+    post:
+      tags:
+      - qc-audit-controller
+      summary: audit
+      operationId: auditUsingPOST_4
+      parameters:
+      - name: qcId
+        in: path
+        description: qcId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: qcSamplingItemId
+        in: path
+        description: qcSamplingItemId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QcAuditSampleDto'
+        description: qcAuditSampleDto
+        required: true
+  /api/v1/path/generic_qc_audit/{qcId}/samples-to-audit:
+    get:
+      tags:
+      - qc-audit-controller
+      summary: samplesToAudit
+      operationId: samplesToAuditUsingGET
+      parameters:
+      - name: qcId
+        in: path
+        description: qcId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int64
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/qc-audit/{qcId}/audit:
+    get:
+      tags:
+      - qc-audit-controller
+      summary: getAudit
+      operationId: getAuditUsingGET_1
+      parameters:
+      - name: qcId
+        in: path
+        description: qcId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QcAuditDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - qc-audit-controller
+      summary: audit
+      operationId: auditUsingPOST_1
+      parameters:
+      - name: qcId
+        in: path
+        description: qcId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QcAuditDto'
+        description: qcAuditDto
+        required: true
+  /api/v1/path/qc-audit/{qcId}/line/{qcLineValueId}/audit:
+    post:
+      tags:
+      - qc-audit-controller
+      summary: audit
+      operationId: auditUsingPOST_3
+      parameters:
+      - name: qcId
+        in: path
+        description: qcId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: qcLineValueId
+        in: path
+        description: qcLineValueId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QcAuditLineValueDto'
+        description: qcAuditLineValueDto
+        required: true
+  /api/v1/path/qc-audit/{qcId}/sample/{qcSamplingItemId}/audit:
+    post:
+      tags:
+      - qc-audit-controller
+      summary: audit
+      operationId: auditUsingPOST_5
+      parameters:
+      - name: qcId
+        in: path
+        description: qcId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: qcSamplingItemId
+        in: path
+        description: qcSamplingItemId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QcAuditSampleDto'
+        description: qcAuditSampleDto
+        required: true
+  /api/v1/path/qc-audit/{qcId}/samples-to-audit:
+    get:
+      tags:
+      - qc-audit-controller
+      summary: samplesToAudit
+      operationId: samplesToAuditUsingGET_1
+      parameters:
+      - name: qcId
+        in: path
+        description: qcId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int64
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    QcAuditSampleDto:
+      type: object
+      properties:
+        data:
+          type: object
+        id:
+          type: integer
+          format: int64
+        qc_sampling_item_id:
+          type: integer
+          format: int64
+        reason:
+          type: string
+        status:
+          type: boolean
+      title: QcAuditSampleDto
+    QcAuditLineValueDto:
+      type: object
+      properties:
+        data:
+          type: object
+        id:
+          type: integer
+          format: int64
+        qc_line_value_id:
+          type: integer
+          format: int64
+        reason:
+          type: string
+        status:
+          type: boolean
+      title: QcAuditLineValueDto
+    QcAuditDto:
+      type: object
+      properties:
+        audit_status:
+          type: string
+        audit_ts:
+          type: integer
+          format: int64
+        auditor_id:
+          type: integer
+          format: int64
+        data:
+          type: object
+        id:
+          type: integer
+          format: int64
+        qc_audit_line_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcAuditLineValueDto'
+        qc_audit_samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcAuditSampleDto'
+        qc_id:
+          type: integer
+          format: int64
+        remark:
+          type: string
+      title: QcAuditDto

@@ -1,0 +1,658 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Courier Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: courier-controller
+  description: Courier Controller
+paths:
+  /api/v1/courier:
+    get:
+      tags:
+      - courier-controller
+      summary: index
+      operationId: indexUsingGET_4
+      parameters:
+      - name: addressIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: costTimestampFrom
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: costTimestampTo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: dispatchedOnFrom
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: dispatchedOnTo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: fromEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: fromEntityType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: geniemodeEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: issuanceIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: requestedByIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: requestedOnFrom
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: requestedOnTo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: statuses
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: toEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: toEntityType
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - courier-controller
+      summary: create
+      operationId: createUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CourierDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourierDto'
+        description: courierRequestDto
+        required: true
+  /api/v1/courier/cancel/{id}:
+    put:
+      tags:
+      - courier-controller
+      summary: delete
+      operationId: deleteUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourierCancellationRequestPayload'
+        description: payload
+        required: true
+  /api/v1/courier/getVpBudget:
+    get:
+      tags:
+      - courier-controller
+      summary: getCourierBudgetManager
+      operationId: getCourierBudgetManagerUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CourierBudgetDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/courier/{courierId}/getVpBudget:
+    get:
+      tags:
+      - courier-controller
+      summary: getCourierBudgetManager
+      operationId: getCourierBudgetManagerUsingGET_1
+      parameters:
+      - name: courierId
+        in: path
+        description: courierId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CourierBudgetDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/courier/{id}:
+    get:
+      tags:
+      - courier-controller
+      summary: get
+      operationId: getUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CourierDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - courier-controller
+      summary: update
+      operationId: updateUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CourierDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourierDto'
+        description: courierRequestDto
+        required: true
+    delete:
+      tags:
+      - courier-controller
+      summary: delete
+      operationId: deleteUsingDELETE_2
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+  /api/v1/courier/{id}/sendMailToLead:
+    put:
+      tags:
+      - courier-controller
+      summary: sendMailToLead
+      operationId: sendMailToLeadUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: boolean
+  /api/v1/courier/{id}/sendMailToRM:
+    put:
+      tags:
+      - courier-controller
+      summary: sendMailToRM
+      operationId: sendMailToRMUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CourierDto'
+components:
+  schemas:
+    UMSUserResponsePayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        created_by:
+          type: string
+        first_name:
+          type: string
+        group_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        whatsapp_opt_in:
+          type: boolean
+      title: UMSUserResponsePayload
+    CourierCancellationRequestPayload:
+      type: object
+      properties:
+        reason_for_cancellation:
+          type: string
+      title: CourierCancellationRequestPayload
+    CourierItemDto:
+      type: object
+      properties:
+        cost_per_piece:
+          type: number
+        courier_item_type:
+          type: string
+        description:
+          type: string
+        hsn_code:
+          type: string
+        id:
+          type: integer
+          format: int64
+        item:
+          type: object
+        item_id:
+          type: integer
+          format: int64
+        no_of_pieces:
+          type: integer
+          format: int64
+        sub_item:
+          type: object
+        sub_item_id:
+          type: integer
+          format: int64
+        total_item_cost:
+          type: number
+      title: CourierItemDto
+    CourierBoxDto:
+      type: object
+      properties:
+        courier_breadth:
+          type: number
+        courier_height:
+          type: number
+        courier_length:
+          type: number
+        id:
+          type: integer
+          format: int64
+        weight:
+          type: number
+        weight_uom:
+          type: string
+      title: CourierBoxDto
+    CourierDocDto:
+      type: object
+      properties:
+        doc_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        url:
+          type: string
+      title: CourierDocDto
+    CourierDto:
+      type: object
+      properties:
+        awb:
+          type: string
+        booked_via:
+          type: string
+        boxes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourierBoxDto'
+        cost:
+          type: number
+        cost_borne_by:
+          type: string
+        cost_borne_by_factory:
+          type: object
+        cost_borne_by_factory_id:
+          type: integer
+          format: int64
+        cost_currency:
+          type: string
+        cost_receipt_url:
+          type: string
+        cost_timestamp:
+          type: integer
+          format: int64
+        courier_item_group:
+          type: string
+        courier_items_currency:
+          type: string
+        courier_packaging_type:
+          type: string
+        courier_partner:
+          $ref: '#/components/schemas/CourierPartnerDto'
+        created_at:
+          type: string
+          format: date-time
+        dispatched_by:
+          type: object
+        dispatched_by_id:
+          type: integer
+          format: int64
+        dispatched_on:
+          type: integer
+          format: int64
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourierDocDto'
+        eta:
+          type: integer
+          format: int64
+        from:
+          type: object
+        from_address:
+          type: object
+        from_address_id:
+          type: integer
+          format: int64
+        from_id:
+          type: integer
+          format: int64
+        from_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        is_international:
+          type: boolean
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourierItemDto'
+        items_total_cost:
+          type: number
+        made_in_india:
+          type: boolean
+        port_of_loading:
+          type: string
+        reason_for_cancellation:
+          type: string
+        receiver_country_code:
+          type: string
+        receiver_email:
+          type: string
+        receiver_name:
+          type: string
+        receiver_phone_number:
+          type: string
+        remarks:
+          type: string
+        requested_by:
+          type: object
+        requested_by_id:
+          type: integer
+          format: int64
+        requested_on:
+          type: integer
+          format: int64
+        send_mail_to_buyer:
+          type: boolean
+        sender_country_code:
+          type: string
+        sender_name:
+          type: string
+        sender_phone_number:
+          type: string
+        shipment_mode:
+          type: string
+          enum:
+          - Air
+          - Courier
+          - Land
+          - Sea
+        slip_doc_url:
+          type: string
+        status:
+          type: string
+        to:
+          type: object
+        to_address:
+          type: object
+        to_address_id:
+          type: integer
+          format: int64
+        to_id:
+          type: integer
+          format: int64
+        to_type:
+          type: string
+        total_no_of_pieces:
+          type: integer
+          format: int64
+        tracking_link:
+          type: string
+      title: CourierDto
+    CourierBudgetDto:
+      type: object
+      properties:
+        budget:
+          type: number
+        current_month_spend:
+          type: number
+        default_budget:
+          type: number
+        id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        vp:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+      title: CourierBudgetDto
+    CourierPartnerDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: CourierPartnerDto

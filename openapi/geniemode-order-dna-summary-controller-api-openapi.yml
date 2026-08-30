@@ -1,0 +1,102 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Order Dna Summary Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: order-dna-summary-controller
+  description: Order Dna Summary Controller
+paths:
+  /api/v1/order-dna-summary/{orderId}:
+    get:
+      tags:
+      - order-dna-summary-controller
+      summary: order_dna_summary
+      operationId: order_dna_summaryUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderDnaSummaryResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: Person
+    OrderDnaSummaryResponse:
+      type: object
+      properties:
+        logistics:
+          $ref: '#/components/schemas/Person'
+        margin:
+          $ref: '#/components/schemas/Margin'
+        ops:
+          $ref: '#/components/schemas/Person'
+        order_id:
+          type: integer
+          format: int64
+        qc:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcSummary'
+        rm:
+          $ref: '#/components/schemas/Person'
+      title: OrderDnaSummaryResponse
+    Margin:
+      type: object
+      properties:
+        margin:
+          type: number
+        model_type:
+          type: string
+        order_cost:
+          type: number
+        order_revenue:
+          type: number
+      title: Margin
+    QcSummary:
+      type: object
+      properties:
+        assigned_by:
+          $ref: '#/components/schemas/Person'
+        completion_date:
+          type: integer
+          format: int64
+        qc_date:
+          type: integer
+          format: int64
+        status:
+          type: string
+        type:
+          type: string
+      title: QcSummary

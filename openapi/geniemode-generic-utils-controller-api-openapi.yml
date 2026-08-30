@@ -1,0 +1,578 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Generic Utils Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: generic-utils-controller
+  description: Generic Utils Controller
+paths:
+  /api/gen/SendApprovalEmail:
+    post:
+      tags:
+      - generic-utils-controller
+      summary: send_approval_email
+      operationId: send_approval_emailUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendApprovalEmailRequestPayload'
+        description: requestPayload
+        required: true
+  /api/gen/VpOfRm:
+    get:
+      tags:
+      - generic-utils-controller
+      summary: getVpForAllRm
+      operationId: getVpForAllRmUsingGET
+      parameters:
+      - name: rmId
+        in: query
+        description: rmId
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VpRmDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/gen/allRoles:
+    get:
+      tags:
+      - generic-utils-controller
+      summary: index
+      operationId: indexUsingGET_9
+      parameters:
+      - name: clientIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: count
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: financeImpact
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: financeStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: leadIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: rmIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/gen/createDemo:
+    post:
+      tags:
+      - generic-utils-controller
+      summary: createDemo
+      operationId: createDemoUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDemoResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDemoRequest'
+        description: createDemoRequest
+        required: true
+  /api/gen/getTncDetails:
+    post:
+      tags:
+      - generic-utils-controller
+      summary: get_tnc
+      operationId: get_tncUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTncDetailResponsePayload'
+  /api/gen/tncAccepted:
+    post:
+      tags:
+      - generic-utils-controller
+      summary: tnc_accepted
+      operationId: tnc_acceptedUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TncAcceptedResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TncAcceptedRequestPayload'
+        description: requestPayload
+        required: true
+  /api/gen/usersUnderUser:
+    get:
+      tags:
+      - generic-utils-controller
+      summary: usersUnderUser
+      operationId: usersUnderUserUsingGET
+      parameters:
+      - name: allRoleList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: ignoreRmFlag
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: roleList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: vpList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListUserResponseUmsPayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/gen/usersUnderUser/paginated:
+    get:
+      tags:
+      - generic-utils-controller
+      summary: usersUnderUserPaginated
+      operationId: usersUnderUserPaginatedUsingGET
+      parameters:
+      - name: allRoleList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: ignoreRmFlag
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: roleList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: vpList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/gen/usersUnderUserPaginated:
+    get:
+      tags:
+      - generic-utils-controller
+      summary: usersUnderUserPaginatedOld
+      operationId: usersUnderUserPaginatedOldUsingGET
+      parameters:
+      - name: allRoleList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: ignoreRmFlag
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: roleList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: vpList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/gen/usersUnderVp:
+    get:
+      tags:
+      - generic-utils-controller
+      summary: usersUnderVp
+      operationId: usersUnderVpUsingGET
+      parameters:
+      - name: allRoleList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: ignoreRmFlag
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: roleList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: vpList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/gen/usersWithRole:
+    get:
+      tags:
+      - generic-utils-controller
+      summary: usersWithRole
+      operationId: usersWithRoleUsingGET
+      parameters:
+      - name: allRoleList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: ignoreRmFlag
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: roleList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: vpList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    CreateDemoResponse:
+      type: object
+      properties:
+        token:
+          type: string
+      title: CreateDemoResponse
+    GetTncDetailResponsePayload:
+      type: object
+      properties:
+        company_address:
+          type: string
+        company_name:
+          type: string
+      title: GetTncDetailResponsePayload
+    TncAcceptedResponsePayload:
+      type: object
+      properties:
+        msg:
+          type: string
+      title: TncAcceptedResponsePayload
+    SendApprovalEmailRequestPayload:
+      type: object
+      properties:
+        status:
+          type: boolean
+      title: SendApprovalEmailRequestPayload
+    CreateDemoRequest:
+      type: object
+      properties:
+        client_id:
+          type: integer
+          format: int64
+        for_client:
+          type: boolean
+        for_manufacturer:
+          type: boolean
+      title: CreateDemoRequest
+    VpRmDto:
+      type: object
+      properties:
+        rm_id:
+          type: integer
+          format: int64
+        rm_name:
+          type: string
+        vp_id:
+          type: integer
+          format: int64
+        vp_name:
+          type: string
+      title: VpRmDto
+    TncAcceptedRequestPayload:
+      type: object
+      properties:
+        manufacturer_id:
+          type: integer
+          format: int64
+      title: TncAcceptedRequestPayload
+    ListUserResponseUmsPayload:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/ListUserResponseUmsPayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+      title: ListUserResponseUmsPayload

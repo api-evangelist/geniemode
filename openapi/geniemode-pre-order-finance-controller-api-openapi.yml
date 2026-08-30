@@ -1,0 +1,469 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Pre Order Finance Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: pre-order-finance-controller
+  description: Pre Order Finance Controller
+paths:
+  /api/v1/pre-orders/finance:
+    get:
+      tags:
+      - pre-order-finance-controller
+      summary: index
+      operationId: indexUsingGET_23
+      parameters:
+      - name: orderCreated
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: rmId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - pre-order-finance-controller
+      summary: create
+      operationId: createUsingPOST_12
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PreOrderDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreOrderDto'
+        description: dto
+        required: true
+    delete:
+      tags:
+      - pre-order-finance-controller
+      summary: deleteMultiple
+      operationId: deleteMultipleUsingDELETE
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePreOrderDto'
+        description: requestPayload
+        required: true
+  /api/v1/pre-orders/finance/order-mapping/{orderId}:
+    get:
+      tags:
+      - pre-order-finance-controller
+      summary: findPreOrderToOrderMapping
+      operationId: findPreOrderToOrderMappingUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderPreOrderAggregateInterface'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/pre-orders/finance/{id}:
+    get:
+      tags:
+      - pre-order-finance-controller
+      summary: getById
+      operationId: getByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PreOrderDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - pre-order-finance-controller
+      summary: update
+      operationId: updateUsingPUT_9
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PreOrderDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreOrderDto'
+        description: dto
+        required: true
+    delete:
+      tags:
+      - pre-order-finance-controller
+      summary: delete
+      operationId: deleteUsingDELETE_8
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/v1/pre-orders/finance/{id}/free-pos:
+    put:
+      tags:
+      - pre-order-finance-controller
+      summary: freePos
+      operationId: freePosUsingPUT
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PreOrderDto'
+components:
+  schemas:
+    PreOrderToOrderMappingDto:
+      type: object
+      properties:
+        currency:
+          type: string
+        currency_price:
+          type: number
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        sku:
+          type: string
+        style_code:
+          type: string
+      title: PreOrderToOrderMappingDto
+    PoTypeDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: PoTypeDto
+    PreOrderPoDto:
+      type: object
+      properties:
+        buyer_handover_date:
+          type: integer
+          format: int64
+        buyer_po_no:
+          type: string
+        buyer_shipment_type:
+          type: string
+        created_at:
+          type: integer
+          format: int64
+        created_by:
+          type: string
+        currency:
+          type: string
+        currency_price:
+          type: number
+        factory_handover_date:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        po_date:
+          type: integer
+          format: int64
+        po_doc_url:
+          type: string
+        po_type:
+          $ref: '#/components/schemas/PoTypeDto'
+        po_type_id:
+          type: integer
+          format: int64
+        pre_order_po_styles:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreOrderPoStyleDto'
+        quantity:
+          type: integer
+          format: int64
+      title: PreOrderPoDto
+    OrderPreOrderAggregateInterface:
+      type: object
+      properties:
+        order_currency:
+          type: string
+        order_currency_price:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+        order_quantity:
+          type: integer
+          format: int64
+        order_sku:
+          type: string
+        order_style_code:
+          type: string
+        pre_order_currency:
+          type: string
+        pre_order_currency_price:
+          type: number
+        pre_order_quantity:
+          type: integer
+          format: int64
+        pre_order_sku:
+          type: string
+        pre_order_style_code:
+          type: string
+      title: OrderPreOrderAggregateInterface
+    PreOrderPoMappingDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        pre_order_po:
+          $ref: '#/components/schemas/PreOrderPoDto'
+      title: PreOrderPoMappingDto
+    UMSUserResponseDTO:
+      type: object
+      properties:
+        active:
+          type: boolean
+        country_code:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_modified_at:
+          type: string
+          format: date-time
+        last_name:
+          type: string
+        manager_username:
+          type: string
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+      title: UMSUserResponseDTO
+    DeletePreOrderDto:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: DeletePreOrderDto
+    PreOrderPoStyleVariantDto:
+      type: object
+      properties:
+        color:
+          type: string
+        id:
+          type: integer
+          format: int64
+        price:
+          type: number
+        quantity:
+          type: integer
+          format: int64
+        size:
+          type: string
+      title: PreOrderPoStyleVariantDto
+    PreOrderPoStyleDto:
+      type: object
+      properties:
+        currency_price:
+          type: number
+        id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        style_code:
+          type: string
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreOrderPoStyleVariantDto'
+      title: PreOrderPoStyleDto
+    BusinessOwnerDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: BusinessOwnerDto
+    PreOrderDto:
+      type: object
+      properties:
+        assignee:
+          type: integer
+          format: int64
+        assignee_data:
+          $ref: '#/components/schemas/UMSUserResponseDTO'
+        business_owner:
+          $ref: '#/components/schemas/BusinessOwnerDto'
+        business_owner_id:
+          type: integer
+          format: int64
+        buyer_days:
+          type: integer
+          format: int64
+        buyer_handover_date:
+          type: integer
+          format: int64
+        buyer_payment_type:
+          type: string
+        confirmation_date:
+          type: integer
+          format: int64
+        created_at:
+          type: integer
+          format: int64
+        created_by:
+          type: string
+        currency_conversion_date:
+          type: integer
+          format: int64
+        currency_conversion_rate:
+          type: number
+        factory_handover_date:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        model_type:
+          type: string
+        name:
+          type: string
+        ops_assignee:
+          type: integer
+          format: int64
+        ops_assignee_data:
+          $ref: '#/components/schemas/UMSUserResponseDTO'
+        order_created:
+          type: boolean
+        pre_order_po_mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreOrderPoMappingDto'
+        pre_order_to_order_mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreOrderToOrderMappingDto'
+      title: PreOrderDto

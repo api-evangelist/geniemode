@@ -1,0 +1,674 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Designer Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: designer-controller
+  description: Designer Controller
+paths:
+  /api/v1/design-attribution/excel:
+    get:
+      tags:
+      - designer-controller
+      summary: excel
+      operationId: excelUsingGET
+      parameters:
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: designHeadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: fromDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: sampleAvailable
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: teamUserIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ByteArrayResource'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/design-attribution/excel-base64:
+    get:
+      tags:
+      - designer-controller
+      summary: excelBase64
+      operationId: excelBase64UsingGET
+      parameters:
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: designHeadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: fromDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: sampleAvailable
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: teamUserIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/design-attribution/excel-query:
+    get:
+      tags:
+      - designer-controller
+      summary: excelQuery
+      operationId: excelQueryUsingGET
+      parameters:
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: designHeadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: fromDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: sampleAvailable
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: teamUserIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/design-attribution/get-count:
+    get:
+      tags:
+      - designer-controller
+      summary: getCount
+      operationId: getCountUsingGET
+      parameters:
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: designHeadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: fromDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: sampleAvailable
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: teamUserIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DesignAttributionCountDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/design-attribution/products:
+    get:
+      tags:
+      - designer-controller
+      summary: getProducts
+      operationId: getProductsUsingGET
+      parameters:
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: designHeadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: fromDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: sampleAvailable
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: teamUserIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/design-attribution/products/{skuId}/stats:
+    get:
+      tags:
+      - designer-controller
+      summary: getProductStats
+      operationId: getProductStatsUsingGET
+      parameters:
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: designHeadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: fromDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: sampleAvailable
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: skuId
+        in: path
+        description: skuId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: teamUserIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    ByteArrayResource:
+      type: object
+      properties:
+        byteArray:
+          type: string
+          format: byte
+        description:
+          type: string
+        file:
+          type: string
+          format: binary
+        filename:
+          type: string
+        inputStream:
+          $ref: '#/components/schemas/InputStream'
+        open:
+          type: boolean
+        readable:
+          type: boolean
+        uri:
+          type: string
+          format: uri
+        url:
+          type: string
+          format: url
+      title: ByteArrayResource
+    DesignAttributionCountDto:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+        key:
+          type: string
+        label:
+          type: string
+      title: DesignAttributionCountDto
+    InputStream:
+      type: object
+      title: InputStream

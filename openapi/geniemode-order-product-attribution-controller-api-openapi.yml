@@ -1,0 +1,527 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Order Product Attribution Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: order-product-attribution-controller
+  description: Order Product Attribution Controller
+paths:
+  /api/v1/order/product/attribution/excel-query:
+    get:
+      tags:
+      - order-product-attribution-controller
+      summary: index
+      operationId: indexUsingGET_20
+      parameters:
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: attributionAttached
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: attributionStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: businessOwnerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: confirmationDateFrom
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: confirmationDateSort
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: confirmationDateTo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: createdBy
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: documentsAttached
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: financialStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: orderId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: pendingDaysMax
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: pendingDaysMin
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: sources
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: styleCode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: tab
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: types
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/order/product/attribution/index:
+    get:
+      tags:
+      - order-product-attribution-controller
+      summary: index
+      operationId: indexUsingGET_21
+      parameters:
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: attributionAttached
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: attributionStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: businessOwnerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: confirmationDateFrom
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: confirmationDateSort
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: confirmationDateTo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: createdBy
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: documentsAttached
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: financialStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: orderId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: pendingDaysMax
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: pendingDaysMin
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: sources
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: styleCode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: tab
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: types
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/order/product/attribution/orders:
+    get:
+      tags:
+      - order-product-attribution-controller
+      summary: orders
+      operationId: ordersUsingGET_2
+      parameters:
+      - name: sku
+        in: query
+        description: sku
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/order/product/attribution/tab-counts:
+    get:
+      tags:
+      - order-product-attribution-controller
+      summary: tabCounts
+      operationId: tabCountsUsingGET_1
+      parameters:
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: attributionAttached
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: attributionStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: businessOwnerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: confirmationDateFrom
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: confirmationDateSort
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: confirmationDateTo
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: createdBy
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: documentsAttached
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: financialStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: orderId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: pendingDaysMax
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: pendingDaysMin
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: sources
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: styleCode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: tab
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: types
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributionTabCountsResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    AttributionTabCountsResponsePayload:
+      type: object
+      properties:
+        all:
+          type: integer
+          format: int64
+        approved:
+          type: integer
+          format: int64
+        audit_pending:
+          type: integer
+          format: int64
+        document_pending:
+          type: integer
+          format: int64
+        rejected:
+          type: integer
+          format: int64
+      title: AttributionTabCountsResponsePayload

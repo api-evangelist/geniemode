@@ -1,0 +1,51 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Indexer Service Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: indexer-service-controller
+  description: Indexer Service Controller
+paths:
+  /api/indexer-service/generate-doc/es/{entityType}/{entityId}:
+    get:
+      tags:
+      - indexer-service-controller
+      summary: esReindexProduct
+      operationId: esReindexProductUsingGET
+      parameters:
+      - name: entityId
+        in: path
+        description: entityId
+        required: true
+        schema:
+          type: string
+      - name: entityType
+        in: path
+        description: entityType
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message

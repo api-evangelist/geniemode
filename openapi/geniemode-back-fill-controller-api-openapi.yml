@@ -1,0 +1,129 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Back Fill Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: back-fill-controller
+  description: Back Fill Controller
+paths:
+  /api/v1/path/backfill/migrate/shipment-data/shipment-hop-data:
+    put:
+      tags:
+      - back-fill-controller
+      summary: migrateShipmentDataToHops
+      operationId: migrateShipmentDataToHopsUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/path/backfill/order/address:
+    put:
+      tags:
+      - back-fill-controller
+      summary: backFillAddress
+      operationId: backFillAddressUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/path/backfill/order/bill/address:
+    put:
+      tags:
+      - back-fill-controller
+      summary: backFillOrderBillAddress
+      operationId: backFillOrderBillAddressUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/path/backfill/order/client/assignee:
+    put:
+      tags:
+      - back-fill-controller
+      summary: backfillClientAssignee
+      operationId: backfillClientAssigneeUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/path/backfill/order/manufacturer/assignee:
+    put:
+      tags:
+      - back-fill-controller
+      summary: backfillManufacturerAssignee
+      operationId: backfillManufacturerAssigneeUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/path/backfill/pre-order/variants:
+    put:
+      tags:
+      - back-fill-controller
+      summary: backfillPreOrderVariants
+      operationId: backfillPreOrderVariantsUsingPUT
+      parameters:
+      - name: afterId
+        in: query
+        description: afterId
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 0
+      - name: limit
+        in: query
+        description: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+  /api/v1/path/backfill/refresh/shipment/hops:
+    put:
+      tags:
+      - back-fill-controller
+      summary: refreshHops
+      operationId: refreshHopsUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string

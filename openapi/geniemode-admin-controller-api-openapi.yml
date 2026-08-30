@@ -1,0 +1,1662 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Admin Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: admin-controller
+  description: Admin Controller
+paths:
+  /api/v1/admin/GetDashboardData/{userId}:
+    post:
+      tags:
+      - admin-controller
+      summary: getDashboardData
+      operationId: getDashboardDataUsingPOST
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardDataDto'
+  /api/v1/admin/auto-approve/order/risk:
+    put:
+      tags:
+      - admin-controller
+      summary: autoApproveOrderRisk
+      operationId: autoApproveOrderRiskUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/admin/buyerEngagementData:
+    post:
+      tags:
+      - admin-controller
+      summary: getEngagementData
+      operationId: getEngagementDataUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EngagementDataRequestPayload'
+        description: payload
+        required: true
+  /api/v1/admin/change-status/{orderId}/{status}:
+    get:
+      tags:
+      - admin-controller
+      summary: changeStatus
+      operationId: changeStatusUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: status
+        in: path
+        description: status
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/admin/check/risk/team/approval/{orderId}:
+    put:
+      tags:
+      - admin-controller
+      summary: createQcOldOrders
+      operationId: createQcOldOrdersUsingPUT
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /api/v1/admin/computeAuditStatus:
+    post:
+      tags:
+      - admin-controller
+      summary: createQc
+      operationId: createQcUsingPOST_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComputeTnaStatusRequestPayload'
+        description: payload
+        required: true
+  /api/v1/admin/courier-budget/reset:
+    post:
+      tags:
+      - admin-controller
+      summary: courierBudgetReset
+      operationId: courierBudgetResetUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/admin/createQcs:
+    post:
+      tags:
+      - admin-controller
+      summary: createQc
+      operationId: createQcUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenForcedCompleteOrdersRequestPayload'
+        description: payload
+        required: true
+  /api/v1/admin/dashboard-mv/refresh:
+    post:
+      tags:
+      - admin-controller
+      summary: refreshLogisticsDashboardMv
+      operationId: refreshLogisticsDashboardMvUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+  /api/v1/admin/encryptAndSaveMissingQcs:
+    put:
+      tags:
+      - admin-controller
+      summary: encryptAndSaveMissingQcs
+      operationId: encryptAndSaveMissingQcsUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/admin/factoryEngagementData:
+    post:
+      tags:
+      - admin-controller
+      summary: factoryEngagementData
+      operationId: factoryEngagementDataUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EngagementDataRequestPayload'
+        description: payload
+        required: true
+  /api/v1/admin/fix/invoice/currency-conversion:
+    put:
+      tags:
+      - admin-controller
+      summary: fixInvoiceCurrencyConversion
+      operationId: fixInvoiceCurrencyConversionUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FixInvoiceCurrencyConversionRequestPayload'
+        description: payload
+        required: true
+  /api/v1/admin/forceCompleteOrders:
+    post:
+      tags:
+      - admin-controller
+      summary: forceCompleteOrders
+      operationId: forceCompleteOrdersUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForceCompleteRequestPayload'
+        description: payload
+        required: true
+  /api/v1/admin/getLeadsFromOrderRms:
+    get:
+      tags:
+      - admin-controller
+      summary: getLeadsFromOrderRms
+      operationId: getLeadsFromOrderRmsUsingGET
+      parameters:
+      - name: orderRmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int64
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/admin/getOrderEventData/{orderId}:
+    put:
+      tags:
+      - admin-controller
+      summary: getOrderEventData
+      operationId: getOrderEventDataUsingPUT
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderDetailForEvent'
+  /api/v1/admin/getOrderForNotes/{orderId}:
+    get:
+      tags:
+      - admin-controller
+      summary: getOrderForNotes
+      operationId: getOrderForNotesUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrderForNotesResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/admin/lock-shipment/{shipmentId}:
+    put:
+      tags:
+      - admin-controller
+      summary: lockShipment
+      operationId: lockShipmentUsingPUT
+      parameters:
+      - name: shipmentId
+        in: path
+        description: shipmentId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/admin/manufacturer/delete:
+    put:
+      tags:
+      - admin-controller
+      summary: deleteManufacturer
+      operationId: deleteManufacturerUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerGaId'
+        description: manufacturerGaId
+        required: true
+  /api/v1/admin/manufacturer/set/rating/parameters:
+    put:
+      tags:
+      - admin-controller
+      summary: setManufactureRatingParameters
+      operationId: setManufactureRatingParametersUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/admin/mark-invoice-payment-complete:
+    put:
+      tags:
+      - admin-controller
+      summary: markInvoicePaymentComplete
+      operationId: markInvoicePaymentCompleteUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/admin/migrateBuyerPoDocs:
+    post:
+      tags:
+      - admin-controller
+      summary: migrateBuyerPoDocs
+      operationId: migrateBuyerPoDocsUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/admin/openForcedCompleteOrders:
+    put:
+      tags:
+      - admin-controller
+      summary: openForcedCompleteOrders
+      operationId: openForcedCompleteOrdersUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenForcedCompleteOrdersRequestPayload'
+        description: payload
+        required: true
+  /api/v1/admin/order-status-history/explain:
+    post:
+      tags:
+      - admin-controller
+      summary: reexplainOrderStatusHistory
+      operationId: reexplainOrderStatusHistoryUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExplainRowsRequestPayload'
+        description: req
+        required: true
+  /api/v1/admin/order/GetAllOrdersWithoutHierarchy:
+    get:
+      tags:
+      - admin-controller
+      summary: index_light
+      operationId: index_lightUsingGET
+      parameters:
+      - name: approvalStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: assigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: businessOwnerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: buyerExFactoryEndDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: buyerExFactoryStartDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: confirmationDateEndDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: confirmationDateStartDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: draftOrders
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: fieldName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filters
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: financeApprovedOnce
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: financialStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: forPo
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: fromDb
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: getDataFor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: havingShipmentsOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: inventoryCreated
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: modelTypes
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: opsAssigneeIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: parentOrderOnly
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: object
+      - name: skipList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: typeOfDelivery
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/admin/order/backfill/all:
+    put:
+      tags:
+      - admin-controller
+      summary: backFillVariants
+      operationId: backFillVariantsUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackfillVariantResponsePayload'
+  /api/v1/admin/order/backfill/fixIdentifier:
+    put:
+      tags:
+      - admin-controller
+      summary: fixIdentifier
+      operationId: fixIdentifierUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FixVariantsIdentifierRequestPayload'
+        description: fixVariantsIdentifierRequestPayload
+        required: true
+  /api/v1/admin/order/get-shipments-in-forwarder-quotation/list:
+    get:
+      tags:
+      - admin-controller
+      summary: getShipmentInForwarderQuotationList
+      operationId: getShipmentInForwarderQuotationListUsingGET
+      parameters:
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ShipmentInForwarderQuotationResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/admin/order/get-shipments-in-forwarder-quotation/page:
+    get:
+      tags:
+      - admin-controller
+      summary: getShipmentInForwarderQuotationPage
+      operationId: getShipmentInForwarderQuotationPageUsingGET
+      parameters:
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/admin/order/get-sku-orders:
+    get:
+      tags:
+      - admin-controller
+      summary: getSkuOrders
+      operationId: getSkuOrdersUsingGET
+      parameters:
+      - name: sku
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderDetailMinimalDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/admin/order/{orderId}/eta-date:
+    get:
+      tags:
+      - admin-controller
+      summary: getOrderEtaDate
+      operationId: getOrderEtaDateUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                format: date-time
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/admin/order/{orderId}/eta-epoch:
+    get:
+      tags:
+      - admin-controller
+      summary: getOrderEtaEpoch
+      operationId: getOrderEtaEpochUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/admin/propagate/variant/prices:
+    put:
+      tags:
+      - admin-controller
+      summary: propagateVariantPrices
+      operationId: propagateVariantPricesUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropagateVariantPricesRequestPayload'
+        description: payload
+        required: true
+  /api/v1/admin/system-config:
+    get:
+      tags:
+      - admin-controller
+      summary: getSystemConfig
+      operationId: getSystemConfigUsingGET
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: key
+        in: query
+        description: key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemConfig'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - admin-controller
+      summary: upsertSystemConfig
+      operationId: upsertSystemConfigUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemConfig'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        description: body
+        required: true
+  /api/v1/admin/test/{orderId}:
+    get:
+      tags:
+      - admin-controller
+      summary: test
+      operationId: testUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/admin/unlock-invoice/{invoiceId}:
+    put:
+      tags:
+      - admin-controller
+      summary: unlockInvoice
+      operationId: unlockInvoiceUsingPUT
+      parameters:
+      - name: invoiceId
+        in: path
+        description: invoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/admin/unlock-shipment/{shipmentId}:
+    put:
+      tags:
+      - admin-controller
+      summary: unlockShipment
+      operationId: unlockShipmentUsingPUT
+      parameters:
+      - name: shipmentId
+        in: path
+        description: shipmentId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/admin/unzipAndUpdatePos:
+    put:
+      tags:
+      - admin-controller
+      summary: unzipAndUpdatePos
+      operationId: unzipAndUpdatePosUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnzipAndUpdatePosRequestPayload'
+        description: payload
+        required: true
+  /api/v1/admin/user/{userId}/{type}/open-count:
+    get:
+      tags:
+      - admin-controller
+      summary: getUserOpenOrderCount
+      operationId: getUserOpenOrderCountUsingGET
+      parameters:
+      - name: type
+        in: path
+        description: type
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    ExplainRowsRequestPayload:
+      type: object
+      properties:
+        force_overwrite:
+          type: boolean
+        order_id:
+          type: integer
+          format: int64
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        order_status_history_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        use_ai:
+          type: boolean
+        use_queue:
+          type: boolean
+      title: ExplainRowsRequestPayload
+    BrandVpDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        vp_email:
+          type: string
+        vp_id:
+          type: integer
+          format: int64
+        vp_name:
+          type: string
+      title: BrandVpDto
+    OrderDetailForEvent:
+      type: object
+      properties:
+        factory:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        last_finance_approver:
+          type: string
+        lead_data:
+          $ref: '#/components/schemas/LeadPageDTO'
+        manufacturer:
+          $ref: '#/components/schemas/ManufacturerDetailsDTO'
+        order_id:
+          type: integer
+          format: int64
+        rm:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        rm_ops:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        sku:
+          type: string
+        style_code:
+          type: string
+      title: OrderDetailForEvent
+    ShipmentInForwarderQuotationResponse:
+      type: object
+      properties:
+        ex_factory_date:
+          type: integer
+          format: int64
+        factory_invoice_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+        manufacturer_name:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        port_of_discharge:
+          type: string
+        port_of_loading:
+          type: string
+      title: ShipmentInForwarderQuotationResponse
+    LeadGenerationResponse:
+      type: object
+      properties:
+        brand:
+          $ref: '#/components/schemas/BrandResponse'
+        client_id:
+          type: integer
+          format: int64
+        company:
+          $ref: '#/components/schemas/CompanyDTO'
+        country:
+          type: string
+        email:
+          type: string
+        id:
+          type: integer
+          format: int64
+        lead_approval_status:
+          type: string
+        lead_projection_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeadProjectionDTO'
+        name:
+          type: string
+      title: LeadGenerationResponse
+    LeadPageDTO:
+      type: object
+      properties:
+        current_stage_name:
+          type: string
+        current_user:
+          $ref: '#/components/schemas/UserResponsePayload'
+        last_stage_id:
+          type: integer
+          format: int64
+        lead_generation:
+          $ref: '#/components/schemas/LeadGenerationResponse'
+        time_difference:
+          type: integer
+          format: int64
+      title: LeadPageDTO
+    OrderDetailMinimalDto:
+      type: object
+      properties:
+        confirmation_date:
+          type: string
+          format: date-time
+        lead:
+          $ref: '#/components/schemas/LeadsUnderVpResponse'
+        lead_id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+      title: OrderDetailMinimalDto
+    UMSUserResponsePayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        created_by:
+          type: string
+        first_name:
+          type: string
+        group_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        whatsapp_opt_in:
+          type: boolean
+      title: UMSUserResponsePayload
+    CompanyDTO:
+      type: object
+      properties:
+        ask_buyer_wip_on_order:
+          type: boolean
+        company_name:
+          type: string
+        compliances:
+          type: array
+          items:
+            type: string
+        id:
+          type: integer
+          format: int64
+        min_buy_sell_margin:
+          type: number
+        min_commission_margin:
+          type: number
+        min_trading_margin:
+          type: number
+      title: CompanyDTO
+    BrandCategoryDto:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          format: int64
+        category_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: BrandCategoryDto
+    ManufacturerGaId:
+      type: object
+      properties:
+        ga_id:
+          type: string
+        get_docs:
+          type: boolean
+        manufacturer_id:
+          type: integer
+          format: int64
+        pin:
+          type: integer
+          format: int64
+      title: ManufacturerGaId
+    OpenForcedCompleteOrdersRequestPayload:
+      type: object
+      properties:
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: OpenForcedCompleteOrdersRequestPayload
+    GetOrderForNotesResponse:
+      type: object
+      properties:
+        assignee_id:
+          type: integer
+          format: int64
+        client_id:
+          type: integer
+          format: int64
+        manufacturer_id:
+          type: integer
+          format: int64
+        ops_assignee_id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        order_type:
+          type: string
+        parent_order_id:
+          type: integer
+          format: int64
+      title: GetOrderForNotesResponse
+    ManufacturerUnitsDTO:
+      type: object
+      properties:
+        failure_reasons:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        id:
+          type: integer
+          format: int64
+        is_selectable:
+          type: boolean
+        preferred_factory:
+          type: boolean
+        rag_rating:
+          type: string
+      title: ManufacturerUnitsDTO
+    SystemConfig:
+      type: object
+      properties:
+        configKey:
+          type: string
+        configValue:
+          type: string
+        createdBy:
+          type: string
+      title: SystemConfig
+    ForceCompleteRequestPayload:
+      type: object
+      properties:
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: ForceCompleteRequestPayload
+    FixVariantsIdentifierRequestPayload:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: FixVariantsIdentifierRequestPayload
+    ComputeTnaStatusRequestPayload:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: ComputeTnaStatusRequestPayload
+    UnzipAndUpdatePosRequestPayload:
+      type: object
+      properties:
+        filename_to_po_map:
+          type: object
+          additionalProperties:
+            type: string
+        po_no_to_order_map:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        zip_file_path:
+          type: string
+      title: UnzipAndUpdatePosRequestPayload
+    BrandResponse:
+      type: object
+      properties:
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        ask_buyer_wip_on_order:
+          type: boolean
+        billing_address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        brand_name:
+          type: string
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/BrandCategoryDto'
+        compliances:
+          type: array
+          items:
+            type: string
+        created_by:
+          type: string
+        id:
+          type: integer
+          format: int64
+        legal_address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        legal_address_response:
+          type: string
+        legal_name:
+          type: string
+        vp_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/BrandVpDto'
+        vps:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: BrandResponse
+    DashboardDataDto:
+      type: object
+      properties:
+        completed_orders:
+          type: integer
+          format: int64
+        open_orders:
+          type: integer
+          format: int64
+        success_qcs:
+          type: integer
+          format: int64
+        total_manufacturers:
+          type: integer
+          format: int64
+        total_orders:
+          type: integer
+          format: int64
+        total_qcs:
+          type: integer
+          format: int64
+      title: DashboardDataDto
+    PropagateVariantPricesRequestPayload:
+      type: object
+      properties:
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateVariantPriceRequestPayload'
+      title: PropagateVariantPricesRequestPayload
+    FixInvoiceCurrencyConversionRequestPayload:
+      type: object
+      properties:
+        conversion_date_floor:
+          type: integer
+          format: int64
+        invoice_nos:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+      title: FixInvoiceCurrencyConversionRequestPayload
+    UserResponsePayload:
+      type: object
+      properties:
+        created_by:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+      title: UserResponsePayload
+    BackfillVariantResponsePayload:
+      type: object
+      properties:
+        remaining:
+          type: integer
+          format: int32
+        unsupported:
+          type: integer
+          format: int32
+      title: BackfillVariantResponsePayload
+    EngagementDataRequestPayload:
+      type: object
+      properties:
+        end:
+          type: string
+          format: date-time
+        interval:
+          type: string
+        start:
+          type: string
+          format: date-time
+      title: EngagementDataRequestPayload
+    ManufacturerDetailsDTO:
+      type: object
+      properties:
+        company_registered_name:
+          type: string
+        contact_number:
+          type: string
+        contact_person:
+          type: string
+        eligible_categories:
+          type: string
+        email:
+          type: string
+        failure_reasons:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        is_selectable:
+          type: boolean
+        manufacturer_id:
+          type: integer
+          format: int64
+        manufacturer_status:
+          type: boolean
+        rm_id:
+          type: integer
+          format: int64
+        sku_filter_query:
+          type: string
+        soft_delete:
+          type: string
+        units:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerUnitsDTO'
+      title: ManufacturerDetailsDTO
+    LeadProjectionDTO:
+      type: object
+      properties:
+        achieved_business_value:
+          type: number
+        amount:
+          type: integer
+          format: int64
+        business_size:
+          type: number
+        id:
+          type: integer
+          format: int64
+        lead_probability:
+          type: integer
+          format: int32
+        probable_completion_date:
+          type: integer
+          format: int64
+      title: LeadProjectionDTO
+    LeadsUnderVpResponse:
+      type: object
+      properties:
+        brand_name:
+          type: string
+        company_name:
+          type: string
+        count:
+          type: integer
+          format: int64
+        lead_email:
+          type: string
+        lead_id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: LeadsUnderVpResponse
+    UpdateVariantPriceRequestPayload:
+      type: object
+      required:
+      - buyer_currency_price
+      - factory_currency_price
+      - variant_id
+      properties:
+        buyer_currency_price:
+          type: number
+        factory_currency_price:
+          type: number
+        variant_id:
+          type: integer
+          format: int64
+      title: UpdateVariantPriceRequestPayload
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload

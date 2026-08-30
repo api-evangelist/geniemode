@@ -1,0 +1,148 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Edi Monitoring Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: edi-monitoring-controller
+  description: Edi Monitoring Controller
+paths:
+  /api/v1/edi/logs:
+    get:
+      tags:
+      - edi-monitoring-controller
+      summary: listLogs
+      operationId: listLogsUsingGET
+      parameters:
+      - name: fromDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: operation
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: success
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/edi/usage:
+    get:
+      tags:
+      - edi-monitoring-controller
+      summary: getUsage
+      operationId: getUsageUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdiUsageDashboardResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    EdiUsageDashboardResponse:
+      type: object
+      properties:
+        alert_threshold:
+          type: integer
+          format: int64
+        billable_calls:
+          type: integer
+          format: int64
+        by_operation:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        cycle_end:
+          type: string
+          format: date-time
+        cycle_start:
+          type: string
+          format: date-time
+        daily:
+          type: array
+          items:
+            $ref: '#/components/schemas/EdiDailyUsageInterface'
+        estimated_cost_usd:
+          type: number
+          format: double
+        free_tier_limit:
+          type: integer
+          format: int64
+        free_tier_remaining:
+          type: integer
+          format: int64
+        status:
+          type: string
+        total_calls:
+          type: integer
+          format: int64
+        warn_threshold:
+          type: integer
+          format: int64
+      title: EdiUsageDashboardResponse
+    EdiDailyUsageInterface:
+      type: object
+      properties:
+        avgDurationMs:
+          type: number
+          format: double
+        day:
+          type: string
+        failedCalls:
+          type: integer
+          format: int64
+        readCalls:
+          type: integer
+          format: int64
+        totalCalls:
+          type: integer
+          format: int64
+        writeCalls:
+          type: integer
+          format: int64
+      title: EdiDailyUsageInterface

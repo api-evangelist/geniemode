@@ -1,0 +1,281 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Currency Conversion Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: currency-conversion-controller
+  description: Currency Conversion Controller
+paths:
+  /api/v1/currency-conversion/create:
+    post:
+      tags:
+      - currency-conversion-controller
+      summary: createCurrencyConversion
+      operationId: createCurrencyConversionUsingPOST
+      parameters:
+      - name: conversionRate
+        in: query
+        required: false
+        schema:
+          type: number
+      - name: fromCurrency
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: id
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toCurrency
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: toTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrencyConversionDto'
+  /api/v1/currency-conversion/get:
+    get:
+      tags:
+      - currency-conversion-controller
+      summary: getCurrencyConversion
+      operationId: getCurrencyConversionUsingGET
+      parameters:
+      - name: fromCurrency
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: timestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toCurrency
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrencyConversionDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/currency-conversion/getAll:
+    get:
+      tags:
+      - currency-conversion-controller
+      summary: getAllCurrencyConversion
+      operationId: getAllCurrencyConversionUsingGET
+      parameters:
+      - name: conversionRate
+        in: query
+        required: false
+        schema:
+          type: number
+      - name: fromCurrency
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: id
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toCurrency
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: toTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page_CurrencyConversionDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/currency-conversion/update:
+    put:
+      tags:
+      - currency-conversion-controller
+      summary: updateCurrencyConversion
+      operationId: updateCurrencyConversionUsingPUT
+      parameters:
+      - name: conversionRate
+        in: query
+        required: false
+        schema:
+          type: number
+      - name: fromCurrency
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: id
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toCurrency
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: toTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrencyConversionDto'
+components:
+  schemas:
+    Page_CurrencyConversionDto:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyConversionDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      title: Page«CurrencyConversionDto»
+    Pageable:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/Sort'
+        unpaged:
+          type: boolean
+      title: Pageable
+    Sort:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+      title: Sort
+    CurrencyConversionDto:
+      type: object
+      properties:
+        conversion_rate:
+          type: number
+        from_currency:
+          type: string
+        from_timestamp:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        to_currency:
+          type: string
+        to_timestamp:
+          type: integer
+          format: int64
+      title: CurrencyConversionDto

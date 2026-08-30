@@ -1,0 +1,310 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Geniemode Entity Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: geniemode-entity-controller
+  description: Geniemode Entity Controller
+paths:
+  /api/v1/path/geniemode-entity:
+    get:
+      tags:
+      - geniemode-entity-controller
+      summary: getGeniemodeEntities
+      operationId: getGeniemodeEntitiesUsingGET
+      parameters:
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: tags
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - geniemode-entity-controller
+      summary: create
+      operationId: createUsingPOST_7
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeniemodeEntityDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeniemodeEntityCreatePayload'
+        description: payload
+        required: true
+  /api/v1/path/geniemode-entity/get:
+    get:
+      tags:
+      - geniemode-entity-controller
+      summary: getGeniemodeEntity
+      operationId: getGeniemodeEntityUsingGET_1
+      parameters:
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: tags
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeniemodeEntityDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/geniemode-entity/{geniemodeEntityId}:
+    get:
+      tags:
+      - geniemode-entity-controller
+      summary: getGeniemodeEntity
+      operationId: getGeniemodeEntityUsingGET
+      parameters:
+      - name: geniemodeEntityId
+        in: path
+        description: geniemodeEntityId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeniemodeEntityDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - geniemode-entity-controller
+      summary: addTags
+      operationId: addTagsUsingPUT
+      parameters:
+      - name: geniemodeEntityId
+        in: path
+        description: geniemodeEntityId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeniemodeEntityDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeniemodeEntityCreatePayload'
+        description: payload
+        required: true
+components:
+  schemas:
+    GeniemodeEntityDto:
+      type: object
+      properties:
+        address:
+          type: object
+        address_id:
+          type: integer
+          format: int64
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        compliance:
+          type: string
+        currency:
+          type: string
+        id:
+          type: integer
+          format: int64
+        invoice_declaration:
+          type: string
+        label:
+          type: string
+        legal_name:
+          type: string
+        tally_currency:
+          type: string
+        value:
+          type: string
+      title: GeniemodeEntityDto
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload
+    AddressSubmitRequestPayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        search:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitRequestPayload
+    GeniemodeEntityCreatePayload:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressSubmitRequestPayload'
+        address_id:
+          type: integer
+          format: int64
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitRequestPayload'
+        compliance:
+          type: string
+        currency:
+          type: string
+        id:
+          type: integer
+          format: int64
+        invoice_declaration:
+          type: string
+        label:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        value:
+          type: string
+      title: GeniemodeEntityCreatePayload

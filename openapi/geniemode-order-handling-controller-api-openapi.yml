@@ -1,0 +1,61 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Order Handling Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: order-handling-controller
+  description: Order Handling Controller
+paths:
+  /api/v1/handling/order/lead/{orderId}:
+    put:
+      tags:
+      - order-handling-controller
+      summary: updateSubOrderLeads
+      operationId: updateSubOrderLeadsUsingPUT
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/handling/order/{orderId}:
+    put:
+      tags:
+      - order-handling-controller
+      summary: updateSubOrders
+      operationId: updateSubOrdersUsingPUT
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string

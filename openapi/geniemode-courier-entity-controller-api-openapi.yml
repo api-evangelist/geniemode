@@ -1,0 +1,327 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Courier Entity Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: courier-entity-controller
+  description: Courier Entity Controller
+paths:
+  /api/v1/path/courier-entity:
+    get:
+      tags:
+      - courier-entity-controller
+      summary: getCourierEntities
+      operationId: getCourierEntitiesUsingGET
+      parameters:
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - courier-entity-controller
+      summary: create
+      operationId: createUsingPOST_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourierEntityResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourierEntityCreatePayload'
+        description: payload
+        required: true
+  /api/v1/path/courier-entity/get:
+    get:
+      tags:
+      - courier-entity-controller
+      summary: getCourierEntity
+      operationId: getCourierEntityUsingGET
+      parameters:
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourierEntityResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/courier-entity/{courierEntityId}/add-address:
+    post:
+      tags:
+      - courier-entity-controller
+      summary: addAddress
+      operationId: addAddressUsingPOST
+      parameters:
+      - name: courierEntityId
+        in: path
+        description: courierEntityId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressSubmitResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressSubmitRequestPayload'
+        description: requestPayload
+        required: true
+  /api/v1/path/courier-entity/{courierEntityId}/addresses:
+    get:
+      tags:
+      - courier-entity-controller
+      summary: getAddresses
+      operationId: getAddressesUsingGET
+      parameters:
+      - name: addressLine1
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: addressLine2
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: city
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: contactPersonName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: contactPersonNumber
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: country
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: courierEntityId
+        in: path
+        description: courierEntityId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: entityId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: entityType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: landmark
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pincode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: state
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    AddressSubmitRequestPayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        search:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitRequestPayload
+    CourierEntityCreatePayload:
+      type: object
+      properties:
+        name:
+          type: string
+      title: CourierEntityCreatePayload
+    CourierEntityResponsePayload:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: CourierEntityResponsePayload
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload

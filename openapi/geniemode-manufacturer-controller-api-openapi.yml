@@ -1,0 +1,1408 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Manufacturer Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: manufacturer-controller
+  description: Manufacturer Controller
+paths:
+  /api/manufacturer/GetAllManufacturer/lite:
+    post:
+      tags:
+      - manufacturer-controller
+      summary: getAllManufacturerLite
+      operationId: getAllManufacturerLiteUsingPOST
+      parameters:
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+  /api/manufacturer/GetCategories:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: getCategory
+      operationId: getCategoryUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCategoryResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/GetManufacturerDetailsById:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: getManufacturerDetailsById
+      operationId: getManufacturerDetailsByIdUsingGET
+      parameters:
+      - name: gaId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: getDocs
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: manufacturerId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: pin
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerDetailResponseNew'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/GetManufacturerIdByName:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: get_manufacturer_id_by_company_name
+      operationId: get_manufacturer_id_by_company_nameUsingGET
+      parameters:
+      - name: caseSensitive
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/GetManufacturers/factoryCompliances:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: findAllFactoryCompliance
+      operationId: findAllFactoryComplianceUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/GetManufacturers/manufacturers:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: findAllManufacturers
+      operationId: findAllManufacturersUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/GetManufacturers/supplierTypes:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: getAllSupplierTypes
+      operationId: getAllSupplierTypesUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/UploadManufacturerDocs:
+    post:
+      tags:
+      - manufacturer-controller
+      summary: uploadManufacturerDocs
+      operationId: uploadManufacturerDocsUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponsePayload'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: string
+              format: binary
+        description: file
+        required: true
+  /api/manufacturer/all/dashboard:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: getAllDashboardManufacturers
+      operationId: getAllDashboardManufacturersUsingGET
+      parameters:
+      - name: categories
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: categoryId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: city
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: companyName
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: complianceType
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: confirmationDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: contractStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - all
+          - completed_signature
+          - pending_signature
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: leadId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: orderStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active_orders
+          - all
+          - completed_orders
+      - name: pendingAudits
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: pincode
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: preferredFactory
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: ragRatings
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: regions
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchTerm
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: supplierType
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: type
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/auditData/{manufacturerId}:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: getManufacturerAuditData
+      operationId: getManufacturerAuditDataUsingGET
+      parameters:
+      - name: checkDoc
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: manufacturerId
+        in: path
+        description: manufacturerId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ManufacturerAuditDataResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/auditStatus/{manufacturerId}:
+    put:
+      tags:
+      - manufacturer-controller
+      summary: updateAuditStatus
+      operationId: updateAuditStatusUsingPUT
+      parameters:
+      - name: manufacturerId
+        in: path
+        description: manufacturerId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerUpdateAuditRequest'
+        description: request
+        required: true
+  /api/manufacturer/cities:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: getManufacturerCities
+      operationId: getManufacturerCitiesUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/get/{manufacturerId}/add-address:
+    post:
+      tags:
+      - manufacturer-controller
+      summary: addAddress
+      operationId: addAddressUsingPOST_1
+      parameters:
+      - name: manufacturerId
+        in: path
+        description: manufacturerId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressSubmitResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressSubmitRequestPayload'
+        description: addressDTO
+        required: true
+  /api/manufacturer/getAll:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: index
+      operationId: indexUsingGET_15
+      parameters:
+      - name: categories
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: categoryId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: city
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: companyName
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: complianceType
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: confirmationDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: contractStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - all
+          - completed_signature
+          - pending_signature
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: leadId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: orderStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active_orders
+          - all
+          - completed_orders
+      - name: pendingAudits
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: pincode
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: preferredFactory
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: ragRatings
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: regions
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchTerm
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: supplierType
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: type
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/getManufacturerAddresses/{manufacturerId}:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: getManufacturerAddresses
+      operationId: getManufacturerAddressesUsingGET
+      parameters:
+      - name: manufacturerId
+        in: path
+        description: manufacturerId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/getStateCity:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: getStateCityByPincode
+      operationId: getStateCityByPincodeUsingGET
+      parameters:
+      - name: pincode
+        in: query
+        description: pincode
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityStateResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/migrate/all:
+    post:
+      tags:
+      - manufacturer-controller
+      summary: migrateAll
+      operationId: migrateAllUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/manufacturer/migrateAudit:
+    post:
+      tags:
+      - manufacturer-controller
+      summary: migrateToAudit
+      operationId: migrateToAuditUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/manufacturer/migrateOldManufacturerDocs:
+    post:
+      tags:
+      - manufacturer-controller
+      summary: migrateOldManufacturerDocs
+      operationId: migrateOldManufacturerDocsUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/manufacturer/mini:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: manufacturerMini
+      operationId: manufacturerMiniUsingGET
+      parameters:
+      - name: categories
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: categoryId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: city
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: companyName
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: complianceType
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: confirmationDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: contractStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - all
+          - completed_signature
+          - pending_signature
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: leadId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: orderStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active_orders
+          - all
+          - completed_orders
+      - name: pendingAudits
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: pincode
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: preferredFactory
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: ragRatings
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: regions
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: rmIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchTerm
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: supplierType
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: type
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ManufacturerMiniResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/orderSummary/{manufacturerId}:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: getManufacturerOrderSummary
+      operationId: getManufacturerOrderSummaryUsingGET
+      parameters:
+      - name: manufacturerId
+        in: path
+        description: manufacturerId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ManufacturerOrderSummary'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/ragRating/{manufacturerId}/{manufacturerUnitId}/history:
+    get:
+      tags:
+      - manufacturer-controller
+      summary: getRagRatingHistory
+      operationId: getRagRatingHistoryUsingGET
+      parameters:
+      - name: manufacturerId
+        in: path
+        description: manufacturerId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: manufacturerUnitId
+        in: path
+        description: manufacturerUnitId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page_RagRatingHistoryDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/ragRating/{manufacturerId}/{manufacturerUnitId}/{ragRating}:
+    put:
+      tags:
+      - manufacturer-controller
+      summary: ragRating
+      operationId: ragRatingUsingPUT
+      parameters:
+      - name: manufacturerId
+        in: path
+        description: manufacturerId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: manufacturerUnitId
+        in: path
+        description: manufacturerUnitId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: ragRating
+        in: path
+        description: ragRating
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/manufacturer/refactor/director:
+    put:
+      tags:
+      - manufacturer-controller
+      summary: refactorDirector
+      operationId: refactorDirectorUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/manufacturer/updateDoc/{manufacturerId}:
+    put:
+      tags:
+      - manufacturer-controller
+      summary: updateDoc
+      operationId: updateDocUsingPUT
+      parameters:
+      - name: manufacturerId
+        in: path
+        description: manufacturerId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerUpdateDocRequest'
+        description: request
+        required: true
+components:
+  schemas:
+    Sort:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+      title: Sort
+    ManufacturerUpdateAuditRequest:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        for_all:
+          type: boolean
+        status:
+          type: string
+      title: ManufacturerUpdateAuditRequest
+    AddressSubmitRequestPayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        search:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitRequestPayload
+    Page_RagRatingHistoryDto:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/RagRatingHistoryDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      title: Page«RagRatingHistoryDto»
+    ManufacturerAuditDataResponse:
+      type: object
+      properties:
+        audit_status:
+          type: string
+        audit_ts:
+          type: integer
+          format: int64
+        auditor_id:
+          type: integer
+          format: int64
+        auditor_name:
+          type: string
+        doc_id:
+          type: integer
+          format: int64
+        doc_present:
+          type: boolean
+        doc_type:
+          type: string
+        manufacturer_id:
+          type: integer
+          format: int64
+        replace_doc:
+          type: boolean
+        s3_path:
+          type: string
+        update_bank_details:
+          type: boolean
+      title: ManufacturerAuditDataResponse
+    ManufacturerUpdateDocRequest:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        doc_type:
+          type: string
+      title: ManufacturerUpdateDocRequest
+    GetCategoryDtO:
+      type: object
+      properties:
+        category:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        sub_category:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetCategoryDtO'
+        type:
+          type: string
+      title: GetCategoryDtO
+    CityStateResponse:
+      type: object
+      properties:
+        region:
+          type: string
+        state:
+          type: string
+      title: CityStateResponse
+    Pageable:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/Sort'
+        unpaged:
+          type: boolean
+      title: Pageable
+    ManufacturerOrderSummary:
+      type: object
+      properties:
+        last_order_date:
+          type: string
+          format: date-time
+        order_count:
+          type: integer
+          format: int64
+        rm_id:
+          type: integer
+          format: int64
+        rm_name:
+          type: string
+        total_order_amount:
+          type: number
+      title: ManufacturerOrderSummary
+    GetCategoryResponsePayload:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetCategoryDtO'
+      title: GetCategoryResponsePayload
+    UploadResponsePayload:
+      type: object
+      properties:
+        bucket_name:
+          type: string
+        doc_id:
+          type: integer
+          format: int64
+        error_file:
+          type: string
+          format: byte
+        error_messages:
+          type: array
+          items:
+            type: string
+        filename:
+          type: string
+        key:
+          type: string
+        status:
+          type: string
+        url:
+          type: string
+      title: UploadResponsePayload
+    ManufacturerDetailResponseNew:
+      type: object
+      properties:
+        company_address:
+          type: string
+        company_address_id:
+          type: integer
+          format: int64
+        company_address_object:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        company_registered_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        manufacturer_region:
+          type: string
+      title: ManufacturerDetailResponseNew
+    RagRatingHistoryDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        rag_rating:
+          type: string
+      title: RagRatingHistoryDto
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload
+    ManufacturerMiniResponsePayload:
+      type: object
+      properties:
+        billing_address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        billing_address_id:
+          type: integer
+          format: int64
+        gst:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        pan:
+          type: string
+      title: ManufacturerMiniResponsePayload

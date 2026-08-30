@@ -1,0 +1,173 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Admin Qc Audio Recording Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: admin-qc-audio-recording-controller
+  description: Admin QC Audio Recording Controller
+paths:
+  /api/v1/path/qc-audio-recordings/admin/users:
+    get:
+      tags:
+      - admin-qc-audio-recording-controller
+      summary: users
+      operationId: usersUsingGET
+      parameters:
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/qc-audio-recordings/admin/users/{userId}/date-wise-recordings:
+    get:
+      tags:
+      - admin-qc-audio-recording-controller
+      summary: dateWiseUsersRecordings
+      operationId: dateWiseUsersRecordingsUsingGET
+      parameters:
+      - name: endEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: startEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: zoneOffset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/QcAudioRecordingDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/qc-audio-recordings/admin/users/{userId}/recordings:
+    get:
+      tags:
+      - admin-qc-audio-recording-controller
+      summary: usersRecordings
+      operationId: usersRecordingsUsingGET
+      parameters:
+      - name: endEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: startEpoch
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: zoneOffset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    QcAudioRecordingDto:
+      type: object
+      properties:
+        data:
+          type: object
+        duration:
+          type: integer
+          format: int64
+        end_epoch:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        location:
+          type: string
+        start_epoch:
+          type: integer
+          format: int64
+        url:
+          type: string
+        user_id:
+          type: integer
+          format: int64
+      title: QcAudioRecordingDto

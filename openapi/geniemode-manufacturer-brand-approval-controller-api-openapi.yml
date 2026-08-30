@@ -1,0 +1,303 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Manufacturer Brand Approval Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: manufacturer-brand-approval-controller
+  description: Manufacturer Brand Approval Controller
+paths:
+  /api/manufacturer/buyer/compliance:
+    post:
+      tags:
+      - manufacturer-brand-approval-controller
+      summary: create
+      operationId: createUsingPOST_9
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerBrandApprovalDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerBrandApprovalRequestPayload'
+        description: requestPayload
+        required: true
+  /api/manufacturer/buyer/compliance/index:
+    get:
+      tags:
+      - manufacturer-brand-approval-controller
+      summary: index
+      operationId: indexUsingGET_14
+      parameters:
+      - name: pageType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^(approved|pending|rejected)$
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/manufacturer/buyer/compliance/{manufacturerUnitBuyerComplianceId}:
+    get:
+      tags:
+      - manufacturer-brand-approval-controller
+      summary: view
+      operationId: viewUsingGET
+      parameters:
+      - name: manufacturerUnitBuyerComplianceId
+        in: path
+        description: manufacturerUnitBuyerComplianceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerBrandApprovalDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - manufacturer-brand-approval-controller
+      summary: update
+      operationId: updateUsingPUT_6
+      parameters:
+      - name: manufacturerUnitBuyerComplianceId
+        in: path
+        description: manufacturerUnitBuyerComplianceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerBrandApprovalDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManufacturerBrandApprovalRequestPayload'
+        description: requestPayload
+        required: true
+components:
+  schemas:
+    BrandCategoryDto:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          format: int64
+        category_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: BrandCategoryDto
+    ManufacturerBrandApprovalCrossCostingsDto:
+      type: object
+      properties:
+        cost_comparison:
+          type: string
+        delivery_performance:
+          type: string
+        id:
+          type: integer
+          format: int64
+        innovation_comparison:
+          type: string
+        supplier_name:
+          type: string
+      title: ManufacturerBrandApprovalCrossCostingsDto
+    ManufacturerBrandApprovalRequestPayload:
+      type: object
+      properties:
+        address_id:
+          type: integer
+          format: int64
+        approval_status:
+          type: string
+        brand_id:
+          type: integer
+          format: int64
+        buyer_days:
+          type: integer
+          format: int64
+        checked_other_team_sourcing_similar_products:
+          type: boolean
+        cross_costings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerBrandApprovalCrossCostingsDto'
+        existing_brand:
+          type: boolean
+        factory_used_by_other_brand:
+          type: boolean
+        manufacturer_unit_id:
+          type: integer
+          format: int64
+        onboarding_reason:
+          type: string
+        planned_business_usd:
+          type: number
+        rm_id:
+          type: integer
+          format: int64
+        tier1_processes:
+          type: string
+        tier2_processes:
+          type: string
+        tier3_processes:
+          type: string
+      title: ManufacturerBrandApprovalRequestPayload
+    ManufacturerBrandApprovalCompliancesDto:
+      type: object
+      properties:
+        compliance_type:
+          type: string
+        compliances:
+          type: array
+          items:
+            type: string
+      title: ManufacturerBrandApprovalCompliancesDto
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload
+    ManufacturerBrandApprovalDto:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        address_id:
+          type: integer
+          format: int64
+        approval_status:
+          type: string
+        brand_categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/BrandCategoryDto'
+        brand_id:
+          type: integer
+          format: int64
+        brand_name:
+          type: string
+        buyer_days:
+          type: integer
+          format: int64
+        checked_other_team_sourcing_similar_products:
+          type: boolean
+        compliances:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerBrandApprovalCompliancesDto'
+        cross_costings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerBrandApprovalCrossCostingsDto'
+        existing_brand:
+          type: boolean
+        factory_used_by_other_brand:
+          type: boolean
+        id:
+          type: integer
+          format: int64
+        manufacturer_id:
+          type: integer
+          format: int64
+        manufacturer_name:
+          type: string
+        manufacturer_unit_id:
+          type: integer
+          format: int64
+        manufacturer_unit_name:
+          type: string
+        onboarding_reason:
+          type: string
+        planned_business_usd:
+          type: number
+        rejection_reason:
+          type: string
+        rm_id:
+          type: integer
+          format: int64
+        rm_name:
+          type: string
+        tier1_processes:
+          type: string
+        tier2_processes:
+          type: string
+        tier3_processes:
+          type: string
+      title: ManufacturerBrandApprovalDto

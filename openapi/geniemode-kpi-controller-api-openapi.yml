@@ -1,0 +1,281 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Kpi Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: kpi-controller
+  description: Kpi Controller
+paths:
+  /api/v1/order/kpi:
+    get:
+      tags:
+      - kpi-controller
+      summary: getKpi
+      operationId: getKpiUsingGET
+      parameters:
+      - name: month
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserOrderKpiResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/order/kpi/buyer:
+    get:
+      tags:
+      - kpi-controller
+      summary: getKpiBuyer
+      operationId: getKpiBuyerUsingGET
+      parameters:
+      - name: month
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserOrderKpiBuyerResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/order/kpi/excel:
+    post:
+      tags:
+      - kpi-controller
+      summary: getKpiAllUsers
+      operationId: getKpiAllUsersUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ByteArrayResource'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetKpiExcelRequestPayload'
+        description: payload
+        required: true
+components:
+  schemas:
+    UserOrderKpiParameters:
+      type: object
+      properties:
+        aborted_qc:
+          type: number
+          format: float
+        buyer_approved:
+          type: number
+          format: float
+        buyer_engagement:
+          type: number
+          format: float
+        ctpo:
+          type: number
+          format: float
+        first_name:
+          type: string
+        fus:
+          type: number
+          format: float
+        id:
+          type: integer
+          format: int64
+        jas:
+          type: number
+          format: float
+        last_name:
+          type: string
+        ms:
+          type: integer
+          format: int64
+        pps:
+          type: number
+          format: float
+        saf:
+          type: number
+          format: float
+        sot:
+          type: number
+          format: float
+        username:
+          type: string
+      title: UserOrderKpiParameters
+    UserOrderKpiValueFormat:
+      type: object
+      properties:
+        type:
+          type: string
+        value:
+          type: object
+      title: UserOrderKpiValueFormat
+    UserOrderKpiBuyerResponsePayload:
+      type: object
+      properties:
+        self:
+          $ref: '#/components/schemas/UserOrderKpiBuyerParameters'
+        sub_ordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOrderKpiBuyerParameters'
+      title: UserOrderKpiBuyerResponsePayload
+    UserOrderKPIBuyerCombined:
+      type: object
+      properties:
+        brand_name:
+          type: string
+        company_name:
+          type: string
+      title: UserOrderKPIBuyerCombined
+    UserOrderKpiBuyerParameters:
+      type: object
+      properties:
+        churned:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOrderKPIBuyerCombined'
+        eligible:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOrderKPIBuyerCombined'
+        engaged:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOrderKPIBuyerCombined'
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        never_engaged:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOrderKPIBuyerCombined'
+        partially_engaged:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOrderKPIBuyerCombined'
+        previously_engaged:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOrderKPIBuyerCombined'
+        username:
+          type: string
+      title: UserOrderKpiBuyerParameters
+    InputStream:
+      type: object
+      title: InputStream
+    UserOrderMaxKpiValues:
+      type: object
+      properties:
+        aborted_qc_required:
+          $ref: '#/components/schemas/UserOrderKpiValueFormat'
+        buyer_approved_required:
+          $ref: '#/components/schemas/UserOrderKpiValueFormat'
+        buyer_engagement_required:
+          $ref: '#/components/schemas/UserOrderKpiValueFormat'
+        ctpo_required:
+          $ref: '#/components/schemas/UserOrderKpiValueFormat'
+        fus_required:
+          $ref: '#/components/schemas/UserOrderKpiValueFormat'
+        jas_required:
+          $ref: '#/components/schemas/UserOrderKpiValueFormat'
+        ms_required:
+          $ref: '#/components/schemas/UserOrderKpiValueFormat'
+        pps_required:
+          $ref: '#/components/schemas/UserOrderKpiValueFormat'
+        saf_required:
+          $ref: '#/components/schemas/UserOrderKpiValueFormat'
+        sot_required:
+          $ref: '#/components/schemas/UserOrderKpiValueFormat'
+      title: UserOrderMaxKpiValues
+    GetKpiExcelRequestPayload:
+      type: object
+      properties:
+        days:
+          type: integer
+          format: int32
+        usernames:
+          type: array
+          items:
+            type: string
+      title: GetKpiExcelRequestPayload
+    UserOrderKpiResponsePayload:
+      type: object
+      properties:
+        required_values:
+          $ref: '#/components/schemas/UserOrderMaxKpiValues'
+        self:
+          $ref: '#/components/schemas/UserOrderKpiParameters'
+        sub_ordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOrderKpiParameters'
+      title: UserOrderKpiResponsePayload
+    ByteArrayResource:
+      type: object
+      properties:
+        byteArray:
+          type: string
+          format: byte
+        description:
+          type: string
+        file:
+          type: string
+          format: binary
+        filename:
+          type: string
+        inputStream:
+          $ref: '#/components/schemas/InputStream'
+        open:
+          type: boolean
+        readable:
+          type: boolean
+        uri:
+          type: string
+          format: uri
+        url:
+          type: string
+          format: url
+      title: ByteArrayResource

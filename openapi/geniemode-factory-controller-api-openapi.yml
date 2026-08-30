@@ -1,0 +1,382 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Factory Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: factory-controller
+  description: Factory Controller
+paths:
+  /api/factory/Create:
+    post:
+      tags:
+      - factory-controller
+      summary: create
+      operationId: createUsingPOST_3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FactoryCreateRequestPayload'
+        description: factoryCreateRequestPayload
+        required: true
+  /api/factory/all_enums:
+    get:
+      tags:
+      - factory-controller
+      summary: getAllEnums
+      operationId: getAllEnumsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetAllEnumsResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/factory/delete:
+    delete:
+      tags:
+      - factory-controller
+      summary: deleteFactory
+      operationId: deleteFactoryUsingDELETE
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetFactoryResponsePayload'
+  /api/factory/get:
+    get:
+      tags:
+      - factory-controller
+      summary: getFactory
+      operationId: getFactoryUsingGET
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetFactoryResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/factory/get_all:
+    get:
+      tags:
+      - factory-controller
+      summary: index
+      operationId: indexUsingGET_7
+      parameters:
+      - name: agentUserId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: factoryId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/factory/send-mail:
+    post:
+      tags:
+      - factory-controller
+      summary: sendMail
+      operationId: sendMailUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailRequest'
+        description: sendEmailRequest
+        required: true
+  /api/factory/update:
+    put:
+      tags:
+      - factory-controller
+      summary: updateFactory
+      operationId: updateFactoryUsingPUT
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetFactoryResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FactoryCreateRequestPayload'
+        description: factoryCreateRequestPayload
+        required: true
+components:
+  schemas:
+    UMSUserResponsePayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        created_by:
+          type: string
+        first_name:
+          type: string
+        group_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        whatsapp_opt_in:
+          type: boolean
+      title: UMSUserResponsePayload
+    DocDetailsDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+      title: DocDetailsDto
+    GetAllEnumsResponse:
+      type: object
+      properties:
+        factory_business_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - MANUFACTURING
+            - OTHER
+            - SERVICES
+            - TRADING
+        factory_doc_types:
+          type: object
+          additionalProperties:
+            type: string
+        factory_nature_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - OTHER
+            - PARTNERSHIP
+            - PRIVATELTD
+            - PROPRIETORSHIP
+        loan_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - Term_Loan
+            - Working_Capital_Loan
+      title: GetAllEnumsResponse
+    FactoryCreateRequestPayload:
+      type: object
+      properties:
+        agent_user_id:
+          type: integer
+          format: int64
+        business_type:
+          type: string
+        doc_id:
+          type: integer
+          format: int64
+        factory_agent_user_id:
+          type: integer
+          format: int64
+        factory_name:
+          type: string
+        factory_nature:
+          type: string
+        factory_poc_address:
+          type: string
+        factory_poc_email:
+          type: string
+        factory_poc_name:
+          type: string
+        factory_poc_phone:
+          type: string
+        factory_poc_pincode:
+          type: string
+        finance_raw_material_interest:
+          type: boolean
+        finance_support_interest:
+          type: boolean
+        operation_years:
+          type: integer
+          format: int64
+        profit_last_year:
+          type: integer
+          format: int64
+        revenue_current_year:
+          type: integer
+          format: int64
+        revenue_last_year:
+          type: integer
+          format: int64
+      title: FactoryCreateRequestPayload
+    SendEmailRequest:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        factory_id:
+          type: integer
+          format: int64
+      title: SendEmailRequest
+    GetFactoryResponsePayload:
+      type: object
+      properties:
+        agent_user_data:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        agent_user_id:
+          type: integer
+          format: int64
+        business_type:
+          type: string
+        doc_data:
+          $ref: '#/components/schemas/DocDetailsDto'
+        factory_agent_user_id:
+          type: integer
+          format: int64
+        factory_name:
+          type: string
+        factory_nature:
+          type: string
+        factory_poc_address:
+          type: string
+        factory_poc_email:
+          type: string
+        factory_poc_name:
+          type: string
+        factory_poc_phone:
+          type: string
+        factory_poc_pincode:
+          type: string
+        finance_raw_material_interest:
+          type: boolean
+        finance_support_interest:
+          type: boolean
+        id:
+          type: integer
+          format: int64
+        operation_years:
+          type: integer
+          format: int64
+        profit_last_year:
+          type: integer
+          format: int64
+        revenue_current_year:
+          type: integer
+          format: int64
+        revenue_last_year:
+          type: integer
+          format: int64
+      title: GetFactoryResponsePayload

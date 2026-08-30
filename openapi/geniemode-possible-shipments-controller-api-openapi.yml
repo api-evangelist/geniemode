@@ -1,0 +1,175 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Possible Shipments Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: possible-shipments-controller
+  description: Possible Shipments Controller
+paths:
+  /api/v1/possible/shipment/docs:
+    get:
+      tags:
+      - possible-shipments-controller
+      summary: getOrderDocs
+      operationId: getOrderDocsUsingGET
+      parameters:
+      - name: docType
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: finalInvoiceId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: shipmentId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/possible/shipment/documents:
+    post:
+      tags:
+      - possible-shipments-controller
+      summary: addDocuments
+      operationId: addDocumentsUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PossibleShipmentsAddDocumentRequestPayload'
+        description: requestPayload
+        required: true
+  /api/v1/possible/shipment/documents/{possibleShipmentDocMappingId}:
+    delete:
+      tags:
+      - possible-shipments-controller
+      summary: deleteDocument
+      operationId: deleteDocumentUsingDELETE
+      parameters:
+      - name: possibleShipmentDocMappingId
+        in: path
+        description: possibleShipmentDocMappingId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/possible/shipment/order/{orderId}/assign/{logisticsExecutiveId}:
+    put:
+      tags:
+      - possible-shipments-controller
+      summary: assignLogisticsExecutive
+      operationId: assignLogisticsExecutiveUsingPUT
+      parameters:
+      - name: logisticsExecutiveId
+        in: path
+        description: logisticsExecutiveId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    PossibleShipmentsAddDocumentRequestPayload:
+      type: object
+      required:
+      - doc_type
+      - order_id
+      properties:
+        doc_type:
+          type: string
+          enum:
+          - bill_of_lading
+          - booking_document_proof
+          - buyer_pod
+          - commercial_invoice
+          - commercial_invoice_logistics
+          - commercial_invoice_logistics_sales_invoice
+          - commercial_invoice_of_shipper
+          - complete_email_screenshot
+          - delivery_email_screenshot
+          - factory_invoice
+          - grn
+          - invoice_doc
+          - our_eway_bill
+          - packaging_list
+          - payment_followup_document_proof
+          - pod
+          - preplanning_document_proof
+          - sales_invoice_finance
+          - screenshot_of_vessel_arriving
+          - shipping_bill
+          - supplier_e_way_bill
+        doc_urls:
+          type: array
+          items:
+            type: string
+        order_id:
+          type: integer
+          format: int64
+      title: PossibleShipmentsAddDocumentRequestPayload

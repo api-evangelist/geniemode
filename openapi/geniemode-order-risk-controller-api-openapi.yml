@@ -1,0 +1,680 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Order Risk Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: order-risk-controller
+  description: Order Risk Controller
+paths:
+  /api/path/risk/order/autoApprove/{type}:
+    put:
+      tags:
+      - order-risk-controller
+      summary: autoApprove
+      operationId: autoApproveUsingPUT
+      parameters:
+      - name: type
+        in: path
+        description: type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRiskStatusRequestPayload'
+        description: orderRiskStatusRequestPayload
+        required: true
+  /api/path/risk/order/eligible/orders:
+    get:
+      tags:
+      - order-risk-controller
+      summary: fetchOrdersForBrandInsuranceSpread
+      operationId: fetchOrdersForBrandInsuranceSpreadUsingGET
+      parameters:
+      - name: geniemodeEntityName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: maxDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: minDate
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: parentOrderId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SpreadEligibleOrdersResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/path/risk/order/excel-query:
+    get:
+      tags:
+      - order-risk-controller
+      summary: getOrderRiskExcelQuery
+      operationId: getOrderRiskExcelQueryUsingGET
+      parameters:
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: geniemodeEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: pageType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: riskStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^(approved|pending|rejected|autoApproved)$
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/path/risk/order/index:
+    get:
+      tags:
+      - order-risk-controller
+      summary: getRiskOrderListing
+      operationId: getRiskOrderListingUsingGET
+      parameters:
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: geniemodeEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: pageType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: riskStatus
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^(approved|pending|rejected|autoApproved)$
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/path/risk/order/move-to-risk-pending:
+    put:
+      tags:
+      - order-risk-controller
+      summary: moveToRiskPending
+      operationId: moveToRiskPendingUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRiskStatusRequestPayload'
+        description: orderRiskStatusRequestPayload
+        required: true
+  /api/path/risk/order/status/index:
+    get:
+      tags:
+      - order-risk-controller
+      summary: getOrderRiskStatusListing
+      operationId: getOrderRiskStatusListingUsingGET
+      parameters:
+      - name: brandId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: companyId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: geniemodeEntityIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/path/risk/order/update-secured-amount:
+    put:
+      tags:
+      - order-risk-controller
+      summary: updateSecuredAmount
+      operationId: updateSecuredAmountUsingPUT
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderSecuredAmountRequestPayload'
+        description: orderRiskStatusRequestPayload
+        required: true
+  /api/path/risk/order/{brandId}/approvedBrandOrders:
+    get:
+      tags:
+      - order-risk-controller
+      summary: getRiskOrderListing
+      operationId: getRiskOrderListingUsingGET_1
+      parameters:
+      - name: brandId
+        in: path
+        description: brandId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/path/risk/order/{orderId}:
+    get:
+      tags:
+      - order-risk-controller
+      summary: getOrderRiskDetails
+      operationId: getOrderRiskDetailsUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderRiskResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/path/risk/order/{orderId}/history:
+    get:
+      tags:
+      - order-risk-controller
+      summary: getOrderRiskHistory
+      operationId: getOrderRiskHistoryUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderRiskStatus'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/path/risk/order/{orderId}/{status}:
+    put:
+      tags:
+      - order-risk-controller
+      summary: updateRiskStatus
+      operationId: updateRiskStatusUsingPUT
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: status
+        in: path
+        description: status
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRiskStatusRequestPayload'
+        description: orderRiskStatusRequestPayload
+        required: true
+  /api/path/risk/order/{status}:
+    put:
+      tags:
+      - order-risk-controller
+      summary: updateMultiRiskStatus
+      operationId: updateMultiRiskStatusUsingPUT
+      parameters:
+      - name: status
+        in: path
+        description: status
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRiskStatusRequestPayload'
+        description: orderRiskStatusRequestPayload
+        required: true
+components:
+  schemas:
+    SpreadEligibleOrdersResponse:
+      type: object
+      properties:
+        order_amount_in_dollar:
+          type: number
+        order_date:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        parent_order_id:
+          type: integer
+          format: int64
+      title: SpreadEligibleOrdersResponse
+    OrderSecuredAmountRequestPayload:
+      type: object
+      properties:
+        insured_orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderInsuredAmountDTO'
+      title: OrderSecuredAmountRequestPayload
+    OrderRiskStatus:
+      type: object
+      properties:
+        approval_status:
+          type: string
+        approval_type:
+          type: string
+        approved_at:
+          type: integer
+          format: int64
+        approved_by:
+          type: string
+        comment:
+          type: string
+        document_url:
+          type: string
+        insurance:
+          $ref: '#/components/schemas/LmsInsuredOrderResponse'
+        order_amount_in_dollar:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+        risk_type:
+          type: string
+        secured_amount:
+          type: number
+        unsecured_amount:
+          type: number
+      title: OrderRiskStatus
+    OrderWiseApprovalReason:
+      type: object
+      properties:
+        approval_reasons:
+          type: array
+          items:
+            type: string
+        order_id:
+          type: integer
+          format: int64
+      title: OrderWiseApprovalReason
+    PendingBrandInsuranceResponse:
+      type: object
+      properties:
+        allocated_amount:
+          type: number
+        geniemode_entity:
+          type: string
+        id:
+          type: integer
+          format: int64
+        insurance_company:
+          type: string
+        pending_amount:
+          type: number
+        policy_id:
+          type: string
+        policy_renewal_date:
+          type: integer
+          format: int64
+        policy_start_date:
+          type: integer
+          format: int64
+      title: PendingBrandInsuranceResponse
+    LmsInsuredOrderResponse:
+      type: object
+      properties:
+        insurance_company:
+          type: string
+        insurance_id:
+          type: integer
+          format: int64
+        insured_amount:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+        parent_order_id:
+          type: integer
+          format: int64
+        policy_id:
+          type: string
+        policy_renewal_date:
+          type: integer
+          format: int64
+        policy_start_date:
+          type: integer
+          format: int64
+      title: LmsInsuredOrderResponse
+    OrderRiskResponsePayload:
+      type: object
+      properties:
+        assignee:
+          type: string
+        assignee_id:
+          type: integer
+          format: int64
+        brand_id:
+          type: integer
+          format: int64
+        brand_name:
+          type: string
+        buyer_days:
+          type: integer
+          format: int64
+        buyer_payment_type:
+          type: string
+        buyer_shipment_term:
+          type: string
+        company_name:
+          type: string
+        factory_payment_type:
+          type: string
+        geniemode_entity_name:
+          type: string
+        lead_id:
+          type: integer
+          format: int64
+        manufacturer:
+          type: string
+        manufacturer_days:
+          type: integer
+          format: int64
+        model_type:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        order_risk_status_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderRiskStatus'
+        order_total_amount_including_child_in_dollar:
+          type: number
+        order_wise_approval_reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderWiseApprovalReason'
+        pending_brand_insurances:
+          type: array
+          items:
+            $ref: '#/components/schemas/PendingBrandInsuranceResponse'
+        shipment_mode:
+          type: string
+      title: OrderRiskResponsePayload
+    OrderRiskStatusRequestPayload:
+      type: object
+      properties:
+        comment:
+          type: string
+        document_url:
+          type: string
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: OrderRiskStatusRequestPayload
+    OrderInsuredAmountDTO:
+      type: object
+      properties:
+        order_amount_in_dollar:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+      title: OrderInsuredAmountDTO

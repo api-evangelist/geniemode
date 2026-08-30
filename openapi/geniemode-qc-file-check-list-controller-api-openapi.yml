@@ -1,0 +1,850 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Qc File Check List Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: qc-file-check-list-controller
+  description: QC File Check List Controller
+paths:
+  /api/v1/path/qc_file_check_list:
+    get:
+      tags:
+      - qc-file-check-list-controller
+      summary: index
+      operationId: indexUsingGET_28
+      parameters:
+      - name: completionDateEnd
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: completionDateStart
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: executiveList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: qcManager
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: requestedDateEnd
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: requestedDateStart
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: rmList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^(approved|pending|rejected)$
+      - name: vp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/qc_file_check_list/docs:
+    get:
+      tags:
+      - qc-file-check-list-controller
+      summary: getDocsOnDocType
+      operationId: getDocsOnDocTypeUsingGET
+      parameters:
+      - name: docTypeName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QcFileCheckListDocsResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/qc_file_check_list/docs/{orderId}/{docTypeName}:
+    get:
+      tags:
+      - qc-file-check-list-controller
+      summary: getDocsOnDocType
+      operationId: getDocsOnDocTypeUsingGET_1
+      parameters:
+      - name: docTypeName
+        in: path
+        description: docTypeName
+        required: true
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QcFileCheckListDocsResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/qc_file_check_list/order/{orderId}:
+    get:
+      tags:
+      - qc-file-check-list-controller
+      summary: get
+      operationId: getUsingGET_8
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseQcFileCheckListPayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/qc_file_check_list/updateByQc/{qcCheckListId}:
+    put:
+      tags:
+      - qc-file-check-list-controller
+      summary: updateByQc
+      operationId: updateByQcUsingPUT
+      parameters:
+      - name: qcCheckListId
+        in: path
+        description: qcCheckListId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestQcFileCheckListByQcPayload'
+        description: request
+        required: true
+  /api/v1/path/qc_file_check_list/{orderId}:
+    post:
+      tags:
+      - qc-file-check-list-controller
+      summary: submit
+      operationId: submitUsingPOST
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseQcFileCheckListPayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestQcFileCheckListPayload'
+        description: request
+        required: true
+  /api/v1/path/qc_file_check_list/{qcCheckListId}:
+    get:
+      tags:
+      - qc-file-check-list-controller
+      summary: getByQcFileCheckListId
+      operationId: getByQcFileCheckListIdUsingGET
+      parameters:
+      - name: qcCheckListId
+        in: path
+        description: qcCheckListId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseQcFileCheckListPayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - qc-file-check-list-controller
+      summary: update
+      operationId: updateUsingPUT_11
+      parameters:
+      - name: qcCheckListId
+        in: path
+        description: qcCheckListId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseQcFileCheckListPayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestQcFileCheckListPayload'
+        description: request
+        required: true
+    delete:
+      tags:
+      - qc-file-check-list-controller
+      summary: deleteCheckList
+      operationId: deleteCheckListUsingDELETE
+      parameters:
+      - name: qcCheckListId
+        in: path
+        description: qcCheckListId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/path/qc_file_check_list/{qcCheckListId}/add-order/{orderId}:
+    put:
+      tags:
+      - qc-file-check-list-controller
+      summary: addOrderToQcCheckList
+      operationId: addOrderToQcCheckListUsingPUT
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: qcCheckListId
+        in: path
+        description: qcCheckListId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseQcFileCheckListPayload'
+  /api/v1/path/qc_file_check_list/{qcCheckListId}/add-orders:
+    put:
+      tags:
+      - qc-file-check-list-controller
+      summary: addOrdersToQcCheckList
+      operationId: addOrdersToQcCheckListUsingPUT
+      parameters:
+      - name: qcCheckListId
+        in: path
+        description: qcCheckListId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddOrdersToQcCheckListResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddOrdersToQcCheckListRequestPayload'
+        description: request
+        required: true
+  /api/v1/path/qc_file_check_list/{qcCheckListId}/copy:
+    post:
+      tags:
+      - qc-file-check-list-controller
+      summary: copyToOrders
+      operationId: copyToOrdersUsingPOST
+      parameters:
+      - name: qcCheckListId
+        in: path
+        description: qcCheckListId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyQcFileCheckListResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyQcFileCheckListRequestPayload'
+        description: request
+        required: true
+  /api/v1/path/qc_file_check_list/{qcCheckListId}/copyable-orders:
+    get:
+      tags:
+      - qc-file-check-list-controller
+      summary: getCopyableOrders
+      operationId: getCopyableOrdersUsingGET
+      parameters:
+      - name: qcCheckListId
+        in: path
+        description: qcCheckListId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int64
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/qc_file_check_list/{qcCheckListId}/eligible-orders:
+    get:
+      tags:
+      - qc-file-check-list-controller
+      summary: getDocsOnDocType
+      operationId: getDocsOnDocTypeUsingGET_2
+      parameters:
+      - name: qcCheckListId
+        in: path
+        description: qcCheckListId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int64
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/qc_file_check_list/{qcCheckListId}/remove-order/{orderId}:
+    delete:
+      tags:
+      - qc-file-check-list-controller
+      summary: removeOrderFromQcCheckList
+      operationId: removeOrderFromQcCheckListUsingDELETE
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: qcCheckListId
+        in: path
+        description: qcCheckListId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseQcFileCheckListPayload'
+  /api/v1/path/qc_file_check_list/{qcCheckListId}/version/{versionId}:
+    get:
+      tags:
+      - qc-file-check-list-controller
+      summary: getVersions
+      operationId: getVersionsUsingGET
+      parameters:
+      - name: qcCheckListId
+        in: path
+        description: qcCheckListId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: versionId
+        in: path
+        description: versionId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseQcFileCheckListPayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/qc_file_check_list/{qcCheckListId}/versions:
+    get:
+      tags:
+      - qc-file-check-list-controller
+      summary: getVersions
+      operationId: getVersionsUsingGET_1
+      parameters:
+      - name: qcCheckListId
+        in: path
+        description: qcCheckListId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResponseQcFileCheckListVersionsPayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    QcFileCheckListSubPointSampleResponse:
+      type: object
+      properties:
+        item:
+          type: string
+        sub_points:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcFileCheckListSubPointSampleResponse'
+      title: QcFileCheckListSubPointSampleResponse
+    QcFileCheckListItemDocPayload:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        url:
+          type: string
+      title: QcFileCheckListItemDocPayload
+    ResponseQcFileCheckListPayload:
+      type: object
+      properties:
+        approved_once:
+          type: boolean
+        assignee:
+          $ref: '#/components/schemas/UserDTO'
+        assignee_id:
+          type: integer
+          format: int64
+        buyer_delivery_date_map:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        buyer_po_list:
+          type: array
+          items:
+            type: string
+        comments:
+          type: string
+        completion_date:
+          type: integer
+          format: int64
+        destination:
+          type: string
+        executive:
+          $ref: '#/components/schemas/UserDTO'
+        executive_id:
+          type: integer
+          format: int64
+        file_handover_date_map:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        id:
+          type: integer
+          format: int64
+        images:
+          type: array
+          items:
+            type: string
+        is_otp_verified:
+          type: boolean
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestQcFileCheckListItemsPayload'
+        manufacturer:
+          type: string
+        ops_assignee:
+          $ref: '#/components/schemas/UserDTO'
+        ops_assignee_id:
+          type: integer
+          format: int64
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        order_quantity:
+          type: integer
+          format: int64
+        product_description:
+          type: string
+        product_name:
+          type: string
+        rejected_reason:
+          type: string
+        requested_by:
+          $ref: '#/components/schemas/UserDTO'
+        requested_by_id:
+          type: integer
+          format: int64
+        requested_date:
+          type: integer
+          format: int64
+        sku:
+          type: string
+        status:
+          type: string
+        style_code:
+          type: string
+        style_names:
+          type: string
+        total_styles:
+          type: integer
+          format: int32
+      title: ResponseQcFileCheckListPayload
+    AddOrdersToQcCheckListResponsePayload:
+      type: object
+      properties:
+        checklist:
+          $ref: '#/components/schemas/ResponseQcFileCheckListPayload'
+        qc_check_list_id:
+          type: integer
+          format: int64
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderResult'
+      title: AddOrdersToQcCheckListResponsePayload
+    CopyQcFileCheckListResponsePayload:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetResult'
+        source_qc_check_list_id:
+          type: integer
+          format: int64
+      title: CopyQcFileCheckListResponsePayload
+    QcCheckListDocsResponsePayload:
+      type: object
+      properties:
+        doc_url:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        type:
+          type: string
+      title: QcCheckListDocsResponsePayload
+    AddOrdersToQcCheckListRequestPayload:
+      type: object
+      properties:
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: AddOrdersToQcCheckListRequestPayload
+    CopyQcFileCheckListRequestPayload:
+      type: object
+      properties:
+        target_order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: CopyQcFileCheckListRequestPayload
+    UserDTO:
+      type: object
+      properties:
+        country_code:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        phone_number:
+          type: string
+        username:
+          type: string
+      title: UserDTO
+    OrderResult:
+      type: object
+      properties:
+        message:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+          - ADDED
+          - ALREADY_HAS_CHECKLIST
+          - ALREADY_LINKED
+          - INELIGIBLE
+      title: OrderResult
+    ResponseQcFileCheckListVersionsPayload:
+      type: object
+      properties:
+        approved_at:
+          type: string
+          format: date-time
+        approved_by:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: ResponseQcFileCheckListVersionsPayload
+    RequestQcFileCheckListItemsPayload:
+      type: object
+      properties:
+        check_list_item:
+          type: string
+        check_list_item_id:
+          type: integer
+          format: int64
+        date_in_file:
+          type: integer
+          format: int64
+        doc_type_name:
+          type: string
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcFileCheckListItemDocPayload'
+        expected_date_in_file:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        is_active:
+          type: boolean
+        is_available:
+          type: boolean
+        remarks:
+          type: string
+        sub_points:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcFileCheckListSubPointSampleResponse'
+      title: RequestQcFileCheckListItemsPayload
+    RequestQcFileCheckListPayload:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        is_submittable:
+          type: boolean
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestQcFileCheckListItemsPayload'
+      title: RequestQcFileCheckListPayload
+    RequestQcFileCheckListByQcPayload:
+      type: object
+      properties:
+        comments:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestQcFileCheckListItemsPayload'
+        rejected_reason:
+          type: string
+        status:
+          type: string
+          pattern: ^(REJECTED|APPROVED)$
+      title: RequestQcFileCheckListByQcPayload
+    QcFileCheckListDocsResponsePayload:
+      type: object
+      properties:
+        doc_urls:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcCheckListDocsResponsePayload'
+        type:
+          type: string
+      title: QcFileCheckListDocsResponsePayload
+    TargetResult:
+      type: object
+      properties:
+        copied_qc_check_list_id:
+          type: integer
+          format: int64
+        message:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+          - CONFLICT
+          - COPIED
+          - INELIGIBLE
+          - ORDER_NOT_FOUND
+      title: TargetResult

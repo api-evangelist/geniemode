@@ -1,0 +1,347 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Admin API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: admin
+  description: Admin
+paths:
+  /api/v1/siren-events/admin/events:
+    get:
+      tags:
+      - admin
+      summary: events
+      operationId: eventsUsingGET
+      parameters:
+      - name: limit
+        in: query
+        description: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: sirenType
+        in: query
+        description: sirenType
+        required: false
+        schema:
+          type: string
+      - name: userId
+        in: query
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserSirenEventLog'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/siren-events/admin/performance:
+    get:
+      tags:
+      - admin
+      summary: performance
+      operationId: performanceUsingGET
+      parameters:
+      - name: departmentId
+        in: query
+        description: departmentId
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: eventType
+        in: query
+        description: eventType
+        required: false
+        schema:
+          type: string
+      - name: fromEpochMillis
+        in: query
+        description: fromEpochMillis
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: sirenType
+        in: query
+        description: sirenType
+        required: false
+        schema:
+          type: string
+      - name: toEpochMillis
+        in: query
+        description: toEpochMillis
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SirenPerformanceRowDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/user-lock-state/admin:
+    get:
+      tags:
+      - admin
+      summary: list
+      operationId: listUsingGET
+      parameters:
+      - name: key
+        in: query
+        description: key
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - admin
+      summary: setState
+      operationId: setStateUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLockState'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetUserLockStateRequestPayload'
+        description: requestPayload
+        required: true
+  /api/v1/user-lock-state/admin/{userId}:
+    get:
+      tags:
+      - admin
+      summary: getRawStates
+      operationId: getRawStatesUsingGET
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserLockState'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    delete:
+      tags:
+      - admin
+      summary: clearState
+      operationId: clearStateUsingDELETE
+      parameters:
+      - name: key
+        in: query
+        description: key
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/user-lock-state/admin/{userId}/effective:
+    get:
+      tags:
+      - admin
+      summary: getEffectiveStates
+      operationId: getEffectiveStatesUsingGET
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    UserLockState:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        expiresAt:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        keyName:
+          type: string
+        userId:
+          type: integer
+          format: int64
+        value:
+          $ref: '#/components/schemas/JsonNode'
+      title: UserLockState
+    UserSirenEventLog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        eventType:
+          type: string
+        id:
+          type: integer
+          format: int64
+        metrics:
+          $ref: '#/components/schemas/JsonNode'
+        occurredAt:
+          type: integer
+          format: int64
+        path:
+          type: string
+        sirenType:
+          type: string
+        userId:
+          type: integer
+          format: int64
+      title: UserSirenEventLog
+    SirenPerformanceRowDto:
+      type: object
+      properties:
+        by_siren:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+        departments:
+          type: array
+          items:
+            type: string
+        dismiss_rate_pct:
+          type: number
+          format: double
+        dismissed:
+          type: integer
+          format: int64
+        last_event_at:
+          type: integer
+          format: int64
+        lock_value:
+          $ref: '#/components/schemas/JsonNode'
+        locked_now:
+          type: boolean
+        locks_engaged:
+          type: integer
+          format: int64
+        locks_released:
+          type: integer
+          format: int64
+        presented:
+          type: integer
+          format: int64
+        roles:
+          type: array
+          items:
+            type: string
+        snoozed:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        username:
+          type: string
+      title: SirenPerformanceRowDto
+    SetUserLockStateRequestPayload:
+      type: object
+      properties:
+        duration_seconds:
+          type: integer
+          format: int64
+        key:
+          type: string
+        user_id:
+          type: integer
+          format: int64
+        value:
+          type: object
+      title: SetUserLockStateRequestPayload
+    JsonNode:
+      type: object
+      title: JsonNode

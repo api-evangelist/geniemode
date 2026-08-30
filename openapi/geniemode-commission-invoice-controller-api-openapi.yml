@@ -1,0 +1,1528 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Commission Invoice Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: commission-invoice-controller
+  description: Commission Invoice Controller
+paths:
+  /api/v1/commission/invoice:
+    get:
+      tags:
+      - commission-invoice-controller
+      summary: index
+      operationId: indexUsingGET_2
+      parameters:
+      - name: brandIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: companyIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: companyName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: endApprovedTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: endRaisedOnTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: geniemodeEntityId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: paymentAddedEndTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentAddedStartTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentCompleted
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: paymentEndTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: paymentStartTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: startApprovedTs
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: startRaisedOnTimestamp
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^(approved|rejected|pending)$
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - commission-invoice-controller
+      summary: createCommissionOrderInvoice
+      operationId: createCommissionOrderInvoiceUsingPOST_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommissionModelFinalInvoiceRequestPayload'
+        description: createInvoiceRequestPayload
+        required: true
+  /api/v1/commission/invoice/buyer/pos/{finalInvoiceId}:
+    get:
+      tags:
+      - commission-invoice-controller
+      summary: getFinalInvoiceCommissionBuyerPos
+      operationId: getFinalInvoiceCommissionBuyerPosUsingGET
+      parameters:
+      - name: finalInvoiceId
+        in: path
+        description: finalInvoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderDetailBuyerPODocWithOrdersDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/commission/invoice/copy:
+    post:
+      tags:
+      - commission-invoice-controller
+      summary: createCommissionOrderInvoice
+      operationId: createCommissionOrderInvoiceUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyCommissionModelFinalInvoiceRequestPayload'
+        description: copyPayload
+        required: true
+  /api/v1/commission/invoice/find-similar-orders-by-shipment:
+    get:
+      tags:
+      - commission-invoice-controller
+      summary: findSimilarOrdersToShipmentCommissionModel
+      operationId: findSimilarOrdersToShipmentCommissionModelUsingGET
+      parameters:
+      - name: billToType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: shipmentId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/commission/invoice/find-similar-shipments/{shipmentId}/order/{orderId}:
+    get:
+      tags:
+      - commission-invoice-controller
+      summary: findSimilarShipmentToGivenShipmentAndCommissionOrder
+      operationId: findSimilarShipmentToGivenShipmentAndCommissionOrderUsingGET
+      parameters:
+      - name: billToType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: shipmentId
+        in: path
+        description: shipmentId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ShipmentInInvoiceResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/commission/invoice/get-order-eligible-shipments/{orderId}/{billToType}:
+    get:
+      tags:
+      - commission-invoice-controller
+      summary: getCommissionOrderEligibleShipments
+      operationId: getCommissionOrderEligibleShipmentsUsingGET
+      parameters:
+      - name: billToType
+        in: path
+        description: billToType
+        required: true
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ShipmentInInvoiceResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/commission/invoice/get-shipment-invoice-data:
+    get:
+      tags:
+      - commission-invoice-controller
+      summary: getShipmentInvoiceData
+      operationId: getShipmentInvoiceDataUsingGET
+      parameters:
+      - name: billToType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: shipmentIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/ShipmentInCommissionInvoiceDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/commission/invoice/offline-invoice:
+    post:
+      tags:
+      - commission-invoice-controller
+      summary: createOfflineInvoice
+      operationId: createOfflineInvoiceUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFinalInvoiceRequestPayload'
+        description: payload
+        required: true
+  /api/v1/commission/invoice/orders-eligible-for-invoice:
+    get:
+      tags:
+      - commission-invoice-controller
+      summary: findOrdersEligibleForInvoiceCommissionModel
+      operationId: findOrdersEligibleForInvoiceCommissionModelUsingGET
+      parameters:
+      - name: billToType
+        in: query
+        required: true
+        schema:
+          type: string
+          pattern: ^(buyer|factory)$
+      - name: geniemodeEntityId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: shipmentId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/commission/invoice/weightedConversion:
+    put:
+      tags:
+      - commission-invoice-controller
+      summary: calculateWeightedAvgForConversionRate
+      operationId: calculateWeightedAvgForConversionRateUsingPUT
+      parameters:
+      - name: ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/commission/invoice/{invoiceId}:
+    get:
+      tags:
+      - commission-invoice-controller
+      summary: getFinalInvoiceCommission
+      operationId: getFinalInvoiceCommissionUsingGET
+      parameters:
+      - name: invoiceId
+        in: path
+        description: invoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommissionModelFinalInvoiceResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    put:
+      tags:
+      - commission-invoice-controller
+      summary: editCommissionOrderInvoice
+      operationId: editCommissionOrderInvoiceUsingPUT
+      parameters:
+      - name: invoiceId
+        in: path
+        description: invoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommissionModelFinalInvoiceRequestPayload'
+        description: createInvoiceRequestPayload
+        required: true
+    delete:
+      tags:
+      - commission-invoice-controller
+      summary: delete
+      operationId: deleteUsingDELETE
+      parameters:
+      - name: invoiceId
+        in: path
+        description: invoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/commission/invoice/{invoiceId}/buyerDocs:
+    get:
+      tags:
+      - commission-invoice-controller
+      summary: getBuyerDocs
+      operationId: getBuyerDocsUsingGET
+      parameters:
+      - name: invoiceId
+        in: path
+        description: invoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvoiceBuyerDocsResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/commission/invoice/{invoiceId}/docs:
+    get:
+      tags:
+      - commission-invoice-controller
+      summary: getInvoiceDocs
+      operationId: getInvoiceDocsUsingGET
+      parameters:
+      - name: invoiceId
+        in: path
+        description: invoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/commission/invoice/{invoiceId}/factoryDocs:
+    get:
+      tags:
+      - commission-invoice-controller
+      summary: getFactoryDocs
+      operationId: getFactoryDocsUsingGET
+      parameters:
+      - name: invoiceId
+        in: path
+        description: invoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvoiceFactoryDocsResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/commission/invoice/{invoiceId}/pdf/data:
+    get:
+      tags:
+      - commission-invoice-controller
+      summary: getCommissionInvoicePdfData
+      operationId: getCommissionInvoicePdfDataUsingGET
+      parameters:
+      - name: invoiceId
+        in: path
+        description: invoiceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommissionInvoicePdfDataResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    InvoiceFactoryDocsResponsePayload:
+      type: object
+      properties:
+        order_id:
+          type: integer
+          format: int64
+        response:
+          $ref: '#/components/schemas/FactoryDocsResponsePayload'
+      title: InvoiceFactoryDocsResponsePayload
+    OrderDetailBuyerPODocWithOrdersDto:
+      type: object
+      properties:
+        buyer_doc:
+          $ref: '#/components/schemas/OrderDocDto'
+        buyer_po_id:
+          type: integer
+          format: int64
+        buyer_po_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_ids:
+          type: array
+          uniqueItems: true
+          items:
+            type: integer
+            format: int64
+        po_type:
+          type: string
+      title: OrderDetailBuyerPODocWithOrdersDto
+    CommissionInvoiceVariantsDto:
+      type: object
+      properties:
+        buyer_currency:
+          type: string
+        buyer_currency_price:
+          type: number
+        buyer_currency_price_total:
+          type: number
+        color:
+          type: string
+        commission_amount_buyer_currency:
+          type: number
+        commission_amount_geniemode_currency:
+          type: number
+        commission_percent:
+          type: number
+        discount_amount:
+          type: number
+        discount_percentage:
+          type: number
+        geniemode_currency_price:
+          type: number
+        geniemode_currency_price_total:
+          type: number
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        order_variant_quantity:
+          type: integer
+          format: int64
+        parent_order_id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        rate_of_exchange:
+          type: number
+        size:
+          type: string
+        sku:
+          type: string
+        sku_data:
+          type: object
+        style_code:
+          type: string
+        supplier_invoice_nos:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        uom:
+          type: string
+        variant_buyer_po_mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceVariantBuyerPoMappingDto'
+        variant_id:
+          type: integer
+          format: int64
+      title: CommissionInvoiceVariantsDto
+    CommissionInvoicePdfInvoicesResponsePayload:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        invoice_amount_dollar:
+          type: number
+        invoice_amount_geniemode_entity_currency:
+          type: number
+        po_nos:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        style_codes:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        supplier_invoice_nos:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+      title: CommissionInvoicePdfInvoicesResponsePayload
+    CreateFinalInvoiceRequestPayload:
+      type: object
+      properties:
+        bill_to_type:
+          type: string
+        currency:
+          type: string
+        discount_amount:
+          type: number
+        discount_percentage:
+          type: number
+        document_amount:
+          type: number
+        geniemode_entity_conversion:
+          type: number
+        internal_invoice_no:
+          type: string
+        invoice_doc_url:
+          type: string
+        invoice_no:
+          type: string
+        invoice_orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateFinalInvoiceOrderRequestPayload'
+        invoice_type:
+          type: string
+        raised_on_timestamp:
+          type: integer
+          format: int64
+        status:
+          type: string
+        type:
+          type: string
+      title: CreateFinalInvoiceRequestPayload
+    ManufacturerDetailMiniDto:
+      type: object
+      properties:
+        company_registered_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: ManufacturerDetailMiniDto
+    OrderDocDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        doc_no:
+          type: string
+        doc_type:
+          type: string
+        docs:
+          $ref: '#/components/schemas/DocDto'
+        id:
+          type: integer
+          format: int64
+        is_additional_doc:
+          type: boolean
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+      title: OrderDocDto
+    InvoiceVariantBuyerPoMappingDto:
+      type: object
+      properties:
+        buyer_currency_price_total:
+          type: number
+        commission_amount_buyer_currency:
+          type: number
+        commission_amount_geniemode_currency:
+          type: number
+        currency_price_total:
+          type: number
+        factory_currency_price_total:
+          type: number
+        geniemode_currency_price_total:
+          type: number
+        id:
+          type: integer
+          format: int64
+        locked_quantity:
+          type: integer
+          format: int64
+        order_buyer_po:
+          $ref: '#/components/schemas/OrderBuyerPoBaseDto'
+        quantity:
+          type: integer
+          format: int64
+      title: InvoiceVariantBuyerPoMappingDto
+    ShipmentInCommissionInvoiceDto:
+      type: object
+      properties:
+        buyer_currency:
+          type: string
+        buyer_type:
+          type: string
+        geniemode_currency:
+          type: string
+        id:
+          type: integer
+          format: int64
+        model_type:
+          type: string
+        shipment_mode:
+          type: string
+        total_shipment_currency_price:
+          type: number
+        total_shipment_quantity:
+          type: integer
+          format: int64
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceVariantsDto'
+      title: ShipmentInCommissionInvoiceDto
+    CommissionModelFinalInvoiceResponsePayload:
+      type: object
+      properties:
+        allow_conversion_change:
+          type: boolean
+        bank:
+          $ref: '#/components/schemas/BankResponsePayload'
+        bill_to_address:
+          type: object
+        bill_to_id:
+          type: integer
+          format: int64
+        bill_to_type:
+          type: string
+        buyer_currency_amounts:
+          type: object
+          additionalProperties:
+            type: number
+        buyer_type:
+          type: string
+        cgst_amount:
+          type: number
+        currency:
+          type: string
+        currency_exchange_rate:
+          type: number
+        declaration:
+          type: string
+        declaration_addendum:
+          type: string
+        discount:
+          $ref: '#/components/schemas/FinalInvoiceDiscountDto'
+        finance_remark:
+          type: string
+        generate_invoice_pdf:
+          type: boolean
+        geniemode_entity:
+          $ref: '#/components/schemas/GeniemodeEntityDto'
+        geniemode_entity_conversion:
+          type: number
+        id:
+          type: integer
+          format: int64
+        igst_amount:
+          type: number
+        internal_invoice_no:
+          type: string
+        invoice_doc_url:
+          type: string
+        invoice_no:
+          type: string
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionModelInvoiceResponsePayload'
+        lead_info:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/LeadsLiteResponse'
+        logistics_remark:
+          type: string
+        manufacturer_info:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ManufacturerDetailMiniDto'
+        model_type:
+          type: string
+        next_invoice_no:
+          type: string
+        raised_on_timestamp:
+          type: integer
+          format: int64
+        sgst_amount:
+          type: number
+        status:
+          type: string
+        status_change_date:
+          type: integer
+          format: int64
+        total_amount:
+          type: number
+        total_amount_excluding_gst:
+          type: number
+        total_buying_price_in_geniemode_currency:
+          type: number
+        total_factory_amount:
+          type: number
+        total_quantity:
+          type: integer
+          format: int64
+        type:
+          type: string
+      title: CommissionModelFinalInvoiceResponsePayload
+    OrderBuyerPoBaseDto:
+      type: object
+      properties:
+        buyer_po_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: OrderBuyerPoBaseDto
+    LeadsLiteResponse:
+      type: object
+      properties:
+        brand_id:
+          type: integer
+          format: int64
+        brand_name:
+          type: string
+        client_email:
+          type: string
+        client_id:
+          type: integer
+          format: int64
+        company_name:
+          type: string
+        lead_contact:
+          type: string
+        lead_email:
+          type: string
+        lead_id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: LeadsLiteResponse
+    CreateCommissionModelFinalInvoiceRequestPayload:
+      type: object
+      required:
+      - bill_to_id
+      - bill_to_type
+      - geniemode_entity_id
+      properties:
+        bill_to_id:
+          type: integer
+          format: int64
+        bill_to_type:
+          type: string
+          pattern: ^(buyer|factory)$
+        declaration:
+          type: string
+        declaration_addendum:
+          type: string
+        geniemode_entity_id:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateCommissionModelInvoiceRequestPayload'
+        lead_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        manufacturer_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: CreateCommissionModelFinalInvoiceRequestPayload
+    GeniemodeEntityDto:
+      type: object
+      properties:
+        address:
+          type: object
+        address_id:
+          type: integer
+          format: int64
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        compliance:
+          type: string
+        currency:
+          type: string
+        id:
+          type: integer
+          format: int64
+        invoice_declaration:
+          type: string
+        label:
+          type: string
+        legal_name:
+          type: string
+        tally_currency:
+          type: string
+        value:
+          type: string
+      title: GeniemodeEntityDto
+    DocDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+      title: DocDto
+    CreateCommissionModelInvoiceRequestPayload:
+      type: object
+      properties:
+        bls:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
+        id:
+          type: integer
+          format: int64
+        shipment_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        shipping_docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
+        supplier_invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
+      title: CreateCommissionModelInvoiceRequestPayload
+    BuyerDocsResponsePayload:
+      type: object
+      properties:
+        additional_docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDocDto'
+        buyer_po_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetailBuyerPODocResponseDto'
+        confirmation_mail_doc_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDocDto'
+        pi_id:
+          type: integer
+          format: int64
+      title: BuyerDocsResponsePayload
+    BankResponsePayload:
+      type: object
+      properties:
+        account_no:
+          type: string
+        address:
+          type: object
+        address_id:
+          type: integer
+          format: int64
+        bank_routing_number:
+          type: string
+        beneficiary_address:
+          type: object
+        beneficiary_address_id:
+          type: integer
+          format: int64
+        beneficiary_name:
+          type: string
+        entity_id:
+          type: string
+        entity_type:
+          type: string
+        iban_aba:
+          type: string
+        id:
+          type: integer
+          format: int64
+        ifsc:
+          type: string
+        name:
+          type: string
+        sort_code:
+          type: string
+        sub_type:
+          type: string
+        swift:
+          type: string
+      title: BankResponsePayload
+    InvoiceBuyerDocsResponsePayload:
+      type: object
+      properties:
+        order_id:
+          type: integer
+          format: int64
+        response:
+          $ref: '#/components/schemas/BuyerDocsResponsePayload'
+      title: InvoiceBuyerDocsResponsePayload
+    FinalInvoiceDiscountDto:
+      type: object
+      properties:
+        discount_amount:
+          type: number
+        discount_percentage:
+          type: number
+        type:
+          type: string
+      title: FinalInvoiceDiscountDto
+    CommissionInvoicePdfDataResponsePayload:
+      type: object
+      properties:
+        bank:
+          $ref: '#/components/schemas/BankResponsePayload'
+        bill_to_address:
+          type: object
+        bill_to_id:
+          type: integer
+          format: int64
+        bill_to_type:
+          type: string
+        cgst_amount:
+          type: number
+        commission_amount:
+          type: number
+        commission_amount_excluding_gst:
+          type: number
+        discount:
+          $ref: '#/components/schemas/FinalInvoiceDiscountDto'
+        geniemode_entity:
+          $ref: '#/components/schemas/GeniemodeEntityDto'
+        igst_amount:
+          type: number
+        internal_invoice_no:
+          type: string
+        invoice_no:
+          type: string
+        invoicee_name:
+          type: string
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoicePdfInvoicesResponsePayload'
+        order_ids:
+          type: array
+          uniqueItems: true
+          items:
+            type: integer
+            format: int64
+        payment_terms:
+          type: string
+        po_nos:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        raised_on_timestamp:
+          type: integer
+          format: int64
+        sgst_amount:
+          type: number
+        total_amount_percentage:
+          type: number
+        total_order_amount:
+          type: number
+        total_quantity:
+          type: integer
+          format: int64
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceVariantsDto'
+      title: CommissionInvoicePdfDataResponsePayload
+    CommissionModelInvoiceResponsePayload:
+      type: object
+      properties:
+        bls:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
+        geniemode_entity:
+          $ref: '#/components/schemas/GeniemodeEntityDto'
+        id:
+          type: integer
+          format: int64
+        shipments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentInCommissionInvoiceDto'
+        shipping_docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
+        status:
+          type: string
+        status_change_date:
+          type: integer
+          format: int64
+        supplier_invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
+        total_invoice_amount:
+          type: number
+        total_invoice_quantity:
+          type: integer
+          format: int64
+        type:
+          type: string
+      title: CommissionModelInvoiceResponsePayload
+    CopyCommissionModelFinalInvoiceRequestPayload:
+      type: object
+      required:
+      - bill_to_id
+      - bill_to_type
+      properties:
+        bill_to_id:
+          type: integer
+          format: int64
+        bill_to_type:
+          type: string
+          pattern: ^(buyer|factory)$
+        final_invoice_id:
+          type: integer
+          format: int64
+      title: CopyCommissionModelFinalInvoiceRequestPayload
+    FactoryDocsResponsePayload:
+      type: object
+      properties:
+        distro_docs:
+          type: array
+          items:
+            type: string
+        factory_email_docs:
+          type: array
+          items:
+            type: string
+        factory_invoice_docs:
+          type: array
+          items:
+            type: string
+        invoice_docs:
+          type: array
+          items:
+            type: string
+        packing_list_docs:
+          type: array
+          items:
+            type: string
+        payment_docs:
+          type: array
+          items:
+            type: string
+        po_id:
+          type: integer
+          format: int64
+        po_information_docs:
+          type: array
+          items:
+            type: string
+      title: FactoryDocsResponsePayload
+    CommissionInvoiceDocsDto:
+      type: object
+      properties:
+        document_name:
+          type: string
+        document_type:
+          type: string
+        document_url:
+          type: string
+        id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+      title: CommissionInvoiceDocsDto
+    OrderDetailBuyerPODocResponseDto:
+      type: object
+      properties:
+        buyer_doc:
+          $ref: '#/components/schemas/OrderDocDto'
+        buyer_po_id:
+          type: integer
+          format: int64
+        buyer_po_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+        po_type:
+          type: string
+      title: OrderDetailBuyerPODocResponseDto
+    ShipmentInInvoiceResponse:
+      type: object
+      properties:
+        actual_shipment_mode:
+          type: string
+          enum:
+          - Air
+          - Courier
+          - Land
+          - Sea
+        address_id:
+          type: integer
+          format: int64
+        assignee_id:
+          type: integer
+          format: int64
+        current_status:
+          type: string
+          enum:
+          - booked
+          - complete
+          - deliveryDate
+          - paymentFollowup
+          - preplanned
+          - shipped
+        eligible:
+          type: boolean
+        ex_factory_date:
+          type: integer
+          format: int64
+        failure_reasons:
+          type: array
+          items:
+            type: string
+        id:
+          type: integer
+          format: int64
+        planned_shipment_mode:
+          type: string
+          enum:
+          - Air
+          - Courier
+          - Land
+          - Sea
+        ship_to_address:
+          type: object
+        shipment_ready:
+          type: boolean
+      title: ShipmentInInvoiceResponse
+    CreateFinalInvoiceOrderRequestPayload:
+      type: object
+      properties:
+        amount:
+          type: number
+        factory_amount:
+          type: number
+        final_invoice_id:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+      title: CreateFinalInvoiceOrderRequestPayload
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload

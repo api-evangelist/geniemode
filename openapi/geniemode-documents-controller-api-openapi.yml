@@ -1,0 +1,238 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Documents Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: documents-controller
+  description: Documents Controller
+paths:
+  /api/documents/AddDocument:
+    post:
+      tags:
+      - documents-controller
+      summary: addDocument
+      operationId: addDocumentUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadDocumentResponsePayload'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadResponsePayload'
+        description: uploadResponsePayload
+        required: true
+  /api/documents/GetAllDocument:
+    post:
+      tags:
+      - documents-controller
+      summary: get_all
+      operationId: get_allUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentSearchRequestPayload'
+        description: documentSearchRequestPayload
+        required: true
+  /api/documents/GetDocument:
+    post:
+      tags:
+      - documents-controller
+      summary: get_document
+      operationId: get_documentUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocDetailsDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDocumentRequestPayload'
+        description: documentRequestPayload
+        required: true
+  /api/documents/GetOnlyDocument:
+    post:
+      tags:
+      - documents-controller
+      summary: get_other_document
+      operationId: get_other_documentUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocDetailsDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDocumentRequestPayload'
+        description: documentRequestPayload
+        required: true
+  /api/documents/UploadDocument:
+    post:
+      tags:
+      - documents-controller
+      summary: upload_document
+      operationId: upload_documentUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadDocumentResponsePayload'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: string
+              format: binary
+        description: file_content
+components:
+  schemas:
+    DocDetailsDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+      title: DocDetailsDto
+    UploadDocumentResponsePayload:
+      type: object
+      properties:
+        doc:
+          $ref: '#/components/schemas/Doc'
+        doc_id:
+          type: integer
+          format: int64
+        message:
+          type: string
+      title: UploadDocumentResponsePayload
+    GetDocumentRequestPayload:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+      title: GetDocumentRequestPayload
+    UploadResponsePayload:
+      type: object
+      properties:
+        bucket_name:
+          type: string
+        doc_id:
+          type: integer
+          format: int64
+        error_file:
+          type: string
+          format: byte
+        error_messages:
+          type: array
+          items:
+            type: string
+        filename:
+          type: string
+        key:
+          type: string
+        status:
+          type: string
+        url:
+          type: string
+      title: UploadResponsePayload
+    Pair_string_string:
+      type: object
+      properties:
+        key:
+          type: string
+        left:
+          type: string
+        right:
+          type: string
+        value:
+          type: string
+      title: Pair«string,string»
+    Doc:
+      type: object
+      properties:
+        bucketAndKey:
+          $ref: '#/components/schemas/Pair_string_string'
+        createdBy:
+          type: string
+        docDisplayName:
+          type: string
+        id:
+          type: integer
+          format: int64
+        s3Path:
+          type: string
+        s3Version:
+          type: integer
+          format: int64
+      title: Doc
+    DocumentSearchRequestPayload:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        doc_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        document_name:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        search:
+          type: string
+      title: DocumentSearchRequestPayload

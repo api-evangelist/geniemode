@@ -1,0 +1,243 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Shipment Tracking Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: shipment-tracking-controller
+  description: Shipment Tracking Controller
+paths:
+  /api/v1/shipment-tracking/add-order-tracking-details:
+    post:
+      tags:
+      - shipment-tracking-controller
+      summary: addOrderShipmentTrackingDetails
+      operationId: addOrderShipmentTrackingDetailsUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderShipmentTrackingResponseDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderShipmentTrackingRequestPayload'
+        description: createOrderShipmentTrackingRequestPayload
+        required: true
+  /api/v1/shipment-tracking/get-order-tracking-details:
+    get:
+      tags:
+      - shipment-tracking-controller
+      summary: getOrderShipmentTrackingDetails
+      operationId: getOrderShipmentTrackingDetailsUsingGET
+      parameters:
+      - name: leadIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: orderIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: orderType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: updateTrackingData
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: workflowStepOrderMapIds
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    StepTemplateDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        is_hidden:
+          type: string
+        require_approver:
+          type: string
+        require_due_date:
+          type: string
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        visible_to_client:
+          type: string
+        visible_to_manufacturer:
+          type: string
+      title: StepTemplateDto
+    WfTemplateDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        workflow_name:
+          type: string
+      title: WfTemplateDto
+    OrderDetailSimpleDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        sku_id:
+          type: string
+      title: OrderDetailSimpleDto
+    CreateOrderShipmentTrackingRequestPayload:
+      type: object
+      properties:
+        awb:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        partner:
+          type: string
+          enum:
+          - DHL
+          - FEDEX
+          - UPS
+        workflow_step_order_map_id:
+          type: integer
+          format: int64
+      title: CreateOrderShipmentTrackingRequestPayload
+    WfStepOrderMapDto:
+      type: object
+      properties:
+        ai_audit:
+          type: boolean
+        approval_status:
+          type: string
+        audit_status:
+          type: string
+        audit_ts:
+          type: integer
+          format: int64
+        auditor_id:
+          type: integer
+          format: int64
+        buffer_date:
+          type: string
+          format: date-time
+        buyer_advance_percentage:
+          type: integer
+          format: int64
+        completion_date:
+          type: string
+          format: date-time
+        due_date:
+          type: string
+          format: date-time
+        factory_advance_percentage:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        initial_due_date:
+          type: string
+          format: date-time
+        qc:
+          type: boolean
+        require_approval:
+          type: string
+        require_due_date:
+          type: string
+        status:
+          type: string
+        step_template:
+          $ref: '#/components/schemas/StepTemplateDto'
+        wf_template:
+          $ref: '#/components/schemas/WfTemplateDto'
+      title: WfStepOrderMapDto
+    OrderShipmentTrackingResponseDto:
+      type: object
+      properties:
+        awb:
+          type: string
+        expired:
+          type: boolean
+        order:
+          $ref: '#/components/schemas/OrderDetailSimpleDto'
+        partner:
+          type: string
+          enum:
+          - DHL
+          - FEDEX
+          - UPS
+        sku_response:
+          type: object
+        timestamp:
+          type: integer
+          format: int64
+        tracking_data:
+          type: object
+        wf_step_order_map:
+          $ref: '#/components/schemas/WfStepOrderMapDto'
+      title: OrderShipmentTrackingResponseDto

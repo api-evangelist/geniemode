@@ -1,0 +1,86 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Quality Defects Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: quality-defects-controller
+  description: Quality Defects Controller
+paths:
+  /api/v1/quality/defects/all:
+    get:
+      tags:
+      - quality-defects-controller
+      summary: getAllDefects
+      operationId: getAllDefectsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QualityDefectResponsePayload'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    QualityDefectDto:
+      type: object
+      properties:
+        defect_description:
+          type: string
+        defect_type:
+          type: string
+      title: QualityDefectDto
+    QualityDefectResponsePayload:
+      type: object
+      properties:
+        color:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityDefectDto'
+        embellishments:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityDefectDto'
+        fabric:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityDefectDto'
+        finishing:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityDefectDto'
+        kids:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityDefectDto'
+        labeling:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityDefectDto'
+        packing:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityDefectDto'
+        pattern:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityDefectDto'
+        workmanship:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityDefectDto'
+      title: QualityDefectResponsePayload

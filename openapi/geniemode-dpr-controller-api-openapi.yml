@@ -1,0 +1,586 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Dpr Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: dpr-controller
+  description: Dpr Controller
+paths:
+  /api/v1/path/dpr:
+    get:
+      tags:
+      - dpr-controller
+      summary: index
+      operationId: indexUsingGET_6
+      parameters:
+      - name: clientIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: count
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: financeImpact
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: financeStatus
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: leadIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: manufacturerIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: rmIdList
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/dpr/compute-dpr-statuses/{days}:
+    put:
+      tags:
+      - dpr-controller
+      summary: computeDprStatuses
+      operationId: computeDprStatusesUsingPUT
+      parameters:
+      - name: days
+        in: path
+        description: days
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/path/dpr/deviation/{orderId}:
+    get:
+      tags:
+      - dpr-controller
+      summary: getDprDeviation
+      operationId: getDprDeviationUsingGET
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/dpr/schemaForPlan/{orderId}:
+    get:
+      tags:
+      - dpr-controller
+      summary: schemaForPlan
+      operationId: schemaForPlanUsingGET
+      parameters:
+      - name: call
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: mode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: preferences
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: templateUsed
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DprPlanDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/v1/path/dpr/{orderId}:
+    get:
+      tags:
+      - dpr-controller
+      summary: getDpr
+      operationId: getDprUsingGET
+      parameters:
+      - name: call
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: mode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: preferences
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: templateUsed
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DprPlanDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+    post:
+      tags:
+      - dpr-controller
+      summary: submitPlan
+      operationId: submitPlanUsingPOST
+      parameters:
+      - name: mode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: persist
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: preferences
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: responseMode
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DprPlanDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DprPlanDto'
+        description: request
+        required: true
+    put:
+      tags:
+      - dpr-controller
+      summary: updateDpr
+      operationId: updateDprUsingPUT
+      parameters:
+      - name: mode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: persist
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: preferences
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: responseMode
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DprPlanDto'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DprPlanDto'
+        description: request
+        required: true
+    delete:
+      tags:
+      - dpr-controller
+      summary: deleteDpr
+      operationId: deleteDprUsingDELETE
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/path/dpr/{orderId}/check-validity:
+    put:
+      tags:
+      - dpr-controller
+      summary: checkValidity
+      operationId: checkValidityUsingPUT
+      parameters:
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/path/dpr/{orderId}/summary:
+    get:
+      tags:
+      - dpr-controller
+      summary: getDprSummary
+      operationId: getDprSummaryUsingGET
+      parameters:
+      - name: call
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: mode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        description: orderId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: preferences
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: templateUsed
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DprPlanDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    DprProgressPointDto:
+      type: object
+      properties:
+        today:
+          $ref: '#/components/schemas/DprFieldDto'
+        total:
+          $ref: '#/components/schemas/DprFieldDto'
+      title: DprProgressPointDto
+    DprLineTotalDto:
+      type: object
+      properties:
+        stages:
+          $ref: '#/components/schemas/DprStagesDto'
+      title: DprLineTotalDto
+    DprFieldDto:
+      type: object
+      properties:
+        bg_color:
+          type: string
+        color:
+          type: string
+        error:
+          type: string
+        heading_bg_color:
+          type: string
+        heading_color:
+          type: string
+        input_type:
+          type: string
+        is_editable:
+          type: boolean
+        label:
+          type: string
+        metadata:
+          type: object
+        options:
+          type: string
+        value:
+          type: string
+      title: DprFieldDto
+    DprStageDetailsDto:
+      type: object
+      properties:
+        actual:
+          $ref: '#/components/schemas/DprProgressPointDto'
+        blank:
+          $ref: '#/components/schemas/DprProgressPointDto'
+        deviation:
+          $ref: '#/components/schemas/DprProgressPointDto'
+        planned:
+          $ref: '#/components/schemas/DprProgressPointDto'
+        stage_name:
+          type: string
+      title: DprStageDetailsDto
+    DprChangeLogDto:
+      type: object
+      properties:
+        change_time:
+          type: string
+          format: date-time
+        user_email:
+          type: string
+        user_id:
+          type: integer
+          format: int64
+      title: DprChangeLogDto
+    DprCheckpointDto:
+      type: object
+      properties:
+        checkpoint_identifier:
+          $ref: '#/components/schemas/DprFieldDto'
+        error:
+          type: string
+        line_total:
+          $ref: '#/components/schemas/DprLineTotalDto'
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/DprRowDto'
+        rows_editable:
+          type: boolean
+      title: DprCheckpointDto
+    DprStagesDto:
+      type: object
+      properties:
+        cut:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        emb:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        finish:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        pack:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        stitch:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        wash:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+      title: DprStagesDto
+    DprVariantDto:
+      type: object
+      properties:
+        color:
+          $ref: '#/components/schemas/DprFieldDto'
+        size:
+          $ref: '#/components/schemas/DprFieldDto'
+      title: DprVariantDto
+    DprPlanDto:
+      type: object
+      properties:
+        checkpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/DprCheckpointDto'
+        checkpoints_editable:
+          type: boolean
+        dpr_changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DprChangeLogDto'
+        grand_total:
+          $ref: '#/components/schemas/DprLineTotalDto'
+        is_dpr_plan_changed:
+          type: boolean
+        is_valid:
+          type: boolean
+        message:
+          type: string
+        message_type:
+          type: string
+        metadata:
+          type: object
+        preferences:
+          type: string
+      title: DprPlanDto
+    DprRowDto:
+      type: object
+      properties:
+        error:
+          type: string
+        stages:
+          $ref: '#/components/schemas/DprStagesDto'
+        variant_details:
+          $ref: '#/components/schemas/DprVariantDto'
+      title: DprRowDto

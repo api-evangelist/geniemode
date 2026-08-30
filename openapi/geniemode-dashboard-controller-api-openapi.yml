@@ -1,0 +1,1152 @@
+openapi: 3.2.0
+info:
+  description: Cataloguing API.
+  version: API V
+  title: Cataloguing Dashboard Controller API
+  termsOfService: Terms of service
+  contact:
+    name: Mani Bhushan
+    url: www.geniemode.com
+    email: mani.kumar@geniemode.com
+  license:
+    name: License of API
+    url: API license URL
+servers:
+- url: https://portal.geniemode.com
+tags:
+- name: dashboard-controller
+  description: Dashboard Controller
+paths:
+  /api/dashboard/GetDashboardData:
+    post:
+      tags:
+      - dashboard-controller
+      summary: getDashboardData
+      operationId: getDashboardDataUsingPOST_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardDataDto'
+  /api/dashboard/GetDashboardLeads:
+    get:
+      tags:
+      - dashboard-controller
+      summary: GetDashboardLeads
+      operationId: GetDashboardLeadsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeadDetailsResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetDashboardLeads/paginated:
+    get:
+      tags:
+      - dashboard-controller
+      summary: GetDashboardLeadsPaginated
+      operationId: GetDashboardLeadsPaginatedUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page_LeadsUnderVpResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetDashboardManufacturers:
+    get:
+      tags:
+      - dashboard-controller
+      summary: get_dashboard_manufacturer
+      operationId: get_dashboard_manufacturerUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDashboardManufacturersResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetDashboardManufacturers/paginated:
+    get:
+      tags:
+      - dashboard-controller
+      summary: GetDashboardManufacturersPaginated
+      operationId: GetDashboardManufacturersPaginatedUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page_ManufacturerDetailInOrderListingDto'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetDashboardOpsUnderManager/paginated:
+    get:
+      tags:
+      - dashboard-controller
+      summary: getDashboardOpsUnderManagerPaginated
+      operationId: getDashboardOpsUnderManagerPaginatedUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page_UmsUserManagerResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetDashboardOrders:
+    get:
+      tags:
+      - dashboard-controller
+      summary: get_dashboard_orders
+      operationId: get_dashboard_ordersUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardOrderDetailsResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetDashboardOrdersAggregatedCount:
+    get:
+      tags:
+      - dashboard-controller
+      summary: get_dashboard_orders_summary
+      operationId: get_dashboard_orders_summaryUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardOrderDetailsSummaryResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetDashboardOrdersPage:
+    get:
+      tags:
+      - dashboard-controller
+      summary: get_dashboard_orders_page
+      operationId: get_dashboard_orders_pageUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardOrderDetailsResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetDashboardOrdersSummary:
+    get:
+      tags:
+      - dashboard-controller
+      summary: get_dashboard_orders_summary
+      operationId: get_dashboard_orders_summaryUsingGET_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardOrderDetailsSummaryResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetDashboardOrdersSummaryGroupByReportee:
+    get:
+      tags:
+      - dashboard-controller
+      summary: GetDashboardOrdersSummaryGroupByReportee
+      operationId: GetDashboardOrdersSummaryGroupByReporteeUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardOrderDetailsSummaryResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetDashboardOrdersV2:
+    get:
+      tags:
+      - dashboard-controller
+      summary: get_dashboard_orders
+      operationId: get_dashboard_ordersUsingGET_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardOrderDetailsResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetDashboardRms:
+    get:
+      tags:
+      - dashboard-controller
+      summary: get_dashboard_rms
+      operationId: get_dashboard_rmsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetDashboardUsersUnderManger/paginated:
+    get:
+      tags:
+      - dashboard-controller
+      summary: getDashboardUsersUnderManagerPaginated2
+      operationId: getDashboardUsersUnderManagerPaginated2UsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page_UmsUserManagerResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetDashboardUsersUnderSuperManger:
+    get:
+      tags:
+      - dashboard-controller
+      summary: getDashboardUsersUnderSuperManager
+      operationId: getDashboardUsersUnderSuperManagerUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UmsUserManagerResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+      deprecated: true
+  /api/dashboard/GetDashboardUsersUnderSuperManger/paginated:
+    get:
+      tags:
+      - dashboard-controller
+      summary: getDashboardUsersUnderSuperManagerPaginated
+      operationId: getDashboardUsersUnderSuperManagerPaginatedUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/GetTotalNoOfCompleteOrders:
+    post:
+      tags:
+      - dashboard-controller
+      summary: get_num_completed_order
+      operationId: get_num_completed_orderUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderCountDto'
+  /api/dashboard/GetTotalNoOfOpenOrders:
+    post:
+      tags:
+      - dashboard-controller
+      summary: get_num_open_order
+      operationId: get_num_open_orderUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderCountDto'
+  /api/dashboard/GetTotalNoOfOrders:
+    post:
+      tags:
+      - dashboard-controller
+      summary: get_num_order
+      operationId: get_num_orderUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderCountDto'
+  /api/dashboard/GetUserDelayedOrders:
+    get:
+      tags:
+      - dashboard-controller
+      summary: GetUserDelayedOrders
+      operationId: GetUserDelayedOrdersUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserDelayedOrdersResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+  /api/dashboard/clone/GetDashboardOrdersSummary:
+    get:
+      tags:
+      - dashboard-controller
+      summary: clone_get_dashboard_orders_summary
+      operationId: clone_get_dashboard_orders_summaryUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardOrderDetailsSummaryResponse'
+        '403':
+          description: Forbidden!!!!!
+        '500':
+          description: 500 message
+components:
+  schemas:
+    RMResponseDto:
+      type: object
+      properties:
+        contact_info:
+          type: string
+        country_code:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        rm_id:
+          type: integer
+          format: int64
+        soft_delete:
+          type: string
+        status:
+          type: boolean
+        user_email:
+          type: string
+      title: RMResponseDto
+    OrderDetailBuyerPODocWithOrdersDto:
+      type: object
+      properties:
+        buyer_doc:
+          $ref: '#/components/schemas/OrderDocDto'
+        buyer_po_id:
+          type: integer
+          format: int64
+        buyer_po_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_ids:
+          type: array
+          uniqueItems: true
+          items:
+            type: integer
+            format: int64
+        po_type:
+          type: string
+      title: OrderDetailBuyerPODocWithOrdersDto
+    Pageable:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/Sort'
+        unpaged:
+          type: boolean
+      title: Pageable
+    Page_LeadsUnderVpResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeadsUnderVpResponse'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      title: Page«LeadsUnderVpResponse»
+    BrandVpDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        vp_email:
+          type: string
+        vp_id:
+          type: integer
+          format: int64
+        vp_name:
+          type: string
+      title: BrandVpDto
+    LeadDetailsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeadsUnderVpResponse'
+      title: LeadDetailsResponse
+    GetDashboardManufacturersResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerDetailsDTO'
+      title: GetDashboardManufacturersResponse
+    OrderDocDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        doc_no:
+          type: string
+        doc_type:
+          type: string
+        docs:
+          $ref: '#/components/schemas/DocDto'
+        id:
+          type: integer
+          format: int64
+        is_additional_doc:
+          type: boolean
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+      title: OrderDocDto
+    OrderDprDto:
+      type: object
+      properties:
+        dpr_change_count:
+          type: integer
+          format: int32
+        dpr_valid:
+          type: boolean
+        message:
+          type: string
+        message_type:
+          type: string
+        view_dpr:
+          type: string
+      title: OrderDprDto
+    RMResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMResponseDto'
+      title: RMResponse
+    DashboardOrderDetailsSummaryDto:
+      type: object
+      properties:
+        client_count:
+          type: integer
+          format: int64
+        clients:
+          type: array
+          items:
+            type: integer
+            format: int32
+        completed_count:
+          type: integer
+          format: int64
+        dead_count:
+          type: integer
+          format: int64
+        delayed_by_original_date_count:
+          type: integer
+          format: int64
+        delayed_count:
+          type: integer
+          format: int64
+        dpr_delay_sum:
+          type: number
+          format: float
+        group_by_id:
+          type: string
+        group_by_name:
+          type: string
+        lead_detail:
+          $ref: '#/components/schemas/LeadsUnderVpResponse'
+        manufacturer_count:
+          type: integer
+          format: int64
+        manufacturers:
+          type: array
+          items:
+            type: integer
+            format: int32
+        on_time_count:
+          type: integer
+          format: int64
+        order_quantity:
+          type: number
+          format: double
+        order_score_sum:
+          type: integer
+          format: int64
+        order_value:
+          type: number
+        risk_sum:
+          type: number
+          format: float
+        rms:
+          type: array
+          items:
+            $ref: '#/components/schemas/RmDetail'
+      title: DashboardOrderDetailsSummaryDto
+    DocDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+      title: DocDto
+    DashboardOrderDetailsSummaryResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DashboardOrderDetailsSummaryDto'
+      title: DashboardOrderDetailsSummaryResponse
+    GetUserDelayedOrdersResponse:
+      type: object
+      properties:
+        delayed:
+          type: integer
+          format: int64
+      title: GetUserDelayedOrdersResponse
+    OrderCountDto:
+      type: object
+      properties:
+        data:
+          type: integer
+          format: int64
+      title: OrderCountDto
+    DashboardWorkflowResponseDto:
+      type: object
+      properties:
+        at_risk:
+          type: boolean
+        completion_date:
+          type: string
+          format: date-time
+        due_date:
+          type: string
+          format: date-time
+        initial_due_date:
+          type: string
+          format: date-time
+        original_selected_due_date:
+          type: string
+          format: date-time
+        rejection_count:
+          type: integer
+          format: int64
+        status:
+          type: string
+        step_display_order:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+        step_original_date_score:
+          type: integer
+          format: int64
+        visible_to_client:
+          type: string
+        visible_to_manufacturer:
+          type: string
+        work_step_score:
+          type: integer
+          format: int64
+      title: DashboardWorkflowResponseDto
+    SkuIdUrlResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        url:
+          type: string
+      title: SkuIdUrlResponse
+    Sort:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+      title: Sort
+    RmDetailsDTO:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          format: int64
+        category_name:
+          type: string
+        contact_info:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: RmDetailsDTO
+    ManufacturerUnitsDTO:
+      type: object
+      properties:
+        failure_reasons:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        id:
+          type: integer
+          format: int64
+        is_selectable:
+          type: boolean
+        preferred_factory:
+          type: boolean
+        rag_rating:
+          type: string
+      title: ManufacturerUnitsDTO
+    ManufacturerDetailInOrderListingDto:
+      type: object
+      properties:
+        company_registered_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: ManufacturerDetailInOrderListingDto
+    UmsUserManagerResponse:
+      type: object
+      properties:
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        order_count:
+          type: integer
+          format: int64
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+      title: UmsUserManagerResponse
+    RmDetail:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          format: int64
+        categoryName:
+          type: string
+        contactInfo:
+          type: string
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: RmDetail
+    Page_ManufacturerDetailInOrderListingDto:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerDetailInOrderListingDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      title: Page«ManufacturerDetailInOrderListingDto»
+    DashboardDataDto:
+      type: object
+      properties:
+        completed_orders:
+          type: integer
+          format: int64
+        open_orders:
+          type: integer
+          format: int64
+        success_qcs:
+          type: integer
+          format: int64
+        total_manufacturers:
+          type: integer
+          format: int64
+        total_orders:
+          type: integer
+          format: int64
+        total_qcs:
+          type: integer
+          format: int64
+      title: DashboardDataDto
+    DashboardOrderDetailsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DashboardOrderDetailsResponseDto'
+      title: DashboardOrderDetailsResponse
+    UMSUserResponseDTO:
+      type: object
+      properties:
+        active:
+          type: boolean
+        country_code:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_modified_at:
+          type: string
+          format: date-time
+        last_name:
+          type: string
+        manager_username:
+          type: string
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+      title: UMSUserResponseDTO
+    ManufacturerDetailsDTO:
+      type: object
+      properties:
+        company_registered_name:
+          type: string
+        contact_number:
+          type: string
+        contact_person:
+          type: string
+        eligible_categories:
+          type: string
+        email:
+          type: string
+        failure_reasons:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        is_selectable:
+          type: boolean
+        manufacturer_id:
+          type: integer
+          format: int64
+        manufacturer_status:
+          type: boolean
+        rm_id:
+          type: integer
+          format: int64
+        sku_filter_query:
+          type: string
+        soft_delete:
+          type: string
+        units:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerUnitsDTO'
+      title: ManufacturerDetailsDTO
+    LeadsUnderVpResponse:
+      type: object
+      properties:
+        brand_name:
+          type: string
+        company_name:
+          type: string
+        count:
+          type: integer
+          format: int64
+        lead_email:
+          type: string
+        lead_id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: LeadsUnderVpResponse
+    Page_UmsUserManagerResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/UmsUserManagerResponse'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      title: Page«UmsUserManagerResponse»
+    BusinessOwnerDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: BusinessOwnerDto
+    DashboardOrderDetailsResponseDto:
+      type: object
+      properties:
+        assignee_data:
+          $ref: '#/components/schemas/UMSUserResponseDTO'
+        assignee_id:
+          type: integer
+          format: int64
+        brand_name:
+          type: string
+        business_owner:
+          $ref: '#/components/schemas/BusinessOwnerDto'
+        buyer_delivery_date:
+          type: string
+          format: date-time
+        buyer_handover_date:
+          type: integer
+          format: int64
+        buyer_po_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetailBuyerPODocWithOrdersDto'
+        buying_price:
+          type: number
+        child_orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/DashboardOrderDetailsResponseDto'
+        client_id:
+          type: integer
+          format: int64
+        client_name:
+          type: string
+        completion_status:
+          type: string
+        confirmation_date:
+          type: string
+          format: date-time
+        conversion_rate:
+          type: number
+        count_completed_steps:
+          type: integer
+          format: int64
+        count_delayed_steps:
+          type: integer
+          format: int64
+        count_delayed_sub_orders:
+          type: integer
+          format: int64
+        count_on_time_steps:
+          type: integer
+          format: int64
+        count_on_time_sub_orders:
+          type: integer
+          format: int64
+        count_skipped_steps:
+          type: integer
+          format: int64
+        currency:
+          type: string
+        current_amount:
+          type: number
+        date_created:
+          type: string
+          format: date-time
+        date_update:
+          type: string
+          format: date-time
+        delivery_date:
+          type: string
+          format: date-time
+        dpr_data:
+          $ref: '#/components/schemas/OrderDprDto'
+        dpr_status:
+          type: string
+        factory_conversion:
+          type: number
+        factory_currency:
+          type: string
+        factory_currency_price:
+          type: number
+        factory_delivery_date:
+          type: string
+          format: date-time
+        factory_dollar_price:
+          type: number
+        financial_status:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/SkuIdUrlResponse'
+        in_dc_date:
+          type: integer
+          format: int64
+        is_parent_order:
+          type: boolean
+        lead_id:
+          type: integer
+          format: int64
+        lead_vps:
+          type: array
+          items:
+            type: integer
+            format: int64
+        manufacturer_detail:
+          $ref: '#/components/schemas/ManufacturerDetailsDTO'
+        model_type:
+          type: string
+        notes_count:
+          type: integer
+          format: int64
+        ops_assignee_data:
+          $ref: '#/components/schemas/UMSUserResponseDTO'
+        ops_assignee_id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        order_score:
+          type: integer
+          format: int64
+        order_status:
+          type: string
+        order_value:
+          type: number
+        packaging_complete:
+          type: boolean
+        parent_financial_status:
+          type: string
+        parent_id:
+          type: integer
+          format: int64
+        pre_order_id:
+          type: integer
+          format: int64
+        price:
+          type: number
+        qc_checklist_qr_url:
+          type: string
+        qr_url:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+        raw_material_cost_present:
+          type: boolean
+        rm:
+          $ref: '#/components/schemas/RmDetailsDTO'
+        sample_dead_additional_reason:
+          type: string
+        sample_dead_doc_url:
+          type: string
+        sample_dead_reason:
+          type: string
+        selected_currency:
+          type: string
+        selected_currency_price:
+          type: number
+        selected_currency_value:
+          type: number
+        selected_dollar_price:
+          type: number
+        selected_dollar_value:
+          type: number
+        selected_handover_date:
+          type: integer
+          format: int64
+        shipment_packaging_complete:
+          type: boolean
+        sku_id:
+          type: string
+        style_code:
+          type: string
+        tna_finalized:
+          type: boolean
+        vp_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/BrandVpDto'
+        workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/DashboardWorkflowResponseDto'
+      title: DashboardOrderDetailsResponseDto
