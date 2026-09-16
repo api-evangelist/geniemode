@@ -1,14 +1,13 @@
 aid: geniemode
 name: Geniemode
-description: 'Geniemode (Geniemode Global Pvt Ltd) is a Gurugram, India based B2B cross-border
-  sourcing and supply-chain technology company founded in 2021 by Amit Sharma and Tanuj Gangwani.
-  It runs an asset-light sourcing platform that connects global retail buyers in home textiles,
-  furniture, apparel and accessories with a vetted manufacturer network, covering product discovery
-  and design collaboration, sampling, quality control, factory and raw-material management,
-  logistics, customs and invoicing. Its technology surface is an internal operations and partner
-  portal at portal.geniemode.com, built on Spring Boot, whose Springfox-generated Swagger 2.0
-  contract is served publicly while every operation itself sits behind authentication. Geniemode
-  publishes no developer program, SDKs, pricing or public API documentation.'
+description: Geniemode (Geniemode Global Pvt Ltd) is a Gurugram, India based B2B cross-border sourcing
+  and supply-chain technology company founded in 2021 by Amit Sharma and Tanuj Gangwani. It runs an asset-light
+  sourcing platform that connects global retail buyers in home textiles, furniture, apparel and accessories
+  with a vetted manufacturer network, covering product discovery and design collaboration, sampling, quality
+  control, factory and raw-material management, logistics, customs and invoicing. Its technology surface
+  is an internal operations and partner portal at portal.geniemode.com, built on Spring Boot, whose Springfox-generated
+  Swagger 2.0 contract is served publicly while every operation itself sits behind authentication. Geniemode
+  publishes no developer program, SDKs, pricing or public API documentation.
 url: https://raw.githubusercontent.com/api-evangelist/geniemode/refs/heads/main/apis.yml
 deliveryModel:
   model: saas
@@ -40,7 +39,7 @@ x-type: company
 x-source: harvest:secondary-market
 specificationVersion: '0.20'
 created: '2026-08-21'
-modified: '2026-08-21'
+modified: '2026-09-16'
 tags:
 - Company
 - Sourcing
@@ -638,7 +637,7 @@ apis:
   - type: DataModel
     url: data-model/geniemode-data-model.yml
 - aid: geniemode:geniemode-geniemode-entity-controller-api
-  name: Geniemode Geniemode Entity Controller API
+  name: Geniemode Entity Controller API
   description: Geniemode Entity Controller
   humanURL: https://portal.geniemode.com/
   baseURL: https://portal.geniemode.com
