@@ -1722,26 +1722,6 @@ apis:
     url: conventions/geniemode-conventions.yml
   - type: DataModel
     url: data-model/geniemode-data-model.yml
-- aid: geniemode:geniemode-workflow-controller-api
-  name: Geniemode Workflow Controller API
-  description: Workflow Controller
-  humanURL: https://portal.geniemode.com/
-  baseURL: https://portal.geniemode.com
-  tags:
-  - work-flow-controller
-  tags_raw:
-  - workflow-controller
-  properties:
-  - type: OpenAPI
-    url: openapi/geniemode-workflow-controller-api-openapi.yml
-  - type: Authentication
-    url: authentication/geniemode-authentication.yml
-  - type: ErrorCatalog
-    url: errors/geniemode-problem-types.yml
-  - type: Conventions
-    url: conventions/geniemode-conventions.yml
-  - type: DataModel
-    url: data-model/geniemode-data-model.yml
 - aid: geniemode:geniemode-workflow-step-controller-api
   name: Geniemode Workflow Step Controller API
   description: Workflow Step Controller
@@ -1770,6 +1750,24 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/geniemode-workflow-step-order-map-controller-api-openapi.yml
+  - type: Authentication
+    url: authentication/geniemode-authentication.yml
+  - type: ErrorCatalog
+    url: errors/geniemode-problem-types.yml
+  - type: Conventions
+    url: conventions/geniemode-conventions.yml
+  - type: DataModel
+    url: data-model/geniemode-data-model.yml
+- aid: geniemode:geniemode-work-flow-controller-api
+  name: Geniemode work flow controller API
+  description: Workflow Controller
+  humanURL: https://portal.geniemode.com/
+  baseURL: https://portal.geniemode.com
+  tags:
+  - work flow controller
+  properties:
+  - type: OpenAPI
+    url: openapi/geniemode-work-flow-controller-api-openapi.yml
   - type: Authentication
     url: authentication/geniemode-authentication.yml
   - type: ErrorCatalog
