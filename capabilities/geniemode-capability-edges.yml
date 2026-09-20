@@ -1,0 +1,279 @@
+slug: geniemode
+provider: Geniemode
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 24
+edges:
+- tag: qc-controller
+  spec_file: geniemode-qc-controller-api-openapi.yml
+  capability_id: BC-720.30
+  capability_id_l1: BC-720
+  capability_name: Quality Control Management
+  confidence: 0.85
+  evidence: POST /api/v1/path/generic_qc/addNewFabricInspectionQuestion; POST addNewQcToAdditionalInspection;
+    PUT completeQcStep; schemas CreateQCRequestPayload, QcSamplingItemDto, UpdateUrlForAliasRequestFinalInspection
+  reason: Large surface for creating and progressing quality-control inspections (fabric inspection, additional
+    inspection, final inspection, sampling, QC templates and statuses) on sourced goods — clearly inspection
+    and testing against acceptance criteria.
+- tag: qc-audit-controller
+  spec_file: geniemode-qc-audit-controller-api-openapi.yml
+  capability_id: BC-720.30
+  capability_id_l1: BC-720
+  capability_name: Quality Control Management
+  confidence: 0.8
+  evidence: POST /api/v1/path/qc-audit/{qcId}/sample/{qcSamplingItemId}/audit; GET /api/v1/path/qc-audit/{qcId}/samples-to-audit;
+    schemas QcAuditSampleDto, QcAuditLineValueDto
+  reason: Operations record audit results against QC inspections at line and sample level and list samples
+    awaiting audit — inspection and acceptance activity, i.e. quality control, not internal audit of governance/controls.
+- tag: logistics-dashboard-controller
+  spec_file: geniemode-logistics-dashboard-controller-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.78
+  evidence: GET /api/v1/logistics/dashboard getDashBoardShipments; PUT /api/v1/logistics/dashboard/assign/manufacturer/{manufacturerId}/logistics/executive/{userId}
+    addUpdateLogisticsExecutive; schema ShipmentDashboardSummaryResponse
+  reason: Shipment dashboards, logistics executive assignment per manufacturer, and logistics order approval
+    listings are day-to-day logistics execution and monitoring. Some invoice/commission operations are
+    mixed in, hence not higher.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: manufacturer-controller
+  spec_file: geniemode-manufacturer-controller-api-openapi.yml
+  capability_id: BC-510
+  capability_id_l1: BC-510
+  capability_name: Supplier Management
+  confidence: 0.78
+  evidence: GET /api/manufacturer/GetManufacturers/factoryCompliances  findAllFactoryCompliance ; PUT
+    /api/manufacturer/auditStatus/{manufacturerId}  updateAuditStatus ; schema RagRatingHistoryDto
+  reason: Manufacturer (supplier) master records, factory compliance, supplier types, audit status and
+    RAG rating history — supplier management. Evidence spans onboarding/qualification and performance
+    rating, so no single L2 is named.
+- tag: manufacturer-v-2-login-less-controller
+  spec_file: geniemode-manufacturer-v-2-login-less-controller-api-openapi.yml
+  capability_id: BC-510.10
+  capability_id_l1: BC-510
+  capability_name: Supplier Onboarding Management
+  confidence: 0.78
+  evidence: POST /api/v2/loginless/manufacturer create; POST /api/v2/loginless/manufacturer/uploadDocs;
+    PUT .../{gaId}/add-contact-person; PUT .../{gaId}/factories addUpdateFactories
+  reason: 'An unauthenticated self-registration surface for manufacturers: create the manufacturer record,
+    submit multi-page profile data, contact persons, factories and supporting documents. That is supplier
+    onboarding/registration and due-diligence capture, not a technical auth concern despite the ''login-less''
+    prefix.'
+- tag: po-controller
+  spec_file: geniemode-po-controller-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.78
+  evidence: POST /api/po/create create_po; PUT /api/po/update_po; schemas CreatePoRequestPayload, PoSkus,
+    PoListDeliveryAddressDto, PoChangeTypeDto
+  reason: Operations create, update, view and version purchase orders with SKUs, delivery addresses and
+    change history — purchase order lifecycle management on this sourcing platform. Mapped to Purchase
+    Order Management; some ambiguity as the PO also acts as a buyer order document.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: shipment-tracking-controller
+  spec_file: geniemode-shipment-tracking-controller-api-openapi.yml
+  capability_id: BC-2510.20
+  capability_id_l1: BC-2510
+  capability_name: Shipment Tracking Management
+  confidence: 0.75
+  evidence: POST /api/v1/shipment-tracking/add-order-tracking-details addOrderShipmentTrackingDetails;
+    GET .../get-order-tracking-details; schema OrderShipmentTrackingResponseDto
+  reason: The two operations record and retrieve shipment tracking details for an order, i.e. resolving
+    and exposing shipment status to stakeholders. Slight ambiguity because tracking is modelled via workflow
+    step templates, but shipment tracking is the plain reading.
+- tag: commission-invoice-controller
+  spec_file: geniemode-commission-invoice-controller-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.72
+  evidence: POST /api/v1/commission/invoice createCommissionOrderInvoice; POST /api/v1/commission/invoice/offline-invoice
+    createOfflineInvoice; schemas CreateFinalInvoiceRequestPayload, FinalInvoiceDiscountDto, InvoiceBuyerDocsResponsePayload
+  reason: 'The operations generate and retrieve commission invoices against buyer POs and shipments, including
+    final invoices, discounts and eligible-order selection — outbound customer invoicing by the platform,
+    i.e. Accounts Receivable / customer invoicing. Not freight billing: the charges are sourcing commission,
+    not transport.'
+- tag: courier-controller
+  spec_file: geniemode-courier-controller-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.72
+  evidence: POST /api/v1/courier create; PUT /api/v1/courier/cancel/{id}; schemas CourierItemDto, CourierBoxDto,
+    CourierPartnerDto, CourierCancellationRequestPayload
+  reason: Creates, updates and cancels courier consignments with boxes, items, documents and a courier
+    partner — outbound shipment/transport execution, which is logistics operations within the sourcing
+    supply chain.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: invoice-finance-controller
+  spec_file: geniemode-invoice-finance-controller-api-openapi.yml
+  capability_id: BC-200
+  capability_id_l1: BC-200
+  capability_name: Financial Management
+  confidence: 0.72
+  evidence: POST /api/v1/path/finance/invoice/buy-sell-invoice-excel-query; GET /api/v1/path/finance/invoice/next-invoice-number
+    fetchNextInvoiceNumber; GET /api/v1/path/finance/invoice/commission/model
+  reason: 'Finance-side invoice administration: invoice numbering, blocking invoice numbers, commission/final
+    invoice models and finance excel extracts. This is invoice accounting and reporting; the buy-sell
+    duality prevents a confident AR-vs-AP sub-capability choice.'
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: invoice-payments-controller
+  spec_file: geniemode-invoice-payments-controller-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.72
+  evidence: POST /api/v1/path/invoicePayments/{finalInvoiceId}  addPayments ; schemas CreditDebitNoteDto,
+    BulkInvoicePaymentRequestPayload
+  reason: Recording, updating and bulk-uploading payments against final invoices plus credit/debit notes
+    is cash application and receivable settlement, i.e. accounts receivable management.
+- tag: mill-controller
+  spec_file: geniemode-mill-controller-api-openapi.yml
+  capability_id: BC-510.10
+  capability_id_l1: BC-510
+  capability_name: Supplier Onboarding Management
+  confidence: 0.72
+  evidence: POST /api/v1/path/mill onboard; POST /api/v1/path/mill/upload/docs uploadDocs; schemas MillSignupRequestPayload,
+    MillDocsDto
+  reason: Mills are upstream fabric suppliers in this sourcing network. The operations literally 'onboard'
+    a mill, capture signup payloads, addresses and supporting documents — supplier registration and qualification.
+- tag: shipment-controller
+  spec_file: geniemode-shipment-controller-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.72
+  evidence: PUT /api/v1/order/shipments/hop/{shipmentId}/audit/{hopId} updateShipmentHopAudit; GET /api/v1/order/shipments/docs/{orderId}
+    getShipmentDocs; schemas ShipmentHopDto, ShipmentInvoiceDto
+  reason: Operations manage outbound shipments against orders — shipment hops (legs), shipping documents,
+    shipment invoices and auditor assignment. That is execution of transport/logistics within the sourcing
+    supply chain, not generic IT plumbing. Sub-capability could arguably be order fulfilment, hence not
+    full confidence.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: client-controller
+  spec_file: geniemode-client-controller-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.7
+  evidence: POST /api/client/CreateClient create_client; schemas CreateClientDto, ClientDetailsResponse,
+    ClientDetailsDTO; GET /api/client/get-buyer-pending-steps
+  reason: Operations create and list client (buyer) records with client detail payloads, i.e. maintenance
+    of the customer master on this B2B sourcing platform. Customer Data Management is the closest fit;
+    some chance it is really onboarding workflow, hence moderate confidence.
+- tag: final-invoice-controller
+  spec_file: geniemode-final-invoice-controller-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.7
+  evidence: GET /api/v1/path/final-invoice/orders-eligible-for-invoice findOrdersEligibleForInvoice; CreateFinalInvoiceRequestPayload;
+    UpdateFinalInvoiceGrnStatusRequestPayload; getBuyerDocs
+  reason: Creates and recomputes final commercial invoices against orders, with buyer and factory document
+    sets and GRN status — customer invoicing on the sourcing platform. Mapped to Accounts Receivable (customer
+    invoicing); some chance it is better read as trade-document handling, hence 0.7.
+- tag: finance-dashboard-controller
+  spec_file: geniemode-finance-dashboard-controller-api-openapi.yml
+  capability_id: BC-230.30
+  capability_id_l1: BC-230
+  capability_name: Management Reporting
+  confidence: 0.7
+  evidence: GET /api/v1/dashboard/finance/buyAndSellARAP; GET /api/v1/dashboard/finance/commissionARAP;
+    schemas RevenueAndProfitGraphDto, MonthlyEngagementCohortDto
+  reason: Read-only aggregated finance dashboards — AR/AP positions, revenue and profit graphs, buyer/supplier
+    cohort analytics — which is management reporting and KPI delivery rather than transactional accounting.
+- tag: hts-code-duty-controller
+  spec_file: geniemode-hts-code-duty-controller-api-openapi.yml
+  capability_id: BC-2480.60
+  capability_id_l1: BC-2480
+  capability_name: Duty and Indirect Tax Management
+  confidence: 0.7
+  evidence: GET /api/v1/path/hts/{htsCode}/duty  getDutyByHtsCode ; schema HtsCodeDutyMappingDto
+  reason: Operations look up import duty rates against HS/HTS codes for cross-border sourcing, which is
+    duty determination within customs & trade compliance. Could arguably be tariff classification, but
+    the surface returns duty by code, so duty/indirect-tax determination is the closer fit.
+- tag: invoice-controller
+  spec_file: geniemode-invoice-controller-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.7
+  evidence: POST /api/v1/path/invoice/consolidated  createConsolidatedInvoice ; PUT /api/v1/path/invoice/cancel/{invoiceId}  cancel
+  reason: Creation, consolidation and cancellation of customer invoices against buyer POs is customer
+    invoicing, i.e. accounts receivable management. These are commercial goods invoices in a sourcing
+    platform, not freight invoices, so the cross-industry AR capability fits better than freight billing.
+- tag: manufacturer-brand-approval-controller
+  spec_file: geniemode-manufacturer-brand-approval-controller-api-openapi.yml
+  capability_id: BC-510.10
+  capability_id_l1: BC-510
+  capability_name: Supplier Onboarding Management
+  confidence: 0.7
+  evidence: POST /api/manufacturer/buyer/compliance  create ; schema ManufacturerBrandApprovalCompliancesDto
+  reason: Recording and reviewing manufacturer compliance/approval records against buyer brands is supplier
+    qualification and due diligence in the supplier onboarding sense.
+- tag: manufacturer-v-2-controller
+  spec_file: geniemode-manufacturer-v-2-controller-api-openapi.yml
+  capability_id: BC-510.10
+  capability_id_l1: BC-510
+  capability_name: Supplier Onboarding Management
+  confidence: 0.7
+  evidence: GET /api/v2/path/manufacturer/audit manufacturerAudit; schemas ManufacturerDocsAuditDto, ManufacturerAgreementsDto,
+    ManufacturerUnitsDetailsDto, ManufacturerCategoriesDto
+  reason: On this sourcing platform manufacturers are the supply base. The operations maintain manufacturer
+    master records, addresses, units/factories, eligible categories, compliance documents and document
+    audit — i.e. supplier registration, qualification and due-diligence data. Ratings/performance ops
+    add some ambiguity between onboarding (.10) and performance (.20), so confidence on the L2 is moderate.
+- tag: order-v-2-controller
+  spec_file: geniemode-order-v-2-controller-api-openapi.yml
+  capability_id: BC-520.40
+  capability_id_l1: BC-520
+  capability_name: Order Fulfilment Management
+  confidence: 0.7
+  evidence: POST /api/v2/new/orders/CreateOrder  createOrderV2; PUT /api/v2/new/orders/cancel/{orderId}  cancelOrder;
+    PUT /api/v2/new/orders/UpdateOrderDates; GET /api/v2/new/orders/buyer/pos/{orderId}  getBuyerPos
+  reason: 'Core order lifecycle surface for the sourcing platform: create, update, date changes, cancellation,
+    addresses, buyer POs and workflow steps — order capture and fulfilment orchestration. Breadth (QC,
+    margin, workflow schemas) adds some ambiguity about the single best sub-capability.'
+- tag: qc-file-check-list-controller
+  spec_file: geniemode-qc-file-check-list-controller-api-openapi.yml
+  capability_id: BC-720.30
+  capability_id_l1: BC-720
+  capability_name: Quality Control Management
+  confidence: 0.7
+  evidence: POST /api/v1/path/qc_file_check_list/{orderId} submit; PUT /qc_file_check_list/updateByQc/{qcCheckListId};
+    schemas QcFileCheckListSubPointSampleResponse, QcCheckListDocsResponsePayload
+  reason: Maintains and submits QC checklists (with sub-points, samples and supporting documents) attached
+    to orders, and copies checklists across orders — inspection criteria and evidence management within
+    quality control. Some of the surface is document/versioning plumbing, so confidence is moderate.
+- tag: qc-tech-controller
+  spec_file: geniemode-qc-tech-controller-api-openapi.yml
+  capability_id: BC-720.30
+  capability_id_l1: BC-720
+  capability_name: Quality Control Management
+  confidence: 0.7
+  evidence: GET /api/v1/path/qc_tech/buyerInspection/{id} getBuyerInspection; GET /qc_tech/inspectionHistory/{id};
+    GET /qc_tech/inspectionPresent/{orderId}/{typeOfSample}; schema QcTechInspectionHistoryResponse
+  reason: Manages technical QC and buyer inspections/evaluations against orders and sample types, including
+    inspection history and cancellation. Inspection execution is quality control; a minority of operations
+    are excel-query and TNA-step plumbing, hence 0.7.
+- tag: quality-defects-controller
+  spec_file: geniemode-quality-defects-controller-api-openapi.yml
+  capability_id: BC-720
+  capability_id_l1: BC-720
+  capability_name: Quality Management
+  confidence: 0.7
+  evidence: GET /api/v1/quality/defects/all getAllDefects; schemas QualityDefectDto, QualityDefectResponsePayload
+  reason: Exposes the catalogue of quality defect types used in inspections — quality management reference
+    data. Single read-only operation is too thin to fix on quality control versus non-conformance management.
+  recovered_from: sweep-20260828T235257Z-edges.json
