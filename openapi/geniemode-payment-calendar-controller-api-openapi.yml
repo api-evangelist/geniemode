@@ -75,17 +75,6 @@ paths:
           description: 500 message
 components:
   schemas:
-    MonthlyPaymentDto:
-      type: object
-      properties:
-        month:
-          type: string
-        month_and_year:
-          type: string
-        payment_pending:
-          type: integer
-          format: int64
-      title: MonthlyPaymentDto
     GetAllPaymentCalendarResponse:
       type: object
       properties:
@@ -124,3 +113,14 @@ components:
           type: integer
           format: int64
       title: PaymentCalendarDto
+    MonthlyPaymentDto:
+      type: object
+      properties:
+        month:
+          type: string
+        month_and_year:
+          type: string
+        payment_pending:
+          type: integer
+          format: int64
+      title: MonthlyPaymentDto

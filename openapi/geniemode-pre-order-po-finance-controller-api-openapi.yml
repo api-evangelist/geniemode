@@ -151,6 +151,15 @@ components:
         size:
           type: string
       title: PreOrderPoStyleVariantDto
+    PoTypeDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: PoTypeDto
     PreOrderPoStyleDto:
       type: object
       properties:
@@ -169,15 +178,6 @@ components:
           items:
             $ref: '#/components/schemas/PreOrderPoStyleVariantDto'
       title: PreOrderPoStyleDto
-    PoTypeDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: PoTypeDto
     PreOrderPoDto:
       type: object
       properties:

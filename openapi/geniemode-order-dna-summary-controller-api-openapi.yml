@@ -44,6 +44,22 @@ paths:
           description: 500 message
 components:
   schemas:
+    QcSummary:
+      type: object
+      properties:
+        assigned_by:
+          $ref: '#/components/schemas/Person'
+        completion_date:
+          type: integer
+          format: int64
+        qc_date:
+          type: integer
+          format: int64
+        status:
+          type: string
+        type:
+          type: string
+      title: QcSummary
     Person:
       type: object
       properties:
@@ -53,6 +69,18 @@ components:
         name:
           type: string
       title: Person
+    Margin:
+      type: object
+      properties:
+        margin:
+          type: number
+        model_type:
+          type: string
+        order_cost:
+          type: number
+        order_revenue:
+          type: number
+      title: Margin
     OrderDnaSummaryResponse:
       type: object
       properties:
@@ -72,31 +100,3 @@ components:
         rm:
           $ref: '#/components/schemas/Person'
       title: OrderDnaSummaryResponse
-    Margin:
-      type: object
-      properties:
-        margin:
-          type: number
-        model_type:
-          type: string
-        order_cost:
-          type: number
-        order_revenue:
-          type: number
-      title: Margin
-    QcSummary:
-      type: object
-      properties:
-        assigned_by:
-          $ref: '#/components/schemas/Person'
-        completion_date:
-          type: integer
-          format: int64
-        qc_date:
-          type: integer
-          format: int64
-        status:
-          type: string
-        type:
-          type: string
-      title: QcSummary

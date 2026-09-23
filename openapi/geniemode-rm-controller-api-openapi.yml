@@ -132,6 +132,40 @@ paths:
         required: true
 components:
   schemas:
+    CreateRMDto:
+      type: object
+      properties:
+        contact_info:
+          type: string
+        country_code:
+          type: string
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        ums_id:
+          type: integer
+          format: int64
+      title: CreateRMDto
+    UpdateRmRequestPayload:
+      type: object
+      properties:
+        contact_info:
+          type: string
+        country_code:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        rm_id:
+          type: integer
+          format: int64
+        user_email:
+          type: string
+      title: UpdateRmRequestPayload
     UpdateRmResponsePayload:
       type: object
       properties:
@@ -141,6 +175,12 @@ components:
           type: integer
           format: int32
       title: UpdateRmResponsePayload
+    DeleteRmResponsePayload:
+      type: object
+      properties:
+        message:
+          type: string
+      title: DeleteRmResponsePayload
     RMResponseDto:
       type: object
       properties:
@@ -179,43 +219,3 @@ components:
           type: integer
           format: int64
       title: GetRmRequestPayload
-    UpdateRmRequestPayload:
-      type: object
-      properties:
-        contact_info:
-          type: string
-        country_code:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        rm_id:
-          type: integer
-          format: int64
-        user_email:
-          type: string
-      title: UpdateRmRequestPayload
-    DeleteRmResponsePayload:
-      type: object
-      properties:
-        message:
-          type: string
-      title: DeleteRmResponsePayload
-    CreateRMDto:
-      type: object
-      properties:
-        contact_info:
-          type: string
-        country_code:
-          type: string
-        email:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        ums_id:
-          type: integer
-          format: int64
-      title: CreateRMDto

@@ -14,13 +14,13 @@ info:
 servers:
 - url: https://portal.geniemode.com
 tags:
-- name: users-controller
+- name: Users Controller
   description: Users Controller
 paths:
   /api/v1/user/isPhoneDataAvailable/{userId}:
     get:
       tags:
-      - users-controller
+      - Users Controller
       summary: isPhoneData
       operationId: isPhoneDataUsingGET
       parameters:
@@ -45,7 +45,7 @@ paths:
   /api/v1/user/updatePhoneNumber/{userId}:
     put:
       tags:
-      - users-controller
+      - Users Controller
       summary: updatePhoneData
       operationId: updatePhoneDataUsingPUT
       parameters:
@@ -73,7 +73,7 @@ paths:
   /api/v1/user/webGupShupRegister:
     post:
       tags:
-      - users-controller
+      - Users Controller
       summary: consumeTwoApis
       operationId: consumeTwoApisUsingPOST
       responses:
@@ -92,14 +92,38 @@ paths:
         required: true
 components:
   schemas:
-    WebEngageGupShupResponse:
+    UpdatePhoneDataRequestPayload:
       type: object
       properties:
-        gup_shup_response:
-          $ref: '#/components/schemas/GupShupResponse'
-        web_engage_phone_response:
-          $ref: '#/components/schemas/WebEngagePhoneResponse'
-      title: WebEngageGupShupResponse
+        country_code:
+          type: string
+        phone_number:
+          type: string
+      title: UpdatePhoneDataRequestPayload
+    GupShupResponseMessageDTO:
+      type: object
+      properties:
+        details:
+          type: string
+        id:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+      title: GupShupResponseMessageDTO
+    WebEngagePhoneResponse:
+      type: object
+      properties:
+        response:
+          $ref: '#/components/schemas/WebEngagePhoneDTO'
+      title: WebEngagePhoneResponse
+    WebEngagePhoneDTO:
+      type: object
+      properties:
+        status:
+          type: string
+      title: WebEngagePhoneDTO
     UMSUserResponsePayload:
       type: object
       properties:
@@ -132,12 +156,32 @@ components:
         whatsapp_opt_in:
           type: boolean
       title: UMSUserResponsePayload
-    WebEngagePhoneDTO:
+    WebEngageGupShupRequest:
       type: object
       properties:
-        status:
+        gup_shup_phone_number:
           type: string
-      title: WebEngagePhoneDTO
+        web_engage_user_id:
+          type: string
+        web_engage_whatsapp_opt_in:
+          type: boolean
+      title: WebEngageGupShupRequest
+    UMSUserGetPhoneDataResponse:
+      type: object
+      properties:
+        phone_number_present:
+          type: boolean
+        ums_user_response_payload:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+      title: UMSUserGetPhoneDataResponse
+    GupShupResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GupShupDataDTO'
+        response:
+          $ref: '#/components/schemas/GupShupResponseDTO'
+      title: GupShupResponse
     GupShupDataDTO:
       type: object
       properties:
@@ -146,6 +190,14 @@ components:
           items:
             $ref: '#/components/schemas/GupShupResponseMessageDTO'
       title: GupShupDataDTO
+    WebEngageGupShupResponse:
+      type: object
+      properties:
+        gup_shup_response:
+          $ref: '#/components/schemas/GupShupResponse'
+        web_engage_phone_response:
+          $ref: '#/components/schemas/WebEngagePhoneResponse'
+      title: WebEngageGupShupResponse
     GupShupResponseDTO:
       type: object
       properties:
@@ -158,55 +210,3 @@ components:
         status:
           type: string
       title: GupShupResponseDTO
-    WebEngagePhoneResponse:
-      type: object
-      properties:
-        response:
-          $ref: '#/components/schemas/WebEngagePhoneDTO'
-      title: WebEngagePhoneResponse
-    UpdatePhoneDataRequestPayload:
-      type: object
-      properties:
-        country_code:
-          type: string
-        phone_number:
-          type: string
-      title: UpdatePhoneDataRequestPayload
-    UMSUserGetPhoneDataResponse:
-      type: object
-      properties:
-        phone_number_present:
-          type: boolean
-        ums_user_response_payload:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-      title: UMSUserGetPhoneDataResponse
-    GupShupResponseMessageDTO:
-      type: object
-      properties:
-        details:
-          type: string
-        id:
-          type: string
-        phone:
-          type: string
-        status:
-          type: string
-      title: GupShupResponseMessageDTO
-    GupShupResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GupShupDataDTO'
-        response:
-          $ref: '#/components/schemas/GupShupResponseDTO'
-      title: GupShupResponse
-    WebEngageGupShupRequest:
-      type: object
-      properties:
-        gup_shup_phone_number:
-          type: string
-        web_engage_user_id:
-          type: string
-        web_engage_whatsapp_opt_in:
-          type: boolean
-      title: WebEngageGupShupRequest

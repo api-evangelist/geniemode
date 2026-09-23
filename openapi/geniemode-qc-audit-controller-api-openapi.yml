@@ -319,6 +319,36 @@ paths:
           description: 500 message
 components:
   schemas:
+    QcAuditDto:
+      type: object
+      properties:
+        audit_status:
+          type: string
+        audit_ts:
+          type: integer
+          format: int64
+        auditor_id:
+          type: integer
+          format: int64
+        data:
+          type: object
+        id:
+          type: integer
+          format: int64
+        qc_audit_line_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcAuditLineValueDto'
+        qc_audit_samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcAuditSampleDto'
+        qc_id:
+          type: integer
+          format: int64
+        remark:
+          type: string
+      title: QcAuditDto
     QcAuditSampleDto:
       type: object
       properties:
@@ -351,33 +381,3 @@ components:
         status:
           type: boolean
       title: QcAuditLineValueDto
-    QcAuditDto:
-      type: object
-      properties:
-        audit_status:
-          type: string
-        audit_ts:
-          type: integer
-          format: int64
-        auditor_id:
-          type: integer
-          format: int64
-        data:
-          type: object
-        id:
-          type: integer
-          format: int64
-        qc_audit_line_values:
-          type: array
-          items:
-            $ref: '#/components/schemas/QcAuditLineValueDto'
-        qc_audit_samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/QcAuditSampleDto'
-        qc_id:
-          type: integer
-          format: int64
-        remark:
-          type: string
-      title: QcAuditDto

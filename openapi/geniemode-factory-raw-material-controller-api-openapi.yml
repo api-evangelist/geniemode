@@ -130,25 +130,41 @@ components:
           type: integer
           format: int64
       title: CreateFactoryRawMaterialRequest
-    DocDetailsDto:
+    GetFactoryRawMaterialResponse:
       type: object
       properties:
-        doc_display_name:
+        doc_data:
+          $ref: '#/components/schemas/DocDetailsDto'
+        doc_id:
+          type: integer
+          format: int64
+        doc_type:
           type: string
+        doc_value:
+          type: string
+        factory:
+          $ref: '#/components/schemas/GetFactoryResponsePayload'
         id:
           type: integer
           format: int64
-        order_id:
+      title: GetFactoryRawMaterialResponse
+    UpdateFactoryRawMaterialRequest:
+      type: object
+      properties:
+        doc_id:
           type: integer
           format: int64
-        s3_path:
+        doc_type:
           type: string
-        s3_version:
+        doc_value:
+          type: string
+        factory_id:
           type: integer
           format: int64
-        step_name:
-          type: string
-      title: DocDetailsDto
+        id:
+          type: integer
+          format: int64
+      title: UpdateFactoryRawMaterialRequest
     UMSUserResponsePayload:
       type: object
       properties:
@@ -197,41 +213,25 @@ components:
           type: integer
           format: int64
       title: CreateFactoryFinanceDocRequest
-    UpdateFactoryRawMaterialRequest:
+    DocDetailsDto:
       type: object
       properties:
-        doc_id:
-          type: integer
-          format: int64
-        doc_type:
+        doc_display_name:
           type: string
-        doc_value:
-          type: string
-        factory_id:
-          type: integer
-          format: int64
         id:
           type: integer
           format: int64
-      title: UpdateFactoryRawMaterialRequest
-    GetFactoryRawMaterialResponse:
-      type: object
-      properties:
-        doc_data:
-          $ref: '#/components/schemas/DocDetailsDto'
-        doc_id:
+        order_id:
           type: integer
           format: int64
-        doc_type:
+        s3_path:
           type: string
-        doc_value:
-          type: string
-        factory:
-          $ref: '#/components/schemas/GetFactoryResponsePayload'
-        id:
+        s3_version:
           type: integer
           format: int64
-      title: GetFactoryRawMaterialResponse
+        step_name:
+          type: string
+      title: DocDetailsDto
     GetFactoryResponsePayload:
       type: object
       properties:

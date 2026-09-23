@@ -1105,204 +1105,24 @@ paths:
         required: true
 components:
   schemas:
-    Sort:
+    ManufacturerMiniResponsePayload:
       type: object
       properties:
-        empty:
-          type: boolean
-        sorted:
-          type: boolean
-        unsorted:
-          type: boolean
-      title: Sort
-    ManufacturerUpdateAuditRequest:
-      type: object
-      properties:
-        doc_id:
+        billing_address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        billing_address_id:
           type: integer
           format: int64
-        for_all:
-          type: boolean
-        status:
-          type: string
-      title: ManufacturerUpdateAuditRequest
-    AddressSubmitRequestPayload:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        address_line2:
-          type: string
-        city:
-          type: string
-        contact_person_name:
-          type: string
-        contact_person_number:
-          type: string
-        country:
-          type: string
-        entity_id:
-          type: integer
-          format: int64
-        entity_type:
-          type: string
-        id:
-          type: integer
-          format: int64
-        landmark:
-          type: string
-        name:
-          type: string
-        pincode:
-          type: string
-        search:
-          type: string
-        state:
-          type: string
-        type:
-          type: string
-      title: AddressSubmitRequestPayload
-    Page_RagRatingHistoryDto:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/RagRatingHistoryDto'
-        empty:
-          type: boolean
-        first:
-          type: boolean
-        last:
-          type: boolean
-        number:
-          type: integer
-          format: int32
-        numberOfElements:
-          type: integer
-          format: int32
-        pageable:
-          $ref: '#/components/schemas/Pageable'
-        size:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/Sort'
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int32
-      title: Page«RagRatingHistoryDto»
-    ManufacturerAuditDataResponse:
-      type: object
-      properties:
-        audit_status:
-          type: string
-        audit_ts:
-          type: integer
-          format: int64
-        auditor_id:
-          type: integer
-          format: int64
-        auditor_name:
-          type: string
-        doc_id:
-          type: integer
-          format: int64
-        doc_present:
-          type: boolean
-        doc_type:
-          type: string
-        manufacturer_id:
-          type: integer
-          format: int64
-        replace_doc:
-          type: boolean
-        s3_path:
-          type: string
-        update_bank_details:
-          type: boolean
-      title: ManufacturerAuditDataResponse
-    ManufacturerUpdateDocRequest:
-      type: object
-      properties:
-        doc_id:
-          type: integer
-          format: int64
-        doc_type:
-          type: string
-      title: ManufacturerUpdateDocRequest
-    GetCategoryDtO:
-      type: object
-      properties:
-        category:
+        gst:
           type: string
         id:
           type: integer
           format: int64
         name:
           type: string
-        sub_category:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetCategoryDtO'
-        type:
+        pan:
           type: string
-      title: GetCategoryDtO
-    CityStateResponse:
-      type: object
-      properties:
-        region:
-          type: string
-        state:
-          type: string
-      title: CityStateResponse
-    Pageable:
-      type: object
-      properties:
-        offset:
-          type: integer
-          format: int64
-        pageNumber:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        paged:
-          type: boolean
-        sort:
-          $ref: '#/components/schemas/Sort'
-        unpaged:
-          type: boolean
-      title: Pageable
-    ManufacturerOrderSummary:
-      type: object
-      properties:
-        last_order_date:
-          type: string
-          format: date-time
-        order_count:
-          type: integer
-          format: int64
-        rm_id:
-          type: integer
-          format: int64
-        rm_name:
-          type: string
-        total_order_amount:
-          type: number
-      title: ManufacturerOrderSummary
-    GetCategoryResponsePayload:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetCategoryDtO'
-      title: GetCategoryResponsePayload
+      title: ManufacturerMiniResponsePayload
     UploadResponsePayload:
       type: object
       properties:
@@ -1345,6 +1165,42 @@ components:
         manufacturer_region:
           type: string
       title: ManufacturerDetailResponseNew
+    Pageable:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/Sort'
+        unpaged:
+          type: boolean
+      title: Pageable
+    ManufacturerOrderSummary:
+      type: object
+      properties:
+        last_order_date:
+          type: string
+          format: date-time
+        order_count:
+          type: integer
+          format: int64
+        rm_id:
+          type: integer
+          format: int64
+        rm_name:
+          type: string
+        total_order_amount:
+          type: number
+      title: ManufacturerOrderSummary
     RagRatingHistoryDto:
       type: object
       properties:
@@ -1388,21 +1244,165 @@ components:
         type:
           type: string
       title: AddressSubmitResponsePayload
-    ManufacturerMiniResponsePayload:
+    AddressSubmitRequestPayload:
       type: object
       properties:
-        billing_address:
-          $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        billing_address_id:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
           type: integer
           format: int64
-        gst:
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        search:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitRequestPayload
+    ManufacturerAuditDataResponse:
+      type: object
+      properties:
+        audit_status:
+          type: string
+        audit_ts:
+          type: integer
+          format: int64
+        auditor_id:
+          type: integer
+          format: int64
+        auditor_name:
+          type: string
+        doc_id:
+          type: integer
+          format: int64
+        doc_present:
+          type: boolean
+        doc_type:
+          type: string
+        manufacturer_id:
+          type: integer
+          format: int64
+        replace_doc:
+          type: boolean
+        s3_path:
+          type: string
+        update_bank_details:
+          type: boolean
+      title: ManufacturerAuditDataResponse
+    CityStateResponse:
+      type: object
+      properties:
+        region:
+          type: string
+        state:
+          type: string
+      title: CityStateResponse
+    ManufacturerUpdateDocRequest:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        doc_type:
+          type: string
+      title: ManufacturerUpdateDocRequest
+    Page_RagRatingHistoryDto:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/RagRatingHistoryDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      title: Page«RagRatingHistoryDto»
+    Sort:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+      title: Sort
+    GetCategoryDtO:
+      type: object
+      properties:
+        category:
           type: string
         id:
           type: integer
           format: int64
         name:
           type: string
-        pan:
+        sub_category:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetCategoryDtO'
+        type:
           type: string
-      title: ManufacturerMiniResponsePayload
+      title: GetCategoryDtO
+    ManufacturerUpdateAuditRequest:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        for_all:
+          type: boolean
+        status:
+          type: string
+      title: ManufacturerUpdateAuditRequest
+    GetCategoryResponsePayload:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetCategoryDtO'
+      title: GetCategoryResponsePayload

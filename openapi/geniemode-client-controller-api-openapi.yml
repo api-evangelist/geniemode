@@ -79,6 +79,15 @@ components:
           items:
             $ref: '#/components/schemas/ClientDetailsDTO'
       title: ClientDetailsResponse
+    CreateClientResponse:
+      type: object
+      properties:
+        client_id:
+          type: integer
+          format: int64
+        message:
+          type: string
+      title: CreateClientResponse
     CreateClientDto:
       type: object
       properties:
@@ -111,15 +120,6 @@ components:
         user_email:
           type: string
       title: CreateClientDto
-    CreateClientResponse:
-      type: object
-      properties:
-        client_id:
-          type: integer
-          format: int64
-        message:
-          type: string
-      title: CreateClientResponse
     ClientDetailsDTO:
       type: object
       properties:

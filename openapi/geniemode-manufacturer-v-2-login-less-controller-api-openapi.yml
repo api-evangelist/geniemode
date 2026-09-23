@@ -528,262 +528,6 @@ paths:
                 type: string
 components:
   schemas:
-    ManufacturerPage6Dto:
-      type: object
-      properties:
-        article_of_association_doc_url:
-          type: string
-        authorization_letter_doc_url:
-          type: string
-        br_authorizing_signing_auth_doc_url:
-          type: string
-        certificate_of_incorporation_doc_url:
-          type: string
-        company_pan_doc_url:
-          type: string
-        directors_on_letterhead_doc_url:
-          type: string
-        huf_authority_letter_on_letterhead_doc_url:
-          type: string
-        huf_deed_doc_url:
-          type: string
-        list_of_partners_on_letterhead_doc_url:
-          type: string
-        memorandum_of_association_doc_url:
-          type: string
-        need_advance_payment:
-          type: boolean
-        partnership_deed_doc_url:
-          type: string
-        steps_completed:
-          type: integer
-          format: int64
-      title: ManufacturerPage6Dto
-    ManufacturerPage2Dto:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/AddressMiniRequestPayload'
-        proof_doc_url:
-          type: string
-        proof_sub_type:
-          type: string
-        proof_type:
-          type: string
-        steps_completed:
-          type: integer
-          format: int64
-      title: ManufacturerPage2Dto
-    ManufacturerDirectorNewDto:
-      type: object
-      properties:
-        aadhar_doc_url:
-          type: string
-        aadhar_no:
-          type: string
-        din:
-          type: string
-        dpin:
-          type: string
-        father_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        is_primary:
-          type: boolean
-        name:
-          type: string
-        pan:
-          type: string
-        pan_doc_url:
-          type: string
-        passport_no:
-          type: string
-      title: ManufacturerDirectorNewDto
-    ManufacturerPage3Dto:
-      type: object
-      properties:
-        aadhar_doc_url:
-          type: string
-        aadhar_no:
-          type: integer
-          format: int64
-        export_license_doc_url:
-          type: string
-        export_license_no:
-          type: string
-        gst_doc_url:
-          type: string
-        gst_number:
-          type: string
-        letter_head_doc_url:
-          type: string
-        nid:
-          type: string
-        nid_card_doc_url:
-          type: string
-        nid_company_relation_card_doc_url:
-          type: string
-        pan:
-          type: string
-        pan_doc_url:
-          type: string
-        registration_certificate_doc_url:
-          type: string
-        registration_no:
-          type: string
-        steps_completed:
-          type: integer
-          format: int64
-        tan:
-          type: string
-        tin:
-          type: string
-        tin_certificate_doc_url:
-          type: string
-        udyam_registration_certificate_doc_url:
-          type: string
-        udyam_registration_certificate_present:
-          type: boolean
-        vat:
-          type: string
-        vat_doc_url:
-          type: string
-      title: ManufacturerPage3Dto
-    ManufacturerPage4Dto:
-      type: object
-      properties:
-        bank_account_number:
-          type: string
-        bank_name:
-          type: string
-        cancelled_cheque_doc_url:
-          type: string
-        ifsc_code:
-          type: string
-        intermediate_bank_account_number:
-          type: string
-        intermediate_bank_ifsc_code:
-          type: string
-        intermediate_bank_name:
-          type: string
-        intermediate_bank_swift_code:
-          type: string
-        steps_completed:
-          type: integer
-          format: int64
-        swift_code:
-          type: string
-      title: ManufacturerPage4Dto
-    ManufacturerContactPersonRequestPayload:
-      type: object
-      properties:
-        country_code:
-          type: string
-        department:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        manufacturer_id:
-          type: integer
-          format: int64
-        phone_number:
-          type: string
-        username:
-          type: string
-      title: ManufacturerContactPersonRequestPayload
-    AddressMiniRequestPayload:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        address_line2:
-          type: string
-        city:
-          type: string
-        country:
-          type: string
-        id:
-          type: integer
-          format: int64
-        landmark:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-      title: AddressMiniRequestPayload
-    UserResponsePayload:
-      type: object
-      properties:
-        created_by:
-          type: string
-        first_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        last_name:
-          type: string
-        manager:
-          $ref: '#/components/schemas/UserResponsePayload'
-        phone_number:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-        username:
-          type: string
-      title: UserResponsePayload
-    GroupUserResponsePayload:
-      type: object
-      properties:
-        description:
-          type: string
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserSimpleDTO'
-      title: GroupUserResponsePayload
-    ManufacturerAddressesDto:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/AddressMiniRequestPayload'
-        id:
-          type: integer
-          format: int64
-        proof_doc_url:
-          type: string
-        proof_sub_type:
-          type: string
-        proof_type:
-          type: string
-      title: ManufacturerAddressesDto
-    ManufacturerProductsDTO:
-      type: object
-      properties:
-        category:
-          type: string
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        sub_type:
-          type: string
-        type:
-          type: string
-      title: ManufacturerProductsDTO
     ManufacturerUnitDto:
       type: object
       properties:
@@ -883,6 +627,51 @@ components:
         worker_type:
           type: string
       title: ManufacturerUnitDto
+    UserSimpleDTO:
+      type: object
+      properties:
+        country_code:
+          type: string
+        department:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        is_primary:
+          type: boolean
+        last_name:
+          type: string
+        phone_number:
+          type: string
+        username:
+          type: string
+      title: UserSimpleDTO
+    UploadResponsePayload:
+      type: object
+      properties:
+        bucket_name:
+          type: string
+        doc_id:
+          type: integer
+          format: int64
+        error_file:
+          type: string
+          format: byte
+        error_messages:
+          type: array
+          items:
+            type: string
+        filename:
+          type: string
+        key:
+          type: string
+        status:
+          type: string
+        url:
+          type: string
+      title: UploadResponsePayload
     ManufacturerPage5Dto:
       type: object
       required:
@@ -929,30 +718,291 @@ components:
         type_of_current_buyer:
           type: string
       title: ManufacturerPage5Dto
-    UploadResponsePayload:
+    UserResponsePayload:
       type: object
       properties:
-        bucket_name:
+        created_by:
           type: string
-        doc_id:
+        first_name:
+          type: string
+        id:
           type: integer
           format: int64
-        error_file:
+        last_name:
           type: string
-          format: byte
-        error_messages:
+        manager:
+          $ref: '#/components/schemas/UserResponsePayload'
+        phone_number:
+          type: string
+        roles:
           type: array
           items:
             type: string
-        filename:
+        username:
           type: string
-        key:
+      title: UserResponsePayload
+    ManufacturerPage6Dto:
+      type: object
+      properties:
+        article_of_association_doc_url:
           type: string
-        status:
+        authorization_letter_doc_url:
           type: string
-        url:
+        br_authorizing_signing_auth_doc_url:
           type: string
-      title: UploadResponsePayload
+        certificate_of_incorporation_doc_url:
+          type: string
+        company_pan_doc_url:
+          type: string
+        directors_on_letterhead_doc_url:
+          type: string
+        huf_authority_letter_on_letterhead_doc_url:
+          type: string
+        huf_deed_doc_url:
+          type: string
+        list_of_partners_on_letterhead_doc_url:
+          type: string
+        memorandum_of_association_doc_url:
+          type: string
+        need_advance_payment:
+          type: boolean
+        partnership_deed_doc_url:
+          type: string
+        steps_completed:
+          type: integer
+          format: int64
+      title: ManufacturerPage6Dto
+    ManufacturerPage3Dto:
+      type: object
+      properties:
+        aadhar_doc_url:
+          type: string
+        aadhar_no:
+          type: integer
+          format: int64
+        export_license_doc_url:
+          type: string
+        export_license_no:
+          type: string
+        gst_doc_url:
+          type: string
+        gst_number:
+          type: string
+        letter_head_doc_url:
+          type: string
+        nid:
+          type: string
+        nid_card_doc_url:
+          type: string
+        nid_company_relation_card_doc_url:
+          type: string
+        pan:
+          type: string
+        pan_doc_url:
+          type: string
+        registration_certificate_doc_url:
+          type: string
+        registration_no:
+          type: string
+        steps_completed:
+          type: integer
+          format: int64
+        tan:
+          type: string
+        tin:
+          type: string
+        tin_certificate_doc_url:
+          type: string
+        udyam_registration_certificate_doc_url:
+          type: string
+        udyam_registration_certificate_present:
+          type: boolean
+        vat:
+          type: string
+        vat_doc_url:
+          type: string
+      title: ManufacturerPage3Dto
+    ManufacturerPage2Dto:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressMiniRequestPayload'
+        proof_doc_url:
+          type: string
+        proof_sub_type:
+          type: string
+        proof_type:
+          type: string
+        steps_completed:
+          type: integer
+          format: int64
+      title: ManufacturerPage2Dto
+    ManufacturerPage7Dto:
+      type: object
+      properties:
+        steps_completed:
+          type: integer
+          format: int64
+        units:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerUnitDto'
+      title: ManufacturerPage7Dto
+    GroupUserResponsePayload:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSimpleDTO'
+      title: GroupUserResponsePayload
+    ManufacturerContactPersonRequestPayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        department:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        manufacturer_id:
+          type: integer
+          format: int64
+        phone_number:
+          type: string
+        username:
+          type: string
+      title: ManufacturerContactPersonRequestPayload
+    ManufacturerProductsDTO:
+      type: object
+      properties:
+        category:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        sub_type:
+          type: string
+        type:
+          type: string
+      title: ManufacturerProductsDTO
+    ManufacturerDocsDto:
+      type: object
+      required:
+      - doc_expiry
+      properties:
+        doc_category:
+          type: string
+        doc_expiry:
+          type: integer
+          format: int64
+        doc_sub_category:
+          type: string
+        doc_url:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: ManufacturerDocsDto
+    ManufacturerDirectorNewDto:
+      type: object
+      properties:
+        aadhar_doc_url:
+          type: string
+        aadhar_no:
+          type: string
+        din:
+          type: string
+        dpin:
+          type: string
+        father_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        is_primary:
+          type: boolean
+        name:
+          type: string
+        pan:
+          type: string
+        pan_doc_url:
+          type: string
+        passport_no:
+          type: string
+      title: ManufacturerDirectorNewDto
+    AddressMiniRequestPayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+      title: AddressMiniRequestPayload
+    ManufacturerAddressesDto:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressMiniRequestPayload'
+        id:
+          type: integer
+          format: int64
+        proof_doc_url:
+          type: string
+        proof_sub_type:
+          type: string
+        proof_type:
+          type: string
+      title: ManufacturerAddressesDto
+    ManufacturerPage4Dto:
+      type: object
+      properties:
+        bank_account_number:
+          type: string
+        bank_name:
+          type: string
+        cancelled_cheque_doc_url:
+          type: string
+        ifsc_code:
+          type: string
+        intermediate_bank_account_number:
+          type: string
+        intermediate_bank_ifsc_code:
+          type: string
+        intermediate_bank_name:
+          type: string
+        intermediate_bank_swift_code:
+          type: string
+        steps_completed:
+          type: integer
+          format: int64
+        swift_code:
+          type: string
+      title: ManufacturerPage4Dto
     ManufacturerBasicDetailsDto:
       type: object
       properties:
@@ -991,53 +1041,3 @@ components:
         website:
           type: string
       title: ManufacturerBasicDetailsDto
-    UserSimpleDTO:
-      type: object
-      properties:
-        country_code:
-          type: string
-        department:
-          type: string
-        first_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        is_primary:
-          type: boolean
-        last_name:
-          type: string
-        phone_number:
-          type: string
-        username:
-          type: string
-      title: UserSimpleDTO
-    ManufacturerPage7Dto:
-      type: object
-      properties:
-        steps_completed:
-          type: integer
-          format: int64
-        units:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerUnitDto'
-      title: ManufacturerPage7Dto
-    ManufacturerDocsDto:
-      type: object
-      required:
-      - doc_expiry
-      properties:
-        doc_category:
-          type: string
-        doc_expiry:
-          type: integer
-          format: int64
-        doc_sub_category:
-          type: string
-        doc_url:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: ManufacturerDocsDto

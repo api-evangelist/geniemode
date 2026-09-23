@@ -1087,144 +1087,29 @@ paths:
           description: 500 message
 components:
   schemas:
-    ExplainRowsRequestPayload:
+    ForceCompleteRequestPayload:
       type: object
       properties:
-        force_overwrite:
-          type: boolean
-        order_id:
-          type: integer
-          format: int64
         order_ids:
           type: array
           items:
             type: integer
             format: int64
-        order_status_history_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-        use_ai:
+      title: ForceCompleteRequestPayload
+    ManufacturerGaId:
+      type: object
+      properties:
+        ga_id:
+          type: string
+        get_docs:
           type: boolean
-        use_queue:
-          type: boolean
-      title: ExplainRowsRequestPayload
-    BrandVpDto:
-      type: object
-      properties:
-        id:
+        manufacturer_id:
           type: integer
           format: int64
-        vp_email:
-          type: string
-        vp_id:
+        pin:
           type: integer
           format: int64
-        vp_name:
-          type: string
-      title: BrandVpDto
-    OrderDetailForEvent:
-      type: object
-      properties:
-        factory:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-        last_finance_approver:
-          type: string
-        lead_data:
-          $ref: '#/components/schemas/LeadPageDTO'
-        manufacturer:
-          $ref: '#/components/schemas/ManufacturerDetailsDTO'
-        order_id:
-          type: integer
-          format: int64
-        rm:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-        rm_ops:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-        sku:
-          type: string
-        style_code:
-          type: string
-      title: OrderDetailForEvent
-    ShipmentInForwarderQuotationResponse:
-      type: object
-      properties:
-        ex_factory_date:
-          type: integer
-          format: int64
-        factory_invoice_no:
-          type: string
-        id:
-          type: integer
-          format: int64
-        manufacturer_name:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        port_of_discharge:
-          type: string
-        port_of_loading:
-          type: string
-      title: ShipmentInForwarderQuotationResponse
-    LeadGenerationResponse:
-      type: object
-      properties:
-        brand:
-          $ref: '#/components/schemas/BrandResponse'
-        client_id:
-          type: integer
-          format: int64
-        company:
-          $ref: '#/components/schemas/CompanyDTO'
-        country:
-          type: string
-        email:
-          type: string
-        id:
-          type: integer
-          format: int64
-        lead_approval_status:
-          type: string
-        lead_projection_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/LeadProjectionDTO'
-        name:
-          type: string
-      title: LeadGenerationResponse
-    LeadPageDTO:
-      type: object
-      properties:
-        current_stage_name:
-          type: string
-        current_user:
-          $ref: '#/components/schemas/UserResponsePayload'
-        last_stage_id:
-          type: integer
-          format: int64
-        lead_generation:
-          $ref: '#/components/schemas/LeadGenerationResponse'
-        time_difference:
-          type: integer
-          format: int64
-      title: LeadPageDTO
-    OrderDetailMinimalDto:
-      type: object
-      properties:
-        confirmation_date:
-          type: string
-          format: date-time
-        lead:
-          $ref: '#/components/schemas/LeadsUnderVpResponse'
-        lead_id:
-          type: integer
-          format: int64
-        order_id:
-          type: integer
-          format: int64
-      title: OrderDetailMinimalDto
+      title: ManufacturerGaId
     UMSUserResponsePayload:
       type: object
       properties:
@@ -1257,27 +1142,136 @@ components:
         whatsapp_opt_in:
           type: boolean
       title: UMSUserResponsePayload
-    CompanyDTO:
+    UnzipAndUpdatePosRequestPayload:
       type: object
       properties:
-        ask_buyer_wip_on_order:
-          type: boolean
-        company_name:
-          type: string
-        compliances:
-          type: array
-          items:
+        filename_to_po_map:
+          type: object
+          additionalProperties:
             type: string
+        po_no_to_order_map:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        zip_file_path:
+          type: string
+      title: UnzipAndUpdatePosRequestPayload
+    LeadProjectionDTO:
+      type: object
+      properties:
+        achieved_business_value:
+          type: number
+        amount:
+          type: integer
+          format: int64
+        business_size:
+          type: number
         id:
           type: integer
           format: int64
-        min_buy_sell_margin:
+        lead_probability:
+          type: integer
+          format: int32
+        probable_completion_date:
+          type: integer
+          format: int64
+      title: LeadProjectionDTO
+    BackfillVariantResponsePayload:
+      type: object
+      properties:
+        remaining:
+          type: integer
+          format: int32
+        unsupported:
+          type: integer
+          format: int32
+      title: BackfillVariantResponsePayload
+    SystemConfig:
+      type: object
+      properties:
+        configKey:
+          type: string
+        configValue:
+          type: string
+        createdBy:
+          type: string
+      title: SystemConfig
+    UpdateVariantPriceRequestPayload:
+      type: object
+      required:
+      - buyer_currency_price
+      - factory_currency_price
+      - variant_id
+      properties:
+        buyer_currency_price:
           type: number
-        min_commission_margin:
+        factory_currency_price:
           type: number
-        min_trading_margin:
-          type: number
-      title: CompanyDTO
+        variant_id:
+          type: integer
+          format: int64
+      title: UpdateVariantPriceRequestPayload
+    ComputeTnaStatusRequestPayload:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: ComputeTnaStatusRequestPayload
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload
+    FixVariantsIdentifierRequestPayload:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: FixVariantsIdentifierRequestPayload
+    PropagateVariantPricesRequestPayload:
+      type: object
+      properties:
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateVariantPriceRequestPayload'
+      title: PropagateVariantPricesRequestPayload
     BrandCategoryDto:
       type: object
       properties:
@@ -1290,29 +1284,6 @@ components:
           type: integer
           format: int64
       title: BrandCategoryDto
-    ManufacturerGaId:
-      type: object
-      properties:
-        ga_id:
-          type: string
-        get_docs:
-          type: boolean
-        manufacturer_id:
-          type: integer
-          format: int64
-        pin:
-          type: integer
-          format: int64
-      title: ManufacturerGaId
-    OpenForcedCompleteOrdersRequestPayload:
-      type: object
-      properties:
-        order_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-      title: OpenForcedCompleteOrdersRequestPayload
     GetOrderForNotesResponse:
       type: object
       properties:
@@ -1337,35 +1308,107 @@ components:
           type: integer
           format: int64
       title: GetOrderForNotesResponse
-    ManufacturerUnitsDTO:
+    FixInvoiceCurrencyConversionRequestPayload:
       type: object
       properties:
-        failure_reasons:
+        conversion_date_floor:
+          type: integer
+          format: int64
+        invoice_nos:
           type: array
           uniqueItems: true
+          items:
+            type: string
+      title: FixInvoiceCurrencyConversionRequestPayload
+    LeadsUnderVpResponse:
+      type: object
+      properties:
+        brand_name:
+          type: string
+        company_name:
+          type: string
+        count:
+          type: integer
+          format: int64
+        lead_email:
+          type: string
+        lead_id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: LeadsUnderVpResponse
+    CompanyDTO:
+      type: object
+      properties:
+        ask_buyer_wip_on_order:
+          type: boolean
+        company_name:
+          type: string
+        compliances:
+          type: array
           items:
             type: string
         id:
           type: integer
           format: int64
-        is_selectable:
-          type: boolean
-        preferred_factory:
-          type: boolean
-        rag_rating:
-          type: string
-      title: ManufacturerUnitsDTO
-    SystemConfig:
+        min_buy_sell_margin:
+          type: number
+        min_commission_margin:
+          type: number
+        min_trading_margin:
+          type: number
+      title: CompanyDTO
+    LeadGenerationResponse:
       type: object
       properties:
-        configKey:
+        brand:
+          $ref: '#/components/schemas/BrandResponse'
+        client_id:
+          type: integer
+          format: int64
+        company:
+          $ref: '#/components/schemas/CompanyDTO'
+        country:
           type: string
-        configValue:
+        email:
           type: string
-        createdBy:
+        id:
+          type: integer
+          format: int64
+        lead_approval_status:
           type: string
-      title: SystemConfig
-    ForceCompleteRequestPayload:
+        lead_projection_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeadProjectionDTO'
+        name:
+          type: string
+      title: LeadGenerationResponse
+    OrderDetailForEvent:
+      type: object
+      properties:
+        factory:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        last_finance_approver:
+          type: string
+        lead_data:
+          $ref: '#/components/schemas/LeadPageDTO'
+        manufacturer:
+          $ref: '#/components/schemas/ManufacturerDetailsDTO'
+        order_id:
+          type: integer
+          format: int64
+        rm:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        rm_ops:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        sku:
+          type: string
+        style_code:
+          type: string
+      title: OrderDetailForEvent
+    OpenForcedCompleteOrdersRequestPayload:
       type: object
       properties:
         order_ids:
@@ -1373,40 +1416,57 @@ components:
           items:
             type: integer
             format: int64
-      title: ForceCompleteRequestPayload
-    FixVariantsIdentifierRequestPayload:
+      title: OpenForcedCompleteOrdersRequestPayload
+    DashboardDataDto:
       type: object
       properties:
-        ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-      title: FixVariantsIdentifierRequestPayload
-    ComputeTnaStatusRequestPayload:
+        completed_orders:
+          type: integer
+          format: int64
+        open_orders:
+          type: integer
+          format: int64
+        success_qcs:
+          type: integer
+          format: int64
+        total_manufacturers:
+          type: integer
+          format: int64
+        total_orders:
+          type: integer
+          format: int64
+        total_qcs:
+          type: integer
+          format: int64
+      title: DashboardDataDto
+    EngagementDataRequestPayload:
       type: object
       properties:
-        ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-      title: ComputeTnaStatusRequestPayload
-    UnzipAndUpdatePosRequestPayload:
-      type: object
-      properties:
-        filename_to_po_map:
-          type: object
-          additionalProperties:
-            type: string
-        po_no_to_order_map:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-        zip_file_path:
+        end:
           type: string
-      title: UnzipAndUpdatePosRequestPayload
+          format: date-time
+        interval:
+          type: string
+        start:
+          type: string
+          format: date-time
+      title: EngagementDataRequestPayload
+    LeadPageDTO:
+      type: object
+      properties:
+        current_stage_name:
+          type: string
+        current_user:
+          $ref: '#/components/schemas/UserResponsePayload'
+        last_stage_id:
+          type: integer
+          format: int64
+        lead_generation:
+          $ref: '#/components/schemas/LeadGenerationResponse'
+        time_difference:
+          type: integer
+          format: int64
+      title: LeadPageDTO
     BrandResponse:
       type: object
       properties:
@@ -1449,48 +1509,41 @@ components:
             type: integer
             format: int64
       title: BrandResponse
-    DashboardDataDto:
+    BrandVpDto:
       type: object
       properties:
-        completed_orders:
+        id:
           type: integer
           format: int64
-        open_orders:
+        vp_email:
+          type: string
+        vp_id:
           type: integer
           format: int64
-        success_qcs:
-          type: integer
-          format: int64
-        total_manufacturers:
-          type: integer
-          format: int64
-        total_orders:
-          type: integer
-          format: int64
-        total_qcs:
-          type: integer
-          format: int64
-      title: DashboardDataDto
-    PropagateVariantPricesRequestPayload:
+        vp_name:
+          type: string
+      title: BrandVpDto
+    ShipmentInForwarderQuotationResponse:
       type: object
       properties:
-        variants:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateVariantPriceRequestPayload'
-      title: PropagateVariantPricesRequestPayload
-    FixInvoiceCurrencyConversionRequestPayload:
-      type: object
-      properties:
-        conversion_date_floor:
+        ex_factory_date:
           type: integer
           format: int64
-        invoice_nos:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-      title: FixInvoiceCurrencyConversionRequestPayload
+        factory_invoice_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+        manufacturer_name:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        port_of_discharge:
+          type: string
+        port_of_loading:
+          type: string
+      title: ShipmentInForwarderQuotationResponse
     UserResponsePayload:
       type: object
       properties:
@@ -1514,28 +1567,62 @@ components:
         username:
           type: string
       title: UserResponsePayload
-    BackfillVariantResponsePayload:
+    ExplainRowsRequestPayload:
       type: object
       properties:
-        remaining:
+        force_overwrite:
+          type: boolean
+        order_id:
           type: integer
-          format: int32
-        unsupported:
-          type: integer
-          format: int32
-      title: BackfillVariantResponsePayload
-    EngagementDataRequestPayload:
+          format: int64
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        order_status_history_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        use_ai:
+          type: boolean
+        use_queue:
+          type: boolean
+      title: ExplainRowsRequestPayload
+    ManufacturerUnitsDTO:
       type: object
       properties:
-        end:
+        failure_reasons:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        id:
+          type: integer
+          format: int64
+        is_selectable:
+          type: boolean
+        preferred_factory:
+          type: boolean
+        rag_rating:
+          type: string
+      title: ManufacturerUnitsDTO
+    OrderDetailMinimalDto:
+      type: object
+      properties:
+        confirmation_date:
           type: string
           format: date-time
-        interval:
-          type: string
-        start:
-          type: string
-          format: date-time
-      title: EngagementDataRequestPayload
+        lead:
+          $ref: '#/components/schemas/LeadsUnderVpResponse'
+        lead_id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+      title: OrderDetailMinimalDto
     ManufacturerDetailsDTO:
       type: object
       properties:
@@ -1573,90 +1660,3 @@ components:
           items:
             $ref: '#/components/schemas/ManufacturerUnitsDTO'
       title: ManufacturerDetailsDTO
-    LeadProjectionDTO:
-      type: object
-      properties:
-        achieved_business_value:
-          type: number
-        amount:
-          type: integer
-          format: int64
-        business_size:
-          type: number
-        id:
-          type: integer
-          format: int64
-        lead_probability:
-          type: integer
-          format: int32
-        probable_completion_date:
-          type: integer
-          format: int64
-      title: LeadProjectionDTO
-    LeadsUnderVpResponse:
-      type: object
-      properties:
-        brand_name:
-          type: string
-        company_name:
-          type: string
-        count:
-          type: integer
-          format: int64
-        lead_email:
-          type: string
-        lead_id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: LeadsUnderVpResponse
-    UpdateVariantPriceRequestPayload:
-      type: object
-      required:
-      - buyer_currency_price
-      - factory_currency_price
-      - variant_id
-      properties:
-        buyer_currency_price:
-          type: number
-        factory_currency_price:
-          type: number
-        variant_id:
-          type: integer
-          format: int64
-      title: UpdateVariantPriceRequestPayload
-    AddressSubmitResponsePayload:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        address_line2:
-          type: string
-        city:
-          type: string
-        contact_person_name:
-          type: string
-        contact_person_number:
-          type: string
-        country:
-          type: string
-        entity_id:
-          type: integer
-          format: int64
-        entity_type:
-          type: string
-        id:
-          type: integer
-          format: int64
-        landmark:
-          type: string
-        name:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-        type:
-          type: string
-      title: AddressSubmitResponsePayload

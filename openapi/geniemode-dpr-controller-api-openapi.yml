@@ -440,20 +440,44 @@ paths:
           description: 500 message
 components:
   schemas:
-    DprProgressPointDto:
+    DprChangeLogDto:
       type: object
       properties:
-        today:
-          $ref: '#/components/schemas/DprFieldDto'
-        total:
-          $ref: '#/components/schemas/DprFieldDto'
-      title: DprProgressPointDto
-    DprLineTotalDto:
+        change_time:
+          type: string
+          format: date-time
+        user_email:
+          type: string
+        user_id:
+          type: integer
+          format: int64
+      title: DprChangeLogDto
+    DprRowDto:
       type: object
       properties:
+        error:
+          type: string
         stages:
           $ref: '#/components/schemas/DprStagesDto'
-      title: DprLineTotalDto
+        variant_details:
+          $ref: '#/components/schemas/DprVariantDto'
+      title: DprRowDto
+    DprStagesDto:
+      type: object
+      properties:
+        cut:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        emb:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        finish:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        pack:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        stitch:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        wash:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+      title: DprStagesDto
     DprFieldDto:
       type: object
       properties:
@@ -480,32 +504,14 @@ components:
         value:
           type: string
       title: DprFieldDto
-    DprStageDetailsDto:
+    DprVariantDto:
       type: object
       properties:
-        actual:
-          $ref: '#/components/schemas/DprProgressPointDto'
-        blank:
-          $ref: '#/components/schemas/DprProgressPointDto'
-        deviation:
-          $ref: '#/components/schemas/DprProgressPointDto'
-        planned:
-          $ref: '#/components/schemas/DprProgressPointDto'
-        stage_name:
-          type: string
-      title: DprStageDetailsDto
-    DprChangeLogDto:
-      type: object
-      properties:
-        change_time:
-          type: string
-          format: date-time
-        user_email:
-          type: string
-        user_id:
-          type: integer
-          format: int64
-      title: DprChangeLogDto
+        color:
+          $ref: '#/components/schemas/DprFieldDto'
+        size:
+          $ref: '#/components/schemas/DprFieldDto'
+      title: DprVariantDto
     DprCheckpointDto:
       type: object
       properties:
@@ -522,30 +528,20 @@ components:
         rows_editable:
           type: boolean
       title: DprCheckpointDto
-    DprStagesDto:
+    DprStageDetailsDto:
       type: object
       properties:
-        cut:
-          $ref: '#/components/schemas/DprStageDetailsDto'
-        emb:
-          $ref: '#/components/schemas/DprStageDetailsDto'
-        finish:
-          $ref: '#/components/schemas/DprStageDetailsDto'
-        pack:
-          $ref: '#/components/schemas/DprStageDetailsDto'
-        stitch:
-          $ref: '#/components/schemas/DprStageDetailsDto'
-        wash:
-          $ref: '#/components/schemas/DprStageDetailsDto'
-      title: DprStagesDto
-    DprVariantDto:
-      type: object
-      properties:
-        color:
-          $ref: '#/components/schemas/DprFieldDto'
-        size:
-          $ref: '#/components/schemas/DprFieldDto'
-      title: DprVariantDto
+        actual:
+          $ref: '#/components/schemas/DprProgressPointDto'
+        blank:
+          $ref: '#/components/schemas/DprProgressPointDto'
+        deviation:
+          $ref: '#/components/schemas/DprProgressPointDto'
+        planned:
+          $ref: '#/components/schemas/DprProgressPointDto'
+        stage_name:
+          type: string
+      title: DprStageDetailsDto
     DprPlanDto:
       type: object
       properties:
@@ -574,13 +570,17 @@ components:
         preferences:
           type: string
       title: DprPlanDto
-    DprRowDto:
+    DprLineTotalDto:
       type: object
       properties:
-        error:
-          type: string
         stages:
           $ref: '#/components/schemas/DprStagesDto'
-        variant_details:
-          $ref: '#/components/schemas/DprVariantDto'
-      title: DprRowDto
+      title: DprLineTotalDto
+    DprProgressPointDto:
+      type: object
+      properties:
+        today:
+          $ref: '#/components/schemas/DprFieldDto'
+        total:
+          $ref: '#/components/schemas/DprFieldDto'
+      title: DprProgressPointDto

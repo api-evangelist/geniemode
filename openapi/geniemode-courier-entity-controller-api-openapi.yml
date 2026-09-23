@@ -240,6 +240,15 @@ paths:
           description: 500 message
 components:
   schemas:
+    CourierEntityResponsePayload:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: CourierEntityResponsePayload
     AddressSubmitRequestPayload:
       type: object
       properties:
@@ -282,15 +291,6 @@ components:
         name:
           type: string
       title: CourierEntityCreatePayload
-    CourierEntityResponsePayload:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: CourierEntityResponsePayload
     AddressSubmitResponsePayload:
       type: object
       properties:

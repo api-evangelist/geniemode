@@ -199,6 +199,15 @@ components:
         username:
           type: string
       title: UserSimpleDTO
+    MillMiniDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: MillMiniDto
     MillDocsDto:
       type: object
       properties:
@@ -210,12 +219,3 @@ components:
         url:
           type: string
       title: MillDocsDto
-    MillMiniDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: MillMiniDto

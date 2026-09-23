@@ -591,289 +591,60 @@ paths:
         required: true
 components:
   schemas:
-    ShipmentSingleDocTypeResponsePayload:
+    OrderDetailBuyerPODocResponseDto:
       type: object
       properties:
-        doc_type:
-          type: string
-        mandatory:
-          type: boolean
-        name:
-          type: string
-      title: ShipmentSingleDocTypeResponsePayload
-    InvoiceFactoryDocsResponsePayload:
-      type: object
-      properties:
-        order_id:
+        buyer_doc:
+          $ref: '#/components/schemas/OrderDocDto'
+        buyer_po_id:
           type: integer
           format: int64
-        response:
-          $ref: '#/components/schemas/FactoryDocsResponsePayload'
-      title: InvoiceFactoryDocsResponsePayload
-    InvoiceLogisticsDetailsResponsePayload:
+        buyer_po_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+        po_type:
+          type: string
+      title: OrderDetailBuyerPODocResponseDto
+    CreateFinalInvoiceDocsRequestPayload:
       type: object
       properties:
-        actual_logistic_cost_details:
-          $ref: '#/components/schemas/InvoiceActualLogisticsDetailsResponsePayload'
-        actual_shipment_mode:
-          type: string
-        planned_logistic_cost_details:
+        docs:
           type: array
           items:
-            $ref: '#/components/schemas/InvoiceOrderPlannedLogisticsDetailsResponsePayload'
-        planned_shipment_mode:
+            type: string
+        type:
           type: string
-        total_actual_logistics_cost:
-          type: number
-        total_planned_custom_duty:
-          type: number
-        total_planned_logistics_cost:
-          type: number
-      title: InvoiceLogisticsDetailsResponsePayload
-    ShipmentDocTypesRequestPayload:
+      title: CreateFinalInvoiceDocsRequestPayload
+    CreateFinalInvoiceOrderRequestPayload:
       type: object
       properties:
+        amount:
+          type: number
+        factory_amount:
+          type: number
         final_invoice_id:
           type: integer
           format: int64
-        order_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-        shipment_id:
-          type: integer
-          format: int64
-      title: ShipmentDocTypesRequestPayload
-    ManufacturerMiniResponsePayload:
-      type: object
-      properties:
-        billing_address:
-          $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        billing_address_id:
-          type: integer
-          format: int64
-        gst:
-          type: string
         id:
           type: integer
           format: int64
-        name:
-          type: string
-        pan:
-          type: string
-      title: ManufacturerMiniResponsePayload
-    CreateFinalInvoiceRequestPayload:
-      type: object
-      properties:
-        bill_to_type:
-          type: string
-        currency:
-          type: string
-        discount_amount:
-          type: number
-        discount_percentage:
-          type: number
-        document_amount:
-          type: number
-        geniemode_entity_conversion:
-          type: number
-        internal_invoice_no:
-          type: string
-        invoice_doc_url:
-          type: string
-        invoice_no:
-          type: string
-        invoice_orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateFinalInvoiceOrderRequestPayload'
-        invoice_type:
-          type: string
-        raised_on_timestamp:
-          type: integer
-          format: int64
-        status:
-          type: string
-        type:
-          type: string
-      title: CreateFinalInvoiceRequestPayload
-    OrderDocDto:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-        created_by:
-          type: string
-        doc_no:
-          type: string
-        doc_type:
-          type: string
-        docs:
-          $ref: '#/components/schemas/DocDto'
-        id:
-          type: integer
-          format: int64
-        is_additional_doc:
-          type: boolean
         order_id:
           type: integer
           format: int64
-        s3_path:
-          type: string
-      title: OrderDocDto
-    InvoiceInFinalInvoiceDto:
+      title: CreateFinalInvoiceOrderRequestPayload
+    FinalInvoiceOrderResponsePayload:
       type: object
       properties:
+        amount:
+          type: number
         id:
           type: integer
           format: int64
-        invoice_no:
-          type: string
-        is_system_invoice_final:
-          type: boolean
-        status:
-          type: string
-      title: InvoiceInFinalInvoiceDto
-    GeniemodeEntityDto:
-      type: object
-      properties:
-        address:
-          type: object
-        address_id:
-          type: integer
-          format: int64
-        address_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        compliance:
-          type: string
-        currency:
-          type: string
-        id:
-          type: integer
-          format: int64
-        invoice_declaration:
-          type: string
-        label:
-          type: string
-        legal_name:
-          type: string
-        tally_currency:
-          type: string
-        value:
-          type: string
-      title: GeniemodeEntityDto
-    DocDto:
-      type: object
-      properties:
-        doc_display_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        s3_path:
-          type: string
-        s3_version:
-          type: integer
-          format: int64
-      title: DocDto
-    ShipmentDocTypeResponsePayload:
-      type: object
-      properties:
-        booked:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
-        complete:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
-        delivery_date:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
-        is_delivery_date_step_required:
-          type: boolean
-        is_payment_followup_step_required:
-          type: boolean
-        payment_followup:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
-        preplanned:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
-        shipped:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
-      title: ShipmentDocTypeResponsePayload
-    UpdateFinalInvoiceGrnStatusRequestPayload:
-      type: object
-      properties:
-        comment:
-          type: string
-        status:
-          type: string
-      title: UpdateFinalInvoiceGrnStatusRequestPayload
-    BuyerDocsResponsePayload:
-      type: object
-      properties:
-        additional_docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderDocDto'
-        buyer_po_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderDetailBuyerPODocResponseDto'
-        confirmation_mail_doc_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderDocDto'
-        pi_id:
-          type: integer
-          format: int64
-      title: BuyerDocsResponsePayload
-    InvoiceBuyerDocsResponsePayload:
-      type: object
-      properties:
-        order_id:
-          type: integer
-          format: int64
-        response:
-          $ref: '#/components/schemas/BuyerDocsResponsePayload'
-      title: InvoiceBuyerDocsResponsePayload
-    InvoiceActualLogisticsDetailsResponsePayload:
-      type: object
-      properties:
-        clearance_charges:
-          type: number
-        cost_sheet_doc_url:
-          type: string
-        custom_duty:
-          type: number
-        local_freight:
-          type: number
-        management_approval_doc_url:
-          type: string
-        sea_freight:
-          type: number
-        total_shipping_cost:
-          type: number
-        wh_charges:
-          type: number
-      title: InvoiceActualLogisticsDetailsResponsePayload
+        order:
+          $ref: '#/components/schemas/OrderInFinalInvoiceOrderDto'
+      title: FinalInvoiceOrderResponsePayload
     FactoryDocsResponsePayload:
       type: object
       properties:
@@ -909,120 +680,6 @@ components:
           items:
             type: string
       title: FactoryDocsResponsePayload
-    CreateFinalInvoiceListDocsRequestPayload:
-      type: object
-      properties:
-        actual_date:
-          type: integer
-          format: int64
-        courier_partner_name:
-          type: string
-        doc_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateFinalInvoiceDocsRequestPayload'
-        remark:
-          type: string
-        shipment_mode:
-          type: string
-        stage:
-          type: string
-        tracking_id:
-          type: string
-      title: CreateFinalInvoiceListDocsRequestPayload
-    CreateFinalInvoiceDocsRequestPayload:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            type: string
-        type:
-          type: string
-      title: CreateFinalInvoiceDocsRequestPayload
-    OrderInFinalInvoiceOrderDto:
-      type: object
-      properties:
-        buyer_payment_type:
-          type: string
-        currency:
-          type: string
-        current_amount:
-          type: number
-        factory_currency:
-          type: string
-        geniemode_entity_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        lead_data:
-          type: object
-        lead_id:
-          type: integer
-          format: int64
-        manufacturer:
-          $ref: '#/components/schemas/ManufacturerMiniResponsePayload'
-        order_margin:
-          $ref: '#/components/schemas/OrderMarginInFinalInvoiceOrderDto'
-        quantity:
-          type: integer
-          format: int64
-        sku_data:
-          type: object
-        sku_id:
-          type: string
-        total_amount:
-          type: number
-      title: OrderInFinalInvoiceOrderDto
-    InvoiceOrderPlannedLogisticsDetailsResponsePayload:
-      type: object
-      properties:
-        custom_duty:
-          type: number
-        logistics_cost:
-          type: number
-        order_id:
-          type: integer
-          format: int64
-        planned_shipment_mode:
-          type: string
-        quantity:
-          type: integer
-          format: int64
-      title: InvoiceOrderPlannedLogisticsDetailsResponsePayload
-    FinalInvoiceOrderResponsePayload:
-      type: object
-      properties:
-        amount:
-          type: number
-        id:
-          type: integer
-          format: int64
-        order:
-          $ref: '#/components/schemas/OrderInFinalInvoiceOrderDto'
-      title: FinalInvoiceOrderResponsePayload
-    OrderMarginInFinalInvoiceOrderDto:
-      type: object
-      properties:
-        buyer_shipment_type:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: OrderMarginInFinalInvoiceOrderDto
-    InvoiceGrnResponsePayload:
-      type: object
-      properties:
-        comment:
-          type: string
-        grn_doc_url:
-          type: string
-        grn_status:
-          type: string
-        pod_doc_url:
-          type: string
-      title: InvoiceGrnResponsePayload
     FinalInvoiceResponsePayload:
       type: object
       properties:
@@ -1064,48 +721,107 @@ components:
         type:
           type: string
       title: FinalInvoiceResponsePayload
-    OrderDetailBuyerPODocResponseDto:
+    CreateFinalInvoiceRequestPayload:
       type: object
       properties:
-        buyer_doc:
-          $ref: '#/components/schemas/OrderDocDto'
-        buyer_po_id:
-          type: integer
-          format: int64
-        buyer_po_no:
+        bill_to_type:
           type: string
-        id:
-          type: integer
-          format: int64
-        po_type:
+        currency:
           type: string
-      title: OrderDetailBuyerPODocResponseDto
-    CreateFinalInvoiceOrderRequestPayload:
-      type: object
-      properties:
-        amount:
+        discount_amount:
           type: number
-        factory_amount:
+        discount_percentage:
           type: number
-        final_invoice_id:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
-        order_id:
-          type: integer
-          format: int64
-      title: CreateFinalInvoiceOrderRequestPayload
-    FinalInvoiceRecomputeRequestPayload:
-      type: object
-      properties:
-        ids:
+        document_amount:
+          type: number
+        geniemode_entity_conversion:
+          type: number
+        internal_invoice_no:
+          type: string
+        invoice_doc_url:
+          type: string
+        invoice_no:
+          type: string
+        invoice_orders:
           type: array
           items:
-            type: integer
-            format: int64
-      title: FinalInvoiceRecomputeRequestPayload
+            $ref: '#/components/schemas/CreateFinalInvoiceOrderRequestPayload'
+        invoice_type:
+          type: string
+        raised_on_timestamp:
+          type: integer
+          format: int64
+        status:
+          type: string
+        type:
+          type: string
+      title: CreateFinalInvoiceRequestPayload
+    UpdateFinalInvoiceGrnStatusRequestPayload:
+      type: object
+      properties:
+        comment:
+          type: string
+        status:
+          type: string
+      title: UpdateFinalInvoiceGrnStatusRequestPayload
+    InvoiceLogisticsDetailsResponsePayload:
+      type: object
+      properties:
+        actual_logistic_cost_details:
+          $ref: '#/components/schemas/InvoiceActualLogisticsDetailsResponsePayload'
+        actual_shipment_mode:
+          type: string
+        planned_logistic_cost_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceOrderPlannedLogisticsDetailsResponsePayload'
+        planned_shipment_mode:
+          type: string
+        total_actual_logistics_cost:
+          type: number
+        total_planned_custom_duty:
+          type: number
+        total_planned_logistics_cost:
+          type: number
+      title: InvoiceLogisticsDetailsResponsePayload
+    ShipmentDocTypeResponsePayload:
+      type: object
+      properties:
+        booked:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
+        complete:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
+        delivery_date:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
+        is_delivery_date_step_required:
+          type: boolean
+        is_payment_followup_step_required:
+          type: boolean
+        payment_followup:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
+        preplanned:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
+        shipped:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ShipmentSingleDocTypeResponsePayload'
+      title: ShipmentDocTypeResponsePayload
     AddressSubmitResponsePayload:
       type: object
       properties:
@@ -1140,3 +856,287 @@ components:
         type:
           type: string
       title: AddressSubmitResponsePayload
+    OrderMarginInFinalInvoiceOrderDto:
+      type: object
+      properties:
+        buyer_shipment_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: OrderMarginInFinalInvoiceOrderDto
+    InvoiceActualLogisticsDetailsResponsePayload:
+      type: object
+      properties:
+        clearance_charges:
+          type: number
+        cost_sheet_doc_url:
+          type: string
+        custom_duty:
+          type: number
+        local_freight:
+          type: number
+        management_approval_doc_url:
+          type: string
+        sea_freight:
+          type: number
+        total_shipping_cost:
+          type: number
+        wh_charges:
+          type: number
+      title: InvoiceActualLogisticsDetailsResponsePayload
+    CreateFinalInvoiceListDocsRequestPayload:
+      type: object
+      properties:
+        actual_date:
+          type: integer
+          format: int64
+        courier_partner_name:
+          type: string
+        doc_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateFinalInvoiceDocsRequestPayload'
+        remark:
+          type: string
+        shipment_mode:
+          type: string
+        stage:
+          type: string
+        tracking_id:
+          type: string
+      title: CreateFinalInvoiceListDocsRequestPayload
+    InvoiceBuyerDocsResponsePayload:
+      type: object
+      properties:
+        order_id:
+          type: integer
+          format: int64
+        response:
+          $ref: '#/components/schemas/BuyerDocsResponsePayload'
+      title: InvoiceBuyerDocsResponsePayload
+    InvoiceInFinalInvoiceDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        invoice_no:
+          type: string
+        is_system_invoice_final:
+          type: boolean
+        status:
+          type: string
+      title: InvoiceInFinalInvoiceDto
+    InvoiceGrnResponsePayload:
+      type: object
+      properties:
+        comment:
+          type: string
+        grn_doc_url:
+          type: string
+        grn_status:
+          type: string
+        pod_doc_url:
+          type: string
+      title: InvoiceGrnResponsePayload
+    GeniemodeEntityDto:
+      type: object
+      properties:
+        address:
+          type: object
+        address_id:
+          type: integer
+          format: int64
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        compliance:
+          type: string
+        currency:
+          type: string
+        id:
+          type: integer
+          format: int64
+        invoice_declaration:
+          type: string
+        label:
+          type: string
+        legal_name:
+          type: string
+        tally_currency:
+          type: string
+        value:
+          type: string
+      title: GeniemodeEntityDto
+    InvoiceFactoryDocsResponsePayload:
+      type: object
+      properties:
+        order_id:
+          type: integer
+          format: int64
+        response:
+          $ref: '#/components/schemas/FactoryDocsResponsePayload'
+      title: InvoiceFactoryDocsResponsePayload
+    ManufacturerMiniResponsePayload:
+      type: object
+      properties:
+        billing_address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        billing_address_id:
+          type: integer
+          format: int64
+        gst:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        pan:
+          type: string
+      title: ManufacturerMiniResponsePayload
+    InvoiceOrderPlannedLogisticsDetailsResponsePayload:
+      type: object
+      properties:
+        custom_duty:
+          type: number
+        logistics_cost:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+        planned_shipment_mode:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+      title: InvoiceOrderPlannedLogisticsDetailsResponsePayload
+    ShipmentSingleDocTypeResponsePayload:
+      type: object
+      properties:
+        doc_type:
+          type: string
+        mandatory:
+          type: boolean
+        name:
+          type: string
+      title: ShipmentSingleDocTypeResponsePayload
+    BuyerDocsResponsePayload:
+      type: object
+      properties:
+        additional_docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDocDto'
+        buyer_po_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetailBuyerPODocResponseDto'
+        confirmation_mail_doc_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDocDto'
+        pi_id:
+          type: integer
+          format: int64
+      title: BuyerDocsResponsePayload
+    ShipmentDocTypesRequestPayload:
+      type: object
+      properties:
+        final_invoice_id:
+          type: integer
+          format: int64
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        shipment_id:
+          type: integer
+          format: int64
+      title: ShipmentDocTypesRequestPayload
+    OrderDocDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        doc_no:
+          type: string
+        doc_type:
+          type: string
+        docs:
+          $ref: '#/components/schemas/DocDto'
+        id:
+          type: integer
+          format: int64
+        is_additional_doc:
+          type: boolean
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+      title: OrderDocDto
+    DocDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+      title: DocDto
+    OrderInFinalInvoiceOrderDto:
+      type: object
+      properties:
+        buyer_payment_type:
+          type: string
+        currency:
+          type: string
+        current_amount:
+          type: number
+        factory_currency:
+          type: string
+        geniemode_entity_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        lead_data:
+          type: object
+        lead_id:
+          type: integer
+          format: int64
+        manufacturer:
+          $ref: '#/components/schemas/ManufacturerMiniResponsePayload'
+        order_margin:
+          $ref: '#/components/schemas/OrderMarginInFinalInvoiceOrderDto'
+        quantity:
+          type: integer
+          format: int64
+        sku_data:
+          type: object
+        sku_id:
+          type: string
+        total_amount:
+          type: number
+      title: OrderInFinalInvoiceOrderDto
+    FinalInvoiceRecomputeRequestPayload:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: FinalInvoiceRecomputeRequestPayload

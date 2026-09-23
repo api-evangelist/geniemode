@@ -121,43 +121,18 @@ paths:
         description: file_content
 components:
   schemas:
-    DocDetailsDto:
+    Pair_string_string:
       type: object
       properties:
-        doc_display_name:
+        key:
           type: string
-        id:
-          type: integer
-          format: int64
-        order_id:
-          type: integer
-          format: int64
-        s3_path:
+        left:
           type: string
-        s3_version:
-          type: integer
-          format: int64
-        step_name:
+        right:
           type: string
-      title: DocDetailsDto
-    UploadDocumentResponsePayload:
-      type: object
-      properties:
-        doc:
-          $ref: '#/components/schemas/Doc'
-        doc_id:
-          type: integer
-          format: int64
-        message:
+        value:
           type: string
-      title: UploadDocumentResponsePayload
-    GetDocumentRequestPayload:
-      type: object
-      properties:
-        doc_id:
-          type: integer
-          format: int64
-      title: GetDocumentRequestPayload
+      title: Pair«string,string»
     UploadResponsePayload:
       type: object
       properties:
@@ -182,36 +157,17 @@ components:
         url:
           type: string
       title: UploadResponsePayload
-    Pair_string_string:
+    UploadDocumentResponsePayload:
       type: object
       properties:
-        key:
-          type: string
-        left:
-          type: string
-        right:
-          type: string
-        value:
-          type: string
-      title: Pair«string,string»
-    Doc:
-      type: object
-      properties:
-        bucketAndKey:
-          $ref: '#/components/schemas/Pair_string_string'
-        createdBy:
-          type: string
-        docDisplayName:
-          type: string
-        id:
+        doc:
+          $ref: '#/components/schemas/Doc'
+        doc_id:
           type: integer
           format: int64
-        s3Path:
+        message:
           type: string
-        s3Version:
-          type: integer
-          format: int64
-      title: Doc
+      title: UploadDocumentResponsePayload
     DocumentSearchRequestPayload:
       type: object
       properties:
@@ -236,3 +192,47 @@ components:
         search:
           type: string
       title: DocumentSearchRequestPayload
+    GetDocumentRequestPayload:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+      title: GetDocumentRequestPayload
+    DocDetailsDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+      title: DocDetailsDto
+    Doc:
+      type: object
+      properties:
+        bucketAndKey:
+          $ref: '#/components/schemas/Pair_string_string'
+        createdBy:
+          type: string
+        docDisplayName:
+          type: string
+        id:
+          type: integer
+          format: int64
+        s3Path:
+          type: string
+        s3Version:
+          type: integer
+          format: int64
+      title: Doc

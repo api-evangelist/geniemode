@@ -114,35 +114,6 @@ paths:
         required: true
 components:
   schemas:
-    GetWorkFlowStepResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkFlowStepDto'
-        message:
-          type: string
-      title: GetWorkFlowStepResponse
-    CreateWorkFlowStepRequestPayload:
-      type: object
-      properties:
-        require_approver:
-          type: string
-        require_due_date:
-          type: string
-        rm_id:
-          type: integer
-          format: int64
-        step_name:
-          type: string
-        step_success_criteria:
-          type: string
-        visible_to_client:
-          type: string
-        visible_to_manufacturer:
-          type: string
-      title: CreateWorkFlowStepRequestPayload
     WorkFlowStepSearchRequestPayload:
       type: object
       properties:
@@ -197,3 +168,32 @@ components:
         visible_to_manufacturer:
           type: string
       title: WorkFlowStepDto
+    GetWorkFlowStepResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkFlowStepDto'
+        message:
+          type: string
+      title: GetWorkFlowStepResponse
+    CreateWorkFlowStepRequestPayload:
+      type: object
+      properties:
+        require_approver:
+          type: string
+        require_due_date:
+          type: string
+        rm_id:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        visible_to_client:
+          type: string
+        visible_to_manufacturer:
+          type: string
+      title: CreateWorkFlowStepRequestPayload

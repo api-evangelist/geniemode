@@ -14,13 +14,13 @@ info:
 servers:
 - url: https://portal.geniemode.com
 tags:
-- name: factory-controller
+- name: Factory Controller
   description: Factory Controller
 paths:
   /api/factory/Create:
     post:
       tags:
-      - factory-controller
+      - Factory Controller
       summary: create
       operationId: createUsingPOST_3
       responses:
@@ -41,7 +41,7 @@ paths:
   /api/factory/all_enums:
     get:
       tags:
-      - factory-controller
+      - Factory Controller
       summary: getAllEnums
       operationId: getAllEnumsUsingGET
       responses:
@@ -58,7 +58,7 @@ paths:
   /api/factory/delete:
     delete:
       tags:
-      - factory-controller
+      - Factory Controller
       summary: deleteFactory
       operationId: deleteFactoryUsingDELETE
       parameters:
@@ -79,7 +79,7 @@ paths:
   /api/factory/get:
     get:
       tags:
-      - factory-controller
+      - Factory Controller
       summary: getFactory
       operationId: getFactoryUsingGET
       parameters:
@@ -104,7 +104,7 @@ paths:
   /api/factory/get_all:
     get:
       tags:
-      - factory-controller
+      - Factory Controller
       summary: index
       operationId: indexUsingGET_7
       parameters:
@@ -145,7 +145,7 @@ paths:
   /api/factory/send-mail:
     post:
       tags:
-      - factory-controller
+      - Factory Controller
       summary: sendMail
       operationId: sendMailUsingPOST
       responses:
@@ -165,7 +165,7 @@ paths:
   /api/factory/update:
     put:
       tags:
-      - factory-controller
+      - Factory Controller
       summary: updateFactory
       operationId: updateFactoryUsingPUT
       parameters:
@@ -224,58 +224,16 @@ components:
         whatsapp_opt_in:
           type: boolean
       title: UMSUserResponsePayload
-    DocDetailsDto:
+    SendEmailRequest:
       type: object
       properties:
-        doc_display_name:
-          type: string
-        id:
+        doc_id:
           type: integer
           format: int64
-        order_id:
+        factory_id:
           type: integer
           format: int64
-        s3_path:
-          type: string
-        s3_version:
-          type: integer
-          format: int64
-        step_name:
-          type: string
-      title: DocDetailsDto
-    GetAllEnumsResponse:
-      type: object
-      properties:
-        factory_business_types:
-          type: array
-          items:
-            type: string
-            enum:
-            - MANUFACTURING
-            - OTHER
-            - SERVICES
-            - TRADING
-        factory_doc_types:
-          type: object
-          additionalProperties:
-            type: string
-        factory_nature_types:
-          type: array
-          items:
-            type: string
-            enum:
-            - OTHER
-            - PARTNERSHIP
-            - PRIVATELTD
-            - PROPRIETORSHIP
-        loan_types:
-          type: array
-          items:
-            type: string
-            enum:
-            - Term_Loan
-            - Working_Capital_Loan
-      title: GetAllEnumsResponse
+      title: SendEmailRequest
     FactoryCreateRequestPayload:
       type: object
       properties:
@@ -321,16 +279,58 @@ components:
           type: integer
           format: int64
       title: FactoryCreateRequestPayload
-    SendEmailRequest:
+    GetAllEnumsResponse:
       type: object
       properties:
-        doc_id:
+        factory_business_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - MANUFACTURING
+            - OTHER
+            - SERVICES
+            - TRADING
+        factory_doc_types:
+          type: object
+          additionalProperties:
+            type: string
+        factory_nature_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - OTHER
+            - PARTNERSHIP
+            - PRIVATELTD
+            - PROPRIETORSHIP
+        loan_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - Term_Loan
+            - Working_Capital_Loan
+      title: GetAllEnumsResponse
+    DocDetailsDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
           type: integer
           format: int64
-        factory_id:
+        order_id:
           type: integer
           format: int64
-      title: SendEmailRequest
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+      title: DocDetailsDto
     GetFactoryResponsePayload:
       type: object
       properties:

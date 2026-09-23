@@ -14,13 +14,13 @@ info:
 servers:
 - url: https://portal.geniemode.com
 tags:
-- name: user
+- name: User
   description: User
 paths:
   /api/v1/siren-events/user:
     post:
       tags:
-      - user
+      - User
       summary: record
       operationId: recordUsingPOST
       responses:
@@ -42,7 +42,7 @@ paths:
   /api/v1/user-lock-state/user:
     get:
       tags:
-      - user
+      - User
       summary: getMyStates
       operationId: getMyStatesUsingGET
       responses:
@@ -60,7 +60,7 @@ paths:
           description: 500 message
     post:
       tags:
-      - user
+      - User
       summary: setMyState
       operationId: setMyStateUsingPOST
       responses:
@@ -79,7 +79,7 @@ paths:
         required: true
     delete:
       tags:
-      - user
+      - User
       summary: clearMyState
       operationId: clearMyStateUsingDELETE
       parameters:
@@ -99,7 +99,7 @@ paths:
   /api/v1/user-lock-state/user/raw:
     get:
       tags:
-      - user
+      - User
       summary: getMyRawStates
       operationId: getMyRawStatesUsingGET
       responses:
@@ -117,6 +117,9 @@ paths:
           description: 500 message
 components:
   schemas:
+    JsonNode:
+      type: object
+      title: JsonNode
     UserLockState:
       type: object
       properties:
@@ -136,14 +139,6 @@ components:
         value:
           $ref: '#/components/schemas/JsonNode'
       title: UserLockState
-    RecordSirenEventsRequestPayload:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-      title: RecordSirenEventsRequestPayload
     SetUserLockStateRequestPayload:
       type: object
       properties:
@@ -158,9 +153,6 @@ components:
         value:
           type: object
       title: SetUserLockStateRequestPayload
-    JsonNode:
-      type: object
-      title: JsonNode
     Event:
       type: object
       properties:
@@ -176,3 +168,11 @@ components:
         siren_type:
           type: string
       title: Event
+    RecordSirenEventsRequestPayload:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+      title: RecordSirenEventsRequestPayload

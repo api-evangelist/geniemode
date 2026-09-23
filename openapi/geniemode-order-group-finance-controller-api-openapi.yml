@@ -259,6 +259,188 @@ paths:
           description: 500 message
 components:
   schemas:
+    PoResponsePayloadWithHistoryDto:
+      type: object
+      properties:
+        diff:
+          $ref: '#/components/schemas/PoResponsePayloadDto'
+        history:
+          $ref: '#/components/schemas/PoGetHistoryResponsePayloadDto'
+        is_legacy_order:
+          type: boolean
+        orders:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/PoOrderwiseDetails'
+        rejected_reason:
+          type: string
+        size_chart:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoMeasurementChartResponsePayloadDto'
+        status:
+          type: string
+        status_change_time:
+          type: integer
+          format: int64
+      title: PoResponsePayloadWithHistoryDto
+    PoChangeTypeDto:
+      type: object
+      properties:
+        added:
+          $ref: '#/components/schemas/PoChangeDataDto'
+        modify:
+          $ref: '#/components/schemas/PoChangeDataDto'
+        subtracted:
+          $ref: '#/components/schemas/PoChangeDataDto'
+      title: PoChangeTypeDto
+    PoGetResponsePayloadDto:
+      type: object
+      properties:
+        created_by:
+          type: string
+        date:
+          type: string
+        diff:
+          $ref: '#/components/schemas/PoResponsePayloadDto'
+        id:
+          type: integer
+          format: int64
+        is_latest:
+          type: boolean
+        rejected_reason:
+          type: string
+        status:
+          type: string
+        status_change_time:
+          type: integer
+          format: int64
+      title: PoGetResponsePayloadDto
+    OrderDiscountCharges:
+      type: object
+      properties:
+        discount_charges:
+          type: number
+        discount_charges_cost_type:
+          type: string
+        discount_charges_percent:
+          type: number
+        discount_charges_type:
+          type: string
+        factory_discount_charges:
+          type: number
+        factory_discount_charges_cost_type:
+          type: string
+        factory_discount_charges_percent:
+          type: number
+        factory_discount_charges_type:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+      title: OrderDiscountCharges
+    PoChangeDataDto:
+      type: object
+      properties:
+        previous_value:
+          type: string
+      title: PoChangeDataDto
+    BundleSkuDto:
+      type: object
+      properties:
+        bundle_sku_id:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        price:
+          type: number
+          format: double
+        product_sku_id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        sku:
+          type: string
+        style_code:
+          type: string
+      title: BundleSkuDto
+    OrderConversionDto:
+      type: object
+      properties:
+        conversion_rate:
+          type: number
+        currency:
+          type: string
+        currency_conversion_date:
+          type: string
+          format: date-time
+        factory_conversion:
+          type: number
+        factory_conversion_date:
+          type: string
+          format: date-time
+        factory_currency:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        style_code:
+          type: string
+      title: OrderConversionDto
+    OrderCustomDuty:
+      type: object
+      properties:
+        acceptable_cost_of:
+          type: string
+        currency:
+          type: string
+        currency_price:
+          type: number
+        custom_duty:
+          type: number
+        custom_duty_cost_type:
+          type: string
+        custom_duty_per_piece:
+          type: number
+        dollar_price:
+          type: number
+        factory_dollar_price:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        reciprocal_tariff:
+          type: number
+        reciprocal_tariff_cost_type:
+          type: string
+        reciprocal_tariff_per_piece:
+          type: number
+        total_custom_duty:
+          type: number
+      title: OrderCustomDuty
+    PoResponsePayloadWithHistoryForGroupDto:
+      type: object
+      properties:
+        pos:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoResponsePayloadWithHistoryDto'
+      title: PoResponsePayloadWithHistoryForGroupDto
+    OrderLogisticsDetailsVpFinanceViewDto:
+      type: object
+      properties:
+        sku_logistic_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLogisticsDetailsSkusVpFinanceViewDto'
+      title: OrderLogisticsDetailsVpFinanceViewDto
     PoResponsePayloadDto:
       type: object
       properties:
@@ -491,193 +673,37 @@ components:
         total_selling_price_currency:
           $ref: '#/components/schemas/PoMapPayloadDto'
       title: PoResponsePayloadDto
-    PoGetHistoryResponsePayloadDto:
+    OrderGroupEntryDto:
       type: object
       properties:
-        po_history_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/PoGetResponsePayloadDto'
-      title: PoGetHistoryResponsePayloadDto
-    OrderLogisticsDetailsSkusVpFinanceViewDto:
-      type: object
-      properties:
-        currency:
-          type: string
-        currency_price:
-          type: number
-        custom_duty_by_logistics:
-          type: number
-        custom_duty_by_rm:
-          type: number
-        custom_duty_cost_type_by_logistics:
-          type: string
-        custom_duty_cost_type_by_rm:
-          type: string
-        custom_duty_document_approval_required:
-          type: boolean
-        custom_duty_greater_than_rm:
-          type: boolean
-        custom_duty_per_piece_by_logistics:
-          type: number
-        custom_duty_per_piece_by_rm:
-          type: number
-        delivery_charges_by_logistics:
-          type: number
-        delivery_charges_by_rm:
-          type: number
-        dollar_price:
-          type: number
-        factory_dollar_price:
-          type: number
-        freight_cost_by_logistics:
-          type: number
-        freight_cost_by_rm:
-          type: number
-        is_reciprocal_tariff_required:
-          type: boolean
-        logistic_cost_by_logistics:
-          type: number
-        logistic_cost_by_rm:
-          type: number
-        logistic_cost_per_piece_by_logistics:
-          type: number
-        logistic_cost_per_piece_by_rm:
-          type: number
-        logistic_cost_type_by_logistics:
-          type: string
-        logistic_cost_type_by_rm:
-          type: string
-        logistics_cost_greater_than_rm:
-          type: boolean
-        logistics_document_approval_required:
-          type: boolean
-        management_approval_url:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int64
-        reciprocal_tariff_by_logistics:
-          type: number
-        reciprocal_tariff_by_rm:
-          type: number
-        reciprocal_tariff_cost_type_by_logistics:
-          type: string
-        reciprocal_tariff_cost_type_by_rm:
-          type: string
-        reciprocal_tariff_per_piece_by_logistics:
-          type: number
-        reciprocal_tariff_per_piece_by_rm:
-          type: number
-        reciprocal_tariff_type_by_rm:
-          type: string
-        remark:
-          type: string
-        show_freight_keyword:
-          type: boolean
-        sku:
-          type: string
-        style_code:
-          type: string
-        total_cbm:
-          type: number
-        total_custom_duty_by_logistics:
-          type: number
-        total_custom_duty_by_rm:
-          type: number
-        total_gross_weight:
-          type: number
-        total_net_weight:
-          type: number
-        total_volumetric_weight:
-          type: number
-      title: OrderLogisticsDetailsSkusVpFinanceViewDto
-    PoOrderwiseDetails:
-      type: object
-      properties:
-        amount_factory_currency_price:
-          type: number
-        changed_shipment_mode:
-          type: string
-        count:
-          type: integer
-          format: int64
-        order_id:
-          type: integer
-          format: int64
-        planned_shipment_mode:
-          type: string
-        quantity:
-          type: integer
-          format: int64
-        ship_qty_negative_tolerance:
-          type: integer
-          format: int64
-        ship_qty_positive_tolerance:
-          type: integer
-          format: int64
-        total_buyer_price_in_buyer_currency:
-          type: number
-      title: PoOrderwiseDetails
-    OrderMinifiedDto:
-      type: object
-      properties:
-        financial_status:
-          type: string
         id:
           type: integer
           format: int64
+        lead_details:
+          type: object
         lead_id:
           type: integer
           format: int64
-        sku:
-          type: string
-        style_code:
-          type: string
-      title: OrderMinifiedDto
-    PoChangeTypeDto:
-      type: object
-      properties:
-        added:
-          $ref: '#/components/schemas/PoChangeDataDto'
-        modify:
-          $ref: '#/components/schemas/PoChangeDataDto'
-        subtracted:
-          $ref: '#/components/schemas/PoChangeDataDto'
-      title: PoChangeTypeDto
-    OrderRmLogisticsCostResponsePayload:
-      type: object
-      properties:
-        acceptable_cost_of:
-          type: string
-        currency:
-          type: string
-        currency_price:
-          type: number
-        delivery_charges:
-          type: number
-        dollar_price:
-          type: number
-        factory_dollar_price:
-          type: number
-        freight_cost:
-          type: number
-        logistic_cost:
-          type: number
-        logistic_cost_per_piece:
-          type: number
-        logistic_cost_type:
-          type: string
+        order_details:
+          $ref: '#/components/schemas/OrderMinifiedDto'
         order_id:
           type: integer
           format: int64
-        quantity:
-          type: integer
-          format: int64
-      title: OrderRmLogisticsCostResponsePayload
+      title: OrderGroupEntryDto
+    GetLeadBuyerRiskResponse:
+      type: object
+      properties:
+        approval_status:
+          type: string
+        approved_amount:
+          type: number
+        company_name:
+          type: string
+        lms_projection:
+          type: number
+        order_amount:
+          type: number
+      title: GetLeadBuyerRiskResponse
     PoSkus:
       type: object
       properties:
@@ -866,29 +892,6 @@ components:
         variant_margin_percentage:
           $ref: '#/components/schemas/PoMapPayloadDto'
       title: PoSkus
-    OrderConversionDto:
-      type: object
-      properties:
-        conversion_rate:
-          type: number
-        currency:
-          type: string
-        currency_conversion_date:
-          type: string
-          format: date-time
-        factory_conversion:
-          type: number
-        factory_conversion_date:
-          type: string
-          format: date-time
-        factory_currency:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        style_code:
-          type: string
-      title: OrderConversionDto
     GetMasterOrderFinanceCumulativeResponsePayload:
       type: object
       properties:
@@ -1063,25 +1066,6 @@ components:
         total_volumetric_weight_cumulative:
           type: number
       title: GetMasterOrderFinanceCumulativeResponsePayload
-    OrderLogisticsDetailsVpFinanceViewDto:
-      type: object
-      properties:
-        sku_logistic_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLogisticsDetailsSkusVpFinanceViewDto'
-      title: OrderLogisticsDetailsVpFinanceViewDto
-    OrderWiseApprovalReason:
-      type: object
-      properties:
-        approval_reasons:
-          type: array
-          items:
-            type: string
-        order_id:
-          type: integer
-          format: int64
-      title: OrderWiseApprovalReason
     OrderGroupDto:
       type: object
       properties:
@@ -1100,31 +1084,46 @@ components:
         status:
           type: string
       title: OrderGroupDto
-    PoResponsePayloadWithHistoryDto:
+    OrderMinifiedDto:
       type: object
       properties:
-        diff:
-          $ref: '#/components/schemas/PoResponsePayloadDto'
-        history:
-          $ref: '#/components/schemas/PoGetHistoryResponsePayloadDto'
-        is_legacy_order:
-          type: boolean
-        orders:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/PoOrderwiseDetails'
-        rejected_reason:
+        financial_status:
           type: string
-        size_chart:
-          type: array
-          items:
-            $ref: '#/components/schemas/PoMeasurementChartResponsePayloadDto'
-        status:
-          type: string
-        status_change_time:
+        id:
           type: integer
           format: int64
-      title: PoResponsePayloadWithHistoryDto
+        lead_id:
+          type: integer
+          format: int64
+        sku:
+          type: string
+        style_code:
+          type: string
+      title: OrderMinifiedDto
+    OrderWiseMarginPayload:
+      type: object
+      properties:
+        net_margin:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+        sku:
+          type: string
+        style_code:
+          type: string
+      title: OrderWiseMarginPayload
+    OrderWiseApprovalReason:
+      type: object
+      properties:
+        approval_reasons:
+          type: array
+          items:
+            type: string
+        order_id:
+          type: integer
+          format: int64
+      title: OrderWiseApprovalReason
     PoOrder:
       type: object
       properties:
@@ -1167,140 +1166,6 @@ components:
         total_custom_duty:
           $ref: '#/components/schemas/PoMapPayloadDto'
       title: PoOrder
-    OrderGroupEntryDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        lead_details:
-          type: object
-        lead_id:
-          type: integer
-          format: int64
-        order_details:
-          $ref: '#/components/schemas/OrderMinifiedDto'
-        order_id:
-          type: integer
-          format: int64
-      title: OrderGroupEntryDto
-    PoResponsePayloadWithHistoryForGroupDto:
-      type: object
-      properties:
-        pos:
-          type: array
-          items:
-            $ref: '#/components/schemas/PoResponsePayloadWithHistoryDto'
-      title: PoResponsePayloadWithHistoryForGroupDto
-    PoGetResponsePayloadDto:
-      type: object
-      properties:
-        created_by:
-          type: string
-        date:
-          type: string
-        diff:
-          $ref: '#/components/schemas/PoResponsePayloadDto'
-        id:
-          type: integer
-          format: int64
-        is_latest:
-          type: boolean
-        rejected_reason:
-          type: string
-        status:
-          type: string
-        status_change_time:
-          type: integer
-          format: int64
-      title: PoGetResponsePayloadDto
-    OrderDiscountCharges:
-      type: object
-      properties:
-        discount_charges:
-          type: number
-        discount_charges_cost_type:
-          type: string
-        discount_charges_percent:
-          type: number
-        discount_charges_type:
-          type: string
-        factory_discount_charges:
-          type: number
-        factory_discount_charges_cost_type:
-          type: string
-        factory_discount_charges_percent:
-          type: number
-        factory_discount_charges_type:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-      title: OrderDiscountCharges
-    BundleSkuDto:
-      type: object
-      properties:
-        bundle_sku_id:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
-        price:
-          type: number
-          format: double
-        product_sku_id:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int64
-        sku:
-          type: string
-        style_code:
-          type: string
-      title: BundleSkuDto
-    PoSkusMapping:
-      type: object
-      properties:
-        buyer_po_number:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        id:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        quantity:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-      title: PoSkusMapping
-    PoListDeliveryAddressDto:
-      type: object
-      properties:
-        address_id:
-          type: integer
-          format: int64
-        delivery_address:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        delivery_contact:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-      title: PoListDeliveryAddressDto
-    GetLeadBuyerRiskResponse:
-      type: object
-      properties:
-        approval_status:
-          type: string
-        approved_amount:
-          type: number
-        company_name:
-          type: string
-        lms_projection:
-          type: number
-        order_amount:
-          type: number
-      title: GetLeadBuyerRiskResponse
-    PoChangeDataDto:
-      type: object
-      properties:
-        previous_value:
-          type: string
-      title: PoChangeDataDto
     PoMapPayloadDto:
       type: object
       properties:
@@ -1309,7 +1174,15 @@ components:
         value:
           type: string
       title: PoMapPayloadDto
-    OrderCustomDuty:
+    PoGetHistoryResponsePayloadDto:
+      type: object
+      properties:
+        po_history_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoGetResponsePayloadDto'
+      title: PoGetHistoryResponsePayloadDto
+    OrderRmLogisticsCostResponsePayload:
       type: object
       properties:
         acceptable_cost_of:
@@ -1318,44 +1191,27 @@ components:
           type: string
         currency_price:
           type: number
-        custom_duty:
-          type: number
-        custom_duty_cost_type:
-          type: string
-        custom_duty_per_piece:
+        delivery_charges:
           type: number
         dollar_price:
           type: number
         factory_dollar_price:
           type: number
+        freight_cost:
+          type: number
+        logistic_cost:
+          type: number
+        logistic_cost_per_piece:
+          type: number
+        logistic_cost_type:
+          type: string
         order_id:
           type: integer
           format: int64
         quantity:
           type: integer
           format: int64
-        reciprocal_tariff:
-          type: number
-        reciprocal_tariff_cost_type:
-          type: string
-        reciprocal_tariff_per_piece:
-          type: number
-        total_custom_duty:
-          type: number
-      title: OrderCustomDuty
-    OrderWiseMarginPayload:
-      type: object
-      properties:
-        net_margin:
-          type: number
-        order_id:
-          type: integer
-          format: int64
-        sku:
-          type: string
-        style_code:
-          type: string
-      title: OrderWiseMarginPayload
+      title: OrderRmLogisticsCostResponsePayload
     PoMeasurementChartResponsePayloadDto:
       type: object
       properties:
@@ -1370,3 +1226,147 @@ components:
         style_code:
           type: string
       title: PoMeasurementChartResponsePayloadDto
+    PoSkusMapping:
+      type: object
+      properties:
+        buyer_po_number:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        id:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        quantity:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+      title: PoSkusMapping
+    PoOrderwiseDetails:
+      type: object
+      properties:
+        amount_factory_currency_price:
+          type: number
+        changed_shipment_mode:
+          type: string
+        count:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        planned_shipment_mode:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+        ship_qty_negative_tolerance:
+          type: integer
+          format: int64
+        ship_qty_positive_tolerance:
+          type: integer
+          format: int64
+        total_buyer_price_in_buyer_currency:
+          type: number
+      title: PoOrderwiseDetails
+    PoListDeliveryAddressDto:
+      type: object
+      properties:
+        address_id:
+          type: integer
+          format: int64
+        delivery_address:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        delivery_contact:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+      title: PoListDeliveryAddressDto
+    OrderLogisticsDetailsSkusVpFinanceViewDto:
+      type: object
+      properties:
+        currency:
+          type: string
+        currency_price:
+          type: number
+        custom_duty_by_logistics:
+          type: number
+        custom_duty_by_rm:
+          type: number
+        custom_duty_cost_type_by_logistics:
+          type: string
+        custom_duty_cost_type_by_rm:
+          type: string
+        custom_duty_document_approval_required:
+          type: boolean
+        custom_duty_greater_than_rm:
+          type: boolean
+        custom_duty_per_piece_by_logistics:
+          type: number
+        custom_duty_per_piece_by_rm:
+          type: number
+        delivery_charges_by_logistics:
+          type: number
+        delivery_charges_by_rm:
+          type: number
+        dollar_price:
+          type: number
+        factory_dollar_price:
+          type: number
+        freight_cost_by_logistics:
+          type: number
+        freight_cost_by_rm:
+          type: number
+        is_reciprocal_tariff_required:
+          type: boolean
+        logistic_cost_by_logistics:
+          type: number
+        logistic_cost_by_rm:
+          type: number
+        logistic_cost_per_piece_by_logistics:
+          type: number
+        logistic_cost_per_piece_by_rm:
+          type: number
+        logistic_cost_type_by_logistics:
+          type: string
+        logistic_cost_type_by_rm:
+          type: string
+        logistics_cost_greater_than_rm:
+          type: boolean
+        logistics_document_approval_required:
+          type: boolean
+        management_approval_url:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        reciprocal_tariff_by_logistics:
+          type: number
+        reciprocal_tariff_by_rm:
+          type: number
+        reciprocal_tariff_cost_type_by_logistics:
+          type: string
+        reciprocal_tariff_cost_type_by_rm:
+          type: string
+        reciprocal_tariff_per_piece_by_logistics:
+          type: number
+        reciprocal_tariff_per_piece_by_rm:
+          type: number
+        reciprocal_tariff_type_by_rm:
+          type: string
+        remark:
+          type: string
+        show_freight_keyword:
+          type: boolean
+        sku:
+          type: string
+        style_code:
+          type: string
+        total_cbm:
+          type: number
+        total_custom_duty_by_logistics:
+          type: number
+        total_custom_duty_by_rm:
+          type: number
+        total_gross_weight:
+          type: number
+        total_net_weight:
+          type: number
+        total_volumetric_weight:
+          type: number
+      title: OrderLogisticsDetailsSkusVpFinanceViewDto

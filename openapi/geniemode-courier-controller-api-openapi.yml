@@ -396,91 +396,6 @@ paths:
                 $ref: '#/components/schemas/CourierDto'
 components:
   schemas:
-    UMSUserResponsePayload:
-      type: object
-      properties:
-        country_code:
-          type: string
-        created_by:
-          type: string
-        first_name:
-          type: string
-        group_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-        id:
-          type: integer
-          format: int64
-        last_name:
-          type: string
-        manager:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-        phone_number:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-        username:
-          type: string
-        whatsapp_opt_in:
-          type: boolean
-      title: UMSUserResponsePayload
-    CourierCancellationRequestPayload:
-      type: object
-      properties:
-        reason_for_cancellation:
-          type: string
-      title: CourierCancellationRequestPayload
-    CourierItemDto:
-      type: object
-      properties:
-        cost_per_piece:
-          type: number
-        courier_item_type:
-          type: string
-        description:
-          type: string
-        hsn_code:
-          type: string
-        id:
-          type: integer
-          format: int64
-        item:
-          type: object
-        item_id:
-          type: integer
-          format: int64
-        no_of_pieces:
-          type: integer
-          format: int64
-        sub_item:
-          type: object
-        sub_item_id:
-          type: integer
-          format: int64
-        total_item_cost:
-          type: number
-      title: CourierItemDto
-    CourierBoxDto:
-      type: object
-      properties:
-        courier_breadth:
-          type: number
-        courier_height:
-          type: number
-        courier_length:
-          type: number
-        id:
-          type: integer
-          format: int64
-        weight:
-          type: number
-        weight_uom:
-          type: string
-      title: CourierBoxDto
     CourierDocDto:
       type: object
       properties:
@@ -629,6 +544,53 @@ components:
         tracking_link:
           type: string
       title: CourierDto
+    CourierBoxDto:
+      type: object
+      properties:
+        courier_breadth:
+          type: number
+        courier_height:
+          type: number
+        courier_length:
+          type: number
+        id:
+          type: integer
+          format: int64
+        weight:
+          type: number
+        weight_uom:
+          type: string
+      title: CourierBoxDto
+    CourierItemDto:
+      type: object
+      properties:
+        cost_per_piece:
+          type: number
+        courier_item_type:
+          type: string
+        description:
+          type: string
+        hsn_code:
+          type: string
+        id:
+          type: integer
+          format: int64
+        item:
+          type: object
+        item_id:
+          type: integer
+          format: int64
+        no_of_pieces:
+          type: integer
+          format: int64
+        sub_item:
+          type: object
+        sub_item_id:
+          type: integer
+          format: int64
+        total_item_cost:
+          type: number
+      title: CourierItemDto
     CourierBudgetDto:
       type: object
       properties:
@@ -647,6 +609,38 @@ components:
         vp:
           $ref: '#/components/schemas/UMSUserResponsePayload'
       title: CourierBudgetDto
+    UMSUserResponsePayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        created_by:
+          type: string
+        first_name:
+          type: string
+        group_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        whatsapp_opt_in:
+          type: boolean
+      title: UMSUserResponsePayload
     CourierPartnerDto:
       type: object
       properties:
@@ -656,3 +650,9 @@ components:
         name:
           type: string
       title: CourierPartnerDto
+    CourierCancellationRequestPayload:
+      type: object
+      properties:
+        reason_for_cancellation:
+          type: string
+      title: CourierCancellationRequestPayload

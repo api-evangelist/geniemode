@@ -179,27 +179,6 @@ paths:
           description: 500 message
 components:
   schemas:
-    VapiAssistantOverridesDto:
-      type: object
-      properties:
-        variableValues:
-          type: object
-      title: VapiAssistantOverridesDto
-    VapiCallRequestDto:
-      type: object
-      properties:
-        assistantId:
-          type: string
-        assistantOverrides:
-          $ref: '#/components/schemas/VapiAssistantOverridesDto'
-        customer:
-          $ref: '#/components/schemas/VapiCustomerDto'
-        phoneNumberId:
-          type: string
-        userId:
-          type: integer
-          format: int64
-      title: VapiCallRequestDto
     VapiCallLog:
       type: object
       properties:
@@ -259,6 +238,27 @@ components:
         variableValues:
           type: object
       title: VapiCallLog
+    VapiCallRequestDto:
+      type: object
+      properties:
+        assistantId:
+          type: string
+        assistantOverrides:
+          $ref: '#/components/schemas/VapiAssistantOverridesDto'
+        customer:
+          $ref: '#/components/schemas/VapiCustomerDto'
+        phoneNumberId:
+          type: string
+        userId:
+          type: integer
+          format: int64
+      title: VapiCallRequestDto
+    VapiAssistantOverridesDto:
+      type: object
+      properties:
+        variableValues:
+          type: object
+      title: VapiAssistantOverridesDto
     VapiCustomerDto:
       type: object
       properties:

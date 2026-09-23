@@ -550,16 +550,92 @@ paths:
           description: 500 message
 components:
   schemas:
-    QcFileCheckListSubPointSampleResponse:
+    CopyQcFileCheckListRequestPayload:
       type: object
       properties:
-        item:
-          type: string
-        sub_points:
+        target_order_ids:
           type: array
           items:
-            $ref: '#/components/schemas/QcFileCheckListSubPointSampleResponse'
-      title: QcFileCheckListSubPointSampleResponse
+            type: integer
+            format: int64
+      title: CopyQcFileCheckListRequestPayload
+    CopyQcFileCheckListResponsePayload:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetResult'
+        source_qc_check_list_id:
+          type: integer
+          format: int64
+      title: CopyQcFileCheckListResponsePayload
+    OrderResult:
+      type: object
+      properties:
+        message:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+          - ADDED
+          - ALREADY_HAS_CHECKLIST
+          - ALREADY_LINKED
+          - INELIGIBLE
+      title: OrderResult
+    QcCheckListDocsResponsePayload:
+      type: object
+      properties:
+        doc_url:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        type:
+          type: string
+      title: QcCheckListDocsResponsePayload
+    UserDTO:
+      type: object
+      properties:
+        country_code:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        phone_number:
+          type: string
+        username:
+          type: string
+      title: UserDTO
+    RequestQcFileCheckListPayload:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        is_submittable:
+          type: boolean
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestQcFileCheckListItemsPayload'
+      title: RequestQcFileCheckListPayload
+    AddOrdersToQcCheckListRequestPayload:
+      type: object
+      properties:
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: AddOrdersToQcCheckListRequestPayload
     QcFileCheckListItemDocPayload:
       type: object
       properties:
@@ -659,104 +735,6 @@ components:
           type: integer
           format: int32
       title: ResponseQcFileCheckListPayload
-    AddOrdersToQcCheckListResponsePayload:
-      type: object
-      properties:
-        checklist:
-          $ref: '#/components/schemas/ResponseQcFileCheckListPayload'
-        qc_check_list_id:
-          type: integer
-          format: int64
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderResult'
-      title: AddOrdersToQcCheckListResponsePayload
-    CopyQcFileCheckListResponsePayload:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/TargetResult'
-        source_qc_check_list_id:
-          type: integer
-          format: int64
-      title: CopyQcFileCheckListResponsePayload
-    QcCheckListDocsResponsePayload:
-      type: object
-      properties:
-        doc_url:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        type:
-          type: string
-      title: QcCheckListDocsResponsePayload
-    AddOrdersToQcCheckListRequestPayload:
-      type: object
-      properties:
-        order_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-      title: AddOrdersToQcCheckListRequestPayload
-    CopyQcFileCheckListRequestPayload:
-      type: object
-      properties:
-        target_order_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-      title: CopyQcFileCheckListRequestPayload
-    UserDTO:
-      type: object
-      properties:
-        country_code:
-          type: string
-        first_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        last_name:
-          type: string
-        phone_number:
-          type: string
-        username:
-          type: string
-      title: UserDTO
-    OrderResult:
-      type: object
-      properties:
-        message:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        status:
-          type: string
-          enum:
-          - ADDED
-          - ALREADY_HAS_CHECKLIST
-          - ALREADY_LINKED
-          - INELIGIBLE
-      title: OrderResult
-    ResponseQcFileCheckListVersionsPayload:
-      type: object
-      properties:
-        approved_at:
-          type: string
-          format: date-time
-        approved_by:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: ResponseQcFileCheckListVersionsPayload
     RequestQcFileCheckListItemsPayload:
       type: object
       properties:
@@ -791,34 +769,6 @@ components:
           items:
             $ref: '#/components/schemas/QcFileCheckListSubPointSampleResponse'
       title: RequestQcFileCheckListItemsPayload
-    RequestQcFileCheckListPayload:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        is_submittable:
-          type: boolean
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestQcFileCheckListItemsPayload'
-      title: RequestQcFileCheckListPayload
-    RequestQcFileCheckListByQcPayload:
-      type: object
-      properties:
-        comments:
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestQcFileCheckListItemsPayload'
-        rejected_reason:
-          type: string
-        status:
-          type: string
-          pattern: ^(REJECTED|APPROVED)$
-      title: RequestQcFileCheckListByQcPayload
     QcFileCheckListDocsResponsePayload:
       type: object
       properties:
@@ -829,6 +779,19 @@ components:
         type:
           type: string
       title: QcFileCheckListDocsResponsePayload
+    AddOrdersToQcCheckListResponsePayload:
+      type: object
+      properties:
+        checklist:
+          $ref: '#/components/schemas/ResponseQcFileCheckListPayload'
+        qc_check_list_id:
+          type: integer
+          format: int64
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderResult'
+      title: AddOrdersToQcCheckListResponsePayload
     TargetResult:
       type: object
       properties:
@@ -848,3 +811,40 @@ components:
           - INELIGIBLE
           - ORDER_NOT_FOUND
       title: TargetResult
+    ResponseQcFileCheckListVersionsPayload:
+      type: object
+      properties:
+        approved_at:
+          type: string
+          format: date-time
+        approved_by:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: ResponseQcFileCheckListVersionsPayload
+    RequestQcFileCheckListByQcPayload:
+      type: object
+      properties:
+        comments:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestQcFileCheckListItemsPayload'
+        rejected_reason:
+          type: string
+        status:
+          type: string
+          pattern: ^(REJECTED|APPROVED)$
+      title: RequestQcFileCheckListByQcPayload
+    QcFileCheckListSubPointSampleResponse:
+      type: object
+      properties:
+        item:
+          type: string
+        sub_points:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcFileCheckListSubPointSampleResponse'
+      title: QcFileCheckListSubPointSampleResponse

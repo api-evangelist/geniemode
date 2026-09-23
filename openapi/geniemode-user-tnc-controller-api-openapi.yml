@@ -114,6 +114,14 @@ components:
           type: integer
           format: int64
       title: UserTnc
+    UserTncDTO:
+      type: object
+      properties:
+        manufacturer_detail:
+          $ref: '#/components/schemas/ManufacturerTncDto'
+        user_tnc:
+          $ref: '#/components/schemas/UserTnc'
+      title: UserTncDTO
     ManufacturerTncDto:
       type: object
       properties:
@@ -133,11 +141,3 @@ components:
         data:
           $ref: '#/components/schemas/UserTncDTO'
       title: UserTncResponsePayload
-    UserTncDTO:
-      type: object
-      properties:
-        manufacturer_detail:
-          $ref: '#/components/schemas/ManufacturerTncDto'
-        user_tnc:
-          $ref: '#/components/schemas/UserTnc'
-      title: UserTncDTO

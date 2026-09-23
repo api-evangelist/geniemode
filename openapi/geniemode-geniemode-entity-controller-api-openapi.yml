@@ -178,6 +178,36 @@ paths:
         required: true
 components:
   schemas:
+    GeniemodeEntityCreatePayload:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressSubmitRequestPayload'
+        address_id:
+          type: integer
+          format: int64
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitRequestPayload'
+        compliance:
+          type: string
+        currency:
+          type: string
+        id:
+          type: integer
+          format: int64
+        invoice_declaration:
+          type: string
+        label:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        value:
+          type: string
+      title: GeniemodeEntityCreatePayload
     GeniemodeEntityDto:
       type: object
       properties:
@@ -208,40 +238,6 @@ components:
         value:
           type: string
       title: GeniemodeEntityDto
-    AddressSubmitResponsePayload:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        address_line2:
-          type: string
-        city:
-          type: string
-        contact_person_name:
-          type: string
-        contact_person_number:
-          type: string
-        country:
-          type: string
-        entity_id:
-          type: integer
-          format: int64
-        entity_type:
-          type: string
-        id:
-          type: integer
-          format: int64
-        landmark:
-          type: string
-        name:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-        type:
-          type: string
-      title: AddressSubmitResponsePayload
     AddressSubmitRequestPayload:
       type: object
       properties:
@@ -278,33 +274,37 @@ components:
         type:
           type: string
       title: AddressSubmitRequestPayload
-    GeniemodeEntityCreatePayload:
+    AddressSubmitResponsePayload:
       type: object
       properties:
-        address:
-          $ref: '#/components/schemas/AddressSubmitRequestPayload'
-        address_id:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
           type: integer
           format: int64
-        address_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/AddressSubmitRequestPayload'
-        compliance:
-          type: string
-        currency:
+        entity_type:
           type: string
         id:
           type: integer
           format: int64
-        invoice_declaration:
+        landmark:
           type: string
-        label:
+        name:
           type: string
-        tags:
-          type: array
-          items:
-            type: string
-        value:
+        pincode:
           type: string
-      title: GeniemodeEntityCreatePayload
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload

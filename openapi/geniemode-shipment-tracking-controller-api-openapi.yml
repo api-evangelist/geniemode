@@ -110,45 +110,6 @@ paths:
           description: 500 message
 components:
   schemas:
-    StepTemplateDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        is_hidden:
-          type: string
-        require_approver:
-          type: string
-        require_due_date:
-          type: string
-        step_name:
-          type: string
-        step_success_criteria:
-          type: string
-        visible_to_client:
-          type: string
-        visible_to_manufacturer:
-          type: string
-      title: StepTemplateDto
-    WfTemplateDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        workflow_name:
-          type: string
-      title: WfTemplateDto
-    OrderDetailSimpleDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        sku_id:
-          type: string
-      title: OrderDetailSimpleDto
     CreateOrderShipmentTrackingRequestPayload:
       type: object
       properties:
@@ -167,6 +128,15 @@ components:
           type: integer
           format: int64
       title: CreateOrderShipmentTrackingRequestPayload
+    WfTemplateDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        workflow_name:
+          type: string
+      title: WfTemplateDto
     WfStepOrderMapDto:
       type: object
       properties:
@@ -216,6 +186,36 @@ components:
         wf_template:
           $ref: '#/components/schemas/WfTemplateDto'
       title: WfStepOrderMapDto
+    OrderDetailSimpleDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        sku_id:
+          type: string
+      title: OrderDetailSimpleDto
+    StepTemplateDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        is_hidden:
+          type: string
+        require_approver:
+          type: string
+        require_due_date:
+          type: string
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        visible_to_client:
+          type: string
+        visible_to_manufacturer:
+          type: string
+      title: StepTemplateDto
     OrderShipmentTrackingResponseDto:
       type: object
       properties:

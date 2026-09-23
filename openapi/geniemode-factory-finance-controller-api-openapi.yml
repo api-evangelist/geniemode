@@ -113,6 +113,24 @@ paths:
         required: true
 components:
   schemas:
+    CreateFactoryFinanceRequestPayload:
+      type: object
+      properties:
+        collateral:
+          type: boolean
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateFactoryFinanceDocRequest'
+        factory_id:
+          type: integer
+          format: int64
+        loan_amount:
+          type: integer
+          format: int64
+        loan_type:
+          type: string
+      title: CreateFactoryFinanceRequestPayload
     UMSUserResponsePayload:
       type: object
       properties:
@@ -145,6 +163,42 @@ components:
         whatsapp_opt_in:
           type: boolean
       title: UMSUserResponsePayload
+    CreateFactoryFinanceDocRequest:
+      type: object
+      properties:
+        doc_data:
+          $ref: '#/components/schemas/DocDetailsDto'
+        doc_id:
+          type: integer
+          format: int64
+        doc_type:
+          type: string
+        doc_value:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: CreateFactoryFinanceDocRequest
+    GetFactoryFinanceResponse:
+      type: object
+      properties:
+        collateral:
+          type: boolean
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateFactoryFinanceDocRequest'
+        factory:
+          $ref: '#/components/schemas/GetFactoryResponsePayload'
+        id:
+          type: integer
+          format: int64
+        loan_amount:
+          type: integer
+          format: int64
+        loan_type:
+          type: string
+      title: GetFactoryFinanceResponse
     DocDetailsDto:
       type: object
       properties:
@@ -164,40 +218,6 @@ components:
         step_name:
           type: string
       title: DocDetailsDto
-    CreateFactoryFinanceDocRequest:
-      type: object
-      properties:
-        doc_data:
-          $ref: '#/components/schemas/DocDetailsDto'
-        doc_id:
-          type: integer
-          format: int64
-        doc_type:
-          type: string
-        doc_value:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: CreateFactoryFinanceDocRequest
-    CreateFactoryFinanceRequestPayload:
-      type: object
-      properties:
-        collateral:
-          type: boolean
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateFactoryFinanceDocRequest'
-        factory_id:
-          type: integer
-          format: int64
-        loan_amount:
-          type: integer
-          format: int64
-        loan_type:
-          type: string
-      title: CreateFactoryFinanceRequestPayload
     GetFactoryResponsePayload:
       type: object
       properties:
@@ -247,23 +267,3 @@ components:
           type: integer
           format: int64
       title: GetFactoryResponsePayload
-    GetFactoryFinanceResponse:
-      type: object
-      properties:
-        collateral:
-          type: boolean
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateFactoryFinanceDocRequest'
-        factory:
-          $ref: '#/components/schemas/GetFactoryResponsePayload'
-        id:
-          type: integer
-          format: int64
-        loan_amount:
-          type: integer
-          format: int64
-        loan_type:
-          type: string
-      title: GetFactoryFinanceResponse
