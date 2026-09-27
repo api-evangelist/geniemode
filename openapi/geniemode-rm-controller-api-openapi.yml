@@ -132,23 +132,14 @@ paths:
         required: true
 components:
   schemas:
-    CreateRMDto:
+    RMResponse:
       type: object
       properties:
-        contact_info:
-          type: string
-        country_code:
-          type: string
-        email:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        ums_id:
-          type: integer
-          format: int64
-      title: CreateRMDto
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMResponseDto'
+      title: RMResponse
     UpdateRmRequestPayload:
       type: object
       properties:
@@ -166,21 +157,23 @@ components:
         user_email:
           type: string
       title: UpdateRmRequestPayload
-    UpdateRmResponsePayload:
+    CreateRMDto:
       type: object
       properties:
-        message:
+        contact_info:
           type: string
-        status_code:
+        country_code:
+          type: string
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        ums_id:
           type: integer
-          format: int32
-      title: UpdateRmResponsePayload
-    DeleteRmResponsePayload:
-      type: object
-      properties:
-        message:
-          type: string
-      title: DeleteRmResponsePayload
+          format: int64
+      title: CreateRMDto
     RMResponseDto:
       type: object
       properties:
@@ -204,14 +197,21 @@ components:
         user_email:
           type: string
       title: RMResponseDto
-    RMResponse:
+    DeleteRmResponsePayload:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RMResponseDto'
-      title: RMResponse
+        message:
+          type: string
+      title: DeleteRmResponsePayload
+    UpdateRmResponsePayload:
+      type: object
+      properties:
+        message:
+          type: string
+        status_code:
+          type: integer
+          format: int32
+      title: UpdateRmResponsePayload
     GetRmRequestPayload:
       type: object
       properties:

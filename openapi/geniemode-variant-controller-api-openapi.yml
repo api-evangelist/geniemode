@@ -128,6 +128,63 @@ components:
           type: integer
           format: int64
       title: VariantBuyerPoMappingRequestPayload
+    VariantRequestPayload:
+      type: object
+      properties:
+        buying_price:
+          type: number
+        color:
+          type: string
+        currency_price:
+          type: number
+        factory_currency_price:
+          type: number
+        factory_dollar_price:
+          type: number
+        final_currency_price:
+          type: number
+        final_price:
+          type: number
+        id:
+          type: integer
+          format: int64
+        identifier:
+          type: string
+        price:
+          type: number
+        qc_quantity:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        size:
+          type: string
+        through_qc:
+          type: boolean
+        uom:
+          type: string
+        variant_buyer_po_mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantBuyerPoMappingRequestPayload'
+      title: VariantRequestPayload
+    OrderMinifiedDto:
+      type: object
+      properties:
+        financial_status:
+          type: string
+        id:
+          type: integer
+          format: int64
+        lead_id:
+          type: integer
+          format: int64
+        sku:
+          type: string
+        style_code:
+          type: string
+      title: OrderMinifiedDto
     VariantResponsePayload:
       type: object
       properties:
@@ -196,6 +253,27 @@ components:
           items:
             $ref: '#/components/schemas/VariantBuyerPoMappingResponsePayload'
       title: VariantResponsePayload
+    VariantsRequestPayload:
+      type: object
+      properties:
+        check_overflow:
+          type: boolean
+        hold_qc:
+          type: boolean
+        qc_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+        sub_status:
+          type: string
+        update_by_qc:
+          type: boolean
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantRequestPayload'
+      title: VariantsRequestPayload
     VariantBuyerPoMappingResponsePayload:
       type: object
       properties:
@@ -223,81 +301,3 @@ components:
           type: integer
           format: int64
       title: VariantBuyerPoMappingResponsePayload
-    OrderMinifiedDto:
-      type: object
-      properties:
-        financial_status:
-          type: string
-        id:
-          type: integer
-          format: int64
-        lead_id:
-          type: integer
-          format: int64
-        sku:
-          type: string
-        style_code:
-          type: string
-      title: OrderMinifiedDto
-    VariantsRequestPayload:
-      type: object
-      properties:
-        check_overflow:
-          type: boolean
-        hold_qc:
-          type: boolean
-        qc_id:
-          type: integer
-          format: int64
-        status:
-          type: string
-        sub_status:
-          type: string
-        update_by_qc:
-          type: boolean
-        variants:
-          type: array
-          items:
-            $ref: '#/components/schemas/VariantRequestPayload'
-      title: VariantsRequestPayload
-    VariantRequestPayload:
-      type: object
-      properties:
-        buying_price:
-          type: number
-        color:
-          type: string
-        currency_price:
-          type: number
-        factory_currency_price:
-          type: number
-        factory_dollar_price:
-          type: number
-        final_currency_price:
-          type: number
-        final_price:
-          type: number
-        id:
-          type: integer
-          format: int64
-        identifier:
-          type: string
-        price:
-          type: number
-        qc_quantity:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int64
-        size:
-          type: string
-        through_qc:
-          type: boolean
-        uom:
-          type: string
-        variant_buyer_po_mappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/VariantBuyerPoMappingRequestPayload'
-      title: VariantRequestPayload

@@ -213,6 +213,53 @@ paths:
                 $ref: '#/components/schemas/PreOrderDto'
 components:
   schemas:
+    OrderPreOrderAggregateInterface:
+      type: object
+      properties:
+        order_currency:
+          type: string
+        order_currency_price:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+        order_quantity:
+          type: integer
+          format: int64
+        order_sku:
+          type: string
+        order_style_code:
+          type: string
+        pre_order_currency:
+          type: string
+        pre_order_currency_price:
+          type: number
+        pre_order_quantity:
+          type: integer
+          format: int64
+        pre_order_sku:
+          type: string
+        pre_order_style_code:
+          type: string
+      title: OrderPreOrderAggregateInterface
+    DeletePreOrderDto:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: DeletePreOrderDto
+    PoTypeDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: PoTypeDto
     UMSUserResponseDTO:
       type: object
       properties:
@@ -244,6 +291,63 @@ components:
         username:
           type: string
       title: UMSUserResponseDTO
+    PreOrderPoStyleDto:
+      type: object
+      properties:
+        currency_price:
+          type: number
+        id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        style_code:
+          type: string
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreOrderPoStyleVariantDto'
+      title: PreOrderPoStyleDto
+    PreOrderToOrderMappingDto:
+      type: object
+      properties:
+        currency:
+          type: string
+        currency_price:
+          type: number
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        sku:
+          type: string
+        style_code:
+          type: string
+      title: PreOrderToOrderMappingDto
+    PreOrderPoMappingDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        pre_order_po:
+          $ref: '#/components/schemas/PreOrderPoDto'
+      title: PreOrderPoMappingDto
+    BusinessOwnerDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: BusinessOwnerDto
     PreOrderDto:
       type: object
       properties:
@@ -304,87 +408,6 @@ components:
           items:
             $ref: '#/components/schemas/PreOrderToOrderMappingDto'
       title: PreOrderDto
-    OrderPreOrderAggregateInterface:
-      type: object
-      properties:
-        order_currency:
-          type: string
-        order_currency_price:
-          type: number
-        order_id:
-          type: integer
-          format: int64
-        order_quantity:
-          type: integer
-          format: int64
-        order_sku:
-          type: string
-        order_style_code:
-          type: string
-        pre_order_currency:
-          type: string
-        pre_order_currency_price:
-          type: number
-        pre_order_quantity:
-          type: integer
-          format: int64
-        pre_order_sku:
-          type: string
-        pre_order_style_code:
-          type: string
-      title: OrderPreOrderAggregateInterface
-    PreOrderPoMappingDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        pre_order_po:
-          $ref: '#/components/schemas/PreOrderPoDto'
-      title: PreOrderPoMappingDto
-    PoTypeDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: PoTypeDto
-    PreOrderPoStyleVariantDto:
-      type: object
-      properties:
-        color:
-          type: string
-        id:
-          type: integer
-          format: int64
-        price:
-          type: number
-        quantity:
-          type: integer
-          format: int64
-        size:
-          type: string
-      title: PreOrderPoStyleVariantDto
-    PreOrderPoStyleDto:
-      type: object
-      properties:
-        currency_price:
-          type: number
-        id:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int64
-        style_code:
-          type: string
-        variants:
-          type: array
-          items:
-            $ref: '#/components/schemas/PreOrderPoStyleVariantDto'
-      title: PreOrderPoStyleDto
     PreOrderPoDto:
       type: object
       properties:
@@ -428,42 +451,19 @@ components:
           type: integer
           format: int64
       title: PreOrderPoDto
-    BusinessOwnerDto:
+    PreOrderPoStyleVariantDto:
       type: object
       properties:
+        color:
+          type: string
         id:
           type: integer
           format: int64
-        name:
-          type: string
-      title: BusinessOwnerDto
-    PreOrderToOrderMappingDto:
-      type: object
-      properties:
-        currency:
-          type: string
-        currency_price:
+        price:
           type: number
-        id:
-          type: integer
-          format: int64
-        order_id:
-          type: integer
-          format: int64
         quantity:
           type: integer
           format: int64
-        sku:
+        size:
           type: string
-        style_code:
-          type: string
-      title: PreOrderToOrderMappingDto
-    DeletePreOrderDto:
-      type: object
-      properties:
-        ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-      title: DeletePreOrderDto
+      title: PreOrderPoStyleVariantDto

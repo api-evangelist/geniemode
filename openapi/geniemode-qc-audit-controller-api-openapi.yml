@@ -349,22 +349,6 @@ components:
         remark:
           type: string
       title: QcAuditDto
-    QcAuditSampleDto:
-      type: object
-      properties:
-        data:
-          type: object
-        id:
-          type: integer
-          format: int64
-        qc_sampling_item_id:
-          type: integer
-          format: int64
-        reason:
-          type: string
-        status:
-          type: boolean
-      title: QcAuditSampleDto
     QcAuditLineValueDto:
       type: object
       properties:
@@ -381,3 +365,19 @@ components:
         status:
           type: boolean
       title: QcAuditLineValueDto
+    QcAuditSampleDto:
+      type: object
+      properties:
+        data:
+          type: object
+        id:
+          type: integer
+          format: int64
+        qc_sampling_item_id:
+          type: integer
+          format: int64
+        reason:
+          type: string
+        status:
+          type: boolean
+      title: QcAuditSampleDto

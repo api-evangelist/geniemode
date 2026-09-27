@@ -207,42 +207,36 @@ paths:
         required: true
 components:
   schemas:
-    OrderWiseApprovalReason:
+    OrderRiskStatus:
       type: object
       properties:
-        approval_reasons:
-          type: array
-          items:
-            type: string
-        order_id:
-          type: integer
-          format: int64
-      title: OrderWiseApprovalReason
-    LmsInsuredOrderResponse:
-      type: object
-      properties:
-        insurance_company:
+        approval_status:
           type: string
-        insurance_id:
+        approval_type:
+          type: string
+        approved_at:
           type: integer
           format: int64
-        insured_amount:
+        approved_by:
+          type: string
+        comment:
+          type: string
+        document_url:
+          type: string
+        insurance:
+          $ref: '#/components/schemas/LmsInsuredOrderResponse'
+        order_amount_in_dollar:
           type: number
         order_id:
           type: integer
           format: int64
-        parent_order_id:
-          type: integer
-          format: int64
-        policy_id:
+        risk_type:
           type: string
-        policy_renewal_date:
-          type: integer
-          format: int64
-        policy_start_date:
-          type: integer
-          format: int64
-      title: LmsInsuredOrderResponse
+        secured_amount:
+          type: number
+        unsecured_amount:
+          type: number
+      title: OrderRiskStatus
     OrderRiskStatusRequestPayload:
       type: object
       properties:
@@ -256,29 +250,17 @@ components:
             type: integer
             format: int64
       title: OrderRiskStatusRequestPayload
-    PendingBrandInsuranceResponse:
+    OrderWiseApprovalReason:
       type: object
       properties:
-        allocated_amount:
-          type: number
-        geniemode_entity:
-          type: string
-        id:
+        approval_reasons:
+          type: array
+          items:
+            type: string
+        order_id:
           type: integer
           format: int64
-        insurance_company:
-          type: string
-        pending_amount:
-          type: number
-        policy_id:
-          type: string
-        policy_renewal_date:
-          type: integer
-          format: int64
-        policy_start_date:
-          type: integer
-          format: int64
-      title: PendingBrandInsuranceResponse
+      title: OrderWiseApprovalReason
     OrderRiskResponsePayload:
       type: object
       properties:
@@ -335,33 +317,51 @@ components:
         shipment_mode:
           type: string
       title: OrderRiskResponsePayload
-    OrderRiskStatus:
+    PendingBrandInsuranceResponse:
       type: object
       properties:
-        approval_status:
+        allocated_amount:
+          type: number
+        geniemode_entity:
           type: string
-        approval_type:
-          type: string
-        approved_at:
+        id:
           type: integer
           format: int64
-        approved_by:
+        insurance_company:
           type: string
-        comment:
+        pending_amount:
+          type: number
+        policy_id:
           type: string
-        document_url:
+        policy_renewal_date:
+          type: integer
+          format: int64
+        policy_start_date:
+          type: integer
+          format: int64
+      title: PendingBrandInsuranceResponse
+    LmsInsuredOrderResponse:
+      type: object
+      properties:
+        insurance_company:
           type: string
-        insurance:
-          $ref: '#/components/schemas/LmsInsuredOrderResponse'
-        order_amount_in_dollar:
+        insurance_id:
+          type: integer
+          format: int64
+        insured_amount:
           type: number
         order_id:
           type: integer
           format: int64
-        risk_type:
+        parent_order_id:
+          type: integer
+          format: int64
+        policy_id:
           type: string
-        secured_amount:
-          type: number
-        unsecured_amount:
-          type: number
-      title: OrderRiskStatus
+        policy_renewal_date:
+          type: integer
+          format: int64
+        policy_start_date:
+          type: integer
+          format: int64
+      title: LmsInsuredOrderResponse

@@ -92,12 +92,6 @@ paths:
           description: 500 message
 components:
   schemas:
-    UserTncAcceptedResponse:
-      type: object
-      properties:
-        message:
-          type: string
-      title: UserTncAcceptedResponse
     UserTnc:
       type: object
       properties:
@@ -114,14 +108,12 @@ components:
           type: integer
           format: int64
       title: UserTnc
-    UserTncDTO:
+    UserTncResponsePayload:
       type: object
       properties:
-        manufacturer_detail:
-          $ref: '#/components/schemas/ManufacturerTncDto'
-        user_tnc:
-          $ref: '#/components/schemas/UserTnc'
-      title: UserTncDTO
+        data:
+          $ref: '#/components/schemas/UserTncDTO'
+      title: UserTncResponsePayload
     ManufacturerTncDto:
       type: object
       properties:
@@ -135,9 +127,17 @@ components:
           type: integer
           format: int64
       title: ManufacturerTncDto
-    UserTncResponsePayload:
+    UserTncAcceptedResponse:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/UserTncDTO'
-      title: UserTncResponsePayload
+        message:
+          type: string
+      title: UserTncAcceptedResponse
+    UserTncDTO:
+      type: object
+      properties:
+        manufacturer_detail:
+          $ref: '#/components/schemas/ManufacturerTncDto'
+        user_tnc:
+          $ref: '#/components/schemas/UserTnc'
+      title: UserTncDTO

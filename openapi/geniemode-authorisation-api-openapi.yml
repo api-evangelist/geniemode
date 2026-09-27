@@ -82,18 +82,6 @@ paths:
           description: 500 message
 components:
   schemas:
-    ForgetResetPasswordResponse:
-      type: object
-      properties:
-        msg:
-          type: string
-      title: ForgetResetPasswordResponse
-    ForgotPasswordRequestPayload:
-      type: object
-      properties:
-        email:
-          type: string
-      title: ForgotPasswordRequestPayload
     AuthorisationResponsePayload:
       type: object
       properties:
@@ -129,3 +117,15 @@ components:
         token:
           type: string
       title: ResetPasswordRequestPayload
+    ForgotPasswordRequestPayload:
+      type: object
+      properties:
+        email:
+          type: string
+      title: ForgotPasswordRequestPayload
+    ForgetResetPasswordResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+      title: ForgetResetPasswordResponse

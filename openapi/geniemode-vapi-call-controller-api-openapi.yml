@@ -179,6 +179,14 @@ paths:
           description: 500 message
 components:
   schemas:
+    VapiCustomerDto:
+      type: object
+      properties:
+        name:
+          type: string
+        number:
+          type: string
+      title: VapiCustomerDto
     VapiCallLog:
       type: object
       properties:
@@ -259,11 +267,3 @@ components:
         variableValues:
           type: object
       title: VapiAssistantOverridesDto
-    VapiCustomerDto:
-      type: object
-      properties:
-        name:
-          type: string
-        number:
-          type: string
-      title: VapiCustomerDto

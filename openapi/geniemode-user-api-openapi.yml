@@ -120,6 +120,21 @@ components:
     JsonNode:
       type: object
       title: JsonNode
+    Event:
+      type: object
+      properties:
+        event_type:
+          type: string
+        metrics:
+          $ref: '#/components/schemas/JsonNode'
+        occurred_at:
+          type: integer
+          format: int64
+        path:
+          type: string
+        siren_type:
+          type: string
+      title: Event
     UserLockState:
       type: object
       properties:
@@ -139,6 +154,14 @@ components:
         value:
           $ref: '#/components/schemas/JsonNode'
       title: UserLockState
+    RecordSirenEventsRequestPayload:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+      title: RecordSirenEventsRequestPayload
     SetUserLockStateRequestPayload:
       type: object
       properties:
@@ -153,26 +176,3 @@ components:
         value:
           type: object
       title: SetUserLockStateRequestPayload
-    Event:
-      type: object
-      properties:
-        event_type:
-          type: string
-        metrics:
-          $ref: '#/components/schemas/JsonNode'
-        occurred_at:
-          type: integer
-          format: int64
-        path:
-          type: string
-        siren_type:
-          type: string
-      title: Event
-    RecordSirenEventsRequestPayload:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-      title: RecordSirenEventsRequestPayload

@@ -488,59 +488,36 @@ paths:
         required: true
 components:
   schemas:
-    OrderInsuredAmountDTO:
+    OrderRiskStatus:
       type: object
       properties:
+        approval_status:
+          type: string
+        approval_type:
+          type: string
+        approved_at:
+          type: integer
+          format: int64
+        approved_by:
+          type: string
+        comment:
+          type: string
+        document_url:
+          type: string
+        insurance:
+          $ref: '#/components/schemas/LmsInsuredOrderResponse'
         order_amount_in_dollar:
           type: number
         order_id:
           type: integer
           format: int64
-      title: OrderInsuredAmountDTO
-    OrderWiseApprovalReason:
-      type: object
-      properties:
-        approval_reasons:
-          type: array
-          items:
-            type: string
-        order_id:
-          type: integer
-          format: int64
-      title: OrderWiseApprovalReason
-    OrderSecuredAmountRequestPayload:
-      type: object
-      properties:
-        insured_orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderInsuredAmountDTO'
-      title: OrderSecuredAmountRequestPayload
-    LmsInsuredOrderResponse:
-      type: object
-      properties:
-        insurance_company:
+        risk_type:
           type: string
-        insurance_id:
-          type: integer
-          format: int64
-        insured_amount:
+        secured_amount:
           type: number
-        order_id:
-          type: integer
-          format: int64
-        parent_order_id:
-          type: integer
-          format: int64
-        policy_id:
-          type: string
-        policy_renewal_date:
-          type: integer
-          format: int64
-        policy_start_date:
-          type: integer
-          format: int64
-      title: LmsInsuredOrderResponse
+        unsecured_amount:
+          type: number
+      title: OrderRiskStatus
     OrderRiskStatusRequestPayload:
       type: object
       properties:
@@ -554,44 +531,17 @@ components:
             type: integer
             format: int64
       title: OrderRiskStatusRequestPayload
-    PendingBrandInsuranceResponse:
+    OrderWiseApprovalReason:
       type: object
       properties:
-        allocated_amount:
-          type: number
-        geniemode_entity:
-          type: string
-        id:
-          type: integer
-          format: int64
-        insurance_company:
-          type: string
-        pending_amount:
-          type: number
-        policy_id:
-          type: string
-        policy_renewal_date:
-          type: integer
-          format: int64
-        policy_start_date:
-          type: integer
-          format: int64
-      title: PendingBrandInsuranceResponse
-    SpreadEligibleOrdersResponse:
-      type: object
-      properties:
-        order_amount_in_dollar:
-          type: number
-        order_date:
-          type: integer
-          format: int64
+        approval_reasons:
+          type: array
+          items:
+            type: string
         order_id:
           type: integer
           format: int64
-        parent_order_id:
-          type: integer
-          format: int64
-      title: SpreadEligibleOrdersResponse
+      title: OrderWiseApprovalReason
     OrderRiskResponsePayload:
       type: object
       properties:
@@ -648,33 +598,83 @@ components:
         shipment_mode:
           type: string
       title: OrderRiskResponsePayload
-    OrderRiskStatus:
+    OrderSecuredAmountRequestPayload:
       type: object
       properties:
-        approval_status:
-          type: string
-        approval_type:
-          type: string
-        approved_at:
-          type: integer
-          format: int64
-        approved_by:
-          type: string
-        comment:
-          type: string
-        document_url:
-          type: string
-        insurance:
-          $ref: '#/components/schemas/LmsInsuredOrderResponse'
+        insured_orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderInsuredAmountDTO'
+      title: OrderSecuredAmountRequestPayload
+    OrderInsuredAmountDTO:
+      type: object
+      properties:
         order_amount_in_dollar:
           type: number
         order_id:
           type: integer
           format: int64
-        risk_type:
+      title: OrderInsuredAmountDTO
+    SpreadEligibleOrdersResponse:
+      type: object
+      properties:
+        order_amount_in_dollar:
+          type: number
+        order_date:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        parent_order_id:
+          type: integer
+          format: int64
+      title: SpreadEligibleOrdersResponse
+    PendingBrandInsuranceResponse:
+      type: object
+      properties:
+        allocated_amount:
+          type: number
+        geniemode_entity:
           type: string
-        secured_amount:
+        id:
+          type: integer
+          format: int64
+        insurance_company:
+          type: string
+        pending_amount:
           type: number
-        unsecured_amount:
+        policy_id:
+          type: string
+        policy_renewal_date:
+          type: integer
+          format: int64
+        policy_start_date:
+          type: integer
+          format: int64
+      title: PendingBrandInsuranceResponse
+    LmsInsuredOrderResponse:
+      type: object
+      properties:
+        insurance_company:
+          type: string
+        insurance_id:
+          type: integer
+          format: int64
+        insured_amount:
           type: number
-      title: OrderRiskStatus
+        order_id:
+          type: integer
+          format: int64
+        parent_order_id:
+          type: integer
+          format: int64
+        policy_id:
+          type: string
+        policy_renewal_date:
+          type: integer
+          format: int64
+        policy_start_date:
+          type: integer
+          format: int64
+      title: LmsInsuredOrderResponse

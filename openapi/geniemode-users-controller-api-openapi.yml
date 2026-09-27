@@ -92,38 +92,6 @@ paths:
         required: true
 components:
   schemas:
-    UpdatePhoneDataRequestPayload:
-      type: object
-      properties:
-        country_code:
-          type: string
-        phone_number:
-          type: string
-      title: UpdatePhoneDataRequestPayload
-    GupShupResponseMessageDTO:
-      type: object
-      properties:
-        details:
-          type: string
-        id:
-          type: string
-        phone:
-          type: string
-        status:
-          type: string
-      title: GupShupResponseMessageDTO
-    WebEngagePhoneResponse:
-      type: object
-      properties:
-        response:
-          $ref: '#/components/schemas/WebEngagePhoneDTO'
-      title: WebEngagePhoneResponse
-    WebEngagePhoneDTO:
-      type: object
-      properties:
-        status:
-          type: string
-      title: WebEngagePhoneDTO
     UMSUserResponsePayload:
       type: object
       properties:
@@ -156,6 +124,20 @@ components:
         whatsapp_opt_in:
           type: boolean
       title: UMSUserResponsePayload
+    WebEngageGupShupResponse:
+      type: object
+      properties:
+        gup_shup_response:
+          $ref: '#/components/schemas/GupShupResponse'
+        web_engage_phone_response:
+          $ref: '#/components/schemas/WebEngagePhoneResponse'
+      title: WebEngageGupShupResponse
+    WebEngagePhoneResponse:
+      type: object
+      properties:
+        response:
+          $ref: '#/components/schemas/WebEngagePhoneDTO'
+      title: WebEngagePhoneResponse
     WebEngageGupShupRequest:
       type: object
       properties:
@@ -174,14 +156,6 @@ components:
         ums_user_response_payload:
           $ref: '#/components/schemas/UMSUserResponsePayload'
       title: UMSUserGetPhoneDataResponse
-    GupShupResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GupShupDataDTO'
-        response:
-          $ref: '#/components/schemas/GupShupResponseDTO'
-      title: GupShupResponse
     GupShupDataDTO:
       type: object
       properties:
@@ -190,14 +164,40 @@ components:
           items:
             $ref: '#/components/schemas/GupShupResponseMessageDTO'
       title: GupShupDataDTO
-    WebEngageGupShupResponse:
+    GupShupResponseMessageDTO:
       type: object
       properties:
-        gup_shup_response:
-          $ref: '#/components/schemas/GupShupResponse'
-        web_engage_phone_response:
-          $ref: '#/components/schemas/WebEngagePhoneResponse'
-      title: WebEngageGupShupResponse
+        details:
+          type: string
+        id:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+      title: GupShupResponseMessageDTO
+    GupShupResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GupShupDataDTO'
+        response:
+          $ref: '#/components/schemas/GupShupResponseDTO'
+      title: GupShupResponse
+    UpdatePhoneDataRequestPayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        phone_number:
+          type: string
+      title: UpdatePhoneDataRequestPayload
+    WebEngagePhoneDTO:
+      type: object
+      properties:
+        status:
+          type: string
+      title: WebEngagePhoneDTO
     GupShupResponseDTO:
       type: object
       properties:

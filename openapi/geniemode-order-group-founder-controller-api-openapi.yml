@@ -60,32 +60,6 @@ components:
           type: integer
           format: int64
       title: PoVariantRequestPayload
-    PoSkusMapping:
-      type: object
-      properties:
-        buyer_po_number:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        id:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        quantity:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-      title: PoSkusMapping
-    PoChangeTypeDto:
-      type: object
-      properties:
-        added:
-          $ref: '#/components/schemas/PoChangeDataDto'
-        modify:
-          $ref: '#/components/schemas/PoChangeDataDto'
-        subtracted:
-          $ref: '#/components/schemas/PoChangeDataDto'
-      title: PoChangeTypeDto
-    PoChangeDataDto:
-      type: object
-      properties:
-        previous_value:
-          type: string
-      title: PoChangeDataDto
     PoResponsePayloadDto:
       type: object
       properties:
@@ -318,6 +292,16 @@ components:
         total_selling_price_currency:
           $ref: '#/components/schemas/PoMapPayloadDto'
       title: PoResponsePayloadDto
+    PoChangeTypeDto:
+      type: object
+      properties:
+        added:
+          $ref: '#/components/schemas/PoChangeDataDto'
+        modify:
+          $ref: '#/components/schemas/PoChangeDataDto'
+        subtracted:
+          $ref: '#/components/schemas/PoChangeDataDto'
+      title: PoChangeTypeDto
     PoListDeliveryAddressDto:
       type: object
       properties:
@@ -329,6 +313,48 @@ components:
         delivery_contact:
           $ref: '#/components/schemas/PoMapPayloadDto'
       title: PoListDeliveryAddressDto
+    PoOrder:
+      type: object
+      properties:
+        buyer_price_in_buyer_currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        currency:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_duty_cost:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_duty_cost_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_duty_per_piece:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_unique_id:
+          type: string
+        delivery_charges:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        logistic_cost:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        logistic_cost_per_piece:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        logistic_cost_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        net_margin:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        order_id:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        quantity:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        reciprocal_tariff:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        reciprocal_tariff_cost_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        reciprocal_tariff_per_piece:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        sku:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        style_code:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_custom_duty:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+      title: PoOrder
     PoSkus:
       type: object
       properties:
@@ -517,56 +543,6 @@ components:
         variant_margin_percentage:
           $ref: '#/components/schemas/PoMapPayloadDto'
       title: PoSkus
-    PoOrder:
-      type: object
-      properties:
-        buyer_price_in_buyer_currency:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        currency:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        custom_duty_cost:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        custom_duty_cost_type:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        custom_duty_per_piece:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        custom_unique_id:
-          type: string
-        delivery_charges:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        logistic_cost:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        logistic_cost_per_piece:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        logistic_cost_type:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        net_margin:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        order_id:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        quantity:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        reciprocal_tariff:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        reciprocal_tariff_cost_type:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        reciprocal_tariff_per_piece:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        sku:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        style_code:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        total_custom_duty:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-      title: PoOrder
-    PoMapPayloadDto:
-      type: object
-      properties:
-        change_type:
-          $ref: '#/components/schemas/PoChangeTypeDto'
-        value:
-          type: string
-      title: PoMapPayloadDto
     ChangeOrderGroupStatusRequest:
       type: object
       properties:
@@ -605,3 +581,27 @@ components:
         style_code:
           type: string
       title: BundleSkuDto
+    PoSkusMapping:
+      type: object
+      properties:
+        buyer_po_number:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        id:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        quantity:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+      title: PoSkusMapping
+    PoMapPayloadDto:
+      type: object
+      properties:
+        change_type:
+          $ref: '#/components/schemas/PoChangeTypeDto'
+        value:
+          type: string
+      title: PoMapPayloadDto
+    PoChangeDataDto:
+      type: object
+      properties:
+        previous_value:
+          type: string
+      title: PoChangeDataDto

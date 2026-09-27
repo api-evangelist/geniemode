@@ -119,17 +119,6 @@ paths:
         required: true
 components:
   schemas:
-    CreateFactoryRawMaterialRequest:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateFactoryFinanceDocRequest'
-        factory_id:
-          type: integer
-          format: int64
-      title: CreateFactoryRawMaterialRequest
     GetFactoryRawMaterialResponse:
       type: object
       properties:
@@ -148,23 +137,6 @@ components:
           type: integer
           format: int64
       title: GetFactoryRawMaterialResponse
-    UpdateFactoryRawMaterialRequest:
-      type: object
-      properties:
-        doc_id:
-          type: integer
-          format: int64
-        doc_type:
-          type: string
-        doc_value:
-          type: string
-        factory_id:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
-      title: UpdateFactoryRawMaterialRequest
     UMSUserResponsePayload:
       type: object
       properties:
@@ -213,25 +185,6 @@ components:
           type: integer
           format: int64
       title: CreateFactoryFinanceDocRequest
-    DocDetailsDto:
-      type: object
-      properties:
-        doc_display_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        order_id:
-          type: integer
-          format: int64
-        s3_path:
-          type: string
-        s3_version:
-          type: integer
-          format: int64
-        step_name:
-          type: string
-      title: DocDetailsDto
     GetFactoryResponsePayload:
       type: object
       properties:
@@ -281,3 +234,50 @@ components:
           type: integer
           format: int64
       title: GetFactoryResponsePayload
+    CreateFactoryRawMaterialRequest:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateFactoryFinanceDocRequest'
+        factory_id:
+          type: integer
+          format: int64
+      title: CreateFactoryRawMaterialRequest
+    DocDetailsDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+      title: DocDetailsDto
+    UpdateFactoryRawMaterialRequest:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        doc_type:
+          type: string
+        doc_value:
+          type: string
+        factory_id:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+      title: UpdateFactoryRawMaterialRequest

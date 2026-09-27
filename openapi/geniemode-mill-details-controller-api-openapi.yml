@@ -178,6 +178,17 @@ paths:
           description: 500 message
 components:
   schemas:
+    MillDocsDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        type:
+          type: string
+        url:
+          type: string
+      title: MillDocsDto
     UserSimpleDTO:
       type: object
       properties:
@@ -208,14 +219,3 @@ components:
         name:
           type: string
       title: MillMiniDto
-    MillDocsDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        type:
-          type: string
-        url:
-          type: string
-      title: MillDocsDto

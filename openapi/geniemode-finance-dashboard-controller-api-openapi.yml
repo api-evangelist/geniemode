@@ -1503,20 +1503,65 @@ paths:
           description: 500 message
 components:
   schemas:
-    RevenueGraphDto:
+    MonthlyCohortBuyerCoreDebugDto:
+      type: object
+      properties:
+        buyer_cohort:
+          type: string
+        core_non_core:
+          type: string
+        first_ship_group_month:
+          type: string
+        ship_group_month:
+          type: string
+        total_order_value_usd:
+          type: number
+        umesh_category:
+          type: string
+      title: MonthlyCohortBuyerCoreDebugDto
+    ARAPGraphDto:
+      type: object
+      properties:
+        age_bucket:
+          type: string
+        age_bucket_index:
+          type: integer
+          format: int32
+        buyer_amount_in_dollars:
+          type: number
+        factory_amount_in_dollars:
+          type: number
+      title: ARAPGraphDto
+    MonthlyCohortSupplierCategoryDebugDto:
+      type: object
+      properties:
+        amt_flag:
+          type: string
+        first_ship_group_month:
+          type: string
+        ship_group_month:
+          type: string
+        supplier:
+          type: string
+        total_order_value_usd:
+          type: number
+        umesh_category:
+          type: string
+      title: MonthlyCohortSupplierCategoryDebugDto
+    RevenueAndProfitGraphDto:
       type: object
       properties:
         col1:
           type: string
         col2:
           type: string
-        currency:
-          type: string
+        margin_percentage:
+          type: number
+        profit:
+          type: number
         revenue:
           type: number
-        vp_name:
-          type: string
-      title: RevenueGraphDto
+      title: RevenueAndProfitGraphDto
     MonthlyCohortBuyerInternationalFashionDto:
       type: object
       properties:
@@ -1532,6 +1577,63 @@ components:
         total_order_value_usd:
           type: number
       title: MonthlyCohortBuyerInternationalFashionDto
+    RevenueGraphDto:
+      type: object
+      properties:
+        col1:
+          type: string
+        col2:
+          type: string
+        currency:
+          type: string
+        revenue:
+          type: number
+        vp_name:
+          type: string
+      title: RevenueGraphDto
+    MonthlyCohortBuyerCoreDto:
+      type: object
+      properties:
+        buyer_count:
+          type: integer
+          format: int64
+        core_non_core:
+          type: string
+        first_ship_group_month:
+          type: string
+        ship_group_month:
+          type: string
+        total_order_value_usd:
+          type: number
+      title: MonthlyCohortBuyerCoreDto
+    MonthlyCohortSupplierCategoryDto:
+      type: object
+      properties:
+        amt_flag:
+          type: string
+        first_ship_group_month:
+          type: string
+        ship_group_month:
+          type: string
+        total_order_value_usd:
+          type: number
+        umesh_category:
+          type: string
+      title: MonthlyCohortSupplierCategoryDto
+    MonthlyCohortBuyerInternationalFashionDebugDto:
+      type: object
+      properties:
+        buyer_cohort:
+          type: string
+        first_ship_group_month:
+          type: string
+        international_fashion:
+          type: boolean
+        ship_group_month:
+          type: string
+        total_order_value_usd:
+          type: number
+      title: MonthlyCohortBuyerInternationalFashionDebugDto
     MonthlyEngagementCohortDto:
       type: object
       properties:
@@ -1571,105 +1673,3 @@ components:
           type: integer
           format: int64
       title: MonthlyEngagementCohortDto
-    ARAPGraphDto:
-      type: object
-      properties:
-        age_bucket:
-          type: string
-        age_bucket_index:
-          type: integer
-          format: int32
-        buyer_amount_in_dollars:
-          type: number
-        factory_amount_in_dollars:
-          type: number
-      title: ARAPGraphDto
-    RevenueAndProfitGraphDto:
-      type: object
-      properties:
-        col1:
-          type: string
-        col2:
-          type: string
-        margin_percentage:
-          type: number
-        profit:
-          type: number
-        revenue:
-          type: number
-      title: RevenueAndProfitGraphDto
-    MonthlyCohortBuyerInternationalFashionDebugDto:
-      type: object
-      properties:
-        buyer_cohort:
-          type: string
-        first_ship_group_month:
-          type: string
-        international_fashion:
-          type: boolean
-        ship_group_month:
-          type: string
-        total_order_value_usd:
-          type: number
-      title: MonthlyCohortBuyerInternationalFashionDebugDto
-    MonthlyCohortBuyerCoreDto:
-      type: object
-      properties:
-        buyer_count:
-          type: integer
-          format: int64
-        core_non_core:
-          type: string
-        first_ship_group_month:
-          type: string
-        ship_group_month:
-          type: string
-        total_order_value_usd:
-          type: number
-      title: MonthlyCohortBuyerCoreDto
-    MonthlyCohortBuyerCoreDebugDto:
-      type: object
-      properties:
-        buyer_cohort:
-          type: string
-        core_non_core:
-          type: string
-        first_ship_group_month:
-          type: string
-        ship_group_month:
-          type: string
-        total_order_value_usd:
-          type: number
-        umesh_category:
-          type: string
-      title: MonthlyCohortBuyerCoreDebugDto
-    MonthlyCohortSupplierCategoryDebugDto:
-      type: object
-      properties:
-        amt_flag:
-          type: string
-        first_ship_group_month:
-          type: string
-        ship_group_month:
-          type: string
-        supplier:
-          type: string
-        total_order_value_usd:
-          type: number
-        umesh_category:
-          type: string
-      title: MonthlyCohortSupplierCategoryDebugDto
-    MonthlyCohortSupplierCategoryDto:
-      type: object
-      properties:
-        amt_flag:
-          type: string
-        first_ship_group_month:
-          type: string
-        ship_group_month:
-          type: string
-        total_order_value_usd:
-          type: number
-        umesh_category:
-          type: string
-      title: MonthlyCohortSupplierCategoryDto

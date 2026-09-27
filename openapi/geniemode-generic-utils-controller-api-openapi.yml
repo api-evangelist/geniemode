@@ -532,6 +532,12 @@ components:
         username:
           type: string
       title: ListUserResponseUmsPayload
+    CreateDemoResponse:
+      type: object
+      properties:
+        token:
+          type: string
+      title: CreateDemoResponse
     CreateDemoRequest:
       type: object
       properties:
@@ -543,6 +549,21 @@ components:
         for_manufacturer:
           type: boolean
       title: CreateDemoRequest
+    TncAcceptedRequestPayload:
+      type: object
+      properties:
+        manufacturer_id:
+          type: integer
+          format: int64
+      title: TncAcceptedRequestPayload
+    GetTncDetailResponsePayload:
+      type: object
+      properties:
+        company_address:
+          type: string
+        company_name:
+          type: string
+      title: GetTncDetailResponsePayload
     TncAcceptedResponsePayload:
       type: object
       properties:
@@ -555,24 +576,3 @@ components:
         status:
           type: boolean
       title: SendApprovalEmailRequestPayload
-    GetTncDetailResponsePayload:
-      type: object
-      properties:
-        company_address:
-          type: string
-        company_name:
-          type: string
-      title: GetTncDetailResponsePayload
-    TncAcceptedRequestPayload:
-      type: object
-      properties:
-        manufacturer_id:
-          type: integer
-          format: int64
-      title: TncAcceptedRequestPayload
-    CreateDemoResponse:
-      type: object
-      properties:
-        token:
-          type: string
-      title: CreateDemoResponse

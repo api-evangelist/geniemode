@@ -121,6 +121,85 @@ paths:
         description: file_content
 components:
   schemas:
+    DocumentSearchRequestPayload:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        doc_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        document_name:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        search:
+          type: string
+      title: DocumentSearchRequestPayload
+    UploadDocumentResponsePayload:
+      type: object
+      properties:
+        doc:
+          $ref: '#/components/schemas/Doc'
+        doc_id:
+          type: integer
+          format: int64
+        message:
+          type: string
+      title: UploadDocumentResponsePayload
+    Doc:
+      type: object
+      properties:
+        bucketAndKey:
+          $ref: '#/components/schemas/Pair_string_string'
+        createdBy:
+          type: string
+        docDisplayName:
+          type: string
+        id:
+          type: integer
+          format: int64
+        s3Path:
+          type: string
+        s3Version:
+          type: integer
+          format: int64
+      title: Doc
+    DocDetailsDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+      title: DocDetailsDto
+    GetDocumentRequestPayload:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+      title: GetDocumentRequestPayload
     Pair_string_string:
       type: object
       properties:
@@ -157,82 +236,3 @@ components:
         url:
           type: string
       title: UploadResponsePayload
-    UploadDocumentResponsePayload:
-      type: object
-      properties:
-        doc:
-          $ref: '#/components/schemas/Doc'
-        doc_id:
-          type: integer
-          format: int64
-        message:
-          type: string
-      title: UploadDocumentResponsePayload
-    DocumentSearchRequestPayload:
-      type: object
-      properties:
-        doc_id:
-          type: integer
-          format: int64
-        doc_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-        document_name:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        order_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-        search:
-          type: string
-      title: DocumentSearchRequestPayload
-    GetDocumentRequestPayload:
-      type: object
-      properties:
-        doc_id:
-          type: integer
-          format: int64
-      title: GetDocumentRequestPayload
-    DocDetailsDto:
-      type: object
-      properties:
-        doc_display_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        order_id:
-          type: integer
-          format: int64
-        s3_path:
-          type: string
-        s3_version:
-          type: integer
-          format: int64
-        step_name:
-          type: string
-      title: DocDetailsDto
-    Doc:
-      type: object
-      properties:
-        bucketAndKey:
-          $ref: '#/components/schemas/Pair_string_string'
-        createdBy:
-          type: string
-        docDisplayName:
-          type: string
-        id:
-          type: integer
-          format: int64
-        s3Path:
-          type: string
-        s3Version:
-          type: integer
-          format: int64
-      title: Doc

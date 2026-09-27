@@ -134,20 +134,6 @@ paths:
         required: true
 components:
   schemas:
-    QcLogDumpRequest:
-      type: object
-      properties:
-        data:
-          type: object
-        log:
-          type: string
-        ts:
-          type: integer
-          format: int64
-        userId:
-          type: integer
-          format: int64
-      title: QcLogDumpRequest
     QcDump:
       type: object
       properties:
@@ -166,16 +152,6 @@ components:
           type: integer
           format: int64
       title: QcDump
-    QcDumpRequest:
-      type: object
-      properties:
-        data:
-          type: object
-        key:
-          type: string
-        log:
-          type: string
-      title: QcDumpRequest
     QcLogDump:
       type: object
       properties:
@@ -195,3 +171,27 @@ components:
           type: integer
           format: int64
       title: QcLogDump
+    QcDumpRequest:
+      type: object
+      properties:
+        data:
+          type: object
+        key:
+          type: string
+        log:
+          type: string
+      title: QcDumpRequest
+    QcLogDumpRequest:
+      type: object
+      properties:
+        data:
+          type: object
+        log:
+          type: string
+        ts:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+      title: QcLogDumpRequest

@@ -240,15 +240,46 @@ paths:
           description: 500 message
 components:
   schemas:
-    CourierEntityResponsePayload:
+    AddressSubmitResponsePayload:
       type: object
       properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
         id:
           type: integer
           format: int64
+        landmark:
+          type: string
         name:
           type: string
-      title: CourierEntityResponsePayload
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload
+    CourierEntityCreatePayload:
+      type: object
+      properties:
+        name:
+          type: string
+      title: CourierEntityCreatePayload
     AddressSubmitRequestPayload:
       type: object
       properties:
@@ -285,43 +316,12 @@ components:
         type:
           type: string
       title: AddressSubmitRequestPayload
-    CourierEntityCreatePayload:
+    CourierEntityResponsePayload:
       type: object
       properties:
-        name:
-          type: string
-      title: CourierEntityCreatePayload
-    AddressSubmitResponsePayload:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        address_line2:
-          type: string
-        city:
-          type: string
-        contact_person_name:
-          type: string
-        contact_person_number:
-          type: string
-        country:
-          type: string
-        entity_id:
-          type: integer
-          format: int64
-        entity_type:
-          type: string
         id:
           type: integer
           format: int64
-        landmark:
-          type: string
         name:
           type: string
-        pincode:
-          type: string
-        state:
-          type: string
-        type:
-          type: string
-      title: AddressSubmitResponsePayload
+      title: CourierEntityResponsePayload

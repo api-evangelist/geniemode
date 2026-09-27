@@ -295,61 +295,76 @@ paths:
                 $ref: '#/components/schemas/GetWorkAllFlowsResponse'
 components:
   schemas:
-    ShareWorkFlowRequestPayload:
+    GetAllWorkFlowResponseDto:
       type: object
       properties:
+        insert_time:
+          type: string
+          format: date-time
+        name:
+          type: string
+        read_only:
+          type: string
+        wf_template_id:
+          type: integer
+          format: int64
+        workflow_name:
+          type: string
+      title: GetAllWorkFlowResponseDto
+    WorkFlowResponseForOrderDto:
+      type: object
+      properties:
+        buffer_date:
+          type: string
+          format: date-time
+        initial_due_date:
+          type: string
+          format: date-time
+        insert_time:
+          type: string
+          format: date-time
+        name:
+          type: string
+        read_only:
+          type: string
+        require_approver:
+          type: string
+        require_due_date:
+          type: string
         share_rm_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+        step_display_order:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        step_template_id:
           type: integer
           format: int64
         wf_template_id:
           type: integer
           format: int64
-      title: ShareWorkFlowRequestPayload
-    WorfFlowSearchRequestPayload:
+        workflow_name:
+          type: string
+      title: WorkFlowResponseForOrderDto
+    GetWorkFlowForOrderResponse:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-        ids:
+        data:
           type: array
           items:
-            type: integer
-            format: int64
-        rm_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-        search:
+            $ref: '#/components/schemas/WorkFlowResponseForOrderDto'
+        message:
           type: string
-        shared_by_rms:
-          type: array
-          items:
-            type: integer
-            format: int64
-        type:
-          type: string
-        work_flow_name:
-          type: string
-      title: WorfFlowSearchRequestPayload
-    WfStepMapMinDto:
-      type: object
-      properties:
-        id:
+        workflow_id:
           type: integer
           format: int64
-      title: WfStepMapMinDto
-    StepDataForWorkFlow:
-      type: object
-      properties:
-        step_display_order:
-          type: integer
-          format: int64
-        step_template_id:
-          type: integer
-          format: int64
-      title: StepDataForWorkFlow
+      title: GetWorkFlowForOrderResponse
     WorkFlowResponseDto:
       type: object
       properties:
@@ -398,36 +413,47 @@ components:
         workflow_name:
           type: string
       title: WorkFlowResponseDto
-    GetWorkFlowResponse:
+    CreateNewWorkflowRequest:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkFlowResponseDto'
-        message:
-          type: string
-        workflow_id:
+        rm_id:
           type: integer
           format: int64
-      title: GetWorkFlowResponse
-    GetWorkAllFlowsResponse:
+        step_template_data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepDataForWorkFlow'
+        workflow_name:
+          type: string
+      title: CreateNewWorkflowRequest
+    WorfFlowSearchRequestPayload:
       type: object
       properties:
-        message:
-          type: string
-        shared_workflows:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetAllWorkFlowResponseDto'
-        workflow_id:
+        id:
           type: integer
           format: int64
-        workflows:
+        ids:
           type: array
           items:
-            $ref: '#/components/schemas/GetAllWorkFlowResponseDto'
-      title: GetWorkAllFlowsResponse
+            type: integer
+            format: int64
+        rm_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        search:
+          type: string
+        shared_by_rms:
+          type: array
+          items:
+            type: integer
+            format: int64
+        type:
+          type: string
+        work_flow_name:
+          type: string
+      title: WorfFlowSearchRequestPayload
     WorkFlowStepMapDto:
       type: object
       properties:
@@ -453,22 +479,6 @@ components:
         visible_to_manufacturer:
           type: string
       title: WorkFlowStepMapDto
-    GetAllWorkFlowResponseDto:
-      type: object
-      properties:
-        insert_time:
-          type: string
-          format: date-time
-        name:
-          type: string
-        read_only:
-          type: string
-        wf_template_id:
-          type: integer
-          format: int64
-        workflow_name:
-          type: string
-      title: GetAllWorkFlowResponseDto
     GetWorkFlowRequestPayload:
       type: object
       properties:
@@ -476,19 +486,23 @@ components:
           type: integer
           format: int64
       title: GetWorkFlowRequestPayload
-    GetWorkFlowForOrderResponse:
+    GetWorkAllFlowsResponse:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkFlowResponseForOrderDto'
         message:
           type: string
+        shared_workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetAllWorkFlowResponseDto'
         workflow_id:
           type: integer
           format: int64
-      title: GetWorkFlowForOrderResponse
+        workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetAllWorkFlowResponseDto'
+      title: GetWorkAllFlowsResponse
     UpdateWorkFlowRequestPayload:
       type: object
       properties:
@@ -502,60 +516,39 @@ components:
         workflow_name:
           type: string
       title: UpdateWorkFlowRequestPayload
-    CreateNewWorkflowRequest:
+    GetWorkFlowResponse:
       type: object
       properties:
-        rm_id:
-          type: integer
-          format: int64
-        step_template_data:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/StepDataForWorkFlow'
-        workflow_name:
+            $ref: '#/components/schemas/WorkFlowResponseDto'
+        message:
           type: string
-      title: CreateNewWorkflowRequest
-    WorkFlowResponseForOrderDto:
+        workflow_id:
+          type: integer
+          format: int64
+      title: GetWorkFlowResponse
+    ShareWorkFlowRequestPayload:
       type: object
       properties:
-        buffer_date:
-          type: string
-          format: date-time
-        initial_due_date:
-          type: string
-          format: date-time
-        insert_time:
-          type: string
-          format: date-time
-        name:
-          type: string
-        read_only:
-          type: string
-        require_approver:
-          type: string
-        require_due_date:
-          type: string
         share_rm_id:
-          type: integer
-          format: int64
-        status:
-          type: string
-        step_display_order:
-          type: integer
-          format: int64
-        step_name:
-          type: string
-        step_success_criteria:
-          type: string
-        step_template_id:
           type: integer
           format: int64
         wf_template_id:
           type: integer
           format: int64
-        workflow_name:
-          type: string
-      title: WorkFlowResponseForOrderDto
+      title: ShareWorkFlowRequestPayload
+    StepDataForWorkFlow:
+      type: object
+      properties:
+        step_display_order:
+          type: integer
+          format: int64
+        step_template_id:
+          type: integer
+          format: int64
+      title: StepDataForWorkFlow
     WfStepMapValidationDto:
       type: object
       properties:
@@ -581,3 +574,10 @@ components:
         wf_step_map:
           $ref: '#/components/schemas/WfStepMapMinDto'
       title: WfStepMapValidationDto
+    WfStepMapMinDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+      title: WfStepMapMinDto

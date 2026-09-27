@@ -365,6 +365,16 @@ paths:
           description: 500 message
 components:
   schemas:
+    Sort:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+      title: Sort
     UMSUserResponseDTO:
       type: object
       properties:
@@ -396,21 +406,67 @@ components:
         username:
           type: string
       title: UMSUserResponseDTO
-    OrderDprDto:
+    ManufacturerDetailsDTO:
       type: object
       properties:
-        dpr_change_count:
-          type: integer
-          format: int32
-        dpr_valid:
+        company_registered_name:
+          type: string
+        contact_number:
+          type: string
+        contact_person:
+          type: string
+        eligible_categories:
+          type: string
+        email:
+          type: string
+        failure_reasons:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        is_selectable:
           type: boolean
-        message:
+        manufacturer_id:
+          type: integer
+          format: int64
+        manufacturer_status:
+          type: boolean
+        rm_id:
+          type: integer
+          format: int64
+        sku_filter_query:
           type: string
-        message_type:
+        soft_delete:
           type: string
-        view_dpr:
+        units:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerUnitsDTO'
+      title: ManufacturerDetailsDTO
+    RmDetailsDTO:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          format: int64
+        category_name:
           type: string
-      title: OrderDprDto
+        contact_info:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: RmDetailsDTO
+    DashboardOrderDetailsSummaryResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DashboardOrderDetailsSummaryDto'
+      title: DashboardOrderDetailsSummaryResponse
     RMResponseDto:
       type: object
       properties:
@@ -434,130 +490,6 @@ components:
         user_email:
           type: string
       title: RMResponseDto
-    ManufacturerDetailInOrderListingDto:
-      type: object
-      properties:
-        company_registered_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: ManufacturerDetailInOrderListingDto
-    DashboardWorkflowResponseDto:
-      type: object
-      properties:
-        at_risk:
-          type: boolean
-        completion_date:
-          type: string
-          format: date-time
-        due_date:
-          type: string
-          format: date-time
-        initial_due_date:
-          type: string
-          format: date-time
-        original_selected_due_date:
-          type: string
-          format: date-time
-        rejection_count:
-          type: integer
-          format: int64
-        status:
-          type: string
-        step_display_order:
-          type: integer
-          format: int64
-        step_name:
-          type: string
-        step_original_date_score:
-          type: integer
-          format: int64
-        visible_to_client:
-          type: string
-        visible_to_manufacturer:
-          type: string
-        work_step_score:
-          type: integer
-          format: int64
-      title: DashboardWorkflowResponseDto
-    RMResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RMResponseDto'
-      title: RMResponse
-    DashboardOrderDetailsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DashboardOrderDetailsResponseDto'
-      title: DashboardOrderDetailsResponse
-    GetUserDelayedOrdersResponse:
-      type: object
-      properties:
-        delayed:
-          type: integer
-          format: int64
-      title: GetUserDelayedOrdersResponse
-    GetDashboardManufacturersResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerDetailsDTO'
-      title: GetDashboardManufacturersResponse
-    BusinessOwnerDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: BusinessOwnerDto
-    RmDetail:
-      type: object
-      properties:
-        categoryId:
-          type: integer
-          format: int64
-        categoryName:
-          type: string
-        contactInfo:
-          type: string
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: RmDetail
-    Pageable:
-      type: object
-      properties:
-        offset:
-          type: integer
-          format: int64
-        pageNumber:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        paged:
-          type: boolean
-        sort:
-          $ref: '#/components/schemas/Sort'
-        unpaged:
-          type: boolean
-      title: Pageable
     UmsUserManagerResponse:
       type: object
       properties:
@@ -578,40 +510,24 @@ components:
         username:
           type: string
       title: UmsUserManagerResponse
-    LeadsUnderVpResponse:
+    RmDetail:
       type: object
       properties:
-        brand_name:
-          type: string
-        company_name:
-          type: string
-        count:
+        categoryId:
           type: integer
           format: int64
-        lead_email:
+        categoryName:
           type: string
-        lead_id:
-          type: integer
-          format: int64
-        name:
+        contactInfo:
           type: string
-      title: LeadsUnderVpResponse
-    RmDetailsDTO:
-      type: object
-      properties:
-        category_id:
-          type: integer
-          format: int64
-        category_name:
-          type: string
-        contact_info:
+        createdBy:
           type: string
         id:
           type: integer
           format: int64
         name:
           type: string
-      title: RmDetailsDTO
+      title: RmDetail
     DashboardDataDto:
       type: object
       properties:
@@ -634,120 +550,15 @@ components:
           type: integer
           format: int64
       title: DashboardDataDto
-    LeadDetailsResponse:
+    ManufacturerDetailInOrderListingDto:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/LeadsUnderVpResponse'
-      title: LeadDetailsResponse
-    Page_LeadsUnderVpResponse:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/LeadsUnderVpResponse'
-        empty:
-          type: boolean
-        first:
-          type: boolean
-        last:
-          type: boolean
-        number:
-          type: integer
-          format: int32
-        numberOfElements:
-          type: integer
-          format: int32
-        pageable:
-          $ref: '#/components/schemas/Pageable'
-        size:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/Sort'
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int32
-      title: Page«LeadsUnderVpResponse»
-    Page_ManufacturerDetailInOrderListingDto:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerDetailInOrderListingDto'
-        empty:
-          type: boolean
-        first:
-          type: boolean
-        last:
-          type: boolean
-        number:
-          type: integer
-          format: int32
-        numberOfElements:
-          type: integer
-          format: int32
-        pageable:
-          $ref: '#/components/schemas/Pageable'
-        size:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/Sort'
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int32
-      title: Page«ManufacturerDetailInOrderListingDto»
-    OrderCountDto:
-      type: object
-      properties:
-        data:
-          type: integer
-          format: int64
-      title: OrderCountDto
-    SkuIdUrlResponse:
-      type: object
-      properties:
+        company_registered_name:
+          type: string
         id:
           type: integer
           format: int64
-        url:
-          type: string
-      title: SkuIdUrlResponse
-    BrandVpDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        vp_email:
-          type: string
-        vp_id:
-          type: integer
-          format: int64
-        vp_name:
-          type: string
-      title: BrandVpDto
-    Sort:
-      type: object
-      properties:
-        empty:
-          type: boolean
-        sorted:
-          type: boolean
-        unsorted:
-          type: boolean
-      title: Sort
+      title: ManufacturerDetailInOrderListingDto
     OrderDetailBuyerPODocWithOrdersDto:
       type: object
       properties:
@@ -770,39 +581,54 @@ components:
         po_type:
           type: string
       title: OrderDetailBuyerPODocWithOrdersDto
-    Page_UmsUserManagerResponse:
+    BrandVpDto:
       type: object
       properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/UmsUserManagerResponse'
-        empty:
-          type: boolean
-        first:
-          type: boolean
-        last:
-          type: boolean
-        number:
-          type: integer
-          format: int32
-        numberOfElements:
-          type: integer
-          format: int32
-        pageable:
-          $ref: '#/components/schemas/Pageable'
-        size:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/Sort'
-        totalElements:
+        id:
           type: integer
           format: int64
-        totalPages:
+        vp_email:
+          type: string
+        vp_id:
+          type: integer
+          format: int64
+        vp_name:
+          type: string
+      title: BrandVpDto
+    OrderDprDto:
+      type: object
+      properties:
+        dpr_change_count:
           type: integer
           format: int32
-      title: Page«UmsUserManagerResponse»
+        dpr_valid:
+          type: boolean
+        message:
+          type: string
+        message_type:
+          type: string
+        view_dpr:
+          type: string
+      title: OrderDprDto
+    Pageable:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/Sort'
+        unpaged:
+          type: boolean
+      title: Pageable
     DashboardOrderDetailsResponseDto:
       type: object
       properties:
@@ -989,14 +815,103 @@ components:
           items:
             $ref: '#/components/schemas/DashboardWorkflowResponseDto'
       title: DashboardOrderDetailsResponseDto
-    DashboardOrderDetailsSummaryResponse:
+    BusinessOwnerDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: BusinessOwnerDto
+    Page_ManufacturerDetailInOrderListingDto:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerDetailInOrderListingDto'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      title: Page«ManufacturerDetailInOrderListingDto»
+    Page_UmsUserManagerResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/UmsUserManagerResponse'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      title: Page«UmsUserManagerResponse»
+    GetUserDelayedOrdersResponse:
+      type: object
+      properties:
+        delayed:
+          type: integer
+          format: int64
+      title: GetUserDelayedOrdersResponse
+    OrderCountDto:
+      type: object
+      properties:
+        data:
+          type: integer
+          format: int64
+      title: OrderCountDto
+    RMResponse:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/DashboardOrderDetailsSummaryDto'
-      title: DashboardOrderDetailsSummaryResponse
+            $ref: '#/components/schemas/RMResponseDto'
+      title: RMResponse
     OrderDocDto:
       type: object
       properties:
@@ -1036,6 +951,86 @@ components:
           type: integer
           format: int64
       title: DocDto
+    Page_LeadsUnderVpResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeadsUnderVpResponse'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      title: Page«LeadsUnderVpResponse»
+    SkuIdUrlResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        url:
+          type: string
+      title: SkuIdUrlResponse
+    DashboardWorkflowResponseDto:
+      type: object
+      properties:
+        at_risk:
+          type: boolean
+        completion_date:
+          type: string
+          format: date-time
+        due_date:
+          type: string
+          format: date-time
+        initial_due_date:
+          type: string
+          format: date-time
+        original_selected_due_date:
+          type: string
+          format: date-time
+        rejection_count:
+          type: integer
+          format: int64
+        status:
+          type: string
+        step_display_order:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+        step_original_date_score:
+          type: integer
+          format: int64
+        visible_to_client:
+          type: string
+        visible_to_manufacturer:
+          type: string
+        work_step_score:
+          type: integer
+          format: int64
+      title: DashboardWorkflowResponseDto
     DashboardOrderDetailsSummaryDto:
       type: object
       properties:
@@ -1095,6 +1090,14 @@ components:
           items:
             $ref: '#/components/schemas/RmDetail'
       title: DashboardOrderDetailsSummaryDto
+    GetDashboardManufacturersResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerDetailsDTO'
+      title: GetDashboardManufacturersResponse
     ManufacturerUnitsDTO:
       type: object
       properties:
@@ -1113,40 +1116,37 @@ components:
         rag_rating:
           type: string
       title: ManufacturerUnitsDTO
-    ManufacturerDetailsDTO:
+    DashboardOrderDetailsResponse:
       type: object
       properties:
-        company_registered_name:
-          type: string
-        contact_number:
-          type: string
-        contact_person:
-          type: string
-        eligible_categories:
-          type: string
-        email:
-          type: string
-        failure_reasons:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        is_selectable:
-          type: boolean
-        manufacturer_id:
-          type: integer
-          format: int64
-        manufacturer_status:
-          type: boolean
-        rm_id:
-          type: integer
-          format: int64
-        sku_filter_query:
-          type: string
-        soft_delete:
-          type: string
-        units:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/ManufacturerUnitsDTO'
-      title: ManufacturerDetailsDTO
+            $ref: '#/components/schemas/DashboardOrderDetailsResponseDto'
+      title: DashboardOrderDetailsResponse
+    LeadDetailsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeadsUnderVpResponse'
+      title: LeadDetailsResponse
+    LeadsUnderVpResponse:
+      type: object
+      properties:
+        brand_name:
+          type: string
+        company_name:
+          type: string
+        count:
+          type: integer
+          format: int64
+        lead_email:
+          type: string
+        lead_id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: LeadsUnderVpResponse

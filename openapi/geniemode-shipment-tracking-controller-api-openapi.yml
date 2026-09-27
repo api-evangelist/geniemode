@@ -110,6 +110,27 @@ paths:
           description: 500 message
 components:
   schemas:
+    StepTemplateDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        is_hidden:
+          type: string
+        require_approver:
+          type: string
+        require_due_date:
+          type: string
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        visible_to_client:
+          type: string
+        visible_to_manufacturer:
+          type: string
+      title: StepTemplateDto
     CreateOrderShipmentTrackingRequestPayload:
       type: object
       properties:
@@ -128,15 +149,15 @@ components:
           type: integer
           format: int64
       title: CreateOrderShipmentTrackingRequestPayload
-    WfTemplateDto:
+    OrderDetailSimpleDto:
       type: object
       properties:
         id:
           type: integer
           format: int64
-        workflow_name:
+        sku_id:
           type: string
-      title: WfTemplateDto
+      title: OrderDetailSimpleDto
     WfStepOrderMapDto:
       type: object
       properties:
@@ -186,36 +207,15 @@ components:
         wf_template:
           $ref: '#/components/schemas/WfTemplateDto'
       title: WfStepOrderMapDto
-    OrderDetailSimpleDto:
+    WfTemplateDto:
       type: object
       properties:
         id:
           type: integer
           format: int64
-        sku_id:
+        workflow_name:
           type: string
-      title: OrderDetailSimpleDto
-    StepTemplateDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        is_hidden:
-          type: string
-        require_approver:
-          type: string
-        require_due_date:
-          type: string
-        step_name:
-          type: string
-        step_success_criteria:
-          type: string
-        visible_to_client:
-          type: string
-        visible_to_manufacturer:
-          type: string
-      title: StepTemplateDto
+      title: WfTemplateDto
     OrderShipmentTrackingResponseDto:
       type: object
       properties:

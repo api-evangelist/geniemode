@@ -168,16 +168,6 @@ components:
         visible_to_manufacturer:
           type: string
       title: WorkFlowStepDto
-    GetWorkFlowStepResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkFlowStepDto'
-        message:
-          type: string
-      title: GetWorkFlowStepResponse
     CreateWorkFlowStepRequestPayload:
       type: object
       properties:
@@ -197,3 +187,13 @@ components:
         visible_to_manufacturer:
           type: string
       title: CreateWorkFlowStepRequestPayload
+    GetWorkFlowStepResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkFlowStepDto'
+        message:
+          type: string
+      title: GetWorkFlowStepResponse

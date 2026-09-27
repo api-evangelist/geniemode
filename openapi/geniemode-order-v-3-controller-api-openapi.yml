@@ -44,38 +44,6 @@ paths:
           description: 500 message
 components:
   schemas:
-    OrderLogisticsCostDto:
-      type: object
-      properties:
-        custom_duty:
-          type: number
-        custom_duty_cost_type:
-          type: string
-        custom_duty_per_piece:
-          type: number
-        delivery_charges:
-          type: number
-        freight_cost:
-          type: number
-        harbor_merchandise_fee:
-          type: number
-        logistic_cost:
-          type: number
-        logistic_cost_per_piece:
-          type: number
-        logistic_cost_type:
-          type: string
-        reciprocal_tariff:
-          type: number
-        reciprocal_tariff_cost_type:
-          type: string
-        reciprocal_tariff_per_piece:
-          type: number
-        reciprocal_tariff_type:
-          type: string
-        total_custom_duty:
-          type: number
-      title: OrderLogisticsCostDto
     OrderMarginDto:
       type: object
       properties:
@@ -195,3 +163,35 @@ components:
         total_custom_duty:
           type: number
       title: OrderMarginDto
+    OrderLogisticsCostDto:
+      type: object
+      properties:
+        custom_duty:
+          type: number
+        custom_duty_cost_type:
+          type: string
+        custom_duty_per_piece:
+          type: number
+        delivery_charges:
+          type: number
+        freight_cost:
+          type: number
+        harbor_merchandise_fee:
+          type: number
+        logistic_cost:
+          type: number
+        logistic_cost_per_piece:
+          type: number
+        logistic_cost_type:
+          type: string
+        reciprocal_tariff:
+          type: number
+        reciprocal_tariff_cost_type:
+          type: string
+        reciprocal_tariff_per_piece:
+          type: number
+        reciprocal_tariff_type:
+          type: string
+        total_custom_duty:
+          type: number
+      title: OrderLogisticsCostDto

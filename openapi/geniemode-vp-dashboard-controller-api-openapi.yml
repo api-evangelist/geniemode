@@ -870,161 +870,52 @@ paths:
           description: 500 message
 components:
   schemas:
-    OrderDetailBuyerPODocResponseDto:
+    CompanyDTO:
       type: object
       properties:
-        buyer_doc:
-          $ref: '#/components/schemas/OrderDocDto'
-        buyer_po_id:
-          type: integer
-          format: int64
-        buyer_po_no:
-          type: string
-        id:
-          type: integer
-          format: int64
-        po_type:
-          type: string
-      title: OrderDetailBuyerPODocResponseDto
-    VpBulkChangeStatusResponse:
-      type: object
-      properties:
-        failure_count:
-          type: integer
-          format: int32
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/VpBulkChangeStatusFailureItem'
-        success_count:
-          type: integer
-          format: int32
-        success_order_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-      title: VpBulkChangeStatusResponse
-    VpDashboardOrderViewDto:
-      type: object
-      properties:
-        buyer_currency:
-          type: string
-        buyer_po_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderDetailBuyerPODocResponseDto'
-        buyer_shipment_type:
-          type: string
-        company:
-          $ref: '#/components/schemas/CompanyDTO'
-        conversion_date_floor:
-          type: integer
-          format: int64
-        costing_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/VpDashboardOrderCostDetailsDto'
-        factory_conversion_rate:
-          type: number
-        factory_currency:
-          type: string
-        factory_po_doc:
-          $ref: '#/components/schemas/OrderDocDto'
-        factory_shipment_type:
-          type: string
-        geniemode_entity:
-          $ref: '#/components/schemas/GeniemodeEntityDto'
-        manufacturer_id:
-          type: integer
-          format: int64
-        manufacturer_name:
-          type: string
-        model_type:
-          type: string
-        order_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-        parent_order_id:
-          type: integer
-          format: int64
-        parents_buyer_po_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderDetailBuyerPODocResponseDto'
-        planned_order_shipment_mode:
-          type: string
-        qc_hold:
+        ask_buyer_wip_on_order:
           type: boolean
-        total_orders:
-          type: integer
-          format: int64
-        total_quantity:
-          type: integer
-          format: int64
-      title: VpDashboardOrderViewDto
-    VpBulkChangeStatusRequestPayload:
-      type: object
-      properties:
-        margin_approval_doc:
+        company_name:
           type: string
-        order_ids:
+        compliances:
           type: array
           items:
-            type: integer
-            format: int64
-        reason:
-          type: string
-        sku_logistic_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLogisticsDetailSkusVpEditRequestPayload'
-      title: VpBulkChangeStatusRequestPayload
-    AddressSubmitResponsePayload:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        address_line2:
-          type: string
-        city:
-          type: string
-        contact_person_name:
-          type: string
-        contact_person_number:
-          type: string
-        country:
-          type: string
-        entity_id:
-          type: integer
-          format: int64
-        entity_type:
-          type: string
+            type: string
         id:
           type: integer
           format: int64
-        landmark:
-          type: string
-        name:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-        type:
-          type: string
-      title: AddressSubmitResponsePayload
-    OrderLogisticsDetailSkusVpEditRequestPayload:
+        min_buy_sell_margin:
+          type: number
+        min_commission_margin:
+          type: number
+        min_trading_margin:
+          type: number
+      title: CompanyDTO
+    OrderDocDto:
       type: object
       properties:
-        management_approval_url:
+        created_at:
           type: string
+          format: date-time
+        created_by:
+          type: string
+        doc_no:
+          type: string
+        doc_type:
+          type: string
+        docs:
+          $ref: '#/components/schemas/DocDto'
+        id:
+          type: integer
+          format: int64
+        is_additional_doc:
+          type: boolean
         order_id:
           type: integer
           format: int64
-      title: OrderLogisticsDetailSkusVpEditRequestPayload
+        s3_path:
+          type: string
+      title: OrderDocDto
     GeniemodeEntityDto:
       type: object
       properties:
@@ -1055,51 +946,20 @@ components:
         value:
           type: string
       title: GeniemodeEntityDto
-    VpBulkChangeStatusFailureItem:
+    DocDto:
       type: object
       properties:
-        order_id:
-          type: integer
-          format: int64
-        reason:
+        doc_display_name:
           type: string
-      title: VpBulkChangeStatusFailureItem
-    OrderDocDto:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-        created_by:
-          type: string
-        doc_no:
-          type: string
-        doc_type:
-          type: string
-        docs:
-          $ref: '#/components/schemas/DocDto'
         id:
-          type: integer
-          format: int64
-        is_additional_doc:
-          type: boolean
-        order_id:
           type: integer
           format: int64
         s3_path:
           type: string
-      title: OrderDocDto
-    ManufacturerApprovalRequestPayload:
-      type: object
-      properties:
-        page_type:
-          type: string
-        rejection_reason:
-          type: string
-        status:
-          type: string
-          pattern: ^(approved|pending|rejected)$
-      title: ManufacturerApprovalRequestPayload
+        s3_version:
+          type: integer
+          format: int64
+      title: DocDto
     VpDashboardSummaryResponse:
       type: object
       properties:
@@ -1199,53 +1059,96 @@ components:
         total_washing_cost:
           type: number
       title: VpDashboardOrderCostDetailsDto
-    DocDto:
+    VpBulkChangeStatusResponse:
       type: object
       properties:
-        doc_display_name:
-          type: string
-        id:
+        failure_count:
           type: integer
-          format: int64
-        s3_path:
-          type: string
-        s3_version:
+          format: int32
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/VpBulkChangeStatusFailureItem'
+        success_count:
           type: integer
-          format: int64
-      title: DocDto
-    CompanyDTO:
+          format: int32
+        success_order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: VpBulkChangeStatusResponse
+    VpDashboardOrderViewDto:
       type: object
       properties:
-        ask_buyer_wip_on_order:
+        buyer_currency:
+          type: string
+        buyer_po_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetailBuyerPODocResponseDto'
+        buyer_shipment_type:
+          type: string
+        company:
+          $ref: '#/components/schemas/CompanyDTO'
+        conversion_date_floor:
+          type: integer
+          format: int64
+        costing_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/VpDashboardOrderCostDetailsDto'
+        factory_conversion_rate:
+          type: number
+        factory_currency:
+          type: string
+        factory_po_doc:
+          $ref: '#/components/schemas/OrderDocDto'
+        factory_shipment_type:
+          type: string
+        geniemode_entity:
+          $ref: '#/components/schemas/GeniemodeEntityDto'
+        manufacturer_id:
+          type: integer
+          format: int64
+        manufacturer_name:
+          type: string
+        model_type:
+          type: string
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        parent_order_id:
+          type: integer
+          format: int64
+        parents_buyer_po_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetailBuyerPODocResponseDto'
+        planned_order_shipment_mode:
+          type: string
+        qc_hold:
           type: boolean
-        company_name:
-          type: string
-        compliances:
-          type: array
-          items:
-            type: string
-        id:
+        total_orders:
           type: integer
           format: int64
-        min_buy_sell_margin:
-          type: number
-        min_commission_margin:
-          type: number
-        min_trading_margin:
-          type: number
-      title: CompanyDTO
-    VpChangeStatusRequestPayload:
+        total_quantity:
+          type: integer
+          format: int64
+      title: VpDashboardOrderViewDto
+    ManufacturerApprovalRequestPayload:
       type: object
       properties:
-        margin_approval_doc:
+        page_type:
           type: string
-        reason:
+        rejection_reason:
           type: string
-        sku_logistic_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLogisticsDetailSkusVpEditRequestPayload'
-      title: VpChangeStatusRequestPayload
+        status:
+          type: string
+          pattern: ^(approved|pending|rejected)$
+      title: ManufacturerApprovalRequestPayload
     SkuIdUrlResponse:
       type: object
       properties:
@@ -1255,6 +1158,91 @@ components:
         url:
           type: string
       title: SkuIdUrlResponse
+    OrderDetailBuyerPODocResponseDto:
+      type: object
+      properties:
+        buyer_doc:
+          $ref: '#/components/schemas/OrderDocDto'
+        buyer_po_id:
+          type: integer
+          format: int64
+        buyer_po_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+        po_type:
+          type: string
+      title: OrderDetailBuyerPODocResponseDto
+    OrderLogisticsDetailSkusVpEditRequestPayload:
+      type: object
+      properties:
+        management_approval_url:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+      title: OrderLogisticsDetailSkusVpEditRequestPayload
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload
+    VpBulkChangeStatusFailureItem:
+      type: object
+      properties:
+        order_id:
+          type: integer
+          format: int64
+        reason:
+          type: string
+      title: VpBulkChangeStatusFailureItem
+    VpBulkChangeStatusRequestPayload:
+      type: object
+      properties:
+        margin_approval_doc:
+          type: string
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        reason:
+          type: string
+        sku_logistic_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLogisticsDetailSkusVpEditRequestPayload'
+      title: VpBulkChangeStatusRequestPayload
     VpDashboardDelayBreakdown:
       type: object
       properties:
@@ -1267,3 +1255,15 @@ components:
         reason:
           type: string
       title: VpDashboardDelayBreakdown
+    VpChangeStatusRequestPayload:
+      type: object
+      properties:
+        margin_approval_doc:
+          type: string
+        reason:
+          type: string
+        sku_logistic_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLogisticsDetailSkusVpEditRequestPayload'
+      title: VpChangeStatusRequestPayload

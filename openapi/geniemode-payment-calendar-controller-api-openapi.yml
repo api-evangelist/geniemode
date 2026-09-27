@@ -75,6 +75,20 @@ paths:
           description: 500 message
 components:
   schemas:
+    PaymentCalendarDto:
+      type: object
+      properties:
+        client_name:
+          type: string
+        due_date:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        value:
+          type: integer
+          format: int64
+      title: PaymentCalendarDto
     GetAllPaymentCalendarResponse:
       type: object
       properties:
@@ -99,20 +113,6 @@ components:
           type: integer
           format: int32
       title: GetPaymentCalendarResponse
-    PaymentCalendarDto:
-      type: object
-      properties:
-        client_name:
-          type: string
-        due_date:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        value:
-          type: integer
-          format: int64
-      title: PaymentCalendarDto
     MonthlyPaymentDto:
       type: object
       properties:

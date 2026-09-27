@@ -1101,138 +1101,157 @@ paths:
         required: true
 components:
   schemas:
-    QcTechFormKeyDto:
+    RequestQcTechPayload:
       type: object
       properties:
-        label:
+        art_work:
           type: string
-        value:
+        buyer_workbook_avl:
           type: string
-      title: QcTechFormKeyDto
-    QcTechCancelledStatusResponse:
-      type: object
-      properties:
-        cancellation_date:
+        buyer_workbook_doc:
           type: string
-          format: date-time
+        buyer_workbook_doc_secondary:
+          type: string
         cancellation_reason:
           type: string
-        cancelled_by:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-        data:
-          type: object
+        color_wise_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcTechColorWisePayload'
+        colors:
+          type: array
+          items:
+            type: string
+        division:
+          type: string
+        emb_grading_quality:
+          type: string
+        fabric_color:
+          type: string
+        fabric_quality:
+          type: string
+        gcr:
+          type: string
+        handfeel:
+          type: string
+        is_cancelled:
+          type: boolean
+        kids_safety_sheet:
+          type: string
+        no_of_sample:
+          type: integer
+          format: int64
+        packaging:
+          type: string
+        print:
+          type: string
+        production_begin:
+          type: string
+        qc_tech_manager:
+          type: integer
+          format: int64
+        ra_sheet:
+          type: string
+        ref_sample_avl:
+          type: string
+        repeat_reason:
+          type: string
+        request_considered_time:
+          type: integer
+          format: int64
+        testing_status:
+          type: string
+        trims:
+          type: string
+        type_of_sample:
+          type: string
+        wash_care:
+          type: string
+      title: RequestQcTechPayload
+    BrandCategoryDto:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          format: int64
+        category_name:
+          type: string
         id:
           type: integer
           format: int64
-        old_status:
-          type: string
-        qc_tech_id:
-          type: integer
-          format: int64
-        status:
-          type: string
-      title: QcTechCancelledStatusResponse
-    UMSUserResponsePayload:
+      title: BrandCategoryDto
+    RequestQcTechBuyerPayload:
       type: object
       properties:
-        country_code:
+        buyer_comments:
+          type: integer
+          format: int64
+        buyer_result:
           type: string
+        gm_date_out:
+          type: integer
+          format: int64
+        perform_grading:
+          type: string
+          pattern: Yes|No|NA|N/A
+        remarks:
+          type: string
+        sample_authorization:
+          type: string
+        season:
+          type: string
+      title: RequestQcTechBuyerPayload
+    BrandResponse:
+      type: object
+      properties:
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        ask_buyer_wip_on_order:
+          type: boolean
+        billing_address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        brand_name:
+          type: string
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/BrandCategoryDto'
+        compliances:
+          type: array
+          items:
+            type: string
         created_by:
           type: string
-        first_name:
+        id:
+          type: integer
+          format: int64
+        legal_address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        legal_address_response:
           type: string
-        group_ids:
+        legal_name:
+          type: string
+        vp_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/BrandVpDto'
+        vps:
           type: array
           items:
             type: integer
             format: int64
-        id:
-          type: integer
-          format: int64
-        last_name:
-          type: string
-        manager:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-        phone_number:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-        username:
-          type: string
-        whatsapp_opt_in:
-          type: boolean
-      title: UMSUserResponsePayload
-    LeadProjectionDTO:
+      title: BrandResponse
+    QcTechOptionsPayload:
       type: object
       properties:
-        achieved_business_value:
-          type: number
-        amount:
+        order_id:
           type: integer
           format: int64
-        business_size:
-          type: number
-        id:
-          type: integer
-          format: int64
-        lead_probability:
-          type: integer
-          format: int32
-        probable_completion_date:
-          type: integer
-          format: int64
-      title: LeadProjectionDTO
-    QcTechInspectionPresentPayload:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        status:
+        type_of_sample:
           type: string
-      title: QcTechInspectionPresentPayload
-    RequestQcTechEvaluationPayload:
-      type: object
-      properties:
-        checked_by_date:
-          type: integer
-          format: int64
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/QcTechDocsDto'
-        failed_comment:
-          type: string
-        qc_tech_workbook:
-          type: string
-        qc_tech_workbook_date:
-          type: integer
-          format: int64
-        remarks:
-          type: string
-        status:
-          type: string
-      title: RequestQcTechEvaluationPayload
-    RmDetail:
-      type: object
-      properties:
-        categoryId:
-          type: integer
-          format: int64
-        categoryName:
-          type: string
-        contactInfo:
-          type: string
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: RmDetail
+      title: QcTechOptionsPayload
     QcTechBuyerEvaluationResponse:
       type: object
       properties:
@@ -1294,176 +1313,6 @@ components:
         style_code:
           type: string
       title: QcTechBuyerEvaluationResponse
-    AddressSubmitResponsePayload:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        address_line2:
-          type: string
-        city:
-          type: string
-        contact_person_name:
-          type: string
-        contact_person_number:
-          type: string
-        country:
-          type: string
-        entity_id:
-          type: integer
-          format: int64
-        entity_type:
-          type: string
-        id:
-          type: integer
-          format: int64
-        landmark:
-          type: string
-        name:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-        type:
-          type: string
-      title: AddressSubmitResponsePayload
-    BrandCategoryDto:
-      type: object
-      properties:
-        category_id:
-          type: integer
-          format: int64
-        category_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: BrandCategoryDto
-    QcTechInspectionHistoryResponse:
-      type: object
-      properties:
-        color:
-          type: string
-        completion_date:
-          type: string
-          format: date-time
-        id:
-          type: integer
-          format: int64
-        inspection_type:
-          type: string
-        is_equal_to_current:
-          type: boolean
-        order_confirmation_date:
-          type: string
-          format: date-time
-        qc_tech_buyer_evaluation_id:
-          type: integer
-          format: int64
-        qc_tech_evaluation_id:
-          type: integer
-          format: int64
-        repeat_reason:
-          type: string
-        requested_date:
-          type: string
-          format: date-time
-        status:
-          type: string
-        testing_status:
-          type: string
-        tna_present:
-          type: boolean
-      title: QcTechInspectionHistoryResponse
-    QcTechColorWisePayload:
-      type: object
-      properties:
-        color:
-          type: string
-        no_of_sample:
-          type: integer
-          format: int64
-      title: QcTechColorWisePayload
-    CompanyDTO:
-      type: object
-      properties:
-        ask_buyer_wip_on_order:
-          type: boolean
-        company_name:
-          type: string
-        compliances:
-          type: array
-          items:
-            type: string
-        id:
-          type: integer
-          format: int64
-        min_buy_sell_margin:
-          type: number
-        min_commission_margin:
-          type: number
-        min_trading_margin:
-          type: number
-      title: CompanyDTO
-    LeadGenerationResponse:
-      type: object
-      properties:
-        brand:
-          $ref: '#/components/schemas/BrandResponse'
-        client_id:
-          type: integer
-          format: int64
-        company:
-          $ref: '#/components/schemas/CompanyDTO'
-        country:
-          type: string
-        email:
-          type: string
-        id:
-          type: integer
-          format: int64
-        lead_approval_status:
-          type: string
-        lead_projection_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/LeadProjectionDTO'
-        name:
-          type: string
-      title: LeadGenerationResponse
-    RequestQcTechBuyerPayload:
-      type: object
-      properties:
-        buyer_comments:
-          type: integer
-          format: int64
-        buyer_result:
-          type: string
-        gm_date_out:
-          type: integer
-          format: int64
-        perform_grading:
-          type: string
-          pattern: Yes|No|NA|N/A
-        remarks:
-          type: string
-        sample_authorization:
-          type: string
-        season:
-          type: string
-      title: RequestQcTechBuyerPayload
-    QcTechDocsDto:
-      type: object
-      properties:
-        doc_type:
-          type: string
-        id:
-          type: integer
-          format: int64
-        url:
-          type: string
-      title: QcTechDocsDto
     QcTechResponse:
       type: object
       properties:
@@ -1566,6 +1415,166 @@ components:
         wash_care:
           type: string
       title: QcTechResponse
+    UMSUserResponsePayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        created_by:
+          type: string
+        first_name:
+          type: string
+        group_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        whatsapp_opt_in:
+          type: boolean
+      title: UMSUserResponsePayload
+    QcTechInspectionHistoryResponse:
+      type: object
+      properties:
+        color:
+          type: string
+        completion_date:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int64
+        inspection_type:
+          type: string
+        is_equal_to_current:
+          type: boolean
+        order_confirmation_date:
+          type: string
+          format: date-time
+        qc_tech_buyer_evaluation_id:
+          type: integer
+          format: int64
+        qc_tech_evaluation_id:
+          type: integer
+          format: int64
+        repeat_reason:
+          type: string
+        requested_date:
+          type: string
+          format: date-time
+        status:
+          type: string
+        testing_status:
+          type: string
+        tna_present:
+          type: boolean
+      title: QcTechInspectionHistoryResponse
+    QcTechInspectionPresentPayload:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+      title: QcTechInspectionPresentPayload
+    UserResponsePayload:
+      type: object
+      properties:
+        created_by:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+      title: UserResponsePayload
+    LeadProjectionDTO:
+      type: object
+      properties:
+        achieved_business_value:
+          type: number
+        amount:
+          type: integer
+          format: int64
+        business_size:
+          type: number
+        id:
+          type: integer
+          format: int64
+        lead_probability:
+          type: integer
+          format: int32
+        probable_completion_date:
+          type: integer
+          format: int64
+      title: LeadProjectionDTO
+    RmDetail:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          format: int64
+        categoryName:
+          type: string
+        contactInfo:
+          type: string
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: RmDetail
+    QcTechFormKeyDto:
+      type: object
+      properties:
+        label:
+          type: string
+        value:
+          type: string
+      title: QcTechFormKeyDto
+    BrandVpDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        vp_email:
+          type: string
+        vp_id:
+          type: integer
+          format: int64
+        vp_name:
+          type: string
+      title: BrandVpDto
     QcTechStepResponse:
       type: object
       properties:
@@ -1585,6 +1594,70 @@ components:
         step_name:
           type: string
       title: QcTechStepResponse
+    QcTechEvaluationResponse:
+      type: object
+      properties:
+        checked_by_date:
+          type: integer
+          format: int64
+        created_by:
+          type: string
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcTechDocsDto'
+        failed_comment:
+          type: string
+        id:
+          type: integer
+          format: int64
+        qc_tech_buyer_evaluation_id:
+          type: integer
+          format: int64
+        qc_tech_response:
+          $ref: '#/components/schemas/QcTechResponse'
+        qc_tech_workbook:
+          type: string
+        qc_tech_workbook_date:
+          type: integer
+          format: int64
+        ref_sample_avl:
+          type: string
+        remarks:
+          type: string
+        revised_work_book_date:
+          type: integer
+          format: int64
+        revised_work_book_doc:
+          type: string
+        status:
+          type: string
+        step_completed:
+          type: boolean
+      title: QcTechEvaluationResponse
+    QcTechCancelledStatusResponse:
+      type: object
+      properties:
+        cancellation_date:
+          type: string
+          format: date-time
+        cancellation_reason:
+          type: string
+        cancelled_by:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        data:
+          type: object
+        id:
+          type: integer
+          format: int64
+        old_status:
+          type: string
+        qc_tech_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+      title: QcTechCancelledStatusResponse
     QcTechAuditDto:
       type: object
       properties:
@@ -1616,73 +1689,103 @@ components:
         workbook_available_verified:
           type: boolean
       title: QcTechAuditDto
-    RequestQcTechPayload:
+    QcTechColorWisePayload:
       type: object
       properties:
-        art_work:
-          type: string
-        buyer_workbook_avl:
-          type: string
-        buyer_workbook_doc:
-          type: string
-        buyer_workbook_doc_secondary:
-          type: string
-        cancellation_reason:
-          type: string
-        color_wise_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/QcTechColorWisePayload'
-        colors:
-          type: array
-          items:
-            type: string
-        division:
-          type: string
-        emb_grading_quality:
-          type: string
-        fabric_color:
-          type: string
-        fabric_quality:
-          type: string
-        gcr:
-          type: string
-        handfeel:
-          type: string
-        is_cancelled:
-          type: boolean
-        kids_safety_sheet:
+        color:
           type: string
         no_of_sample:
           type: integer
           format: int64
-        packaging:
+      title: QcTechColorWisePayload
+    CompanyDTO:
+      type: object
+      properties:
+        ask_buyer_wip_on_order:
+          type: boolean
+        company_name:
           type: string
-        print:
-          type: string
-        production_begin:
-          type: string
-        qc_tech_manager:
+        compliances:
+          type: array
+          items:
+            type: string
+        id:
           type: integer
           format: int64
-        ra_sheet:
+        min_buy_sell_margin:
+          type: number
+        min_commission_margin:
+          type: number
+        min_trading_margin:
+          type: number
+      title: CompanyDTO
+    QcTechDocsDto:
+      type: object
+      properties:
+        doc_type:
           type: string
-        ref_sample_avl:
-          type: string
-        repeat_reason:
-          type: string
-        request_considered_time:
+        id:
           type: integer
           format: int64
-        testing_status:
+        url:
           type: string
-        trims:
+      title: QcTechDocsDto
+    RequestQcTechEvaluationPayload:
+      type: object
+      properties:
+        checked_by_date:
+          type: integer
+          format: int64
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcTechDocsDto'
+        failed_comment:
           type: string
-        type_of_sample:
+        qc_tech_workbook:
           type: string
-        wash_care:
+        qc_tech_workbook_date:
+          type: integer
+          format: int64
+        remarks:
           type: string
-      title: RequestQcTechPayload
+        status:
+          type: string
+      title: RequestQcTechEvaluationPayload
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload
     LeadPageDTO:
       type: object
       properties:
@@ -1699,94 +1802,32 @@ components:
           type: integer
           format: int64
       title: LeadPageDTO
-    BrandResponse:
+    LeadGenerationResponse:
       type: object
       properties:
-        address_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        ask_buyer_wip_on_order:
-          type: boolean
-        billing_address:
-          $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        brand_name:
+        brand:
+          $ref: '#/components/schemas/BrandResponse'
+        client_id:
+          type: integer
+          format: int64
+        company:
+          $ref: '#/components/schemas/CompanyDTO'
+        country:
           type: string
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/BrandCategoryDto'
-        compliances:
-          type: array
-          items:
-            type: string
-        created_by:
+        email:
           type: string
         id:
           type: integer
           format: int64
-        legal_address:
-          $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        legal_address_response:
+        lead_approval_status:
           type: string
-        legal_name:
-          type: string
-        vp_details:
+        lead_projection_list:
           type: array
           items:
-            $ref: '#/components/schemas/BrandVpDto'
-        vps:
-          type: array
-          items:
-            type: integer
-            format: int64
-      title: BrandResponse
-    BrandVpDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        vp_email:
+            $ref: '#/components/schemas/LeadProjectionDTO'
+        name:
           type: string
-        vp_id:
-          type: integer
-          format: int64
-        vp_name:
-          type: string
-      title: BrandVpDto
-    UserResponsePayload:
-      type: object
-      properties:
-        created_by:
-          type: string
-        first_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        last_name:
-          type: string
-        manager:
-          $ref: '#/components/schemas/UserResponsePayload'
-        phone_number:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-        username:
-          type: string
-      title: UserResponsePayload
-    QcTechOptionsPayload:
-      type: object
-      properties:
-        order_id:
-          type: integer
-          format: int64
-        type_of_sample:
-          type: string
-      title: QcTechOptionsPayload
+      title: LeadGenerationResponse
     QcTechFormOptionsDto:
       type: object
       properties:
@@ -1867,44 +1908,3 @@ components:
           items:
             $ref: '#/components/schemas/QcTechFormKeyDto'
       title: QcTechFormOptionsDto
-    QcTechEvaluationResponse:
-      type: object
-      properties:
-        checked_by_date:
-          type: integer
-          format: int64
-        created_by:
-          type: string
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/QcTechDocsDto'
-        failed_comment:
-          type: string
-        id:
-          type: integer
-          format: int64
-        qc_tech_buyer_evaluation_id:
-          type: integer
-          format: int64
-        qc_tech_response:
-          $ref: '#/components/schemas/QcTechResponse'
-        qc_tech_workbook:
-          type: string
-        qc_tech_workbook_date:
-          type: integer
-          format: int64
-        ref_sample_avl:
-          type: string
-        remarks:
-          type: string
-        revised_work_book_date:
-          type: integer
-          format: int64
-        revised_work_book_doc:
-          type: string
-        status:
-          type: string
-        step_completed:
-          type: boolean
-      title: QcTechEvaluationResponse

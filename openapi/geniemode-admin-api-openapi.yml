@@ -240,25 +240,6 @@ components:
     JsonNode:
       type: object
       title: JsonNode
-    UserLockState:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        expiresAt:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
-        keyName:
-          type: string
-        userId:
-          type: integer
-          format: int64
-        value:
-          $ref: '#/components/schemas/JsonNode'
-      title: UserLockState
     UserSirenEventLog:
       type: object
       properties:
@@ -282,6 +263,25 @@ components:
           type: integer
           format: int64
       title: UserSirenEventLog
+    UserLockState:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        expiresAt:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        keyName:
+          type: string
+        userId:
+          type: integer
+          format: int64
+        value:
+          $ref: '#/components/schemas/JsonNode'
+      title: UserLockState
     SetUserLockStateRequestPayload:
       type: object
       properties:

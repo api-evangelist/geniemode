@@ -122,6 +122,47 @@ paths:
         required: true
 components:
   schemas:
+    ManufacturerBrandApprovalRequestPayload:
+      type: object
+      properties:
+        address_id:
+          type: integer
+          format: int64
+        approval_status:
+          type: string
+        brand_id:
+          type: integer
+          format: int64
+        buyer_days:
+          type: integer
+          format: int64
+        checked_other_team_sourcing_similar_products:
+          type: boolean
+        cross_costings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerBrandApprovalCrossCostingsDto'
+        existing_brand:
+          type: boolean
+        factory_used_by_other_brand:
+          type: boolean
+        manufacturer_unit_id:
+          type: integer
+          format: int64
+        onboarding_reason:
+          type: string
+        planned_business_usd:
+          type: number
+        rm_id:
+          type: integer
+          format: int64
+        tier1_processes:
+          type: string
+        tier2_processes:
+          type: string
+        tier3_processes:
+          type: string
+      title: ManufacturerBrandApprovalRequestPayload
     ManufacturerBrandApprovalCrossCostingsDto:
       type: object
       properties:
@@ -137,6 +178,52 @@ components:
         supplier_name:
           type: string
       title: ManufacturerBrandApprovalCrossCostingsDto
+    BrandCategoryDto:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          format: int64
+        category_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: BrandCategoryDto
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload
     ManufacturerBrandApprovalDto:
       type: object
       properties:
@@ -204,52 +291,6 @@ components:
         tier3_processes:
           type: string
       title: ManufacturerBrandApprovalDto
-    AddressSubmitResponsePayload:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        address_line2:
-          type: string
-        city:
-          type: string
-        contact_person_name:
-          type: string
-        contact_person_number:
-          type: string
-        country:
-          type: string
-        entity_id:
-          type: integer
-          format: int64
-        entity_type:
-          type: string
-        id:
-          type: integer
-          format: int64
-        landmark:
-          type: string
-        name:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-        type:
-          type: string
-      title: AddressSubmitResponsePayload
-    BrandCategoryDto:
-      type: object
-      properties:
-        category_id:
-          type: integer
-          format: int64
-        category_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: BrandCategoryDto
     ManufacturerBrandApprovalCompliancesDto:
       type: object
       properties:
@@ -260,44 +301,3 @@ components:
           items:
             type: string
       title: ManufacturerBrandApprovalCompliancesDto
-    ManufacturerBrandApprovalRequestPayload:
-      type: object
-      properties:
-        address_id:
-          type: integer
-          format: int64
-        approval_status:
-          type: string
-        brand_id:
-          type: integer
-          format: int64
-        buyer_days:
-          type: integer
-          format: int64
-        checked_other_team_sourcing_similar_products:
-          type: boolean
-        cross_costings:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerBrandApprovalCrossCostingsDto'
-        existing_brand:
-          type: boolean
-        factory_used_by_other_brand:
-          type: boolean
-        manufacturer_unit_id:
-          type: integer
-          format: int64
-        onboarding_reason:
-          type: string
-        planned_business_usd:
-          type: number
-        rm_id:
-          type: integer
-          format: int64
-        tier1_processes:
-          type: string
-        tier2_processes:
-          type: string
-        tier3_processes:
-          type: string
-      title: ManufacturerBrandApprovalRequestPayload

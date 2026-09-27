@@ -224,16 +224,6 @@ components:
         whatsapp_opt_in:
           type: boolean
       title: UMSUserResponsePayload
-    SendEmailRequest:
-      type: object
-      properties:
-        doc_id:
-          type: integer
-          format: int64
-        factory_id:
-          type: integer
-          format: int64
-      title: SendEmailRequest
     FactoryCreateRequestPayload:
       type: object
       properties:
@@ -312,25 +302,6 @@ components:
             - Term_Loan
             - Working_Capital_Loan
       title: GetAllEnumsResponse
-    DocDetailsDto:
-      type: object
-      properties:
-        doc_display_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        order_id:
-          type: integer
-          format: int64
-        s3_path:
-          type: string
-        s3_version:
-          type: integer
-          format: int64
-        step_name:
-          type: string
-      title: DocDetailsDto
     GetFactoryResponsePayload:
       type: object
       properties:
@@ -380,3 +351,32 @@ components:
           type: integer
           format: int64
       title: GetFactoryResponsePayload
+    DocDetailsDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+      title: DocDetailsDto
+    SendEmailRequest:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        factory_id:
+          type: integer
+          format: int64
+      title: SendEmailRequest
