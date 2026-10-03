@@ -124,17 +124,6 @@ components:
         name:
           type: string
       title: OrderTraceabilityTreeNode
-    OrderTraceabilityDocDto:
-      type: object
-      properties:
-        doc_type:
-          type: string
-        id:
-          type: integer
-          format: int64
-        url:
-          type: string
-      title: OrderTraceabilityDocDto
     OrderTraceabilityDto:
       type: object
       properties:
@@ -167,3 +156,14 @@ components:
         type:
           type: string
       title: OrderTraceabilityDto
+    OrderTraceabilityDocDto:
+      type: object
+      properties:
+        doc_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        url:
+          type: string
+      title: OrderTraceabilityDocDto

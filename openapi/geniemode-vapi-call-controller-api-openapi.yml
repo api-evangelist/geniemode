@@ -187,6 +187,21 @@ components:
         number:
           type: string
       title: VapiCustomerDto
+    VapiCallRequestDto:
+      type: object
+      properties:
+        assistantId:
+          type: string
+        assistantOverrides:
+          $ref: '#/components/schemas/VapiAssistantOverridesDto'
+        customer:
+          $ref: '#/components/schemas/VapiCustomerDto'
+        phoneNumberId:
+          type: string
+        userId:
+          type: integer
+          format: int64
+      title: VapiCallRequestDto
     VapiCallLog:
       type: object
       properties:
@@ -246,21 +261,6 @@ components:
         variableValues:
           type: object
       title: VapiCallLog
-    VapiCallRequestDto:
-      type: object
-      properties:
-        assistantId:
-          type: string
-        assistantOverrides:
-          $ref: '#/components/schemas/VapiAssistantOverridesDto'
-        customer:
-          $ref: '#/components/schemas/VapiCustomerDto'
-        phoneNumberId:
-          type: string
-        userId:
-          type: integer
-          format: int64
-      title: VapiCallRequestDto
     VapiAssistantOverridesDto:
       type: object
       properties:

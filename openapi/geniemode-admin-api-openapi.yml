@@ -240,62 +240,6 @@ components:
     JsonNode:
       type: object
       title: JsonNode
-    UserSirenEventLog:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        eventType:
-          type: string
-        id:
-          type: integer
-          format: int64
-        metrics:
-          $ref: '#/components/schemas/JsonNode'
-        occurredAt:
-          type: integer
-          format: int64
-        path:
-          type: string
-        sirenType:
-          type: string
-        userId:
-          type: integer
-          format: int64
-      title: UserSirenEventLog
-    UserLockState:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        expiresAt:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
-        keyName:
-          type: string
-        userId:
-          type: integer
-          format: int64
-        value:
-          $ref: '#/components/schemas/JsonNode'
-      title: UserLockState
-    SetUserLockStateRequestPayload:
-      type: object
-      properties:
-        duration_seconds:
-          type: integer
-          format: int64
-        key:
-          type: string
-        user_id:
-          type: integer
-          format: int64
-        value:
-          type: object
-      title: SetUserLockStateRequestPayload
     SirenPerformanceRowDto:
       type: object
       properties:
@@ -345,3 +289,59 @@ components:
         username:
           type: string
       title: SirenPerformanceRowDto
+    SetUserLockStateRequestPayload:
+      type: object
+      properties:
+        duration_seconds:
+          type: integer
+          format: int64
+        key:
+          type: string
+        user_id:
+          type: integer
+          format: int64
+        value:
+          type: object
+      title: SetUserLockStateRequestPayload
+    UserLockState:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        expiresAt:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        keyName:
+          type: string
+        userId:
+          type: integer
+          format: int64
+        value:
+          $ref: '#/components/schemas/JsonNode'
+      title: UserLockState
+    UserSirenEventLog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        eventType:
+          type: string
+        id:
+          type: integer
+          format: int64
+        metrics:
+          $ref: '#/components/schemas/JsonNode'
+        occurredAt:
+          type: integer
+          format: int64
+        path:
+          type: string
+        sirenType:
+          type: string
+        userId:
+          type: integer
+          format: int64
+      title: UserSirenEventLog

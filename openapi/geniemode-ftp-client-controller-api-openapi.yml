@@ -505,72 +505,139 @@ paths:
                 $ref: '#/components/schemas/Class856'
 components:
   schemas:
-    BusinessOwner:
+    Doc:
       type: object
       properties:
-        active:
-          type: boolean
+        bucketAndKey:
+          $ref: '#/components/schemas/Pair_string_string'
         createdBy:
+          type: string
+        docDisplayName:
           type: string
         id:
           type: integer
           format: int64
-        name:
+        s3Path:
           type: string
-      title: BusinessOwner
-    Packet:
-      type: object
-      required:
-      - order
-      properties:
-        breadth:
-          type: number
-          format: float
-        cartonQuantity:
+        s3Version:
           type: integer
           format: int64
-        cartonWeight:
+      title: Doc
+    OrderMargin:
+      type: object
+      properties:
+        buyer_net_margin:
           type: number
-          format: float
-        createdBy:
+        buyer_shipment_type:
           type: string
-        dimensionUnit:
+        buyer_type:
           type: string
-        height:
+        buying_price:
           type: number
-          format: float
+        changed_shipment_mode:
+          type: string
+        created_by:
+          type: string
+        custom_duty:
+          type: number
+        custom_duty_cost_type:
+          type: string
+        custom_duty_per_piece:
+          type: number
+        custom_duty_type:
+          type: string
+        delivery_charges:
+          type: number
+        discount_charges:
+          type: number
+        discount_charges_cost_type:
+          type: string
+        discount_charges_percent:
+          type: number
+        discount_charges_type:
+          type: string
+        factory_currency_price:
+          type: number
+        factory_discount_charges:
+          type: number
+        factory_discount_charges_cost_type:
+          type: string
+        factory_discount_charges_percent:
+          type: number
+        factory_discount_charges_type:
+          type: string
+        factory_dollar_price:
+          type: number
+        factory_net_margin:
+          type: number
+        factory_shipment_type:
+          type: string
+        gross_margin:
+          type: number
+        harbor_merchandise_fee:
+          type: number
         id:
           type: integer
           format: int64
-        length:
+        logistic_cost:
           type: number
-          format: float
-        lockedQuantity:
-          type: integer
-          format: int64
+        logistic_cost_per_piece:
+          type: number
+        logistic_cost_type:
+          type: string
+        logistic_type:
+          type: string
+        margin:
+          type: number
+        model_type:
+          type: string
+        net_margin:
+          type: number
         order:
           $ref: '#/components/schemas/OrderDetail'
-        packagingComplete:
-          type: boolean
-        packetVariants:
-          type: array
-          items:
-            $ref: '#/components/schemas/PacketVariants'
-        shipmentPackets:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentPackets'
-        weightUnit:
+        order_cost:
+          type: number
+        order_revenue:
+          type: number
+        planned_order_shipment_mode:
           type: string
-      title: Packet
-    Ftp855AckPoDto:
-      type: object
-      properties:
-        payload:
-          $ref: '#/components/schemas/Ftp855AckPoPayloadDto'
-        po_identifier:
+        purchase_cgst:
+          type: number
+        purchase_gst:
+          type: number
+        purchase_igst:
+          type: number
+        purchase_sgst:
+          type: number
+        raw_material_cost:
+          type: number
+        raw_material_cost_dollar:
+          type: number
+        raw_material_margin:
+          type: number
+        raw_material_margin_dollar:
+          type: number
+        reciprocal_tariff:
+          type: number
+        reciprocal_tariff_cost_type:
           type: string
-      title: Ftp855AckPoDto
+        reciprocal_tariff_per_piece:
+          type: number
+        reciprocal_tariff_type:
+          type: string
+        selling_cgst:
+          type: number
+        selling_gst:
+          type: number
+        selling_igst:
+          type: number
+        selling_sgst:
+          type: number
+        shipment_type:
+          type: string
+        total_custom_duty:
+          type: number
+      title: OrderMargin
     OrderBuyerPo:
       type: object
       properties:
@@ -590,245 +657,6 @@ components:
         poType:
           $ref: '#/components/schemas/PoType'
       title: OrderBuyerPo
-    ShipmentDoc:
-      type: object
-      required:
-      - shipmentHop
-      properties:
-        createdBy:
-          type: string
-        documentType:
-          type: string
-        documentUrl:
-          type: string
-        id:
-          type: integer
-          format: int64
-        shipmentHop:
-          $ref: '#/components/schemas/ShipmentHop'
-      title: ShipmentDoc
-    Ftp855AckDRDto:
-      type: object
-      properties:
-        date:
-          type: string
-        new_qty:
-          type: string
-        type:
-          type: string
-      title: Ftp855AckDRDto
-    Ftp855AckIPDto:
-      type: object
-      properties:
-        new_price:
-          type: string
-      title: Ftp855AckIPDto
-    FtpFileDto:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-        document810_present:
-          type: boolean
-        document856_present:
-          type: boolean
-        document860_present:
-          type: boolean
-        edi_content:
-          type: string
-        edi_to_json:
-          type: object
-        edi_to_json_content:
-          type: string
-        file_name:
-          type: string
-        file_type:
-          type: string
-        file_url:
-          type: string
-        ftp_buyer_po:
-          $ref: '#/components/schemas/FtpBuyerPoDto'
-        id:
-          type: integer
-          format: int64
-        json_file_url:
-          type: string
-        related_doc_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/FtpFileDto'
-        request_data:
-          type: object
-        uploaded:
-          type: boolean
-        url_for_document810:
-          type: string
-        url_for_document856:
-          type: string
-        url_for_document860:
-          type: string
-        url_for_document997:
-          type: string
-      title: FtpFileDto
-    OrderLogisticDocs:
-      type: object
-      properties:
-        created_by:
-          type: string
-        id:
-          type: integer
-          format: int64
-        order_logistic_details:
-          $ref: '#/components/schemas/OrderLogisticDetails'
-        s3_url:
-          type: string
-        type:
-          type: string
-        version:
-          type: integer
-          format: int64
-      title: OrderLogisticDocs
-    FtpBuyerPoDto:
-      type: object
-      properties:
-        buyer_po_no:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        ftp_buyer_po_id:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
-        parent_id_buyer_po_no:
-          type: string
-        parent_id_ftp_buyer_po_id:
-          type: integer
-          format: int64
-        server:
-          type: string
-        username:
-          type: string
-      title: FtpBuyerPoDto
-    ManufacturerDirector:
-      type: object
-      required:
-      - manufacturer
-      properties:
-        aadharDocUrl:
-          type: string
-        aadharNo:
-          type: string
-        aadharNoDocId:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        din:
-          type: string
-        dpin:
-          type: string
-        fatherName:
-          type: string
-        id:
-          type: integer
-          format: int64
-        isPrimary:
-          type: boolean
-        manufacturer:
-          $ref: '#/components/schemas/Manufacturer'
-        name:
-          type: string
-        pan:
-          type: string
-        panDocId:
-          type: integer
-          format: int64
-        panDocUrl:
-          type: string
-        passportNo:
-          type: string
-      title: ManufacturerDirector
-    Manufacturer:
-      type: object
-      properties:
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerAddress'
-        brandName:
-          type: string
-        buyerName:
-          type: string
-        catalougeShootImageAvailable:
-          type: string
-        catalougeSize:
-          type: string
-        createdBy:
-          type: string
-        directors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerDirector'
-        eligibleCategories:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerEligibleCategories'
-        financialBacking:
-          type: string
-        firmType:
-          type: string
-        gaId:
-          type: string
-        hasOwnLabel:
-          type: boolean
-        id:
-          type: integer
-          format: int64
-        manufacturerAgreementDetails:
-          $ref: '#/components/schemas/ManufacturerAgreementDetails'
-        manufacturerBase:
-          $ref: '#/components/schemas/ManufacturerBase'
-        manufacturerDocs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerDocs'
-        manufacturerRatingDetails:
-          $ref: '#/components/schemas/ManufacturerRatingDetails'
-        needAdvancePayment:
-          type: boolean
-        onBoardingTeamMemberName:
-          type: string
-        prevYearTurnover:
-          type: number
-          format: float
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerProductMap'
-        region:
-          type: string
-        stepsCompleted:
-          type: integer
-          format: int64
-        supplierSubType:
-          type: string
-        supplierType:
-          type: string
-        type:
-          type: string
-        udyamRegistrationCertificatePresent:
-          type: boolean
-        units:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerUnit'
-        website:
-          type: string
-      title: Manufacturer
     RequestPayload856ShipmentAddress:
       type: object
       properties:
@@ -849,573 +677,6 @@ components:
         state:
           type: string
       title: RequestPayload856ShipmentAddress
-    RequestPayload856Order:
-      type: object
-      properties:
-        buyer_po_no:
-          type: string
-        packet_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestPayload856Packet'
-      title: RequestPayload856Order
-    RequestPayload856Item:
-      type: object
-      properties:
-        assigned_identification:
-          type: string
-        description:
-          type: string
-        numberof_units_shipped:
-          type: string
-        product_service_id03:
-          type: string
-        product_service_id05:
-          type: string
-        product_service_id07:
-          type: string
-        product_service_id_qualifier02:
-          type: string
-        product_service_id_qualifier04:
-          type: string
-        product_service_id_qualifier06:
-          type: string
-        unitor_basisfor_measurement_code:
-          type: string
-      title: RequestPayload856Item
-    OrderAddress:
-      type: object
-      properties:
-        addressId:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        order:
-          $ref: '#/components/schemas/OrderDetail'
-      title: OrderAddress
-    FtpSendFileDto:
-      type: object
-      properties:
-        file_type:
-          type: string
-        file_url:
-          type: string
-      title: FtpSendFileDto
-    OrderLogisticCosts:
-      type: object
-      properties:
-        created_by:
-          type: string
-        custom_duty:
-          type: number
-        custom_duty_cost_type:
-          type: string
-        custom_duty_per_piece:
-          type: number
-        delivery_charges:
-          type: number
-        freight_cost:
-          type: number
-        harbor_merchandise_fee:
-          type: number
-        id:
-          type: integer
-          format: int64
-        logistic_cost:
-          type: number
-        logistic_cost_per_piece:
-          type: number
-        logistic_cost_type:
-          type: string
-        order_logistic_details:
-          $ref: '#/components/schemas/OrderLogisticDetails'
-        reciprocal_tariff:
-          type: number
-        reciprocal_tariff_cost_type:
-          type: string
-        reciprocal_tariff_per_piece:
-          type: number
-        total_custom_duty:
-          type: number
-      title: OrderLogisticCosts
-    OrderBuyerAssignee:
-      type: object
-      properties:
-        buyerAssigneeId:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        order:
-          $ref: '#/components/schemas/OrderDetail'
-      title: OrderBuyerAssignee
-    RequestPayload810Txi:
-      type: object
-      properties:
-        monetary_amount:
-          type: string
-        percentage_as_decimal:
-          type: string
-      title: RequestPayload810Txi
-    TD5:
-      type: object
-      properties:
-        identification_code:
-          type: string
-        identification_code_qualifier:
-          type: string
-      title: TD5
-    ManufacturerAgreementDetails:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        indiaEntityBuySellModelAgreementApprovalDate:
-          type: integer
-          format: int64
-        indiaEntityBuySellModelAgreementDocUrl:
-          type: string
-        indiaEntityBuySellModelAgreementJson:
-          type: string
-        indiaEntityBuySellModelAgreementLocation:
-          type: string
-        indiaEntityBuySellModelAgreementSignatureDocUrl:
-          type: string
-        indiaEntityCommissionModelAgreementApprovalDate:
-          type: integer
-          format: int64
-        indiaEntityCommissionModelAgreementDocUrl:
-          type: string
-        indiaEntityCommissionModelAgreementJson:
-          type: string
-        indiaEntityCommissionModelAgreementLocation:
-          type: string
-        indiaEntityCommissionModelAgreementSignatureDocUrl:
-          type: string
-        manufacturerDetail:
-          $ref: '#/components/schemas/Manufacturer'
-        ukEntityBuySellModelAgreementApprovalDate:
-          type: integer
-          format: int64
-        ukEntityBuySellModelAgreementDocUrl:
-          type: string
-        ukEntityBuySellModelAgreementJson:
-          type: string
-        ukEntityBuySellModelAgreementLocation:
-          type: string
-        ukEntityBuySellModelAgreementSignatureDocUrl:
-          type: string
-        ukEntityCommissionModelAgreementApprovalDate:
-          type: integer
-          format: int64
-        ukEntityCommissionModelAgreementDocUrl:
-          type: string
-        ukEntityCommissionModelAgreementJson:
-          type: string
-        ukEntityCommissionModelAgreementLocation:
-          type: string
-        ukEntityCommissionModelAgreementSignatureDocUrl:
-          type: string
-        usEntityBuySellModelAgreementApprovalDate:
-          type: integer
-          format: int64
-        usEntityBuySellModelAgreementDocUrl:
-          type: string
-        usEntityBuySellModelAgreementJson:
-          type: string
-        usEntityBuySellModelAgreementLocation:
-          type: string
-        usEntityBuySellModelAgreementSignatureDocUrl:
-          type: string
-        usEntityCommissionModelAgreementApprovalDate:
-          type: integer
-          format: int64
-        usEntityCommissionModelAgreementDocUrl:
-          type: string
-        usEntityCommissionModelAgreementJson:
-          type: string
-        usEntityCommissionModelAgreementLocation:
-          type: string
-        usEntityCommissionModelAgreementSignatureDocUrl:
-          type: string
-      title: ManufacturerAgreementDetails
-    GeniemodeEntityAddress:
-      type: object
-      required:
-      - geniemodeEntity
-      properties:
-        addressId:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        geniemodeEntity:
-          $ref: '#/components/schemas/GeniemodeEntity'
-        id:
-          type: integer
-          format: int64
-        type:
-          type: string
-      title: GeniemodeEntityAddress
-    RmDetail:
-      type: object
-      properties:
-        categoryId:
-          type: integer
-          format: int64
-        categoryName:
-          type: string
-        contactInfo:
-          type: string
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: RmDetail
-    ShipmentVariantBuyerPoMapping:
-      type: object
-      required:
-      - shipmentVariant
-      - variantBuyerPoMapping
-      properties:
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        locked:
-          type: boolean
-        quantity:
-          type: integer
-          format: int64
-        shipmentVariant:
-          $ref: '#/components/schemas/ShipmentVariant'
-        variantBuyerPoMapping:
-          $ref: '#/components/schemas/VariantBuyerPoMapping'
-      title: ShipmentVariantBuyerPoMapping
-    ManufacturerDocs:
-      type: object
-      properties:
-        auditStatus:
-          type: string
-        auditTs:
-          type: integer
-          format: int64
-        auditorId:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        docCategory:
-          type: string
-        docExpiry:
-          type: integer
-          format: int64
-        docSubCategory:
-          type: string
-        docUrl:
-          type: string
-        id:
-          type: integer
-          format: int64
-        manufacturer:
-          $ref: '#/components/schemas/Manufacturer'
-        manufacturerUnit:
-          $ref: '#/components/schemas/ManufacturerUnit'
-      title: ManufacturerDocs
-    ManufacturerRatingDetails:
-      type: object
-      properties:
-        boughtValue:
-          type: number
-        communicationPercentileRank:
-          type: number
-          format: float
-        completedOrderCount:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        diffDays:
-          type: number
-          format: float
-        id:
-          type: integer
-          format: int64
-        manufacturerDetail:
-          $ref: '#/components/schemas/Manufacturer'
-        ordertnaMetCount:
-          type: integer
-          format: int64
-        receivedMailCount:
-          type: integer
-          format: int64
-        rejectedQcCount:
-          type: integer
-          format: int64
-        sentMailCount:
-          type: integer
-          format: int64
-        soldValue:
-          type: number
-        tnaChangeRequests:
-          type: integer
-          format: int64
-        totalQcCount:
-          type: integer
-          format: int64
-      title: ManufacturerRatingDetails
-    Ftp855AckIQDto:
-      type: object
-      properties:
-        new_qty:
-          type: string
-      title: Ftp855AckIQDto
-    TD1:
-      type: object
-      properties:
-        lading_quantity:
-          type: string
-        packaging_code:
-          type: string
-        unitor_basisfor_measurement_code:
-          type: string
-        weight:
-          type: string
-        weight_qualifier:
-          type: string
-      title: TD1
-    PoType:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: PoType
-    Ftp855AckPoPayloadDto:
-      type: object
-      properties:
-        dr:
-          $ref: '#/components/schemas/Ftp855AckDRDto'
-        ia:
-          type: boolean
-        ib:
-          $ref: '#/components/schemas/Ftp855AckIBDto'
-        ip:
-          $ref: '#/components/schemas/Ftp855AckIPDto'
-        iq:
-          $ref: '#/components/schemas/Ftp855AckIQDto'
-        ir:
-          type: boolean
-      title: Ftp855AckPoPayloadDto
-    ShipmentPackets:
-      type: object
-      required:
-      - packet
-      - shipment
-      properties:
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        locked:
-          type: boolean
-        packet:
-          $ref: '#/components/schemas/Packet'
-        quantity:
-          type: integer
-          format: int64
-        shipment:
-          $ref: '#/components/schemas/Shipment'
-      title: ShipmentPackets
-    WfTemplate:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        rmId:
-          type: integer
-          format: int64
-        type:
-          type: string
-        workflowName:
-          type: string
-      title: WfTemplate
-    RequestPayload856Custom:
-      type: object
-      properties:
-        all_list:
-          type: array
-          items:
-            type: integer
-            format: int64
-        current_date:
-          type: string
-        current_time:
-          type: string
-        date:
-          type: string
-        date_time_qualifier:
-          type: string
-        order_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestPayload856Order'
-        packging_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/TD1'
-        receiver:
-          type: string
-        refs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentRef'
-        scac_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/TD5'
-        sender:
-          type: string
-        shipment:
-          $ref: '#/components/schemas/Shipment'
-        shipment_from:
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestPayload856ShipmentAddress'
-        shipment_identification:
-          type: string
-        shipment_to:
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestPayload856ShipmentAddress'
-        transaction_set_purpose_code:
-          type: string
-        upload:
-          type: boolean
-      title: RequestPayload856Custom
-    DTM:
-      type: object
-      properties:
-        date:
-          type: string
-        date_time_qualifier:
-          type: string
-      title: DTM
-    RequestPayload856Packet:
-      type: object
-      properties:
-        carton_no:
-          type: string
-        item_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestPayload856Item'
-      title: RequestPayload856Packet
-    SampleOrderMapping:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        order:
-          $ref: '#/components/schemas/OrderDetail'
-        sample:
-          $ref: '#/components/schemas/OrderDetail'
-      title: SampleOrderMapping
-    RequestPayload810Refs:
-      type: object
-      properties:
-        reference_identification:
-          type: string
-        reference_identification_qualifier:
-          type: string
-      title: RequestPayload810Refs
-    ShipmentHop:
-      type: object
-      required:
-      - shipment
-      properties:
-        actualDate:
-          type: integer
-          format: int64
-        auditActualDate:
-          type: integer
-          format: int64
-        auditStatus:
-          type: string
-        auditTs:
-          type: integer
-          format: int64
-        auditorId:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        position:
-          type: integer
-          format: int32
-        projectionDate:
-          type: integer
-          format: int64
-        remark:
-          type: string
-        shipment:
-          $ref: '#/components/schemas/Shipment'
-        shipmentDocs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentDoc'
-        status:
-          type: string
-          enum:
-          - booked
-          - complete
-          - deliveryDate
-          - paymentFollowup
-          - preplanned
-          - shipped
-        statusChangeDate:
-          type: integer
-          format: int64
-      title: ShipmentHop
-    CourierPartner:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: CourierPartner
     VariantBuyerPoMapping:
       type: object
       required:
@@ -1438,11 +699,45 @@ components:
         variant:
           $ref: '#/components/schemas/Variant'
       title: VariantBuyerPoMapping
-    PacketVariants:
+    OrderLogisticDocs:
+      type: object
+      properties:
+        created_by:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_logistic_details:
+          $ref: '#/components/schemas/OrderLogisticDetails'
+        s3_url:
+          type: string
+        type:
+          type: string
+        version:
+          type: integer
+          format: int64
+      title: OrderLogisticDocs
+    Ftp855AckPoLoopDto:
+      type: object
+      properties:
+        po_loop:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ftp855AckPoDto'
+      title: Ftp855AckPoLoopDto
+    FtpSendFileDto:
+      type: object
+      properties:
+        file_type:
+          type: string
+        file_url:
+          type: string
+      title: FtpSendFileDto
+    ShipmentPackets:
       type: object
       required:
       - packet
-      - variant
+      - shipment
       properties:
         createdBy:
           type: string
@@ -1456,52 +751,32 @@ components:
         quantity:
           type: integer
           format: int64
-        variant:
-          $ref: '#/components/schemas/Variant'
-      title: PacketVariants
-    ShipmentVariant:
+        shipment:
+          $ref: '#/components/schemas/Shipment'
+      title: ShipmentPackets
+    ShipmentDoc:
       type: object
       required:
-      - shipment
-      - variant
+      - shipmentHop
       properties:
-        buyerDiscountAmount:
-          type: number
-        buyerDiscountPercentage:
-          type: number
         createdBy:
           type: string
-        customFields:
-          type: object
-        factoryDiscountAmount:
-          type: number
-        factoryDiscountPercentage:
-          type: number
+        documentType:
+          type: string
+        documentUrl:
+          type: string
         id:
           type: integer
           format: int64
-        locked:
-          type: boolean
-        quantity:
-          type: integer
-          format: int64
-        shipment:
-          $ref: '#/components/schemas/Shipment'
-        shipmentVariantBuyerPoMappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentVariantBuyerPoMapping'
-        variant:
-          $ref: '#/components/schemas/Variant'
-      title: ShipmentVariant
-    ShipmentRef:
+        shipmentHop:
+          $ref: '#/components/schemas/ShipmentHop'
+      title: ShipmentDoc
+    Ftp855AckIQDto:
       type: object
       properties:
-        reference_identification:
+        new_qty:
           type: string
-        reference_identification_qualifier:
-          type: string
-      title: ShipmentRef
+      title: Ftp855AckIQDto
     RequestPayload810:
       type: object
       properties:
@@ -1540,43 +815,212 @@ components:
           items:
             $ref: '#/components/schemas/RequestPayload810Txi'
       title: RequestPayload810
-    OrderAudit:
+    SampleOrderMapping:
       type: object
       properties:
-        created_by:
+        createdBy:
           type: string
         id:
           type: integer
           format: int64
         order:
           $ref: '#/components/schemas/OrderDetail'
-        total_audit_failed:
-          type: integer
-          format: int64
-        total_audit_passed:
-          type: integer
-          format: int64
-      title: OrderAudit
-    Class856:
+        sample:
+          $ref: '#/components/schemas/OrderDetail'
+      title: SampleOrderMapping
+    BusinessOwner:
       type: object
       properties:
-        current_date:
+        active:
+          type: boolean
+        createdBy:
           type: string
-        current_time:
+        id:
+          type: integer
+          format: int64
+        name:
           type: string
-        dtm:
-          $ref: '#/components/schemas/DTM'
-        receiver:
+      title: BusinessOwner
+    Ftp855AckPoPayloadDto:
+      type: object
+      properties:
+        dr:
+          $ref: '#/components/schemas/Ftp855AckDRDto'
+        ia:
+          type: boolean
+        ib:
+          $ref: '#/components/schemas/Ftp855AckIBDto'
+        ip:
+          $ref: '#/components/schemas/Ftp855AckIPDto'
+        iq:
+          $ref: '#/components/schemas/Ftp855AckIQDto'
+        ir:
+          type: boolean
+      title: Ftp855AckPoPayloadDto
+    DTM:
+      type: object
+      properties:
+        date:
           type: string
-        sender:
+        date_time_qualifier:
           type: string
-        shipment:
-          $ref: '#/components/schemas/Shipment'
-        shipment_identification:
+      title: DTM
+    ManufacturerUnit:
+      type: object
+      properties:
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerAddress'
+        auditComplete:
+          type: boolean
+        createdBy:
           type: string
-        transaction_set_purpose_code:
+        id:
+          type: integer
+          format: int64
+        manufacturer:
+          $ref: '#/components/schemas/Manufacturer'
+        manufacturerBase:
+          $ref: '#/components/schemas/ManufacturerBase'
+        manufacturerDocs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerDocs'
+        noOfMachines:
+          type: integer
+          format: int64
+        noOfWorkers:
+          type: integer
+          format: int64
+        preferredFactory:
+          type: boolean
+        ragRating:
           type: string
-      title: Class856
+        workerType:
+          type: string
+      title: ManufacturerUnit
+    PoType:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: PoType
+    Shipment:
+      type: object
+      required:
+      - order
+      properties:
+        actualShipmentMode:
+          type: string
+          enum:
+          - Air
+          - Courier
+          - Land
+          - Sea
+        addressId:
+          type: integer
+          format: int64
+        assigneeId:
+          type: integer
+          format: int64
+        blDate:
+          type: integer
+          format: int64
+        blDoc:
+          type: string
+        blNumber:
+          type: string
+        bookingNo:
+          type: string
+        buyerInvoiceCreated:
+          type: boolean
+        cancellationDate:
+          type: integer
+          format: int64
+        courierPartner:
+          $ref: '#/components/schemas/CourierPartner'
+        createdBy:
+          type: string
+        currentStatus:
+          type: string
+          enum:
+          - booked
+          - complete
+          - deliveryDate
+          - paymentFollowup
+          - preplanned
+          - shipped
+        eta:
+          type: integer
+          format: int64
+        etd:
+          type: integer
+          format: int64
+        exFactoryDate:
+          type: integer
+          format: int64
+        factoryInvoiceCreated:
+          type: boolean
+        factoryInvoiceDoc:
+          type: string
+        factoryInvoiceNo:
+          type: string
+        factoryInvoiceNoRemark:
+          type: string
+        id:
+          type: integer
+          format: int64
+        incoTerm:
+          type: string
+        invoiceApprovalLock:
+          type: boolean
+        invoiceDoc:
+          type: string
+        locked:
+          type: boolean
+        order:
+          $ref: '#/components/schemas/OrderDetail'
+        packingListDoc:
+          type: string
+        plannedShipmentMode:
+          type: string
+          enum:
+          - Air
+          - Courier
+          - Land
+          - Sea
+        podDate:
+          type: integer
+          format: int64
+        podNumber:
+          type: string
+        shipmentHops:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentHop'
+        shipmentPackets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentPackets'
+        shipmentReady:
+          type: boolean
+        shipmentVariants:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentVariant'
+        shippingBillDoc:
+          type: string
+        trackingId:
+          type: string
+        vessel:
+          type: string
+      title: Shipment
     OrderDetail:
       type: object
       properties:
@@ -1887,15 +1331,634 @@ components:
         wfTemplateId:
           $ref: '#/components/schemas/WfTemplate'
       title: OrderDetail
-    ManufacturerUnit:
+    OrderManufacturerAssignee:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        manufacturerAssigneeId:
+          type: integer
+          format: int64
+        order:
+          $ref: '#/components/schemas/OrderDetail'
+      title: OrderManufacturerAssignee
+    OrderAudit:
+      type: object
+      properties:
+        created_by:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order:
+          $ref: '#/components/schemas/OrderDetail'
+        total_audit_failed:
+          type: integer
+          format: int64
+        total_audit_passed:
+          type: integer
+          format: int64
+      title: OrderAudit
+    OrderBuyerAssignee:
+      type: object
+      properties:
+        buyerAssigneeId:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order:
+          $ref: '#/components/schemas/OrderDetail'
+      title: OrderBuyerAssignee
+    OrderLogisticCosts:
+      type: object
+      properties:
+        created_by:
+          type: string
+        custom_duty:
+          type: number
+        custom_duty_cost_type:
+          type: string
+        custom_duty_per_piece:
+          type: number
+        delivery_charges:
+          type: number
+        freight_cost:
+          type: number
+        harbor_merchandise_fee:
+          type: number
+        id:
+          type: integer
+          format: int64
+        logistic_cost:
+          type: number
+        logistic_cost_per_piece:
+          type: number
+        logistic_cost_type:
+          type: string
+        order_logistic_details:
+          $ref: '#/components/schemas/OrderLogisticDetails'
+        reciprocal_tariff:
+          type: number
+        reciprocal_tariff_cost_type:
+          type: string
+        reciprocal_tariff_per_piece:
+          type: number
+        total_custom_duty:
+          type: number
+      title: OrderLogisticCosts
+    ManufacturerRatingDetails:
+      type: object
+      properties:
+        boughtValue:
+          type: number
+        communicationPercentileRank:
+          type: number
+          format: float
+        completedOrderCount:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        diffDays:
+          type: number
+          format: float
+        id:
+          type: integer
+          format: int64
+        manufacturerDetail:
+          $ref: '#/components/schemas/Manufacturer'
+        ordertnaMetCount:
+          type: integer
+          format: int64
+        receivedMailCount:
+          type: integer
+          format: int64
+        rejectedQcCount:
+          type: integer
+          format: int64
+        sentMailCount:
+          type: integer
+          format: int64
+        soldValue:
+          type: number
+        tnaChangeRequests:
+          type: integer
+          format: int64
+        totalQcCount:
+          type: integer
+          format: int64
+      title: ManufacturerRatingDetails
+    RmDetail:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          format: int64
+        categoryName:
+          type: string
+        contactInfo:
+          type: string
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: RmDetail
+    ShipmentHop:
+      type: object
+      required:
+      - shipment
+      properties:
+        actualDate:
+          type: integer
+          format: int64
+        auditActualDate:
+          type: integer
+          format: int64
+        auditStatus:
+          type: string
+        auditTs:
+          type: integer
+          format: int64
+        auditorId:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        position:
+          type: integer
+          format: int32
+        projectionDate:
+          type: integer
+          format: int64
+        remark:
+          type: string
+        shipment:
+          $ref: '#/components/schemas/Shipment'
+        shipmentDocs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentDoc'
+        status:
+          type: string
+          enum:
+          - booked
+          - complete
+          - deliveryDate
+          - paymentFollowup
+          - preplanned
+          - shipped
+        statusChangeDate:
+          type: integer
+          format: int64
+      title: ShipmentHop
+    Manufacturer:
       type: object
       properties:
         addresses:
           type: array
           items:
             $ref: '#/components/schemas/ManufacturerAddress'
-        auditComplete:
+        brandName:
+          type: string
+        buyerName:
+          type: string
+        catalougeShootImageAvailable:
+          type: string
+        catalougeSize:
+          type: string
+        createdBy:
+          type: string
+        directors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerDirector'
+        eligibleCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerEligibleCategories'
+        financialBacking:
+          type: string
+        firmType:
+          type: string
+        gaId:
+          type: string
+        hasOwnLabel:
           type: boolean
+        id:
+          type: integer
+          format: int64
+        manufacturerAgreementDetails:
+          $ref: '#/components/schemas/ManufacturerAgreementDetails'
+        manufacturerBase:
+          $ref: '#/components/schemas/ManufacturerBase'
+        manufacturerDocs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerDocs'
+        manufacturerRatingDetails:
+          $ref: '#/components/schemas/ManufacturerRatingDetails'
+        needAdvancePayment:
+          type: boolean
+        onBoardingTeamMemberName:
+          type: string
+        prevYearTurnover:
+          type: number
+          format: float
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerProductMap'
+        region:
+          type: string
+        stepsCompleted:
+          type: integer
+          format: int64
+        supplierSubType:
+          type: string
+        supplierType:
+          type: string
+        type:
+          type: string
+        udyamRegistrationCertificatePresent:
+          type: boolean
+        units:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerUnit'
+        website:
+          type: string
+      title: Manufacturer
+    PacketVariants:
+      type: object
+      required:
+      - packet
+      - variant
+      properties:
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        locked:
+          type: boolean
+        packet:
+          $ref: '#/components/schemas/Packet'
+        quantity:
+          type: integer
+          format: int64
+        variant:
+          $ref: '#/components/schemas/Variant'
+      title: PacketVariants
+    CourierPartner:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: CourierPartner
+    RequestPayload856:
+      type: object
+      properties:
+        all_list:
+          type: array
+          items:
+            type: integer
+            format: int64
+        current_date:
+          type: string
+        current_time:
+          type: string
+        draft:
+          type: boolean
+        dtm:
+          $ref: '#/components/schemas/DTM'
+        receiver:
+          type: string
+        request_data:
+          type: object
+        sender:
+          type: string
+        shipment:
+          $ref: '#/components/schemas/Shipment'
+        shipment_identification:
+          type: string
+        transaction_set_purpose_code:
+          type: string
+        upload:
+          type: boolean
+      title: RequestPayload856
+    Ftp855AckIBDto:
+      type: object
+      properties:
+        date:
+          type: string
+        new_qty:
+          type: string
+        type:
+          type: string
+      title: Ftp855AckIBDto
+    ShipmentRef:
+      type: object
+      properties:
+        reference_identification:
+          type: string
+        reference_identification_qualifier:
+          type: string
+      title: ShipmentRef
+    ManufacturerDirector:
+      type: object
+      required:
+      - manufacturer
+      properties:
+        aadharDocUrl:
+          type: string
+        aadharNo:
+          type: string
+        aadharNoDocId:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        din:
+          type: string
+        dpin:
+          type: string
+        fatherName:
+          type: string
+        id:
+          type: integer
+          format: int64
+        isPrimary:
+          type: boolean
+        manufacturer:
+          $ref: '#/components/schemas/Manufacturer'
+        name:
+          type: string
+        pan:
+          type: string
+        panDocId:
+          type: integer
+          format: int64
+        panDocUrl:
+          type: string
+        passportNo:
+          type: string
+      title: ManufacturerDirector
+    ManufacturerBase:
+      type: object
+      properties:
+        aadharNo:
+          type: integer
+          format: int64
+        capacityPerMonth:
+          type: integer
+          format: int64
+        capacityToGeniemode:
+          type: string
+        capacityUtilization:
+          type: string
+        cin:
+          type: string
+        exportLicenseNo:
+          type: string
+        gstNumber:
+          type: string
+        llpin:
+          type: string
+        name:
+          type: string
+        nid:
+          type: string
+        pan:
+          type: string
+        registrationNo:
+          type: string
+        tan:
+          type: string
+        tin:
+          type: string
+        typeOfCurrentBuyer:
+          type: string
+        vat:
+          type: string
+      title: ManufacturerBase
+    ManufacturerDocs:
+      type: object
+      properties:
+        auditStatus:
+          type: string
+        auditTs:
+          type: integer
+          format: int64
+        auditorId:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        docCategory:
+          type: string
+        docExpiry:
+          type: integer
+          format: int64
+        docSubCategory:
+          type: string
+        docUrl:
+          type: string
+        id:
+          type: integer
+          format: int64
+        manufacturer:
+          $ref: '#/components/schemas/Manufacturer'
+        manufacturerUnit:
+          $ref: '#/components/schemas/ManufacturerUnit'
+      title: ManufacturerDocs
+    FtpFileDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        document810_present:
+          type: boolean
+        document856_present:
+          type: boolean
+        document860_present:
+          type: boolean
+        edi_content:
+          type: string
+        edi_to_json:
+          type: object
+        edi_to_json_content:
+          type: string
+        file_name:
+          type: string
+        file_type:
+          type: string
+        file_url:
+          type: string
+        ftp_buyer_po:
+          $ref: '#/components/schemas/FtpBuyerPoDto'
+        id:
+          type: integer
+          format: int64
+        json_file_url:
+          type: string
+        related_doc_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/FtpFileDto'
+        request_data:
+          type: object
+        uploaded:
+          type: boolean
+        url_for_document810:
+          type: string
+        url_for_document856:
+          type: string
+        url_for_document860:
+          type: string
+        url_for_document997:
+          type: string
+      title: FtpFileDto
+    GeniemodeEntityAddress:
+      type: object
+      required:
+      - geniemodeEntity
+      properties:
+        addressId:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        geniemodeEntity:
+          $ref: '#/components/schemas/GeniemodeEntity'
+        id:
+          type: integer
+          format: int64
+        type:
+          type: string
+      title: GeniemodeEntityAddress
+    ManufacturerAgreementDetails:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        indiaEntityBuySellModelAgreementApprovalDate:
+          type: integer
+          format: int64
+        indiaEntityBuySellModelAgreementDocUrl:
+          type: string
+        indiaEntityBuySellModelAgreementJson:
+          type: string
+        indiaEntityBuySellModelAgreementLocation:
+          type: string
+        indiaEntityBuySellModelAgreementSignatureDocUrl:
+          type: string
+        indiaEntityCommissionModelAgreementApprovalDate:
+          type: integer
+          format: int64
+        indiaEntityCommissionModelAgreementDocUrl:
+          type: string
+        indiaEntityCommissionModelAgreementJson:
+          type: string
+        indiaEntityCommissionModelAgreementLocation:
+          type: string
+        indiaEntityCommissionModelAgreementSignatureDocUrl:
+          type: string
+        manufacturerDetail:
+          $ref: '#/components/schemas/Manufacturer'
+        ukEntityBuySellModelAgreementApprovalDate:
+          type: integer
+          format: int64
+        ukEntityBuySellModelAgreementDocUrl:
+          type: string
+        ukEntityBuySellModelAgreementJson:
+          type: string
+        ukEntityBuySellModelAgreementLocation:
+          type: string
+        ukEntityBuySellModelAgreementSignatureDocUrl:
+          type: string
+        ukEntityCommissionModelAgreementApprovalDate:
+          type: integer
+          format: int64
+        ukEntityCommissionModelAgreementDocUrl:
+          type: string
+        ukEntityCommissionModelAgreementJson:
+          type: string
+        ukEntityCommissionModelAgreementLocation:
+          type: string
+        ukEntityCommissionModelAgreementSignatureDocUrl:
+          type: string
+        usEntityBuySellModelAgreementApprovalDate:
+          type: integer
+          format: int64
+        usEntityBuySellModelAgreementDocUrl:
+          type: string
+        usEntityBuySellModelAgreementJson:
+          type: string
+        usEntityBuySellModelAgreementLocation:
+          type: string
+        usEntityBuySellModelAgreementSignatureDocUrl:
+          type: string
+        usEntityCommissionModelAgreementApprovalDate:
+          type: integer
+          format: int64
+        usEntityCommissionModelAgreementDocUrl:
+          type: string
+        usEntityCommissionModelAgreementJson:
+          type: string
+        usEntityCommissionModelAgreementLocation:
+          type: string
+        usEntityCommissionModelAgreementSignatureDocUrl:
+          type: string
+      title: ManufacturerAgreementDetails
+    Pair_string_string:
+      type: object
+      properties:
+        key:
+          type: string
+        left:
+          type: string
+        right:
+          type: string
+        value:
+          type: string
+      title: Pair«string,string»
+    Ftp855AckDRDto:
+      type: object
+      properties:
+        date:
+          type: string
+        new_qty:
+          type: string
+        type:
+          type: string
+      title: Ftp855AckDRDto
+    ManufacturerProductMap:
+      type: object
+      properties:
+        category:
+          type: string
         createdBy:
           type: string
         id:
@@ -1903,25 +1966,194 @@ components:
           format: int64
         manufacturer:
           $ref: '#/components/schemas/Manufacturer'
-        manufacturerBase:
-          $ref: '#/components/schemas/ManufacturerBase'
-        manufacturerDocs:
+        name:
+          type: string
+        subType:
+          type: string
+        type:
+          type: string
+      title: ManufacturerProductMap
+    ShipmentVariantBuyerPoMapping:
+      type: object
+      required:
+      - shipmentVariant
+      - variantBuyerPoMapping
+      properties:
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        locked:
+          type: boolean
+        quantity:
+          type: integer
+          format: int64
+        shipmentVariant:
+          $ref: '#/components/schemas/ShipmentVariant'
+        variantBuyerPoMapping:
+          $ref: '#/components/schemas/VariantBuyerPoMapping'
+      title: ShipmentVariantBuyerPoMapping
+    RequestPayload856Packet:
+      type: object
+      properties:
+        carton_no:
+          type: string
+        item_list:
           type: array
           items:
-            $ref: '#/components/schemas/ManufacturerDocs'
-        noOfMachines:
+            $ref: '#/components/schemas/RequestPayload856Item'
+      title: RequestPayload856Packet
+    RequestPayload856Item:
+      type: object
+      properties:
+        assigned_identification:
+          type: string
+        description:
+          type: string
+        numberof_units_shipped:
+          type: string
+        product_service_id03:
+          type: string
+        product_service_id05:
+          type: string
+        product_service_id07:
+          type: string
+        product_service_id_qualifier02:
+          type: string
+        product_service_id_qualifier04:
+          type: string
+        product_service_id_qualifier06:
+          type: string
+        unitor_basisfor_measurement_code:
+          type: string
+      title: RequestPayload856Item
+    RequestPayload810Txi:
+      type: object
+      properties:
+        monetary_amount:
+          type: string
+        percentage_as_decimal:
+          type: string
+      title: RequestPayload810Txi
+    RequestPayload810Refs:
+      type: object
+      properties:
+        reference_identification:
+          type: string
+        reference_identification_qualifier:
+          type: string
+      title: RequestPayload810Refs
+    ShipmentVariant:
+      type: object
+      required:
+      - shipment
+      - variant
+      properties:
+        buyerDiscountAmount:
+          type: number
+        buyerDiscountPercentage:
+          type: number
+        createdBy:
+          type: string
+        customFields:
+          type: object
+        factoryDiscountAmount:
+          type: number
+        factoryDiscountPercentage:
+          type: number
+        id:
           type: integer
           format: int64
-        noOfWorkers:
-          type: integer
-          format: int64
-        preferredFactory:
+        locked:
           type: boolean
-        ragRating:
+        quantity:
+          type: integer
+          format: int64
+        shipment:
+          $ref: '#/components/schemas/Shipment'
+        shipmentVariantBuyerPoMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentVariantBuyerPoMapping'
+        variant:
+          $ref: '#/components/schemas/Variant'
+      title: ShipmentVariant
+    OrderLogisticDetails:
+      type: object
+      properties:
+        created_by:
           type: string
-        workerType:
+        ctns:
           type: string
-      title: ManufacturerUnit
+        id:
+          type: integer
+          format: int64
+        logistics_cost_by_logistics:
+          $ref: '#/components/schemas/OrderLogisticCosts'
+        management_approval_url:
+          type: string
+        order:
+          $ref: '#/components/schemas/OrderDetail'
+        order_logistic_docs_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLogisticDocs'
+        packaging_list_url:
+          type: string
+        port_of_discharge:
+          type: string
+        port_of_loading:
+          type: string
+        remarks:
+          type: string
+        total_cbm:
+          type: number
+        total_ctns:
+          type: number
+        total_gross_weight:
+          type: number
+        total_net_weight:
+          type: number
+        total_volumetric_weight:
+          type: number
+      title: OrderLogisticDetails
+    TD5:
+      type: object
+      properties:
+        identification_code:
+          type: string
+        identification_code_qualifier:
+          type: string
+      title: TD5
+    Ftp855AckIPDto:
+      type: object
+      properties:
+        new_price:
+          type: string
+      title: Ftp855AckIPDto
+    N3:
+      type: object
+      properties:
+        address_information01:
+          type: string
+        address_information02:
+          type: string
+      title: N3
+    TD1:
+      type: object
+      properties:
+        lading_quantity:
+          type: string
+        packaging_code:
+          type: string
+        unitor_basisfor_measurement_code:
+          type: string
+        weight:
+          type: string
+        weight_qualifier:
+          type: string
+      title: TD1
     Variant:
       type: object
       properties:
@@ -2004,251 +2236,142 @@ components:
           items:
             $ref: '#/components/schemas/VariantBuyerPoMapping'
       title: Variant
-    OrderMargin:
+    OrderAddress:
       type: object
       properties:
-        buyer_net_margin:
-          type: number
-        buyer_shipment_type:
+        addressId:
+          type: integer
+          format: int64
+        createdBy:
           type: string
-        buyer_type:
-          type: string
-        buying_price:
-          type: number
-        changed_shipment_mode:
-          type: string
-        created_by:
-          type: string
-        custom_duty:
-          type: number
-        custom_duty_cost_type:
-          type: string
-        custom_duty_per_piece:
-          type: number
-        custom_duty_type:
-          type: string
-        delivery_charges:
-          type: number
-        discount_charges:
-          type: number
-        discount_charges_cost_type:
-          type: string
-        discount_charges_percent:
-          type: number
-        discount_charges_type:
-          type: string
-        factory_currency_price:
-          type: number
-        factory_discount_charges:
-          type: number
-        factory_discount_charges_cost_type:
-          type: string
-        factory_discount_charges_percent:
-          type: number
-        factory_discount_charges_type:
-          type: string
-        factory_dollar_price:
-          type: number
-        factory_net_margin:
-          type: number
-        factory_shipment_type:
-          type: string
-        gross_margin:
-          type: number
-        harbor_merchandise_fee:
-          type: number
         id:
           type: integer
           format: int64
-        logistic_cost:
-          type: number
-        logistic_cost_per_piece:
-          type: number
-        logistic_cost_type:
-          type: string
-        logistic_type:
-          type: string
-        margin:
-          type: number
-        model_type:
-          type: string
-        net_margin:
-          type: number
         order:
           $ref: '#/components/schemas/OrderDetail'
-        order_cost:
-          type: number
-        order_revenue:
-          type: number
-        planned_order_shipment_mode:
-          type: string
-        purchase_cgst:
-          type: number
-        purchase_gst:
-          type: number
-        purchase_igst:
-          type: number
-        purchase_sgst:
-          type: number
-        raw_material_cost:
-          type: number
-        raw_material_cost_dollar:
-          type: number
-        raw_material_margin:
-          type: number
-        raw_material_margin_dollar:
-          type: number
-        reciprocal_tariff:
-          type: number
-        reciprocal_tariff_cost_type:
-          type: string
-        reciprocal_tariff_per_piece:
-          type: number
-        reciprocal_tariff_type:
-          type: string
-        selling_cgst:
-          type: number
-        selling_gst:
-          type: number
-        selling_igst:
-          type: number
-        selling_sgst:
-          type: number
-        shipment_type:
-          type: string
-        total_custom_duty:
-          type: number
-      title: OrderMargin
-    N3:
+      title: OrderAddress
+    RequestPayload856Custom:
       type: object
       properties:
-        address_information01:
-          type: string
-        address_information02:
-          type: string
-      title: N3
-    ManufacturerEligibleCategories:
-      type: object
-      properties:
-        category:
-          type: string
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        manufacturer:
-          $ref: '#/components/schemas/Manufacturer'
-      title: ManufacturerEligibleCategories
-    ManufacturerProductMap:
-      type: object
-      properties:
-        category:
-          type: string
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        manufacturer:
-          $ref: '#/components/schemas/Manufacturer'
-        name:
-          type: string
-        subType:
-          type: string
-        type:
-          type: string
-      title: ManufacturerProductMap
-    ManufacturerBase:
-      type: object
-      properties:
-        aadharNo:
-          type: integer
-          format: int64
-        capacityPerMonth:
-          type: integer
-          format: int64
-        capacityToGeniemode:
-          type: string
-        capacityUtilization:
-          type: string
-        cin:
-          type: string
-        exportLicenseNo:
-          type: string
-        gstNumber:
-          type: string
-        llpin:
-          type: string
-        name:
-          type: string
-        nid:
-          type: string
-        pan:
-          type: string
-        registrationNo:
-          type: string
-        tan:
-          type: string
-        tin:
-          type: string
-        typeOfCurrentBuyer:
-          type: string
-        vat:
-          type: string
-      title: ManufacturerBase
-    Doc:
-      type: object
-      properties:
-        bucketAndKey:
-          $ref: '#/components/schemas/Pair_string_string'
-        createdBy:
-          type: string
-        docDisplayName:
-          type: string
-        id:
-          type: integer
-          format: int64
-        s3Path:
-          type: string
-        s3Version:
-          type: integer
-          format: int64
-      title: Doc
-    Ftp855AckPoLoopDto:
-      type: object
-      properties:
-        po_loop:
+        all_list:
           type: array
           items:
-            $ref: '#/components/schemas/Ftp855AckPoDto'
-      title: Ftp855AckPoLoopDto
-    Pair_string_string:
+            type: integer
+            format: int64
+        current_date:
+          type: string
+        current_time:
+          type: string
+        date:
+          type: string
+        date_time_qualifier:
+          type: string
+        order_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestPayload856Order'
+        packging_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/TD1'
+        receiver:
+          type: string
+        refs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentRef'
+        scac_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/TD5'
+        sender:
+          type: string
+        shipment:
+          $ref: '#/components/schemas/Shipment'
+        shipment_from:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestPayload856ShipmentAddress'
+        shipment_identification:
+          type: string
+        shipment_to:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestPayload856ShipmentAddress'
+        transaction_set_purpose_code:
+          type: string
+        upload:
+          type: boolean
+      title: RequestPayload856Custom
+    FtpBuyerPoDto:
       type: object
       properties:
-        key:
+        buyer_po_no:
           type: string
-        left:
+        created_at:
           type: string
-        right:
-          type: string
-        value:
-          type: string
-      title: Pair«string,string»
-    OrderManufacturerAssignee:
-      type: object
-      properties:
-        createdBy:
-          type: string
+          format: date-time
+        ftp_buyer_po_id:
+          type: integer
+          format: int64
         id:
           type: integer
           format: int64
-        manufacturerAssigneeId:
+        parent_id_buyer_po_no:
+          type: string
+        parent_id_ftp_buyer_po_id:
+          type: integer
+          format: int64
+        server:
+          type: string
+        username:
+          type: string
+      title: FtpBuyerPoDto
+    Packet:
+      type: object
+      required:
+      - order
+      properties:
+        breadth:
+          type: number
+          format: float
+        cartonQuantity:
+          type: integer
+          format: int64
+        cartonWeight:
+          type: number
+          format: float
+        createdBy:
+          type: string
+        dimensionUnit:
+          type: string
+        height:
+          type: number
+          format: float
+        id:
+          type: integer
+          format: int64
+        length:
+          type: number
+          format: float
+        lockedQuantity:
           type: integer
           format: int64
         order:
           $ref: '#/components/schemas/OrderDetail'
-      title: OrderManufacturerAssignee
+        packagingComplete:
+          type: boolean
+        packetVariants:
+          type: array
+          items:
+            $ref: '#/components/schemas/PacketVariants'
+        shipmentPackets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentPackets'
+        weightUnit:
+          type: string
+      title: Packet
     GeniemodeEntityTags:
       type: object
       required:
@@ -2265,65 +2388,64 @@ components:
         tag:
           type: string
       title: GeniemodeEntityTags
-    OrderLogisticDetails:
+    WfTemplate:
       type: object
       properties:
-        created_by:
-          type: string
-        ctns:
+        createdBy:
           type: string
         id:
           type: integer
           format: int64
-        logistics_cost_by_logistics:
-          $ref: '#/components/schemas/OrderLogisticCosts'
-        management_approval_url:
+        rmId:
+          type: integer
+          format: int64
+        type:
           type: string
-        order:
-          $ref: '#/components/schemas/OrderDetail'
-        order_logistic_docs_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLogisticDocs'
-        packaging_list_url:
+        workflowName:
           type: string
-        port_of_discharge:
-          type: string
-        port_of_loading:
-          type: string
-        remarks:
-          type: string
-        total_cbm:
-          type: number
-        total_ctns:
-          type: number
-        total_gross_weight:
-          type: number
-        total_net_weight:
-          type: number
-        total_volumetric_weight:
-          type: number
-      title: OrderLogisticDetails
-    RequestPayload856:
+      title: WfTemplate
+    Ftp855AckPoDto:
       type: object
       properties:
-        all_list:
+        payload:
+          $ref: '#/components/schemas/Ftp855AckPoPayloadDto'
+        po_identifier:
+          type: string
+      title: Ftp855AckPoDto
+    RequestPayload856Order:
+      type: object
+      properties:
+        buyer_po_no:
+          type: string
+        packet_list:
           type: array
           items:
-            type: integer
-            format: int64
+            $ref: '#/components/schemas/RequestPayload856Packet'
+      title: RequestPayload856Order
+    ManufacturerEligibleCategories:
+      type: object
+      properties:
+        category:
+          type: string
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        manufacturer:
+          $ref: '#/components/schemas/Manufacturer'
+      title: ManufacturerEligibleCategories
+    Class856:
+      type: object
+      properties:
         current_date:
           type: string
         current_time:
           type: string
-        draft:
-          type: boolean
         dtm:
           $ref: '#/components/schemas/DTM'
         receiver:
           type: string
-        request_data:
-          type: object
         sender:
           type: string
         shipment:
@@ -2332,153 +2454,7 @@ components:
           type: string
         transaction_set_purpose_code:
           type: string
-        upload:
-          type: boolean
-      title: RequestPayload856
-    Shipment:
-      type: object
-      required:
-      - order
-      properties:
-        actualShipmentMode:
-          type: string
-          enum:
-          - Air
-          - Courier
-          - Land
-          - Sea
-        addressId:
-          type: integer
-          format: int64
-        assigneeId:
-          type: integer
-          format: int64
-        blDate:
-          type: integer
-          format: int64
-        blDoc:
-          type: string
-        blNumber:
-          type: string
-        bookingNo:
-          type: string
-        buyerInvoiceCreated:
-          type: boolean
-        cancellationDate:
-          type: integer
-          format: int64
-        courierPartner:
-          $ref: '#/components/schemas/CourierPartner'
-        createdBy:
-          type: string
-        currentStatus:
-          type: string
-          enum:
-          - booked
-          - complete
-          - deliveryDate
-          - paymentFollowup
-          - preplanned
-          - shipped
-        eta:
-          type: integer
-          format: int64
-        etd:
-          type: integer
-          format: int64
-        exFactoryDate:
-          type: integer
-          format: int64
-        factoryInvoiceCreated:
-          type: boolean
-        factoryInvoiceDoc:
-          type: string
-        factoryInvoiceNo:
-          type: string
-        factoryInvoiceNoRemark:
-          type: string
-        id:
-          type: integer
-          format: int64
-        incoTerm:
-          type: string
-        invoiceApprovalLock:
-          type: boolean
-        invoiceDoc:
-          type: string
-        locked:
-          type: boolean
-        order:
-          $ref: '#/components/schemas/OrderDetail'
-        packingListDoc:
-          type: string
-        plannedShipmentMode:
-          type: string
-          enum:
-          - Air
-          - Courier
-          - Land
-          - Sea
-        podDate:
-          type: integer
-          format: int64
-        podNumber:
-          type: string
-        shipmentHops:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentHop'
-        shipmentPackets:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentPackets'
-        shipmentReady:
-          type: boolean
-        shipmentVariants:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentVariant'
-        shippingBillDoc:
-          type: string
-        trackingId:
-          type: string
-        vessel:
-          type: string
-      title: Shipment
-    Ftp855AckIBDto:
-      type: object
-      properties:
-        date:
-          type: string
-        new_qty:
-          type: string
-        type:
-          type: string
-      title: Ftp855AckIBDto
-    ManufacturerAddress:
-      type: object
-      properties:
-        addressId:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        manufacturer:
-          $ref: '#/components/schemas/Manufacturer'
-        manufacturerUnit:
-          $ref: '#/components/schemas/ManufacturerUnit'
-        proofDocUrl:
-          type: string
-        proofSubType:
-          type: string
-        proofType:
-          type: string
-        type:
-          type: string
-      title: ManufacturerAddress
+      title: Class856
     GeniemodeEntity:
       type: object
       properties:
@@ -2515,3 +2491,27 @@ components:
         value:
           type: string
       title: GeniemodeEntity
+    ManufacturerAddress:
+      type: object
+      properties:
+        addressId:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        manufacturer:
+          $ref: '#/components/schemas/Manufacturer'
+        manufacturerUnit:
+          $ref: '#/components/schemas/ManufacturerUnit'
+        proofDocUrl:
+          type: string
+        proofSubType:
+          type: string
+        proofType:
+          type: string
+        type:
+          type: string
+      title: ManufacturerAddress

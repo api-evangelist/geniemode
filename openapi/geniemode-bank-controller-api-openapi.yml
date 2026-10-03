@@ -172,6 +172,47 @@ paths:
                 type: string
 components:
   schemas:
+    UpdateManufacturerBankDetailsRequest:
+      type: object
+      properties:
+        toggle:
+          type: boolean
+      title: UpdateManufacturerBankDetailsRequest
+    SubmitBanksRequestPayload:
+      type: object
+      properties:
+        account_holder_name:
+          type: string
+        account_no:
+          type: string
+        address_id:
+          type: integer
+          format: int64
+        bank_routing_number:
+          type: string
+        beneficiary_address_id:
+          type: integer
+          format: int64
+        beneficiary_name:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        iban_aba:
+          type: string
+        ifsc:
+          type: string
+        name:
+          type: string
+        sort_code:
+          type: string
+        sub_type:
+          type: string
+        swift:
+          type: string
+      title: SubmitBanksRequestPayload
     BanksRequestPayload:
       type: object
       properties:
@@ -210,44 +251,3 @@ components:
         swift:
           type: string
       title: BanksRequestPayload
-    SubmitBanksRequestPayload:
-      type: object
-      properties:
-        account_holder_name:
-          type: string
-        account_no:
-          type: string
-        address_id:
-          type: integer
-          format: int64
-        bank_routing_number:
-          type: string
-        beneficiary_address_id:
-          type: integer
-          format: int64
-        beneficiary_name:
-          type: string
-        entity_id:
-          type: integer
-          format: int64
-        entity_type:
-          type: string
-        iban_aba:
-          type: string
-        ifsc:
-          type: string
-        name:
-          type: string
-        sort_code:
-          type: string
-        sub_type:
-          type: string
-        swift:
-          type: string
-      title: SubmitBanksRequestPayload
-    UpdateManufacturerBankDetailsRequest:
-      type: object
-      properties:
-        toggle:
-          type: boolean
-      title: UpdateManufacturerBankDetailsRequest

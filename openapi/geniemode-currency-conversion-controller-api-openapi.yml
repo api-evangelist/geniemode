@@ -198,6 +198,25 @@ paths:
                 $ref: '#/components/schemas/CurrencyConversionDto'
 components:
   schemas:
+    CurrencyConversionDto:
+      type: object
+      properties:
+        conversion_rate:
+          type: number
+        from_currency:
+          type: string
+        from_timestamp:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        to_currency:
+          type: string
+        to_timestamp:
+          type: integer
+          format: int64
+      title: CurrencyConversionDto
     Sort:
       type: object
       properties:
@@ -241,25 +260,6 @@ components:
           type: integer
           format: int32
       title: Page«CurrencyConversionDto»
-    CurrencyConversionDto:
-      type: object
-      properties:
-        conversion_rate:
-          type: number
-        from_currency:
-          type: string
-        from_timestamp:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
-        to_currency:
-          type: string
-        to_timestamp:
-          type: integer
-          format: int64
-      title: CurrencyConversionDto
     Pageable:
       type: object
       properties:

@@ -71,42 +71,6 @@ paths:
           description: 500 message
 components:
   schemas:
-    ClientDetailsDTO:
-      type: object
-      properties:
-        client_id:
-          type: integer
-          format: int64
-        client_spoc:
-          type: string
-        client_spoc_first_name:
-          type: string
-        client_spoc_last_name:
-          type: string
-        client_status:
-          type: boolean
-        company_name:
-          type: string
-        contact_info:
-          type: string
-        country:
-          type: string
-        data:
-          type: integer
-          format: int64
-        order_count:
-          type: integer
-          format: int64
-        rm_id:
-          type: integer
-          format: int64
-        rm_name:
-          type: string
-        soft_delete:
-          type: string
-        user_email:
-          type: string
-      title: ClientDetailsDTO
     CreateClientDto:
       type: object
       properties:
@@ -156,3 +120,39 @@ components:
         message:
           type: string
       title: CreateClientResponse
+    ClientDetailsDTO:
+      type: object
+      properties:
+        client_id:
+          type: integer
+          format: int64
+        client_spoc:
+          type: string
+        client_spoc_first_name:
+          type: string
+        client_spoc_last_name:
+          type: string
+        client_status:
+          type: boolean
+        company_name:
+          type: string
+        contact_info:
+          type: string
+        country:
+          type: string
+        data:
+          type: integer
+          format: int64
+        order_count:
+          type: integer
+          format: int64
+        rm_id:
+          type: integer
+          format: int64
+        rm_name:
+          type: string
+        soft_delete:
+          type: string
+        user_email:
+          type: string
+      title: ClientDetailsDTO

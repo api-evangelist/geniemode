@@ -131,33 +131,6 @@ components:
         visible_to_manufacturer:
           type: string
       title: StepTemplateDto
-    CreateOrderShipmentTrackingRequestPayload:
-      type: object
-      properties:
-        awb:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        partner:
-          type: string
-          enum:
-          - DHL
-          - FEDEX
-          - UPS
-        workflow_step_order_map_id:
-          type: integer
-          format: int64
-      title: CreateOrderShipmentTrackingRequestPayload
-    OrderDetailSimpleDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        sku_id:
-          type: string
-      title: OrderDetailSimpleDto
     WfStepOrderMapDto:
       type: object
       properties:
@@ -207,6 +180,33 @@ components:
         wf_template:
           $ref: '#/components/schemas/WfTemplateDto'
       title: WfStepOrderMapDto
+    OrderDetailSimpleDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        sku_id:
+          type: string
+      title: OrderDetailSimpleDto
+    CreateOrderShipmentTrackingRequestPayload:
+      type: object
+      properties:
+        awb:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        partner:
+          type: string
+          enum:
+          - DHL
+          - FEDEX
+          - UPS
+        workflow_step_order_map_id:
+          type: integer
+          format: int64
+      title: CreateOrderShipmentTrackingRequestPayload
     WfTemplateDto:
       type: object
       properties:

@@ -224,6 +224,49 @@ components:
         whatsapp_opt_in:
           type: boolean
       title: UMSUserResponsePayload
+    SendEmailRequest:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        factory_id:
+          type: integer
+          format: int64
+      title: SendEmailRequest
+    GetAllEnumsResponse:
+      type: object
+      properties:
+        factory_business_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - MANUFACTURING
+            - OTHER
+            - SERVICES
+            - TRADING
+        factory_doc_types:
+          type: object
+          additionalProperties:
+            type: string
+        factory_nature_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - OTHER
+            - PARTNERSHIP
+            - PRIVATELTD
+            - PROPRIETORSHIP
+        loan_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - Term_Loan
+            - Working_Capital_Loan
+      title: GetAllEnumsResponse
     FactoryCreateRequestPayload:
       type: object
       properties:
@@ -269,39 +312,6 @@ components:
           type: integer
           format: int64
       title: FactoryCreateRequestPayload
-    GetAllEnumsResponse:
-      type: object
-      properties:
-        factory_business_types:
-          type: array
-          items:
-            type: string
-            enum:
-            - MANUFACTURING
-            - OTHER
-            - SERVICES
-            - TRADING
-        factory_doc_types:
-          type: object
-          additionalProperties:
-            type: string
-        factory_nature_types:
-          type: array
-          items:
-            type: string
-            enum:
-            - OTHER
-            - PARTNERSHIP
-            - PRIVATELTD
-            - PROPRIETORSHIP
-        loan_types:
-          type: array
-          items:
-            type: string
-            enum:
-            - Term_Loan
-            - Working_Capital_Loan
-      title: GetAllEnumsResponse
     GetFactoryResponsePayload:
       type: object
       properties:
@@ -370,13 +380,3 @@ components:
         step_name:
           type: string
       title: DocDetailsDto
-    SendEmailRequest:
-      type: object
-      properties:
-        doc_id:
-          type: integer
-          format: int64
-        factory_id:
-          type: integer
-          format: int64
-      title: SendEmailRequest

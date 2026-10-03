@@ -132,48 +132,6 @@ paths:
         required: true
 components:
   schemas:
-    RMResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RMResponseDto'
-      title: RMResponse
-    UpdateRmRequestPayload:
-      type: object
-      properties:
-        contact_info:
-          type: string
-        country_code:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        rm_id:
-          type: integer
-          format: int64
-        user_email:
-          type: string
-      title: UpdateRmRequestPayload
-    CreateRMDto:
-      type: object
-      properties:
-        contact_info:
-          type: string
-        country_code:
-          type: string
-        email:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        ums_id:
-          type: integer
-          format: int64
-      title: CreateRMDto
     RMResponseDto:
       type: object
       properties:
@@ -197,12 +155,31 @@ components:
         user_email:
           type: string
       title: RMResponseDto
-    DeleteRmResponsePayload:
+    CreateRMDto:
       type: object
       properties:
-        message:
+        contact_info:
           type: string
-      title: DeleteRmResponsePayload
+        country_code:
+          type: string
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        ums_id:
+          type: integer
+          format: int64
+      title: CreateRMDto
+    RMResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMResponseDto'
+      title: RMResponse
     UpdateRmResponsePayload:
       type: object
       properties:
@@ -212,6 +189,23 @@ components:
           type: integer
           format: int32
       title: UpdateRmResponsePayload
+    UpdateRmRequestPayload:
+      type: object
+      properties:
+        contact_info:
+          type: string
+        country_code:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        rm_id:
+          type: integer
+          format: int64
+        user_email:
+          type: string
+      title: UpdateRmRequestPayload
     GetRmRequestPayload:
       type: object
       properties:
@@ -219,3 +213,9 @@ components:
           type: integer
           format: int64
       title: GetRmRequestPayload
+    DeleteRmResponsePayload:
+      type: object
+      properties:
+        message:
+          type: string
+      title: DeleteRmResponsePayload

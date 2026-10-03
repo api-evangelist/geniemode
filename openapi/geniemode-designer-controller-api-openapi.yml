@@ -632,6 +632,9 @@ paths:
           description: 500 message
 components:
   schemas:
+    InputStream:
+      type: object
+      title: InputStream
     ByteArrayResource:
       type: object
       properties:
@@ -669,6 +672,3 @@ components:
         label:
           type: string
       title: DesignAttributionCountDto
-    InputStream:
-      type: object
-      title: InputStream

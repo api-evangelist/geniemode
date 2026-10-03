@@ -124,66 +124,6 @@ components:
         whatsapp_opt_in:
           type: boolean
       title: UMSUserResponsePayload
-    WebEngageGupShupResponse:
-      type: object
-      properties:
-        gup_shup_response:
-          $ref: '#/components/schemas/GupShupResponse'
-        web_engage_phone_response:
-          $ref: '#/components/schemas/WebEngagePhoneResponse'
-      title: WebEngageGupShupResponse
-    WebEngagePhoneResponse:
-      type: object
-      properties:
-        response:
-          $ref: '#/components/schemas/WebEngagePhoneDTO'
-      title: WebEngagePhoneResponse
-    WebEngageGupShupRequest:
-      type: object
-      properties:
-        gup_shup_phone_number:
-          type: string
-        web_engage_user_id:
-          type: string
-        web_engage_whatsapp_opt_in:
-          type: boolean
-      title: WebEngageGupShupRequest
-    UMSUserGetPhoneDataResponse:
-      type: object
-      properties:
-        phone_number_present:
-          type: boolean
-        ums_user_response_payload:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-      title: UMSUserGetPhoneDataResponse
-    GupShupDataDTO:
-      type: object
-      properties:
-        response_messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/GupShupResponseMessageDTO'
-      title: GupShupDataDTO
-    GupShupResponseMessageDTO:
-      type: object
-      properties:
-        details:
-          type: string
-        id:
-          type: string
-        phone:
-          type: string
-        status:
-          type: string
-      title: GupShupResponseMessageDTO
-    GupShupResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GupShupDataDTO'
-        response:
-          $ref: '#/components/schemas/GupShupResponseDTO'
-      title: GupShupResponse
     UpdatePhoneDataRequestPayload:
       type: object
       properties:
@@ -192,12 +132,28 @@ components:
         phone_number:
           type: string
       title: UpdatePhoneDataRequestPayload
-    WebEngagePhoneDTO:
+    WebEngagePhoneResponse:
       type: object
       properties:
-        status:
-          type: string
-      title: WebEngagePhoneDTO
+        response:
+          $ref: '#/components/schemas/WebEngagePhoneDTO'
+      title: WebEngagePhoneResponse
+    GupShupResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GupShupDataDTO'
+        response:
+          $ref: '#/components/schemas/GupShupResponseDTO'
+      title: GupShupResponse
+    UMSUserGetPhoneDataResponse:
+      type: object
+      properties:
+        phone_number_present:
+          type: boolean
+        ums_user_response_payload:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+      title: UMSUserGetPhoneDataResponse
     GupShupResponseDTO:
       type: object
       properties:
@@ -210,3 +166,47 @@ components:
         status:
           type: string
       title: GupShupResponseDTO
+    GupShupResponseMessageDTO:
+      type: object
+      properties:
+        details:
+          type: string
+        id:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+      title: GupShupResponseMessageDTO
+    GupShupDataDTO:
+      type: object
+      properties:
+        response_messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/GupShupResponseMessageDTO'
+      title: GupShupDataDTO
+    WebEngagePhoneDTO:
+      type: object
+      properties:
+        status:
+          type: string
+      title: WebEngagePhoneDTO
+    WebEngageGupShupResponse:
+      type: object
+      properties:
+        gup_shup_response:
+          $ref: '#/components/schemas/GupShupResponse'
+        web_engage_phone_response:
+          $ref: '#/components/schemas/WebEngagePhoneResponse'
+      title: WebEngageGupShupResponse
+    WebEngageGupShupRequest:
+      type: object
+      properties:
+        gup_shup_phone_number:
+          type: string
+        web_engage_user_id:
+          type: string
+        web_engage_whatsapp_opt_in:
+          type: boolean
+      title: WebEngageGupShupRequest

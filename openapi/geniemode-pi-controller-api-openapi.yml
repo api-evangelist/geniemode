@@ -449,164 +449,22 @@ paths:
           description: 500 message
 components:
   schemas:
-    GeniemodeEntityDto:
+    LeadPageDTO:
       type: object
       properties:
-        address:
-          type: object
-        address_id:
+        current_stage_name:
+          type: string
+        current_user:
+          $ref: '#/components/schemas/UserResponsePayload'
+        last_stage_id:
           type: integer
           format: int64
-        address_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        compliance:
-          type: string
-        currency:
-          type: string
-        id:
+        lead_generation:
+          $ref: '#/components/schemas/LeadGenerationResponse'
+        time_difference:
           type: integer
           format: int64
-        invoice_declaration:
-          type: string
-        label:
-          type: string
-        legal_name:
-          type: string
-        tally_currency:
-          type: string
-        value:
-          type: string
-      title: GeniemodeEntityDto
-    PiListingResponsePayload:
-      type: object
-      properties:
-        acc_no:
-          type: string
-        bank_address:
-          type: string
-        bank_name:
-          type: string
-        bill_to:
-          $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        buyer_currency:
-          type: string
-        buyer_po_list:
-          type: string
-        buyer_po_no:
-          type: string
-        buyer_po_receive_date:
-          type: string
-          format: date-time
-        buyer_po_response:
-          $ref: '#/components/schemas/PiListingResponsePayload'
-        created_at:
-          type: string
-          format: date-time
-        geniemode_entity_name:
-          type: string
-        ifsc:
-          type: string
-        lead:
-          $ref: '#/components/schemas/LeadPageDTO'
-        lead_id:
-          type: integer
-          format: int64
-        master_orders:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type: string
-        pi_id:
-          type: integer
-          format: int64
-        sku_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/PiSkuResponsePayload'
-        status:
-          type: string
-        sum_of_quantity:
-          type: number
-          format: float
-        sum_of_tax_amount:
-          type: number
-          format: float
-        sum_of_taxable_value:
-          type: number
-          format: float
-        sum_of_total_value:
-          type: number
-          format: float
-        swift:
-          type: string
-        total_order_count:
-          type: integer
-          format: int64
-        total_order_price:
-          type: number
-          format: float
-        total_quantity:
-          type: integer
-          format: int64
-        total_value:
-          type: number
-          format: float
-      title: PiListingResponsePayload
-    BrandCategoryDto:
-      type: object
-      properties:
-        category_id:
-          type: integer
-          format: int64
-        category_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: BrandCategoryDto
-    PiSkuResponsePayloadDto:
-      type: object
-      properties:
-        cgst_amount:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        color:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        gst_amount:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        gst_rate:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        hsn:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        hts:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        igst_amount:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        item_description:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        price_per_unit:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        qty:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        sgst_amount:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        size:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        sku_check_sum:
-          type: string
-        style_code:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        tax_amount:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        taxable_value:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        total_value:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        uom:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-      title: PiSkuResponsePayloadDto
+      title: LeadPageDTO
     BrandResponse:
       type: object
       properties:
@@ -649,97 +507,6 @@ components:
             type: integer
             format: int64
       title: BrandResponse
-    OtherChargesRequestPayload:
-      type: object
-      properties:
-        charge:
-          type: number
-        charge_type:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: OtherChargesRequestPayload
-    CreatePiRequestPayload:
-      type: object
-      properties:
-        bill_address_id:
-          type: integer
-          format: int64
-        buyer_gst_in:
-          type: string
-        buyer_po_no:
-          type: string
-        buyer_terms_condition:
-          type: string
-        geniemode_entity_id:
-          type: integer
-          format: int64
-        lead_id:
-          type: integer
-          format: int64
-        master_order_list:
-          type: array
-          items:
-            type: integer
-            format: int64
-        other_charges:
-          type: array
-          items:
-            $ref: '#/components/schemas/OtherChargesRequestPayload'
-      title: CreatePiRequestPayload
-    UserResponsePayload:
-      type: object
-      properties:
-        created_by:
-          type: string
-        first_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        last_name:
-          type: string
-        manager:
-          $ref: '#/components/schemas/UserResponsePayload'
-        phone_number:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-        username:
-          type: string
-      title: UserResponsePayload
-    LeadProjectionDTO:
-      type: object
-      properties:
-        achieved_business_value:
-          type: number
-        amount:
-          type: integer
-          format: int64
-        business_size:
-          type: number
-        id:
-          type: integer
-          format: int64
-        lead_probability:
-          type: integer
-          format: int32
-        probable_completion_date:
-          type: integer
-          format: int64
-      title: LeadProjectionDTO
-    PiComplianceResponsePayloadDto:
-      type: object
-      properties:
-        compliance:
-          $ref: '#/components/schemas/PiMapPayloadDto'
-        id:
-          type: integer
-          format: int64
-      title: PiComplianceResponsePayloadDto
     GetPiValueForOrdersRequestPayload:
       type: object
       properties:
@@ -749,121 +516,6 @@ components:
             type: integer
             format: int64
       title: GetPiValueForOrdersRequestPayload
-    PiChangeDataDto:
-      type: object
-      properties:
-        previous_value:
-          type: string
-      title: PiChangeDataDto
-    BrandVpDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        vp_email:
-          type: string
-        vp_id:
-          type: integer
-          format: int64
-        vp_name:
-          type: string
-      title: BrandVpDto
-    PiComplianceDto:
-      type: object
-      properties:
-        compliance:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: PiComplianceDto
-    GetPiForRmResponsePayload:
-      type: object
-      properties:
-        bill_to:
-          type: string
-        bill_to_id:
-          type: integer
-          format: int64
-        buyer_currency:
-          type: string
-        buyer_gst_in:
-          type: string
-        buyer_po_list:
-          type: string
-        buyer_po_response:
-          $ref: '#/components/schemas/PiListingResponsePayload'
-        buyer_terms_condition:
-          type: string
-        compliance_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/PiComplianceDto'
-        geniemode_entity:
-          $ref: '#/components/schemas/GeniemodeEntityDto'
-        id:
-          type: integer
-          format: int64
-        insurance_charges:
-          type: number
-        other_charges:
-          type: array
-          items:
-            $ref: '#/components/schemas/OtherChargesRequestPayload'
-        reason:
-          type: string
-        sku_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/PiSkuResponsePayload'
-        status:
-          type: string
-        sum_of_quantity:
-          type: number
-          format: float
-        sum_of_tax_amount:
-          type: number
-          format: float
-        sum_of_taxable_value:
-          type: number
-          format: float
-        sum_of_total_value:
-          type: number
-          format: float
-      title: GetPiForRmResponsePayload
-    PiSkuResponsePayload:
-      type: object
-      properties:
-        color:
-          type: string
-        gst_rate:
-          type: string
-        hsn:
-          type: string
-        item_description:
-          type: string
-        price_per_unit:
-          type: number
-        qty:
-          type: integer
-          format: int64
-        size:
-          type: string
-        style_code:
-          type: string
-        tax_amount:
-          type: number
-          format: float
-        taxable_value:
-          type: number
-          format: float
-        total_value:
-          type: number
-          format: float
-        uom:
-          type: string
-      title: PiSkuResponsePayload
     PiResponsePayloadDto:
       type: object
       properties:
@@ -942,18 +594,190 @@ components:
         total_tax_amount:
           $ref: '#/components/schemas/PiMapPayloadDto'
       title: PiResponsePayloadDto
-    PiHistoryResponsePayloadDto:
+    piOtherChargeResponsePayloadDto:
       type: object
       properties:
-        date:
-          type: string
-          format: date-time
+        charge:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        charge_type:
+          $ref: '#/components/schemas/PiMapPayloadDto'
         id:
           type: integer
           format: int64
-        response:
-          $ref: '#/components/schemas/PiResponsePayloadDto'
-      title: PiHistoryResponsePayloadDto
+      title: piOtherChargeResponsePayloadDto
+    PiSkuResponsePayload:
+      type: object
+      properties:
+        color:
+          type: string
+        gst_rate:
+          type: string
+        hsn:
+          type: string
+        item_description:
+          type: string
+        price_per_unit:
+          type: number
+        qty:
+          type: integer
+          format: int64
+        size:
+          type: string
+        style_code:
+          type: string
+        tax_amount:
+          type: number
+          format: float
+        taxable_value:
+          type: number
+          format: float
+        total_value:
+          type: number
+          format: float
+        uom:
+          type: string
+      title: PiSkuResponsePayload
+    PiSkuResponsePayloadDto:
+      type: object
+      properties:
+        cgst_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        color:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        gst_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        gst_rate:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        hsn:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        hts:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        igst_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        item_description:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        price_per_unit:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        qty:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        sgst_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        size:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        sku_check_sum:
+          type: string
+        style_code:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        tax_amount:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        taxable_value:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        total_value:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        uom:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+      title: PiSkuResponsePayloadDto
+    PiChangeTypeDto:
+      type: object
+      properties:
+        added:
+          $ref: '#/components/schemas/PiChangeDataDto'
+        modify:
+          $ref: '#/components/schemas/PiChangeDataDto'
+        subtracted:
+          $ref: '#/components/schemas/PiChangeDataDto'
+      title: PiChangeTypeDto
+    PiListingResponsePayload:
+      type: object
+      properties:
+        acc_no:
+          type: string
+        bank_address:
+          type: string
+        bank_name:
+          type: string
+        bill_to:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        buyer_currency:
+          type: string
+        buyer_po_list:
+          type: string
+        buyer_po_no:
+          type: string
+        buyer_po_receive_date:
+          type: string
+          format: date-time
+        buyer_po_response:
+          $ref: '#/components/schemas/PiListingResponsePayload'
+        created_at:
+          type: string
+          format: date-time
+        geniemode_entity_name:
+          type: string
+        ifsc:
+          type: string
+        lead:
+          $ref: '#/components/schemas/LeadPageDTO'
+        lead_id:
+          type: integer
+          format: int64
+        master_orders:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
+        pi_id:
+          type: integer
+          format: int64
+        sku_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PiSkuResponsePayload'
+        status:
+          type: string
+        sum_of_quantity:
+          type: number
+          format: float
+        sum_of_tax_amount:
+          type: number
+          format: float
+        sum_of_taxable_value:
+          type: number
+          format: float
+        sum_of_total_value:
+          type: number
+          format: float
+        swift:
+          type: string
+        total_order_count:
+          type: integer
+          format: int64
+        total_order_price:
+          type: number
+          format: float
+        total_quantity:
+          type: integer
+          format: int64
+        total_value:
+          type: number
+          format: float
+      title: PiListingResponsePayload
+    PiComplianceResponsePayloadDto:
+      type: object
+      properties:
+        compliance:
+          $ref: '#/components/schemas/PiMapPayloadDto'
+        id:
+          type: integer
+          format: int64
+      title: PiComplianceResponsePayloadDto
+    PiChangeDataDto:
+      type: object
+      properties:
+        previous_value:
+          type: string
+      title: PiChangeDataDto
     CompanyDTO:
       type: object
       properties:
@@ -975,16 +799,184 @@ components:
         min_trading_margin:
           type: number
       title: CompanyDTO
-    PiChangeTypeDto:
+    GetPiForRmResponsePayload:
       type: object
       properties:
-        added:
-          $ref: '#/components/schemas/PiChangeDataDto'
-        modify:
-          $ref: '#/components/schemas/PiChangeDataDto'
-        subtracted:
-          $ref: '#/components/schemas/PiChangeDataDto'
-      title: PiChangeTypeDto
+        bill_to:
+          type: string
+        bill_to_id:
+          type: integer
+          format: int64
+        buyer_currency:
+          type: string
+        buyer_gst_in:
+          type: string
+        buyer_po_list:
+          type: string
+        buyer_po_response:
+          $ref: '#/components/schemas/PiListingResponsePayload'
+        buyer_terms_condition:
+          type: string
+        compliance_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PiComplianceDto'
+        geniemode_entity:
+          $ref: '#/components/schemas/GeniemodeEntityDto'
+        id:
+          type: integer
+          format: int64
+        insurance_charges:
+          type: number
+        other_charges:
+          type: array
+          items:
+            $ref: '#/components/schemas/OtherChargesRequestPayload'
+        reason:
+          type: string
+        sku_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/PiSkuResponsePayload'
+        status:
+          type: string
+        sum_of_quantity:
+          type: number
+          format: float
+        sum_of_tax_amount:
+          type: number
+          format: float
+        sum_of_taxable_value:
+          type: number
+          format: float
+        sum_of_total_value:
+          type: number
+          format: float
+      title: GetPiForRmResponsePayload
+    PiComplianceDto:
+      type: object
+      properties:
+        compliance:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: PiComplianceDto
+    PiHistoryResponsePayloadDto:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int64
+        response:
+          $ref: '#/components/schemas/PiResponsePayloadDto'
+      title: PiHistoryResponsePayloadDto
+    BrandCategoryDto:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          format: int64
+        category_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: BrandCategoryDto
+    LeadGenerationResponse:
+      type: object
+      properties:
+        brand:
+          $ref: '#/components/schemas/BrandResponse'
+        client_id:
+          type: integer
+          format: int64
+        company:
+          $ref: '#/components/schemas/CompanyDTO'
+        country:
+          type: string
+        email:
+          type: string
+        id:
+          type: integer
+          format: int64
+        lead_approval_status:
+          type: string
+        lead_projection_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeadProjectionDTO'
+        name:
+          type: string
+      title: LeadGenerationResponse
+    UserResponsePayload:
+      type: object
+      properties:
+        created_by:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+      title: UserResponsePayload
+    BrandVpDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        vp_email:
+          type: string
+        vp_id:
+          type: integer
+          format: int64
+        vp_name:
+          type: string
+      title: BrandVpDto
+    PiMapPayloadDto:
+      type: object
+      properties:
+        change_type:
+          $ref: '#/components/schemas/PiChangeTypeDto'
+        value:
+          type: string
+      title: PiMapPayloadDto
+    LeadProjectionDTO:
+      type: object
+      properties:
+        achieved_business_value:
+          type: number
+        amount:
+          type: integer
+          format: int64
+        business_size:
+          type: number
+        id:
+          type: integer
+          format: int64
+        lead_probability:
+          type: integer
+          format: int32
+        probable_completion_date:
+          type: integer
+          format: int64
+      title: LeadProjectionDTO
     AddressSubmitResponsePayload:
       type: object
       properties:
@@ -1019,64 +1011,72 @@ components:
         type:
           type: string
       title: AddressSubmitResponsePayload
-    LeadPageDTO:
+    GeniemodeEntityDto:
       type: object
       properties:
-        current_stage_name:
+        address:
+          type: object
+        address_id:
+          type: integer
+          format: int64
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        compliance:
           type: string
-        current_user:
-          $ref: '#/components/schemas/UserResponsePayload'
-        last_stage_id:
-          type: integer
-          format: int64
-        lead_generation:
-          $ref: '#/components/schemas/LeadGenerationResponse'
-        time_difference:
-          type: integer
-          format: int64
-      title: LeadPageDTO
-    LeadGenerationResponse:
-      type: object
-      properties:
-        brand:
-          $ref: '#/components/schemas/BrandResponse'
-        client_id:
-          type: integer
-          format: int64
-        company:
-          $ref: '#/components/schemas/CompanyDTO'
-        country:
-          type: string
-        email:
+        currency:
           type: string
         id:
           type: integer
           format: int64
-        lead_approval_status:
+        invoice_declaration:
           type: string
-        lead_projection_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/LeadProjectionDTO'
-        name:
+        label:
           type: string
-      title: LeadGenerationResponse
-    PiMapPayloadDto:
-      type: object
-      properties:
-        change_type:
-          $ref: '#/components/schemas/PiChangeTypeDto'
+        legal_name:
+          type: string
+        tally_currency:
+          type: string
         value:
           type: string
-      title: PiMapPayloadDto
-    piOtherChargeResponsePayloadDto:
+      title: GeniemodeEntityDto
+    CreatePiRequestPayload:
+      type: object
+      properties:
+        bill_address_id:
+          type: integer
+          format: int64
+        buyer_gst_in:
+          type: string
+        buyer_po_no:
+          type: string
+        buyer_terms_condition:
+          type: string
+        geniemode_entity_id:
+          type: integer
+          format: int64
+        lead_id:
+          type: integer
+          format: int64
+        master_order_list:
+          type: array
+          items:
+            type: integer
+            format: int64
+        other_charges:
+          type: array
+          items:
+            $ref: '#/components/schemas/OtherChargesRequestPayload'
+      title: CreatePiRequestPayload
+    OtherChargesRequestPayload:
       type: object
       properties:
         charge:
-          $ref: '#/components/schemas/PiMapPayloadDto'
+          type: number
         charge_type:
-          $ref: '#/components/schemas/PiMapPayloadDto'
+          type: string
         id:
           type: integer
           format: int64
-      title: piOtherChargeResponsePayloadDto
+      title: OtherChargesRequestPayload

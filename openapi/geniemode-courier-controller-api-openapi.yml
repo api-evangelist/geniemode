@@ -396,35 +396,6 @@ paths:
                 $ref: '#/components/schemas/CourierDto'
 components:
   schemas:
-    CourierDocDto:
-      type: object
-      properties:
-        doc_type:
-          type: string
-        id:
-          type: integer
-          format: int64
-        url:
-          type: string
-      title: CourierDocDto
-    CourierBudgetDto:
-      type: object
-      properties:
-        budget:
-          type: number
-        current_month_spend:
-          type: number
-        default_budget:
-          type: number
-        id:
-          type: integer
-          format: int64
-        user_id:
-          type: integer
-          format: int64
-        vp:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-      title: CourierBudgetDto
     UMSUserResponsePayload:
       type: object
       properties:
@@ -457,59 +428,41 @@ components:
         whatsapp_opt_in:
           type: boolean
       title: UMSUserResponsePayload
-    CourierBoxDto:
-      type: object
-      properties:
-        courier_breadth:
-          type: number
-        courier_height:
-          type: number
-        courier_length:
-          type: number
-        id:
-          type: integer
-          format: int64
-        weight:
-          type: number
-        weight_uom:
-          type: string
-      title: CourierBoxDto
-    CourierItemDto:
-      type: object
-      properties:
-        cost_per_piece:
-          type: number
-        courier_item_type:
-          type: string
-        description:
-          type: string
-        hsn_code:
-          type: string
-        id:
-          type: integer
-          format: int64
-        item:
-          type: object
-        item_id:
-          type: integer
-          format: int64
-        no_of_pieces:
-          type: integer
-          format: int64
-        sub_item:
-          type: object
-        sub_item_id:
-          type: integer
-          format: int64
-        total_item_cost:
-          type: number
-      title: CourierItemDto
     CourierCancellationRequestPayload:
       type: object
       properties:
         reason_for_cancellation:
           type: string
       title: CourierCancellationRequestPayload
+    CourierDocDto:
+      type: object
+      properties:
+        doc_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        url:
+          type: string
+      title: CourierDocDto
+    CourierBudgetDto:
+      type: object
+      properties:
+        budget:
+          type: number
+        current_month_spend:
+          type: number
+        default_budget:
+          type: number
+        id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        vp:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+      title: CourierBudgetDto
     CourierPartnerDto:
       type: object
       properties:
@@ -656,3 +609,50 @@ components:
         tracking_link:
           type: string
       title: CourierDto
+    CourierBoxDto:
+      type: object
+      properties:
+        courier_breadth:
+          type: number
+        courier_height:
+          type: number
+        courier_length:
+          type: number
+        id:
+          type: integer
+          format: int64
+        weight:
+          type: number
+        weight_uom:
+          type: string
+      title: CourierBoxDto
+    CourierItemDto:
+      type: object
+      properties:
+        cost_per_piece:
+          type: number
+        courier_item_type:
+          type: string
+        description:
+          type: string
+        hsn_code:
+          type: string
+        id:
+          type: integer
+          format: int64
+        item:
+          type: object
+        item_id:
+          type: integer
+          format: int64
+        no_of_pieces:
+          type: integer
+          format: int64
+        sub_item:
+          type: object
+        sub_item_id:
+          type: integer
+          format: int64
+        total_item_cost:
+          type: number
+      title: CourierItemDto

@@ -488,60 +488,6 @@ paths:
         required: true
 components:
   schemas:
-    OrderRiskStatus:
-      type: object
-      properties:
-        approval_status:
-          type: string
-        approval_type:
-          type: string
-        approved_at:
-          type: integer
-          format: int64
-        approved_by:
-          type: string
-        comment:
-          type: string
-        document_url:
-          type: string
-        insurance:
-          $ref: '#/components/schemas/LmsInsuredOrderResponse'
-        order_amount_in_dollar:
-          type: number
-        order_id:
-          type: integer
-          format: int64
-        risk_type:
-          type: string
-        secured_amount:
-          type: number
-        unsecured_amount:
-          type: number
-      title: OrderRiskStatus
-    OrderRiskStatusRequestPayload:
-      type: object
-      properties:
-        comment:
-          type: string
-        document_url:
-          type: string
-        order_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-      title: OrderRiskStatusRequestPayload
-    OrderWiseApprovalReason:
-      type: object
-      properties:
-        approval_reasons:
-          type: array
-          items:
-            type: string
-        order_id:
-          type: integer
-          format: int64
-      title: OrderWiseApprovalReason
     OrderRiskResponsePayload:
       type: object
       properties:
@@ -598,38 +544,6 @@ components:
         shipment_mode:
           type: string
       title: OrderRiskResponsePayload
-    OrderSecuredAmountRequestPayload:
-      type: object
-      properties:
-        insured_orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderInsuredAmountDTO'
-      title: OrderSecuredAmountRequestPayload
-    OrderInsuredAmountDTO:
-      type: object
-      properties:
-        order_amount_in_dollar:
-          type: number
-        order_id:
-          type: integer
-          format: int64
-      title: OrderInsuredAmountDTO
-    SpreadEligibleOrdersResponse:
-      type: object
-      properties:
-        order_amount_in_dollar:
-          type: number
-        order_date:
-          type: integer
-          format: int64
-        order_id:
-          type: integer
-          format: int64
-        parent_order_id:
-          type: integer
-          format: int64
-      title: SpreadEligibleOrdersResponse
     PendingBrandInsuranceResponse:
       type: object
       properties:
@@ -653,6 +567,92 @@ components:
           type: integer
           format: int64
       title: PendingBrandInsuranceResponse
+    OrderRiskStatus:
+      type: object
+      properties:
+        approval_status:
+          type: string
+        approval_type:
+          type: string
+        approved_at:
+          type: integer
+          format: int64
+        approved_by:
+          type: string
+        comment:
+          type: string
+        document_url:
+          type: string
+        insurance:
+          $ref: '#/components/schemas/LmsInsuredOrderResponse'
+        order_amount_in_dollar:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+        risk_type:
+          type: string
+        secured_amount:
+          type: number
+        unsecured_amount:
+          type: number
+      title: OrderRiskStatus
+    OrderSecuredAmountRequestPayload:
+      type: object
+      properties:
+        insured_orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderInsuredAmountDTO'
+      title: OrderSecuredAmountRequestPayload
+    SpreadEligibleOrdersResponse:
+      type: object
+      properties:
+        order_amount_in_dollar:
+          type: number
+        order_date:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        parent_order_id:
+          type: integer
+          format: int64
+      title: SpreadEligibleOrdersResponse
+    OrderRiskStatusRequestPayload:
+      type: object
+      properties:
+        comment:
+          type: string
+        document_url:
+          type: string
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: OrderRiskStatusRequestPayload
+    OrderInsuredAmountDTO:
+      type: object
+      properties:
+        order_amount_in_dollar:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+      title: OrderInsuredAmountDTO
+    OrderWiseApprovalReason:
+      type: object
+      properties:
+        approval_reasons:
+          type: array
+          items:
+            type: string
+        order_id:
+          type: integer
+          format: int64
+      title: OrderWiseApprovalReason
     LmsInsuredOrderResponse:
       type: object
       properties:

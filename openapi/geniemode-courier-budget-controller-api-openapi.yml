@@ -209,6 +209,32 @@ paths:
                 type: string
 components:
   schemas:
+    GetVpCourierSpendDto:
+      type: object
+      properties:
+        spend:
+          type: number
+        vp:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+      title: GetVpCourierSpendDto
+    CourierBudgetDto:
+      type: object
+      properties:
+        budget:
+          type: number
+        current_month_spend:
+          type: number
+        default_budget:
+          type: number
+        id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        vp:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+      title: CourierBudgetDto
     UMSUserResponsePayload:
       type: object
       properties:
@@ -241,29 +267,3 @@ components:
         whatsapp_opt_in:
           type: boolean
       title: UMSUserResponsePayload
-    GetVpCourierSpendDto:
-      type: object
-      properties:
-        spend:
-          type: number
-        vp:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-      title: GetVpCourierSpendDto
-    CourierBudgetDto:
-      type: object
-      properties:
-        budget:
-          type: number
-        current_month_spend:
-          type: number
-        default_budget:
-          type: number
-        id:
-          type: integer
-          format: int64
-        user_id:
-          type: integer
-          format: int64
-        vp:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-      title: CourierBudgetDto

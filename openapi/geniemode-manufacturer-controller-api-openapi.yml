@@ -1105,16 +1105,24 @@ paths:
         required: true
 components:
   schemas:
-    Sort:
+    RagRatingHistoryDto:
       type: object
       properties:
-        empty:
-          type: boolean
-        sorted:
-          type: boolean
-        unsorted:
-          type: boolean
-      title: Sort
+        id:
+          type: integer
+          format: int64
+        rag_rating:
+          type: string
+      title: RagRatingHistoryDto
+    ManufacturerUpdateDocRequest:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        doc_type:
+          type: string
+      title: ManufacturerUpdateDocRequest
     Page_RagRatingHistoryDto:
       type: object
       properties:
@@ -1148,68 +1156,41 @@ components:
           type: integer
           format: int32
       title: Page«RagRatingHistoryDto»
-    RagRatingHistoryDto:
+    ManufacturerMiniResponsePayload:
       type: object
       properties:
-        id:
+        billing_address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        billing_address_id:
           type: integer
           format: int64
-        rag_rating:
-          type: string
-      title: RagRatingHistoryDto
-    Pageable:
-      type: object
-      properties:
-        offset:
-          type: integer
-          format: int64
-        pageNumber:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        paged:
-          type: boolean
-        sort:
-          $ref: '#/components/schemas/Sort'
-        unpaged:
-          type: boolean
-      title: Pageable
-    AddressSubmitResponsePayload:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        address_line2:
-          type: string
-        city:
-          type: string
-        contact_person_name:
-          type: string
-        contact_person_number:
-          type: string
-        country:
-          type: string
-        entity_id:
-          type: integer
-          format: int64
-        entity_type:
+        gst:
           type: string
         id:
           type: integer
           format: int64
-        landmark:
-          type: string
         name:
           type: string
-        pincode:
+        pan:
           type: string
-        state:
+      title: ManufacturerMiniResponsePayload
+    ManufacturerOrderSummary:
+      type: object
+      properties:
+        last_order_date:
           type: string
-        type:
+          format: date-time
+        order_count:
+          type: integer
+          format: int64
+        rm_id:
+          type: integer
+          format: int64
+        rm_name:
           type: string
-      title: AddressSubmitResponsePayload
+        total_order_amount:
+          type: number
+      title: ManufacturerOrderSummary
     GetCategoryDtO:
       type: object
       properties:
@@ -1227,44 +1208,30 @@ components:
         type:
           type: string
       title: GetCategoryDtO
-    ManufacturerAuditDataResponse:
+    UploadResponsePayload:
       type: object
       properties:
-        audit_status:
-          type: string
-        audit_ts:
-          type: integer
-          format: int64
-        auditor_id:
-          type: integer
-          format: int64
-        auditor_name:
+        bucket_name:
           type: string
         doc_id:
           type: integer
           format: int64
-        doc_present:
-          type: boolean
-        doc_type:
+        error_file:
           type: string
-        manufacturer_id:
-          type: integer
-          format: int64
-        replace_doc:
-          type: boolean
-        s3_path:
+          format: byte
+        error_messages:
+          type: array
+          items:
+            type: string
+        filename:
           type: string
-        update_bank_details:
-          type: boolean
-      title: ManufacturerAuditDataResponse
-    CityStateResponse:
-      type: object
-      properties:
-        region:
+        key:
           type: string
-        state:
+        status:
           type: string
-      title: CityStateResponse
+        url:
+          type: string
+      title: UploadResponsePayload
     GetCategoryResponsePayload:
       type: object
       properties:
@@ -1273,15 +1240,6 @@ components:
           items:
             $ref: '#/components/schemas/GetCategoryDtO'
       title: GetCategoryResponsePayload
-    ManufacturerUpdateDocRequest:
-      type: object
-      properties:
-        doc_id:
-          type: integer
-          format: int64
-        doc_type:
-          type: string
-      title: ManufacturerUpdateDocRequest
     AddressSubmitRequestPayload:
       type: object
       properties:
@@ -1318,6 +1276,24 @@ components:
         type:
           type: string
       title: AddressSubmitRequestPayload
+    CityStateResponse:
+      type: object
+      properties:
+        region:
+          type: string
+        state:
+          type: string
+      title: CityStateResponse
+    Sort:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+      title: Sort
     ManufacturerDetailResponseNew:
       type: object
       properties:
@@ -1336,65 +1312,89 @@ components:
         manufacturer_region:
           type: string
       title: ManufacturerDetailResponseNew
-    ManufacturerMiniResponsePayload:
+    AddressSubmitResponsePayload:
       type: object
       properties:
-        billing_address:
-          $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        billing_address_id:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
           type: integer
           format: int64
-        gst:
+        entity_type:
           type: string
         id:
           type: integer
           format: int64
+        landmark:
+          type: string
         name:
           type: string
-        pan:
+        pincode:
           type: string
-      title: ManufacturerMiniResponsePayload
-    ManufacturerOrderSummary:
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload
+    Pageable:
       type: object
       properties:
-        last_order_date:
-          type: string
-          format: date-time
-        order_count:
+        offset:
           type: integer
           format: int64
-        rm_id:
+        pageNumber:
           type: integer
-          format: int64
-        rm_name:
-          type: string
-        total_order_amount:
-          type: number
-      title: ManufacturerOrderSummary
-    UploadResponsePayload:
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/Sort'
+        unpaged:
+          type: boolean
+      title: Pageable
+    ManufacturerAuditDataResponse:
       type: object
       properties:
-        bucket_name:
+        audit_status:
+          type: string
+        audit_ts:
+          type: integer
+          format: int64
+        auditor_id:
+          type: integer
+          format: int64
+        auditor_name:
           type: string
         doc_id:
           type: integer
           format: int64
-        error_file:
+        doc_present:
+          type: boolean
+        doc_type:
           type: string
-          format: byte
-        error_messages:
-          type: array
-          items:
-            type: string
-        filename:
+        manufacturer_id:
+          type: integer
+          format: int64
+        replace_doc:
+          type: boolean
+        s3_path:
           type: string
-        key:
-          type: string
-        status:
-          type: string
-        url:
-          type: string
-      title: UploadResponsePayload
+        update_bank_details:
+          type: boolean
+      title: ManufacturerAuditDataResponse
     ManufacturerUpdateAuditRequest:
       type: object
       properties:

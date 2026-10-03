@@ -75,6 +75,17 @@ paths:
           description: 500 message
 components:
   schemas:
+    GetAllPaymentCalendarResponse:
+      type: object
+      properties:
+        monthly_payment_dto:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonthlyPaymentDto'
+        year:
+          type: integer
+          format: int32
+      title: GetAllPaymentCalendarResponse
     PaymentCalendarDto:
       type: object
       properties:
@@ -89,17 +100,6 @@ components:
           type: integer
           format: int64
       title: PaymentCalendarDto
-    GetAllPaymentCalendarResponse:
-      type: object
-      properties:
-        monthly_payment_dto:
-          type: array
-          items:
-            $ref: '#/components/schemas/MonthlyPaymentDto'
-        year:
-          type: integer
-          format: int32
-      title: GetAllPaymentCalendarResponse
     GetPaymentCalendarResponse:
       type: object
       properties:

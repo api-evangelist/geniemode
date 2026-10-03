@@ -117,9 +117,6 @@ paths:
           description: 500 message
 components:
   schemas:
-    JsonNode:
-      type: object
-      title: JsonNode
     Event:
       type: object
       properties:
@@ -135,6 +132,31 @@ components:
         siren_type:
           type: string
       title: Event
+    RecordSirenEventsRequestPayload:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+      title: RecordSirenEventsRequestPayload
+    JsonNode:
+      type: object
+      title: JsonNode
+    SetUserLockStateRequestPayload:
+      type: object
+      properties:
+        duration_seconds:
+          type: integer
+          format: int64
+        key:
+          type: string
+        user_id:
+          type: integer
+          format: int64
+        value:
+          type: object
+      title: SetUserLockStateRequestPayload
     UserLockState:
       type: object
       properties:
@@ -154,25 +176,3 @@ components:
         value:
           $ref: '#/components/schemas/JsonNode'
       title: UserLockState
-    RecordSirenEventsRequestPayload:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-      title: RecordSirenEventsRequestPayload
-    SetUserLockStateRequestPayload:
-      type: object
-      properties:
-        duration_seconds:
-          type: integer
-          format: int64
-        key:
-          type: string
-        user_id:
-          type: integer
-          format: int64
-        value:
-          type: object
-      title: SetUserLockStateRequestPayload

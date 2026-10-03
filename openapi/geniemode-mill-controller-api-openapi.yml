@@ -253,6 +253,30 @@ paths:
         required: true
 components:
   schemas:
+    UploadResponsePayload:
+      type: object
+      properties:
+        bucket_name:
+          type: string
+        doc_id:
+          type: integer
+          format: int64
+        error_file:
+          type: string
+          format: byte
+        error_messages:
+          type: array
+          items:
+            type: string
+        filename:
+          type: string
+        key:
+          type: string
+        status:
+          type: string
+        url:
+          type: string
+      title: UploadResponsePayload
     MillDto:
       type: object
       properties:
@@ -327,25 +351,6 @@ components:
         tan:
           type: string
       title: MillDto
-    MillSignupRequestPayload:
-      type: object
-      properties:
-        email:
-          type: string
-        first_name:
-          type: string
-        ga_id:
-          type: string
-        last_name:
-          type: string
-        password:
-          type: string
-        region:
-          type: string
-        steps_completed:
-          type: integer
-          format: int64
-      title: MillSignupRequestPayload
     AddressSubmitResponsePayload:
       type: object
       properties:
@@ -380,6 +385,25 @@ components:
         type:
           type: string
       title: AddressSubmitResponsePayload
+    MillSignupRequestPayload:
+      type: object
+      properties:
+        email:
+          type: string
+        first_name:
+          type: string
+        ga_id:
+          type: string
+        last_name:
+          type: string
+        password:
+          type: string
+        region:
+          type: string
+        steps_completed:
+          type: integer
+          format: int64
+      title: MillSignupRequestPayload
     MillDocsDto:
       type: object
       properties:
@@ -391,27 +415,3 @@ components:
         url:
           type: string
       title: MillDocsDto
-    UploadResponsePayload:
-      type: object
-      properties:
-        bucket_name:
-          type: string
-        doc_id:
-          type: integer
-          format: int64
-        error_file:
-          type: string
-          format: byte
-        error_messages:
-          type: array
-          items:
-            type: string
-        filename:
-          type: string
-        key:
-          type: string
-        status:
-          type: string
-        url:
-          type: string
-      title: UploadResponsePayload

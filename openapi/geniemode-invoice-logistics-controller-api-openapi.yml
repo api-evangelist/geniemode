@@ -47,104 +47,6 @@ paths:
         required: true
 components:
   schemas:
-    GeniemodeEntityDto:
-      type: object
-      properties:
-        address:
-          type: object
-        address_id:
-          type: integer
-          format: int64
-        address_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        compliance:
-          type: string
-        currency:
-          type: string
-        id:
-          type: integer
-          format: int64
-        invoice_declaration:
-          type: string
-        label:
-          type: string
-        legal_name:
-          type: string
-        tally_currency:
-          type: string
-        value:
-          type: string
-      title: GeniemodeEntityDto
-    InvoiceVariantsDto:
-      type: object
-      properties:
-        buyer_currency:
-          type: string
-        color:
-          type: string
-        currency_price:
-          type: number
-        currency_price_total:
-          type: number
-        custom_fields:
-          type: object
-        factory_currency:
-          type: string
-        factory_currency_price:
-          type: number
-        factory_currency_price_total:
-          type: number
-        hsn_code:
-          type: string
-        hts_code:
-          type: string
-        id:
-          type: integer
-          format: int64
-        order_id:
-          type: integer
-          format: int64
-        order_variant_quantity:
-          type: integer
-          format: int64
-        parent_order_id:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int64
-        size:
-          type: string
-        sku:
-          type: string
-        sku_data:
-          type: object
-        style_code:
-          type: string
-        uom:
-          type: string
-        variant_buyer_po_mappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceVariantBuyerPoMappingDto'
-        variant_id:
-          type: integer
-          format: int64
-      title: InvoiceVariantsDto
-    BrandCategoryDto:
-      type: object
-      properties:
-        category_id:
-          type: integer
-          format: int64
-        category_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: BrandCategoryDto
     BrandResponse:
       type: object
       properties:
@@ -187,97 +89,16 @@ components:
             type: integer
             format: int64
       title: BrandResponse
-    BankResponsePayload:
+    FinalInvoiceDiscountDto:
       type: object
       properties:
-        account_no:
-          type: string
-        address:
-          type: object
-        address_id:
-          type: integer
-          format: int64
-        bank_routing_number:
-          type: string
-        beneficiary_address:
-          type: object
-        beneficiary_address_id:
-          type: integer
-          format: int64
-        beneficiary_name:
-          type: string
-        entity_id:
-          type: string
-        entity_type:
-          type: string
-        iban_aba:
-          type: string
-        id:
-          type: integer
-          format: int64
-        ifsc:
-          type: string
-        name:
-          type: string
-        sort_code:
-          type: string
-        sub_type:
-          type: string
-        swift:
-          type: string
-      title: BankResponsePayload
-    InvoiceBuyerPoResponsePayload:
-      type: object
-      properties:
-        factory_invoices:
-          type: array
-          items:
-            $ref: '#/components/schemas/FactoryInvoiceDto'
-        id:
-          type: integer
-          format: int64
-        order_buyer_po:
-          $ref: '#/components/schemas/OrderBuyerPoDto'
-      title: InvoiceBuyerPoResponsePayload
-    InvoiceOrdersDto:
-      type: object
-      properties:
-        buyer_currency:
-          type: string
-        currency_price:
+        discount_amount:
           type: number
-        currency_price_total:
+        discount_percentage:
           type: number
-        factory_currency:
+        type:
           type: string
-        factory_currency_price:
-          type: number
-        factory_currency_price_total:
-          type: number
-        hsn_code:
-          type: string
-        hts_code:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        parent_order_id:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int64
-        sku:
-          type: string
-        sku_data:
-          type: object
-        style_code:
-          type: string
-        tolerance_approval_doc:
-          type: string
-        uom:
-          type: string
-      title: InvoiceOrdersDto
+      title: FinalInvoiceDiscountDto
     InvoiceResponsePayload:
       type: object
       properties:
@@ -464,38 +285,207 @@ components:
         wh_charges:
           type: number
       title: InvoiceResponsePayload
-    LeadProjectionMiniDTO:
+    CreateInvoiceShipmentsRequestPayload:
       type: object
       properties:
-        amount:
-          type: integer
-          format: int64
-        business_size:
-          type: number
-          format: float
         id:
           type: integer
           format: int64
-        lead_probability:
-          type: integer
-          format: int32
-        probable_completion_date:
+        shipment_id:
           type: integer
           format: int64
-      title: LeadProjectionMiniDTO
-    OrderDocDtoV2:
+      title: CreateInvoiceShipmentsRequestPayload
+    OrderDocDto:
       type: object
       properties:
+        created_at:
+          type: string
+          format: date-time
         created_by:
+          type: string
+        doc_no:
+          type: string
+        doc_type:
+          type: string
+        docs:
+          $ref: '#/components/schemas/DocDto'
+        id:
+          type: integer
+          format: int64
+        is_additional_doc:
+          type: boolean
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+      title: OrderDocDto
+    OrderBuyerPoBaseDto:
+      type: object
+      properties:
+        buyer_po_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: OrderBuyerPoBaseDto
+    CreateInvoiceBuyerPoRequestPayload:
+      type: object
+      properties:
+        factory_invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/FactoryInvoiceDto'
+        id:
+          type: integer
+          format: int64
+        order_buyer_po_id:
+          type: integer
+          format: int64
+      title: CreateInvoiceBuyerPoRequestPayload
+    DocDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+      title: DocDto
+    LeadGenerationLiteResponse:
+      type: object
+      properties:
+        brand:
+          $ref: '#/components/schemas/BrandResponse'
+        client_id:
+          type: integer
+          format: int64
+        company:
+          $ref: '#/components/schemas/CompanyDTO'
+        country:
+          type: string
+        country_code:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        creator_id:
+          type: integer
+          format: int64
+        email:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        lead_projection_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeadProjectionMiniDTO'
+        name:
+          type: string
+        phone:
+          type: string
+      title: LeadGenerationLiteResponse
+    FactoryInvoiceDto:
+      type: object
+      properties:
+        factory_invoice_no:
+          type: string
+        factory_invoice_url:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: FactoryInvoiceDto
+    InvoiceOrdersDto:
+      type: object
+      properties:
+        buyer_currency:
+          type: string
+        currency_price:
+          type: number
+        currency_price_total:
+          type: number
+        factory_currency:
+          type: string
+        factory_currency_price:
+          type: number
+        factory_currency_price_total:
+          type: number
+        hsn_code:
+          type: string
+        hts_code:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        parent_order_id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        sku:
+          type: string
+        sku_data:
+          type: object
+        style_code:
+          type: string
+        tolerance_approval_doc:
+          type: string
+        uom:
+          type: string
+      title: InvoiceOrdersDto
+    OrderBuyerPoDto:
+      type: object
+      properties:
+        asset_url:
+          type: string
+        buyer_po_doc:
+          $ref: '#/components/schemas/OrderDocDtoV2'
+        buyer_po_no:
           type: string
         doc:
           $ref: '#/components/schemas/DocDto'
-        doc_type:
-          type: string
         id:
           type: integer
           format: int64
-      title: OrderDocDtoV2
+        po_doc_id:
+          type: integer
+          format: int64
+        po_type:
+          type: string
+      title: OrderBuyerPoDto
+    CompanyDTO:
+      type: object
+      properties:
+        ask_buyer_wip_on_order:
+          type: boolean
+        company_name:
+          type: string
+        compliances:
+          type: array
+          items:
+            type: string
+        id:
+          type: integer
+          format: int64
+        min_buy_sell_margin:
+          type: number
+        min_commission_margin:
+          type: number
+        min_trading_margin:
+          type: number
+      title: CompanyDTO
     ShipmentInInvoiceDto:
       type: object
       properties:
@@ -551,17 +541,409 @@ components:
           items:
             $ref: '#/components/schemas/InvoiceVariantsDto'
       title: ShipmentInInvoiceDto
-    FactoryInvoiceDto:
+    ShipmentInInvoiceOrderDto:
       type: object
       properties:
-        factory_invoice_no:
+        assignee_id:
+          type: integer
+          format: int64
+        bill_address_id:
+          type: integer
+          format: int64
+        bill_to_address:
+          type: object
+        buyer_days:
+          type: integer
+          format: int64
+        buyer_payment_type:
           type: string
-        factory_invoice_url:
+        buyer_shipment_type:
+          type: string
+        buyer_type:
+          type: string
+        factory_payment_type:
+          type: string
+        geniemode_entity:
+          $ref: '#/components/schemas/GeniemodeEntityDto'
+        id:
+          type: integer
+          format: int64
+        lead_data:
+          $ref: '#/components/schemas/LeadGenerationLiteResponse'
+        lead_id:
+          type: integer
+          format: int64
+        manufacturer_days:
+          type: integer
+          format: int64
+        model_type:
+          type: string
+        sku_data:
+          type: object
+        sku_id:
+          type: string
+        style_code:
+          type: string
+        tolerance_approval_doc:
+          type: string
+      title: ShipmentInInvoiceOrderDto
+    FinalInvoiceInInvoiceDto:
+      type: object
+      properties:
+        comment:
+          type: string
+        discount:
+          $ref: '#/components/schemas/FinalInvoiceDiscountDto'
+        grn_doc_url:
+          type: string
+        grn_status:
           type: string
         id:
           type: integer
           format: int64
-      title: FactoryInvoiceDto
+        invoice_doc_url:
+          type: string
+        invoice_no:
+          type: string
+        pod_doc_url:
+          type: string
+        raised_on_timestamp:
+          type: integer
+          format: int64
+        status:
+          type: string
+        total_amount:
+          type: number
+      title: FinalInvoiceInInvoiceDto
+    BrandCategoryDto:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          format: int64
+        category_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: BrandCategoryDto
+    BankResponsePayload:
+      type: object
+      properties:
+        account_no:
+          type: string
+        address:
+          type: object
+        address_id:
+          type: integer
+          format: int64
+        bank_routing_number:
+          type: string
+        beneficiary_address:
+          type: object
+        beneficiary_address_id:
+          type: integer
+          format: int64
+        beneficiary_name:
+          type: string
+        entity_id:
+          type: string
+        entity_type:
+          type: string
+        iban_aba:
+          type: string
+        id:
+          type: integer
+          format: int64
+        ifsc:
+          type: string
+        name:
+          type: string
+        sort_code:
+          type: string
+        sub_type:
+          type: string
+        swift:
+          type: string
+      title: BankResponsePayload
+    InvoiceVariantBuyerPoMappingDto:
+      type: object
+      properties:
+        buyer_currency_price_total:
+          type: number
+        commission_amount_buyer_currency:
+          type: number
+        commission_amount_geniemode_currency:
+          type: number
+        currency_price_total:
+          type: number
+        factory_currency_price_total:
+          type: number
+        geniemode_currency_price_total:
+          type: number
+        id:
+          type: integer
+          format: int64
+        locked_quantity:
+          type: integer
+          format: int64
+        order_buyer_po:
+          $ref: '#/components/schemas/OrderBuyerPoBaseDto'
+        quantity:
+          type: integer
+          format: int64
+      title: InvoiceVariantBuyerPoMappingDto
+    InvoiceShipmentsResponsePayload:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        shipment:
+          $ref: '#/components/schemas/ShipmentInInvoiceDto'
+      title: InvoiceShipmentsResponsePayload
+    LeadProjectionMiniDTO:
+      type: object
+      properties:
+        amount:
+          type: integer
+          format: int64
+        business_size:
+          type: number
+          format: float
+        id:
+          type: integer
+          format: int64
+        lead_probability:
+          type: integer
+          format: int32
+        probable_completion_date:
+          type: integer
+          format: int64
+      title: LeadProjectionMiniDTO
+    LogisticsInvoiceRequestPayload:
+      type: object
+      properties:
+        bl_doc:
+          type: string
+        carrier_number:
+          type: string
+        carrier_type:
+          type: string
+        clearance_charges:
+          type: number
+        cost_sheet_doc_url:
+          type: string
+        custom_duty:
+          type: number
+        custom_inco_term:
+          type: string
+        factory_invoice_docs:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        factory_invoice_no:
+          type: string
+        final_destination:
+          type: string
+        id:
+          type: integer
+          format: int64
+        invoice_id:
+          type: integer
+          format: int64
+        local_freight:
+          type: number
+        management_approval_doc_url:
+          type: string
+        packing_list_docs:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        pod_docs:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        port_of_discharge:
+          type: string
+        port_of_loading:
+          type: string
+        pre_carriage_by:
+          type: string
+        sea_freight:
+          type: number
+        shipping_bill_doc:
+          type: string
+        total_shipping_cost:
+          type: number
+        warehouse:
+          type: string
+        wh_charges:
+          type: number
+      title: LogisticsInvoiceRequestPayload
+    InvoiceVariantsDto:
+      type: object
+      properties:
+        buyer_currency:
+          type: string
+        color:
+          type: string
+        currency_price:
+          type: number
+        currency_price_total:
+          type: number
+        custom_fields:
+          type: object
+        factory_currency:
+          type: string
+        factory_currency_price:
+          type: number
+        factory_currency_price_total:
+          type: number
+        hsn_code:
+          type: string
+        hts_code:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        order_variant_quantity:
+          type: integer
+          format: int64
+        parent_order_id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        size:
+          type: string
+        sku:
+          type: string
+        sku_data:
+          type: object
+        style_code:
+          type: string
+        uom:
+          type: string
+        variant_buyer_po_mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceVariantBuyerPoMappingDto'
+        variant_id:
+          type: integer
+          format: int64
+      title: InvoiceVariantsDto
+    OrderDocDtoV2:
+      type: object
+      properties:
+        created_by:
+          type: string
+        doc:
+          $ref: '#/components/schemas/DocDto'
+        doc_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: OrderDocDtoV2
+    BrandVpDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        vp_email:
+          type: string
+        vp_id:
+          type: integer
+          format: int64
+        vp_name:
+          type: string
+      title: BrandVpDto
+    InvoiceBuyerPoResponsePayload:
+      type: object
+      properties:
+        factory_invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/FactoryInvoiceDto'
+        id:
+          type: integer
+          format: int64
+        order_buyer_po:
+          $ref: '#/components/schemas/OrderBuyerPoDto'
+      title: InvoiceBuyerPoResponsePayload
+    AddressSubmitResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload
+    GeniemodeEntityDto:
+      type: object
+      properties:
+        address:
+          type: object
+        address_id:
+          type: integer
+          format: int64
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        compliance:
+          type: string
+        currency:
+          type: string
+        id:
+          type: integer
+          format: int64
+        invoice_declaration:
+          type: string
+        label:
+          type: string
+        legal_name:
+          type: string
+        tally_currency:
+          type: string
+        value:
+          type: string
+      title: GeniemodeEntityDto
     CreateInvoiceRequestPayload:
       type: object
       properties:
@@ -626,385 +1008,3 @@ components:
           items:
             $ref: '#/components/schemas/InvoiceVariantsDto'
       title: CreateInvoiceRequestPayload
-    CreateInvoiceBuyerPoRequestPayload:
-      type: object
-      properties:
-        factory_invoices:
-          type: array
-          items:
-            $ref: '#/components/schemas/FactoryInvoiceDto'
-        id:
-          type: integer
-          format: int64
-        order_buyer_po_id:
-          type: integer
-          format: int64
-      title: CreateInvoiceBuyerPoRequestPayload
-    FinalInvoiceDiscountDto:
-      type: object
-      properties:
-        discount_amount:
-          type: number
-        discount_percentage:
-          type: number
-        type:
-          type: string
-      title: FinalInvoiceDiscountDto
-    BrandVpDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        vp_email:
-          type: string
-        vp_id:
-          type: integer
-          format: int64
-        vp_name:
-          type: string
-      title: BrandVpDto
-    LogisticsInvoiceRequestPayload:
-      type: object
-      properties:
-        bl_doc:
-          type: string
-        carrier_number:
-          type: string
-        carrier_type:
-          type: string
-        clearance_charges:
-          type: number
-        cost_sheet_doc_url:
-          type: string
-        custom_duty:
-          type: number
-        custom_inco_term:
-          type: string
-        factory_invoice_docs:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        factory_invoice_no:
-          type: string
-        final_destination:
-          type: string
-        id:
-          type: integer
-          format: int64
-        invoice_id:
-          type: integer
-          format: int64
-        local_freight:
-          type: number
-        management_approval_doc_url:
-          type: string
-        packing_list_docs:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        pod_docs:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        port_of_discharge:
-          type: string
-        port_of_loading:
-          type: string
-        pre_carriage_by:
-          type: string
-        sea_freight:
-          type: number
-        shipping_bill_doc:
-          type: string
-        total_shipping_cost:
-          type: number
-        warehouse:
-          type: string
-        wh_charges:
-          type: number
-      title: LogisticsInvoiceRequestPayload
-    LeadGenerationLiteResponse:
-      type: object
-      properties:
-        brand:
-          $ref: '#/components/schemas/BrandResponse'
-        client_id:
-          type: integer
-          format: int64
-        company:
-          $ref: '#/components/schemas/CompanyDTO'
-        country:
-          type: string
-        country_code:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        creator_id:
-          type: integer
-          format: int64
-        email:
-          type: string
-        first_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        last_name:
-          type: string
-        lead_projection_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/LeadProjectionMiniDTO'
-        name:
-          type: string
-        phone:
-          type: string
-      title: LeadGenerationLiteResponse
-    InvoiceVariantBuyerPoMappingDto:
-      type: object
-      properties:
-        buyer_currency_price_total:
-          type: number
-        commission_amount_buyer_currency:
-          type: number
-        commission_amount_geniemode_currency:
-          type: number
-        currency_price_total:
-          type: number
-        factory_currency_price_total:
-          type: number
-        geniemode_currency_price_total:
-          type: number
-        id:
-          type: integer
-          format: int64
-        locked_quantity:
-          type: integer
-          format: int64
-        order_buyer_po:
-          $ref: '#/components/schemas/OrderBuyerPoBaseDto'
-        quantity:
-          type: integer
-          format: int64
-      title: InvoiceVariantBuyerPoMappingDto
-    FinalInvoiceInInvoiceDto:
-      type: object
-      properties:
-        comment:
-          type: string
-        discount:
-          $ref: '#/components/schemas/FinalInvoiceDiscountDto'
-        grn_doc_url:
-          type: string
-        grn_status:
-          type: string
-        id:
-          type: integer
-          format: int64
-        invoice_doc_url:
-          type: string
-        invoice_no:
-          type: string
-        pod_doc_url:
-          type: string
-        raised_on_timestamp:
-          type: integer
-          format: int64
-        status:
-          type: string
-        total_amount:
-          type: number
-      title: FinalInvoiceInInvoiceDto
-    InvoiceShipmentsResponsePayload:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        shipment:
-          $ref: '#/components/schemas/ShipmentInInvoiceDto'
-      title: InvoiceShipmentsResponsePayload
-    CreateInvoiceShipmentsRequestPayload:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        shipment_id:
-          type: integer
-          format: int64
-      title: CreateInvoiceShipmentsRequestPayload
-    CompanyDTO:
-      type: object
-      properties:
-        ask_buyer_wip_on_order:
-          type: boolean
-        company_name:
-          type: string
-        compliances:
-          type: array
-          items:
-            type: string
-        id:
-          type: integer
-          format: int64
-        min_buy_sell_margin:
-          type: number
-        min_commission_margin:
-          type: number
-        min_trading_margin:
-          type: number
-      title: CompanyDTO
-    OrderDocDto:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-        created_by:
-          type: string
-        doc_no:
-          type: string
-        doc_type:
-          type: string
-        docs:
-          $ref: '#/components/schemas/DocDto'
-        id:
-          type: integer
-          format: int64
-        is_additional_doc:
-          type: boolean
-        order_id:
-          type: integer
-          format: int64
-        s3_path:
-          type: string
-      title: OrderDocDto
-    DocDto:
-      type: object
-      properties:
-        doc_display_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        s3_path:
-          type: string
-        s3_version:
-          type: integer
-          format: int64
-      title: DocDto
-    OrderBuyerPoBaseDto:
-      type: object
-      properties:
-        buyer_po_no:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: OrderBuyerPoBaseDto
-    ShipmentInInvoiceOrderDto:
-      type: object
-      properties:
-        assignee_id:
-          type: integer
-          format: int64
-        bill_address_id:
-          type: integer
-          format: int64
-        bill_to_address:
-          type: object
-        buyer_days:
-          type: integer
-          format: int64
-        buyer_payment_type:
-          type: string
-        buyer_shipment_type:
-          type: string
-        buyer_type:
-          type: string
-        factory_payment_type:
-          type: string
-        geniemode_entity:
-          $ref: '#/components/schemas/GeniemodeEntityDto'
-        id:
-          type: integer
-          format: int64
-        lead_data:
-          $ref: '#/components/schemas/LeadGenerationLiteResponse'
-        lead_id:
-          type: integer
-          format: int64
-        manufacturer_days:
-          type: integer
-          format: int64
-        model_type:
-          type: string
-        sku_data:
-          type: object
-        sku_id:
-          type: string
-        style_code:
-          type: string
-        tolerance_approval_doc:
-          type: string
-      title: ShipmentInInvoiceOrderDto
-    AddressSubmitResponsePayload:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        address_line2:
-          type: string
-        city:
-          type: string
-        contact_person_name:
-          type: string
-        contact_person_number:
-          type: string
-        country:
-          type: string
-        entity_id:
-          type: integer
-          format: int64
-        entity_type:
-          type: string
-        id:
-          type: integer
-          format: int64
-        landmark:
-          type: string
-        name:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-        type:
-          type: string
-      title: AddressSubmitResponsePayload
-    OrderBuyerPoDto:
-      type: object
-      properties:
-        asset_url:
-          type: string
-        buyer_po_doc:
-          $ref: '#/components/schemas/OrderDocDtoV2'
-        buyer_po_no:
-          type: string
-        doc:
-          $ref: '#/components/schemas/DocDto'
-        id:
-          type: integer
-          format: int64
-        po_doc_id:
-          type: integer
-          format: int64
-        po_type:
-          type: string
-      title: OrderBuyerPoDto

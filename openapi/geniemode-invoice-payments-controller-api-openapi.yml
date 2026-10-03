@@ -548,96 +548,6 @@ components:
         whatsapp_opt_in:
           type: boolean
       title: UMSUserResponsePayload
-    GeniemodeEntityDto:
-      type: object
-      properties:
-        address:
-          type: object
-        address_id:
-          type: integer
-          format: int64
-        address_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        compliance:
-          type: string
-        currency:
-          type: string
-        id:
-          type: integer
-          format: int64
-        invoice_declaration:
-          type: string
-        label:
-          type: string
-        legal_name:
-          type: string
-        tally_currency:
-          type: string
-        value:
-          type: string
-      title: GeniemodeEntityDto
-    CreditDebitNoteInvoicesRequestPayload:
-      type: object
-      required:
-      - final_invoice_id
-      - payment_received
-      - payment_received_excluding_gst
-      properties:
-        cgst_percentage:
-          type: number
-        final_invoice_id:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
-        igst_percentage:
-          type: number
-        payment_received:
-          type: number
-        payment_received_excluding_gst:
-          type: number
-        sale_garment:
-          type: string
-        sgst_percentage:
-          type: number
-      title: CreditDebitNoteInvoicesRequestPayload
-    AddressSubmitResponsePayload:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        address_line2:
-          type: string
-        city:
-          type: string
-        contact_person_name:
-          type: string
-        contact_person_number:
-          type: string
-        country:
-          type: string
-        entity_id:
-          type: integer
-          format: int64
-        entity_type:
-          type: string
-        id:
-          type: integer
-          format: int64
-        landmark:
-          type: string
-        name:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-        type:
-          type: string
-      title: AddressSubmitResponsePayload
     CreditDebitNoteRequestPayload:
       type: object
       required:
@@ -672,94 +582,57 @@ components:
           type: string
           pattern: ^(credit|debit)$
       title: CreditDebitNoteRequestPayload
-    RemoveInvoicePaymentsRequestPayload:
+    AddressSubmitResponsePayload:
       type: object
       properties:
-        payment_id:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
           type: integer
           format: int64
-      title: RemoveInvoicePaymentsRequestPayload
-    CreateInvoicePaymentDocRequestPayload:
-      type: object
-      properties:
-        s3_path:
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
           type: string
         type:
           type: string
-      title: CreateInvoicePaymentDocRequestPayload
-    BulkPaymentJsonRequestPayload:
-      type: object
-      required:
-      - invoice_type
-      properties:
-        file_url:
-          type: string
-        invoice_type:
-          type: string
-          pattern: ^(COMMISSION|NON COMMISSION)$
-      title: BulkPaymentJsonRequestPayload
-    CreditDebitNoteDto:
+      title: AddressSubmitResponsePayload
+    BulkInvoicePaymentRequestPayload:
       type: object
       properties:
-        bill_to_address:
-          type: object
-        bill_to_name:
-          type: string
-        buyer_po_numbers:
-          type: array
-          items:
-            type: string
-        currency:
-          type: string
-        dated:
-          type: string
-        delivery_terms:
-          type: string
-        destination:
-          type: string
-        dispatch_doc_no:
-          type: string
-        dispatched_through:
-          type: string
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateInvoicePaymentDocRequestPayload'
-        geniemode_email:
-          type: string
-        geniemode_entity:
-          $ref: '#/components/schemas/GeniemodeEntityDto'
-        narration:
-          type: string
-        note_date:
-          type: integer
-          format: int64
-        note_no:
-          type: string
-        note_sub_type:
-          type: string
-        note_type:
-          type: string
-        other_references:
-          type: string
-        payment_received:
-          type: number
-        payment_received_excluding_gst:
-          type: number
         payments:
           type: array
           items:
-            $ref: '#/components/schemas/CreditDebitNotePaymentsDto'
-        terms_of_payment:
-          type: string
-      title: CreditDebitNoteDto
-    CreditDebitNotePaymentsDto:
+            $ref: '#/components/schemas/BulkInvoiceSinglePaymentRequestPayload'
+      title: BulkInvoicePaymentRequestPayload
+    CreditDebitNoteInvoicesRequestPayload:
       type: object
+      required:
+      - final_invoice_id
+      - payment_received
+      - payment_received_excluding_gst
       properties:
         cgst_percentage:
           type: number
-        currency:
-          type: string
         final_invoice_id:
           type: integer
           format: int64
@@ -768,8 +641,6 @@ components:
           format: int64
         igst_percentage:
           type: number
-        invoice_no:
-          type: string
         payment_received:
           type: number
         payment_received_excluding_gst:
@@ -778,22 +649,7 @@ components:
           type: string
         sgst_percentage:
           type: number
-      title: CreditDebitNotePaymentsDto
-    CreateInvoicePaymentsRequestPayload:
-      type: object
-      properties:
-        final_invoice_id:
-          type: integer
-          format: int64
-        payments:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateSingleInvoicePaymentsRequestPayload'
-        total_factory_amount:
-          type: number
-        type:
-          type: string
-      title: CreateInvoicePaymentsRequestPayload
+      title: CreditDebitNoteInvoicesRequestPayload
     CreateSingleInvoicePaymentsRequestPayload:
       type: object
       properties:
@@ -856,14 +712,102 @@ components:
         type_of_payment:
           type: string
       title: CreateSingleInvoicePaymentsRequestPayload
-    BulkInvoicePaymentRequestPayload:
+    CreditDebitNoteDto:
       type: object
       properties:
+        bill_to_address:
+          type: object
+        bill_to_name:
+          type: string
+        buyer_po_numbers:
+          type: array
+          items:
+            type: string
+        currency:
+          type: string
+        dated:
+          type: string
+        delivery_terms:
+          type: string
+        destination:
+          type: string
+        dispatch_doc_no:
+          type: string
+        dispatched_through:
+          type: string
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateInvoicePaymentDocRequestPayload'
+        geniemode_email:
+          type: string
+        geniemode_entity:
+          $ref: '#/components/schemas/GeniemodeEntityDto'
+        narration:
+          type: string
+        note_date:
+          type: integer
+          format: int64
+        note_no:
+          type: string
+        note_sub_type:
+          type: string
+        note_type:
+          type: string
+        other_references:
+          type: string
+        payment_received:
+          type: number
+        payment_received_excluding_gst:
+          type: number
         payments:
           type: array
           items:
-            $ref: '#/components/schemas/BulkInvoiceSinglePaymentRequestPayload'
-      title: BulkInvoicePaymentRequestPayload
+            $ref: '#/components/schemas/CreditDebitNotePaymentsDto'
+        terms_of_payment:
+          type: string
+      title: CreditDebitNoteDto
+    GeniemodeEntityDto:
+      type: object
+      properties:
+        address:
+          type: object
+        address_id:
+          type: integer
+          format: int64
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        compliance:
+          type: string
+        currency:
+          type: string
+        id:
+          type: integer
+          format: int64
+        invoice_declaration:
+          type: string
+        label:
+          type: string
+        legal_name:
+          type: string
+        tally_currency:
+          type: string
+        value:
+          type: string
+      title: GeniemodeEntityDto
+    BulkPaymentJsonRequestPayload:
+      type: object
+      required:
+      - invoice_type
+      properties:
+        file_url:
+          type: string
+        invoice_type:
+          type: string
+          pattern: ^(COMMISSION|NON COMMISSION)$
+      title: BulkPaymentJsonRequestPayload
     BulkInvoiceSinglePaymentRequestPayload:
       type: object
       required:
@@ -901,6 +845,55 @@ components:
         type_of_payment:
           type: string
       title: BulkInvoiceSinglePaymentRequestPayload
+    CreateInvoicePaymentDocRequestPayload:
+      type: object
+      properties:
+        s3_path:
+          type: string
+        type:
+          type: string
+      title: CreateInvoicePaymentDocRequestPayload
+    CreateInvoicePaymentsRequestPayload:
+      type: object
+      properties:
+        final_invoice_id:
+          type: integer
+          format: int64
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateSingleInvoicePaymentsRequestPayload'
+        total_factory_amount:
+          type: number
+        type:
+          type: string
+      title: CreateInvoicePaymentsRequestPayload
+    CreditDebitNotePaymentsDto:
+      type: object
+      properties:
+        cgst_percentage:
+          type: number
+        currency:
+          type: string
+        final_invoice_id:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        igst_percentage:
+          type: number
+        invoice_no:
+          type: string
+        payment_received:
+          type: number
+        payment_received_excluding_gst:
+          type: number
+        sale_garment:
+          type: string
+        sgst_percentage:
+          type: number
+      title: CreditDebitNotePaymentsDto
     UpdateSingleInvoicePaymentsRequestPayload:
       type: object
       properties:
@@ -935,3 +928,10 @@ components:
         type_of_payment:
           type: string
       title: UpdateSingleInvoicePaymentsRequestPayload
+    RemoveInvoicePaymentsRequestPayload:
+      type: object
+      properties:
+        payment_id:
+          type: integer
+          format: int64
+      title: RemoveInvoicePaymentsRequestPayload
