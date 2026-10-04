@@ -287,24 +287,278 @@ paths:
           description: 500 message
 components:
   schemas:
-    Doc:
+    OrderBuyerPo:
       type: object
       properties:
-        bucketAndKey:
-          $ref: '#/components/schemas/Pair_string_string'
+        buyerPoNo:
+          type: string
         createdBy:
           type: string
-        docDisplayName:
+        deleted:
+          type: boolean
+        doc:
+          $ref: '#/components/schemas/Doc'
+        id:
+          type: integer
+          format: int64
+        orderDetails:
+          $ref: '#/components/schemas/OrderDetail'
+        poType:
+          $ref: '#/components/schemas/PoType'
+      title: OrderBuyerPo
+    PacketVariants:
+      type: object
+      required:
+      - packet
+      - variant
+      properties:
+        createdBy:
           type: string
         id:
           type: integer
           format: int64
-        s3Path:
-          type: string
-        s3Version:
+        locked:
+          type: boolean
+        packet:
+          $ref: '#/components/schemas/Packet'
+        quantity:
           type: integer
           format: int64
-      title: Doc
+        variant:
+          $ref: '#/components/schemas/Variant'
+      title: PacketVariants
+    CreatePoRequestPayload:
+      type: object
+      properties:
+        auto_approved:
+          type: boolean
+        order_id:
+          type: integer
+          format: int64
+        reason:
+          type: string
+        status:
+          type: string
+      title: CreatePoRequestPayload
+    QcSamplingActivityDto:
+      type: object
+      properties:
+        activity:
+          type: string
+        asset_alias:
+          type: string
+        asset_name:
+          type: string
+        asset_url:
+          type: string
+        duration:
+          type: integer
+          format: int64
+        end_timestamp:
+          type: integer
+          format: int64
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcSamplingItemDto'
+        start_timestamp:
+          type: integer
+          format: int64
+      title: QcSamplingActivityDto
+    GetOrderCommentsDTO:
+      type: object
+      properties:
+        comment:
+          type: string
+        doc_display_name:
+          type: string
+        doc_id:
+          type: integer
+          format: int64
+        due_date:
+          type: string
+          format: date-time
+        editable:
+          type: string
+        insert_date:
+          type: string
+          format: date-time
+        insert_time:
+          type: string
+          format: date-time
+        order_event_id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        role:
+          type: array
+          items:
+            type: string
+        s3_path:
+          type: string
+        step_template_id:
+          type: integer
+          format: int64
+        system_generated:
+          type: boolean
+        tagged_users:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UMSUserResponsePayload'
+        user_id:
+          type: integer
+          format: int64
+        user_name:
+          type: string
+        visible_to_client:
+          type: string
+        visible_to_manufacturer:
+          type: string
+        wf_step_order_map_id:
+          type: integer
+          format: int64
+      title: GetOrderCommentsDTO
+    ManufacturerDirector:
+      type: object
+      required:
+      - manufacturer
+      properties:
+        aadharDocUrl:
+          type: string
+        aadharNo:
+          type: string
+        aadharNoDocId:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        din:
+          type: string
+        dpin:
+          type: string
+        fatherName:
+          type: string
+        id:
+          type: integer
+          format: int64
+        isPrimary:
+          type: boolean
+        manufacturer:
+          $ref: '#/components/schemas/Manufacturer'
+        name:
+          type: string
+        pan:
+          type: string
+        panDocId:
+          type: integer
+          format: int64
+        panDocUrl:
+          type: string
+        passportNo:
+          type: string
+      title: ManufacturerDirector
+    OrderLogisticDocs:
+      type: object
+      properties:
+        created_by:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_logistic_details:
+          $ref: '#/components/schemas/OrderLogisticDetails'
+        s3_url:
+          type: string
+        type:
+          type: string
+        version:
+          type: integer
+          format: int64
+      title: OrderLogisticDocs
+    GeniemodeEntity:
+      type: object
+      properties:
+        addressId:
+          type: integer
+          format: int64
+        addressList:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeniemodeEntityAddress'
+        allowManualInvoiceNo:
+          type: boolean
+        compliance:
+          type: string
+        createdBy:
+          type: string
+        currency:
+          type: string
+        id:
+          type: integer
+          format: int64
+        invoiceDeclaration:
+          type: string
+        label:
+          type: string
+        legalName:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeniemodeEntityTags'
+        tallyCurrency:
+          type: string
+        value:
+          type: string
+      title: GeniemodeEntity
+    PoType:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: PoType
+    BrandCategoryDto:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          format: int64
+        category_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: BrandCategoryDto
+    UserResponsePayload:
+      type: object
+      properties:
+        created_by:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+      title: UserResponsePayload
     VariantBuyerPoMapping:
       type: object
       required:
@@ -327,6 +581,371 @@ components:
         variant:
           $ref: '#/components/schemas/Variant'
       title: VariantBuyerPoMapping
+    DocDetailsDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+      title: DocDetailsDto
+    VariantBuyerPoMappingRequestPayload:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        locked_quantity:
+          type: integer
+          format: int64
+        order_buyer_po:
+          $ref: '#/components/schemas/OrderBuyerPoBaseDto'
+        po_no:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+      title: VariantBuyerPoMappingRequestPayload
+    ParentOrderTnaDatesDto:
+      type: object
+      properties:
+        buyer_eta_date:
+          type: string
+          example: MM-dd-YY
+        confirmation_date:
+          type: string
+          example: MM-dd-YY
+        eta_date:
+          type: string
+          example: MM-dd-YY
+        factory_eta_date:
+          type: string
+          example: MM-dd-YY
+      title: ParentOrderTnaDatesDto
+    QcCuePointDto:
+      type: object
+      properties:
+        activity_end_timestamp:
+          type: integer
+          format: int64
+        activity_name:
+          type: string
+        activity_start_timestamp:
+          type: integer
+          format: int64
+        asset_alias:
+          type: string
+        asset_name:
+          type: string
+        asset_url:
+          type: string
+        cue_point_asset_alias:
+          type: string
+        cue_point_asset_url:
+          type: string
+        cue_point_type:
+          type: string
+        end_duration:
+          type: integer
+          format: int64
+        end_timestamp:
+          type: integer
+          format: int64
+        input_field_name:
+          type: string
+        start_duration:
+          type: integer
+          format: int64
+        start_timestamp:
+          type: integer
+          format: int64
+        user_defined_data:
+          type: object
+        workflow_step_id:
+          type: integer
+          format: int64
+      title: QcCuePointDto
+    ShipmentVariantBuyerPoMapping:
+      type: object
+      required:
+      - shipmentVariant
+      - variantBuyerPoMapping
+      properties:
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        locked:
+          type: boolean
+        quantity:
+          type: integer
+          format: int64
+        shipmentVariant:
+          $ref: '#/components/schemas/ShipmentVariant'
+        variantBuyerPoMapping:
+          $ref: '#/components/schemas/VariantBuyerPoMapping'
+      title: ShipmentVariantBuyerPoMapping
+    QcLineWalkResponse:
+      type: object
+      properties:
+        alias:
+          type: string
+        id:
+          type: integer
+          format: int64
+        position:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+      title: QcLineWalkResponse
+    Shipment:
+      type: object
+      required:
+      - order
+      properties:
+        actualShipmentMode:
+          type: string
+          enum:
+          - Air
+          - Courier
+          - Land
+          - Sea
+        addressId:
+          type: integer
+          format: int64
+        assigneeId:
+          type: integer
+          format: int64
+        blDate:
+          type: integer
+          format: int64
+        blDoc:
+          type: string
+        blNumber:
+          type: string
+        bookingNo:
+          type: string
+        buyerInvoiceCreated:
+          type: boolean
+        cancellationDate:
+          type: integer
+          format: int64
+        courierPartner:
+          $ref: '#/components/schemas/CourierPartner'
+        createdBy:
+          type: string
+        currentStatus:
+          type: string
+          enum:
+          - booked
+          - complete
+          - deliveryDate
+          - paymentFollowup
+          - preplanned
+          - shipped
+        eta:
+          type: integer
+          format: int64
+        etd:
+          type: integer
+          format: int64
+        exFactoryDate:
+          type: integer
+          format: int64
+        factoryInvoiceCreated:
+          type: boolean
+        factoryInvoiceDoc:
+          type: string
+        factoryInvoiceNo:
+          type: string
+        factoryInvoiceNoRemark:
+          type: string
+        id:
+          type: integer
+          format: int64
+        incoTerm:
+          type: string
+        invoiceApprovalLock:
+          type: boolean
+        invoiceDoc:
+          type: string
+        locked:
+          type: boolean
+        order:
+          $ref: '#/components/schemas/OrderDetail'
+        packingListDoc:
+          type: string
+        plannedShipmentMode:
+          type: string
+          enum:
+          - Air
+          - Courier
+          - Land
+          - Sea
+        podDate:
+          type: integer
+          format: int64
+        podNumber:
+          type: string
+        shipmentHops:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentHop'
+        shipmentPackets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentPackets'
+        shipmentReady:
+          type: boolean
+        shipmentVariants:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentVariant'
+        shippingBillDoc:
+          type: string
+        trackingId:
+          type: string
+        vessel:
+          type: string
+      title: Shipment
+    DocDto:
+      type: object
+      properties:
+        doc_display_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        s3_path:
+          type: string
+        s3_version:
+          type: integer
+          format: int64
+      title: DocDto
+    Manufacturer:
+      type: object
+      properties:
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerAddress'
+        brandName:
+          type: string
+        buyerName:
+          type: string
+        catalougeShootImageAvailable:
+          type: string
+        catalougeSize:
+          type: string
+        createdBy:
+          type: string
+        directors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerDirector'
+        eligibleCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerEligibleCategories'
+        financialBacking:
+          type: string
+        firmType:
+          type: string
+        gaId:
+          type: string
+        hasOwnLabel:
+          type: boolean
+        id:
+          type: integer
+          format: int64
+        manufacturerAgreementDetails:
+          $ref: '#/components/schemas/ManufacturerAgreementDetails'
+        manufacturerBase:
+          $ref: '#/components/schemas/ManufacturerBase'
+        manufacturerDocs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerDocs'
+        manufacturerRatingDetails:
+          $ref: '#/components/schemas/ManufacturerRatingDetails'
+        needAdvancePayment:
+          type: boolean
+        onBoardingTeamMemberName:
+          type: string
+        prevYearTurnover:
+          type: number
+          format: float
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerProductMap'
+        region:
+          type: string
+        stepsCompleted:
+          type: integer
+          format: int64
+        supplierSubType:
+          type: string
+        supplierType:
+          type: string
+        type:
+          type: string
+        udyamRegistrationCertificatePresent:
+          type: boolean
+        units:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerUnit'
+        website:
+          type: string
+      title: Manufacturer
+    QcFinalInspectionResponse:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcFinalInspectionDocDto'
+        id:
+          type: integer
+          format: int64
+        measurement_audit:
+          type: string
+        packing_audit:
+          type: string
+        remark:
+          type: string
+        selected_cartons:
+          type: string
+        video_url:
+          type: string
+        visual_audit:
+          type: string
+      title: QcFinalInspectionResponse
+    CopyTnaDatesFromParentRequestPayload:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/SaveTnaDatesOnOrderRequest'
+        parent_order_id:
+          type: integer
+          format: int64
+      title: CopyTnaDatesFromParentRequestPayload
     ShipmentPackets:
       type: object
       required:
@@ -348,95 +967,52 @@ components:
         shipment:
           $ref: '#/components/schemas/Shipment'
       title: ShipmentPackets
-    SampleOrderMapping:
+    BusinessOwner:
       type: object
       properties:
+        active:
+          type: boolean
         createdBy:
           type: string
         id:
           type: integer
           format: int64
-        order:
-          $ref: '#/components/schemas/OrderDetail'
-        sample:
-          $ref: '#/components/schemas/OrderDetail'
-      title: SampleOrderMapping
-    QcSamplingDataDefectsDto:
+        name:
+          type: string
+      title: BusinessOwner
+    QcCartonDto:
       type: object
       properties:
-        accept_point:
-          type: integer
-          format: int64
-        aql_type:
+        carton_no:
+          type: number
+        checksum:
           type: string
-        count:
-          type: integer
-          format: int64
-        defect_type:
+        comments:
           type: string
+        gross_weight:
+          type: number
         id:
           type: integer
           format: int64
-        reject_point:
-          type: integer
-          format: int64
-      title: QcSamplingDataDefectsDto
-    DocDto:
+        net_weight:
+          type: number
+        total:
+          type: number
+        type:
+          type: string
+      title: QcCartonDto
+    Pair_string_string:
       type: object
       properties:
-        doc_display_name:
+        key:
           type: string
-        id:
-          type: integer
-          format: int64
-        s3_path:
+        left:
           type: string
-        s3_version:
-          type: integer
-          format: int64
-      title: DocDto
-    UserSimpleDTO:
-      type: object
-      properties:
-        country_code:
+        right:
           type: string
-        department:
+        value:
           type: string
-        first_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        is_primary:
-          type: boolean
-        last_name:
-          type: string
-        phone_number:
-          type: string
-        username:
-          type: string
-      title: UserSimpleDTO
-    QcFinalInspectionThirdPartyResponseDto:
-      type: object
-      properties:
-        final_report:
-          $ref: '#/components/schemas/QcDocDto'
-        final_report_doc_alias:
-          type: string
-        qc_id:
-          type: integer
-          format: int64
-        remark:
-          type: string
-        temporary_doc:
-          $ref: '#/components/schemas/QcDocDto'
-        temporary_doc_alias:
-          type: string
-        variant_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/VariantRequestPayload'
-      title: QcFinalInspectionThirdPartyResponseDto
+      title: Pair«string,string»
     ManufacturerUnit:
       type: object
       properties:
@@ -472,6 +1048,98 @@ components:
         workerType:
           type: string
       title: ManufacturerUnit
+    WfTemplate:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        rmId:
+          type: integer
+          format: int64
+        type:
+          type: string
+        workflowName:
+          type: string
+      title: WfTemplate
+    QcDataResponseDto:
+      type: object
+      properties:
+        audit_status:
+          type: string
+        order_details:
+          $ref: '#/components/schemas/QcDetailResponseDto'
+        order_id:
+          type: integer
+          format: int64
+        order_step_id:
+          type: integer
+          format: int64
+        order_step_status:
+          type: string
+        qc_executive_data:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        qc_executive_id:
+          type: integer
+          format: int64
+        qc_status:
+          type: string
+        qc_template_id:
+          type: integer
+          format: int64
+        rm_id:
+          type: integer
+          format: int64
+        stage:
+          $ref: '#/components/schemas/QcStage'
+        step_name:
+          type: string
+        top_testing_passed:
+          type: boolean
+      title: QcDataResponseDto
+    QcFinalInspectionPoDto:
+      type: object
+      properties:
+        checksum:
+          type: string
+        color:
+          type: string
+        excess_percentage:
+          type: number
+        excess_qty:
+          type: number
+        id:
+          type: integer
+          format: int64
+        new_order:
+          type: boolean
+        order_qty:
+          type: number
+        po_no:
+          type: string
+        remark:
+          type: string
+        repeat_order:
+          type: boolean
+        ship_qty:
+          type: number
+        short_percentage:
+          type: number
+        short_qty:
+          type: number
+        shortage:
+          type: boolean
+      title: QcFinalInspectionPoDto
+    QcDocsOnOrderUpdateResponse:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SingleQcDocsOnOrderUpdateResponse'
+      title: QcDocsOnOrderUpdateResponse
     CreateTnaResponsePayload:
       type: object
       properties:
@@ -502,48 +1170,155 @@ components:
         vp_approval_status:
           type: string
       title: CreateTnaResponsePayload
-    ManufacturerRatingDetails:
+    QcDocDto:
       type: object
       properties:
-        boughtValue:
+        id:
+          type: integer
+          format: int64
+        url:
+          type: string
+      title: QcDocDto
+    Variant:
+      type: object
+      properties:
+        buyingPrice:
           type: number
-        communicationPercentileRank:
+        color:
+          type: string
+        createdBy:
+          type: string
+        currencyPrice:
           type: number
-          format: float
-        completedOrderCount:
+        factoryCurrencyPrice:
+          type: number
+        factoryDollarPrice:
+          type: number
+        finalCurrencyPrice:
+          type: number
+        finalPrice:
+          type: number
+        id:
+          type: integer
+          format: int64
+        identifier:
+          type: string
+        lastQuantityEditor:
+          type: string
+        lockedQuantity:
+          type: integer
+          format: int64
+        order:
+          $ref: '#/components/schemas/OrderDetail'
+        packagingStatus:
+          type: string
+          enum:
+          - over_packed
+          - packed
+          - partially_packed
+          - unpacked
+        packetVariants:
+          type: array
+          items:
+            $ref: '#/components/schemas/PacketVariants'
+        price:
+          type: number
+        priceLocked:
+          type: boolean
+        proposedQuantity:
+          type: integer
+          format: int64
+        purchaseCgst:
+          type: number
+        purchaseIgst:
+          type: number
+        purchaseSgst:
+          type: number
+        qcQuantity:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        quantityFinalized:
+          type: boolean
+        sellingCgst:
+          type: number
+        sellingIgst:
+          type: number
+        sellingSgst:
+          type: number
+        shipmentVariants:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentVariant'
+        size:
+          type: string
+        uom:
+          type: string
+        variantBuyerPoMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantBuyerPoMapping'
+      title: Variant
+    QcSamplingItemDto:
+      type: object
+      properties:
+        alias:
+          type: string
+        cue_point:
+          $ref: '#/components/schemas/QcCuePointDto'
+        id:
+          type: integer
+          format: int64
+        image_url:
+          type: string
+        kind_of_defect:
+          type: string
+        other_defect:
+          type: string
+        other_visual_defect:
+          type: string
+        packing_defect_type:
+          type: string
+        reason_for_failure:
+          type: string
+        status:
+          type: string
+        type_of_defect:
+          type: string
+        visual_defect_category:
+          type: string
+        visual_defect_desc:
+          type: string
+      title: QcSamplingItemDto
+    SingleOnlineQcInspectionResponse:
+      type: object
+      properties:
+        alias:
+          type: string
+        comment:
+          type: string
+        id:
+          type: integer
+          format: int64
+        url:
+          type: string
+      title: SingleOnlineQcInspectionResponse
+    OrderBuyerAssignee:
+      type: object
+      properties:
+        buyerAssigneeId:
           type: integer
           format: int64
         createdBy:
           type: string
-        diffDays:
-          type: number
-          format: float
         id:
           type: integer
           format: int64
-        manufacturerDetail:
-          $ref: '#/components/schemas/Manufacturer'
-        ordertnaMetCount:
-          type: integer
-          format: int64
-        receivedMailCount:
-          type: integer
-          format: int64
-        rejectedQcCount:
-          type: integer
-          format: int64
-        sentMailCount:
-          type: integer
-          format: int64
-        soldValue:
-          type: number
-        tnaChangeRequests:
-          type: integer
-          format: int64
-        totalQcCount:
-          type: integer
-          format: int64
-      title: ManufacturerRatingDetails
+        order:
+          $ref: '#/components/schemas/OrderDetail'
+      title: OrderBuyerAssignee
     CompanyDTO:
       type: object
       properties:
@@ -565,56 +1340,52 @@ components:
         min_trading_margin:
           type: number
       title: CompanyDTO
-    UMSUserResponsePayload:
+    QcStage:
       type: object
       properties:
-        country_code:
+        createdBy:
           type: string
-        created_by:
-          type: string
-        first_name:
-          type: string
-        group_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
         id:
           type: integer
           format: int64
-        last_name:
+        name:
           type: string
-        manager:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-        phone_number:
+      title: QcStage
+    ShipmentVariant:
+      type: object
+      required:
+      - shipment
+      - variant
+      properties:
+        buyerDiscountAmount:
+          type: number
+        buyerDiscountPercentage:
+          type: number
+        createdBy:
           type: string
-        roles:
-          type: array
-          items:
-            type: string
-        username:
-          type: string
-        whatsapp_opt_in:
+        customFields:
+          type: object
+        factoryDiscountAmount:
+          type: number
+        factoryDiscountPercentage:
+          type: number
+        id:
+          type: integer
+          format: int64
+        locked:
           type: boolean
-      title: UMSUserResponsePayload
-    QcSamplingDataResponse:
-      type: object
-      properties:
-        aql_type:
-          type: string
-        id:
+        quantity:
           type: integer
           format: int64
-        sample_size:
-          type: integer
-          format: int64
-        total_no_of_pass:
-          type: integer
-          format: int64
-        total_no_of_reject:
-          type: integer
-          format: int64
-      title: QcSamplingDataResponse
+        shipment:
+          $ref: '#/components/schemas/Shipment'
+        shipmentVariantBuyerPoMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentVariantBuyerPoMapping'
+        variant:
+          $ref: '#/components/schemas/Variant'
+      title: ShipmentVariant
     QCResponsePayload:
       type: object
       properties:
@@ -863,115 +1634,31 @@ components:
         view_url:
           type: string
       title: QCResponsePayload
-    QcSamplingDataDto:
+    OrderDocDto:
       type: object
       properties:
-        aql_type:
+        created_at:
           type: string
+          format: date-time
+        created_by:
+          type: string
+        doc_no:
+          type: string
+        doc_type:
+          type: string
+        docs:
+          $ref: '#/components/schemas/DocDto'
         id:
           type: integer
           format: int64
-        inspection_level_value:
-          type: string
-        pass_count:
-          type: integer
-          format: int64
-        qc_sampling_data_defects:
-          type: array
-          items:
-            $ref: '#/components/schemas/QcSamplingDataDefectsDto'
-        reject_count:
-          type: integer
-          format: int64
-        sample_size:
-          type: integer
-          format: int64
-        total_quantity:
-          type: integer
-          format: int64
-        type:
-          type: string
-      title: QcSamplingDataDto
-    QcFinalInspectionPoDto:
-      type: object
-      properties:
-        checksum:
-          type: string
-        color:
-          type: string
-        excess_percentage:
-          type: number
-        excess_qty:
-          type: number
-        id:
-          type: integer
-          format: int64
-        new_order:
-          type: boolean
-        order_qty:
-          type: number
-        po_no:
-          type: string
-        remark:
-          type: string
-        repeat_order:
-          type: boolean
-        ship_qty:
-          type: number
-        short_percentage:
-          type: number
-        short_qty:
-          type: number
-        shortage:
-          type: boolean
-      title: QcFinalInspectionPoDto
-    OnlineQcInspectionResponse:
-      type: object
-      properties:
-        inspection_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/SingleOnlineQcInspectionResponse'
-      title: OnlineQcInspectionResponse
-    PreviewTargetOrderTnaDatesResponse:
-      type: object
-      properties:
-        effective_order_dates:
-          $ref: '#/components/schemas/ParentOrderTnaDatesDto'
-        reference_order_dates:
-          $ref: '#/components/schemas/ParentOrderTnaDatesDto'
-        reference_order_id:
-          type: integer
-          format: int64
-        step_data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WfStepOrderMapDtoV1'
-        step_date_info:
-          type: array
-          items:
-            type: array
-            items:
-              type: string
-        target_order_dates:
-          $ref: '#/components/schemas/ParentOrderTnaDatesDto'
-        target_order_id:
-          type: integer
-          format: int64
-      title: PreviewTargetOrderTnaDatesResponse
-    CreatePoRequestPayload:
-      type: object
-      properties:
-        auto_approved:
+        is_additional_doc:
           type: boolean
         order_id:
           type: integer
           format: int64
-        reason:
+        s3_path:
           type: string
-        status:
-          type: string
-      title: CreatePoRequestPayload
+      title: OrderDocDto
     OrderLogisticDetails:
       type: object
       properties:
@@ -1056,61 +1743,160 @@ components:
         weightUnit:
           type: string
       title: Packet
-    BrandVpDto:
+    VariantResponseInQcPayload:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-        vp_email:
-          type: string
-        vp_id:
-          type: integer
-          format: int64
-        vp_name:
-          type: string
-      title: BrandVpDto
-    VariantRequestPayload:
-      type: object
-      properties:
-        buying_price:
-          type: number
         color:
           type: string
-        currency_price:
-          type: number
-        factory_currency_price:
-          type: number
-        factory_dollar_price:
-          type: number
-        final_currency_price:
-          type: number
-        final_price:
-          type: number
         id:
           type: integer
           format: int64
         identifier:
           type: string
-        price:
-          type: number
-        qc_quantity:
+        locked_quantity:
           type: integer
           format: int64
+        price_locked:
+          type: boolean
         quantity:
           type: integer
           format: int64
         size:
           type: string
-        through_qc:
-          type: boolean
         uom:
           type: string
-        variant_buyer_po_mappings:
+      title: VariantResponseInQcPayload
+    LeadGenerationResponse:
+      type: object
+      properties:
+        brand:
+          $ref: '#/components/schemas/BrandResponse'
+        client_id:
+          type: integer
+          format: int64
+        company:
+          $ref: '#/components/schemas/CompanyDTO'
+        country:
+          type: string
+        email:
+          type: string
+        id:
+          type: integer
+          format: int64
+        lead_approval_status:
+          type: string
+        lead_projection_list:
           type: array
           items:
-            $ref: '#/components/schemas/VariantBuyerPoMappingRequestPayload'
-      title: VariantRequestPayload
+            $ref: '#/components/schemas/LeadProjectionDTO'
+        name:
+          type: string
+      title: LeadGenerationResponse
+    ManufacturerAddress:
+      type: object
+      properties:
+        addressId:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        manufacturer:
+          $ref: '#/components/schemas/Manufacturer'
+        manufacturerUnit:
+          $ref: '#/components/schemas/ManufacturerUnit'
+        proofDocUrl:
+          type: string
+        proofSubType:
+          type: string
+        proofType:
+          type: string
+        type:
+          type: string
+      title: ManufacturerAddress
+    WfStepOrderMapDtoV1:
+      type: object
+      properties:
+        advance_percentage_comments:
+          type: string
+        approval_status:
+          type: string
+        audit_status:
+          type: string
+        buffer_date:
+          type: string
+          format: date-time
+        buyer_advance_payment:
+          type: integer
+          format: int64
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetOrderCommentsDTO'
+        completion_date:
+          type: string
+          format: date-time
+        due_date:
+          type: string
+          format: date-time
+        factory_advance_payment:
+          type: integer
+          format: int64
+        initial_due_date:
+          type: string
+          format: date-time
+        order_id:
+          type: integer
+          format: int64
+        pending:
+          type: string
+          format: date-time
+        pending_buffer_date:
+          type: string
+          format: date-time
+        qc:
+          type: boolean
+        qc_payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/QCResponsePayload'
+        require_approval:
+          type: string
+        require_due_date:
+          type: string
+        status:
+          type: string
+        step_display_order:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        step_template_id:
+          type: integer
+          format: int64
+        visible_to_client:
+          type: string
+        visible_to_manufacturer:
+          type: string
+        wf_template_id:
+          type: integer
+          format: int64
+        workflow_step_order_map_id:
+          type: integer
+          format: int64
+      title: WfStepOrderMapDtoV1
+    SingleQcDocsOnOrderUpdateResponse:
+      type: object
+      properties:
+        doc:
+          $ref: '#/components/schemas/DocDto'
+        doc_type:
+          type: string
+      title: SingleQcDocsOnOrderUpdateResponse
     AddressSubmitResponsePayload:
       type: object
       properties:
@@ -1145,231 +1931,176 @@ components:
         type:
           type: string
       title: AddressSubmitResponsePayload
-    GetOrderCommentsDTO:
+    OnlineQcInspectionResponse:
       type: object
       properties:
-        comment:
+        inspection_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/SingleOnlineQcInspectionResponse'
+      title: OnlineQcInspectionResponse
+    GroupUsersResponse:
+      type: object
+      properties:
+        factory_users:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/UserSimpleDTO'
+      title: GroupUsersResponse
+    Doc:
+      type: object
+      properties:
+        bucketAndKey:
+          $ref: '#/components/schemas/Pair_string_string'
+        createdBy:
           type: string
-        doc_display_name:
+        docDisplayName:
           type: string
-        doc_id:
+        id:
           type: integer
           format: int64
+        s3Path:
+          type: string
+        s3Version:
+          type: integer
+          format: int64
+      title: Doc
+    OrderBuyerPoBaseDto:
+      type: object
+      properties:
+        buyer_po_no:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: OrderBuyerPoBaseDto
+    QcDetailResponseDto:
+      type: object
+      properties:
+        address_id:
+          type: integer
+          format: int64
+        assignee_data:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        assignee_id:
+          type: integer
+          format: int64
+        buyer_days:
+          type: integer
+          format: int64
+        buyer_pos:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetailBuyerPODocWithOrdersDto'
+        change_tna_request:
+          $ref: '#/components/schemas/CreateTnaResponsePayload'
+        city:
+          type: string
+        company_name:
+          type: string
+        confirmation_date:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        date_created:
+          type: string
+          format: date-time
+        date_update:
+          type: string
+          format: date-time
+        delivery_date:
+          type: string
+          format: date-time
+        description:
+          type: string
         due_date:
           type: string
           format: date-time
-        editable:
+        financial_status:
           type: string
-        insert_date:
-          type: string
-          format: date-time
-        insert_time:
-          type: string
-          format: date-time
-        order_event_id:
-          type: integer
-          format: int64
-        order_id:
-          type: integer
-          format: int64
-        role:
+        images:
           type: array
           items:
             type: string
-        s3_path:
+        initial_due_date:
           type: string
-        step_template_id:
+          format: date-time
+        lead_page_dto:
+          $ref: '#/components/schemas/LeadPageDTO'
+        manufacturer_days:
           type: integer
           format: int64
-        system_generated:
-          type: boolean
-        tagged_users:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UMSUserResponsePayload'
-        user_id:
+        manufacturer_id:
           type: integer
           format: int64
-        user_name:
+        manufacturer_name:
           type: string
-        visible_to_client:
-          type: string
-        visible_to_manufacturer:
-          type: string
-        wf_step_order_map_id:
-          type: integer
-          format: int64
-      title: GetOrderCommentsDTO
-    ManufacturerAddress:
-      type: object
-      properties:
-        addressId:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        manufacturer:
-          $ref: '#/components/schemas/Manufacturer'
-        manufacturerUnit:
-          $ref: '#/components/schemas/ManufacturerUnit'
-        proofDocUrl:
-          type: string
-        proofSubType:
-          type: string
-        proofType:
-          type: string
-        type:
-          type: string
-      title: ManufacturerAddress
-    OrderBuyerPo:
-      type: object
-      properties:
-        buyerPoNo:
-          type: string
-        createdBy:
-          type: string
-        deleted:
-          type: boolean
-        doc:
-          $ref: '#/components/schemas/Doc'
-        id:
-          type: integer
-          format: int64
-        orderDetails:
-          $ref: '#/components/schemas/OrderDetail'
-        poType:
-          $ref: '#/components/schemas/PoType'
-      title: OrderBuyerPo
-    BrandResponse:
-      type: object
-      properties:
-        address_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        ask_buyer_wip_on_order:
-          type: boolean
-        billing_address:
-          $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        brand_name:
-          type: string
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/BrandCategoryDto'
-        compliances:
-          type: array
-          items:
-            type: string
-        created_by:
-          type: string
-        id:
-          type: integer
-          format: int64
-        legal_address:
-          $ref: '#/components/schemas/AddressSubmitResponsePayload'
-        legal_address_response:
-          type: string
-        legal_name:
-          type: string
-        vp_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/BrandVpDto'
-        vps:
-          type: array
-          items:
-            type: integer
-            format: int64
-      title: BrandResponse
-    QcFinalInspectionDocDto:
-      type: object
-      properties:
-        doc_type:
-          type: string
-        remarks:
-          type: string
-        sub_documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/QcFinalInspectionSubDocDto'
-      title: QcFinalInspectionDocDto
-    QcSamplingActivityDto:
-      type: object
-      properties:
-        activity:
-          type: string
-        asset_alias:
-          type: string
-        asset_name:
-          type: string
-        asset_url:
-          type: string
-        duration:
-          type: integer
-          format: int64
-        end_timestamp:
-          type: integer
-          format: int64
-        samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/QcSamplingItemDto'
-        start_timestamp:
-          type: integer
-          format: int64
-      title: QcSamplingActivityDto
-    BusinessOwner:
-      type: object
-      properties:
-        active:
-          type: boolean
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
+        margin_data:
+          $ref: '#/components/schemas/OrderMargin'
         name:
           type: string
-      title: BusinessOwner
-    QcDataResponseDto:
-      type: object
-      properties:
-        audit_status:
-          type: string
-        order_details:
-          $ref: '#/components/schemas/QcDetailResponseDto'
+        ops_assignee_data:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        ops_assignee_id:
+          type: integer
+          format: int64
         order_id:
           type: integer
           format: int64
-        order_step_id:
-          type: integer
-          format: int64
-        order_step_status:
+        order_status:
           type: string
-        qc_executive_data:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-        qc_executive_id:
-          type: integer
-          format: int64
-        qc_status:
+        order_type:
           type: string
-        qc_template_id:
+        parent_order_id:
           type: integer
           format: int64
-        rm_id:
+        payment_doc:
+          $ref: '#/components/schemas/OrderDocDto'
+        po:
+          $ref: '#/components/schemas/CreatePoRequestPayload'
+        po_doc:
+          $ref: '#/components/schemas/OrderDocDto'
+        price:
+          type: number
+        product_description:
+          type: string
+        quantity:
           type: integer
           format: int64
-        stage:
-          $ref: '#/components/schemas/QcStage'
+        request_time:
+          type: string
+          format: date-time
+        rm_name:
+          type: string
+        shipment_mode:
+          type: string
+        sku_data:
+          type: object
+        sku_id:
+          type: string
+        state:
+          type: string
+        status:
+          type: string
         step_name:
           type: string
-        top_testing_passed:
-          type: boolean
-      title: QcDataResponseDto
+        style_code:
+          type: string
+        total_no_of_styles:
+          type: integer
+          format: int64
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantResponseInQcPayload'
+        wf_template_id:
+          type: integer
+          format: int64
+        workflow_status:
+          type: string
+      title: QcDetailResponseDto
     OrderDetail:
       type: object
       properties:
@@ -1680,547 +2411,6 @@ components:
         wfTemplateId:
           $ref: '#/components/schemas/WfTemplate'
       title: OrderDetail
-    Shipment:
-      type: object
-      required:
-      - order
-      properties:
-        actualShipmentMode:
-          type: string
-          enum:
-          - Air
-          - Courier
-          - Land
-          - Sea
-        addressId:
-          type: integer
-          format: int64
-        assigneeId:
-          type: integer
-          format: int64
-        blDate:
-          type: integer
-          format: int64
-        blDoc:
-          type: string
-        blNumber:
-          type: string
-        bookingNo:
-          type: string
-        buyerInvoiceCreated:
-          type: boolean
-        cancellationDate:
-          type: integer
-          format: int64
-        courierPartner:
-          $ref: '#/components/schemas/CourierPartner'
-        createdBy:
-          type: string
-        currentStatus:
-          type: string
-          enum:
-          - booked
-          - complete
-          - deliveryDate
-          - paymentFollowup
-          - preplanned
-          - shipped
-        eta:
-          type: integer
-          format: int64
-        etd:
-          type: integer
-          format: int64
-        exFactoryDate:
-          type: integer
-          format: int64
-        factoryInvoiceCreated:
-          type: boolean
-        factoryInvoiceDoc:
-          type: string
-        factoryInvoiceNo:
-          type: string
-        factoryInvoiceNoRemark:
-          type: string
-        id:
-          type: integer
-          format: int64
-        incoTerm:
-          type: string
-        invoiceApprovalLock:
-          type: boolean
-        invoiceDoc:
-          type: string
-        locked:
-          type: boolean
-        order:
-          $ref: '#/components/schemas/OrderDetail'
-        packingListDoc:
-          type: string
-        plannedShipmentMode:
-          type: string
-          enum:
-          - Air
-          - Courier
-          - Land
-          - Sea
-        podDate:
-          type: integer
-          format: int64
-        podNumber:
-          type: string
-        shipmentHops:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentHop'
-        shipmentPackets:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentPackets'
-        shipmentReady:
-          type: boolean
-        shipmentVariants:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentVariant'
-        shippingBillDoc:
-          type: string
-        trackingId:
-          type: string
-        vessel:
-          type: string
-      title: Shipment
-    OrderManufacturerAssignee:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        manufacturerAssigneeId:
-          type: integer
-          format: int64
-        order:
-          $ref: '#/components/schemas/OrderDetail'
-      title: OrderManufacturerAssignee
-    OrderLogisticCosts:
-      type: object
-      properties:
-        created_by:
-          type: string
-        custom_duty:
-          type: number
-        custom_duty_cost_type:
-          type: string
-        custom_duty_per_piece:
-          type: number
-        delivery_charges:
-          type: number
-        freight_cost:
-          type: number
-        harbor_merchandise_fee:
-          type: number
-        id:
-          type: integer
-          format: int64
-        logistic_cost:
-          type: number
-        logistic_cost_per_piece:
-          type: number
-        logistic_cost_type:
-          type: string
-        order_logistic_details:
-          $ref: '#/components/schemas/OrderLogisticDetails'
-        reciprocal_tariff:
-          type: number
-        reciprocal_tariff_cost_type:
-          type: string
-        reciprocal_tariff_per_piece:
-          type: number
-        total_custom_duty:
-          type: number
-      title: OrderLogisticCosts
-    RmDetail:
-      type: object
-      properties:
-        categoryId:
-          type: integer
-          format: int64
-        categoryName:
-          type: string
-        contactInfo:
-          type: string
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: RmDetail
-    CourierPartner:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: CourierPartner
-    PacketVariants:
-      type: object
-      required:
-      - packet
-      - variant
-      properties:
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        locked:
-          type: boolean
-        packet:
-          $ref: '#/components/schemas/Packet'
-        quantity:
-          type: integer
-          format: int64
-        variant:
-          $ref: '#/components/schemas/Variant'
-      title: PacketVariants
-    ManufacturerDirector:
-      type: object
-      required:
-      - manufacturer
-      properties:
-        aadharDocUrl:
-          type: string
-        aadharNo:
-          type: string
-        aadharNoDocId:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        din:
-          type: string
-        dpin:
-          type: string
-        fatherName:
-          type: string
-        id:
-          type: integer
-          format: int64
-        isPrimary:
-          type: boolean
-        manufacturer:
-          $ref: '#/components/schemas/Manufacturer'
-        name:
-          type: string
-        pan:
-          type: string
-        panDocId:
-          type: integer
-          format: int64
-        panDocUrl:
-          type: string
-        passportNo:
-          type: string
-      title: ManufacturerDirector
-    ManufacturerBase:
-      type: object
-      properties:
-        aadharNo:
-          type: integer
-          format: int64
-        capacityPerMonth:
-          type: integer
-          format: int64
-        capacityToGeniemode:
-          type: string
-        capacityUtilization:
-          type: string
-        cin:
-          type: string
-        exportLicenseNo:
-          type: string
-        gstNumber:
-          type: string
-        llpin:
-          type: string
-        name:
-          type: string
-        nid:
-          type: string
-        pan:
-          type: string
-        registrationNo:
-          type: string
-        tan:
-          type: string
-        tin:
-          type: string
-        typeOfCurrentBuyer:
-          type: string
-        vat:
-          type: string
-      title: ManufacturerBase
-    ManufacturerDocs:
-      type: object
-      properties:
-        auditStatus:
-          type: string
-        auditTs:
-          type: integer
-          format: int64
-        auditorId:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        docCategory:
-          type: string
-        docExpiry:
-          type: integer
-          format: int64
-        docSubCategory:
-          type: string
-        docUrl:
-          type: string
-        id:
-          type: integer
-          format: int64
-        manufacturer:
-          $ref: '#/components/schemas/Manufacturer'
-        manufacturerUnit:
-          $ref: '#/components/schemas/ManufacturerUnit'
-      title: ManufacturerDocs
-    QcStage:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: QcStage
-    ShipmentVariantBuyerPoMapping:
-      type: object
-      required:
-      - shipmentVariant
-      - variantBuyerPoMapping
-      properties:
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        locked:
-          type: boolean
-        quantity:
-          type: integer
-          format: int64
-        shipmentVariant:
-          $ref: '#/components/schemas/ShipmentVariant'
-        variantBuyerPoMapping:
-          $ref: '#/components/schemas/VariantBuyerPoMapping'
-      title: ShipmentVariantBuyerPoMapping
-    QcDocsOnOrderUpdateResponse:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/SingleQcDocsOnOrderUpdateResponse'
-      title: QcDocsOnOrderUpdateResponse
-    QcFinalInspectionResponse:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/QcFinalInspectionDocDto'
-        id:
-          type: integer
-          format: int64
-        measurement_audit:
-          type: string
-        packing_audit:
-          type: string
-        remark:
-          type: string
-        selected_cartons:
-          type: string
-        video_url:
-          type: string
-        visual_audit:
-          type: string
-      title: QcFinalInspectionResponse
-    UserResponsePayload:
-      type: object
-      properties:
-        created_by:
-          type: string
-        first_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        last_name:
-          type: string
-        manager:
-          $ref: '#/components/schemas/UserResponsePayload'
-        phone_number:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-        username:
-          type: string
-      title: UserResponsePayload
-    OrderAddress:
-      type: object
-      properties:
-        addressId:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        order:
-          $ref: '#/components/schemas/OrderDetail'
-      title: OrderAddress
-    SingleOnlineQcInspectionResponse:
-      type: object
-      properties:
-        alias:
-          type: string
-        comment:
-          type: string
-        id:
-          type: integer
-          format: int64
-        url:
-          type: string
-      title: SingleOnlineQcInspectionResponse
-    GeniemodeEntityTags:
-      type: object
-      required:
-      - geniemodeEntity
-      - tag
-      properties:
-        createdBy:
-          type: string
-        geniemodeEntity:
-          $ref: '#/components/schemas/GeniemodeEntity'
-        id:
-          type: integer
-          format: int64
-        tag:
-          type: string
-      title: GeniemodeEntityTags
-    QcFinalInspectionSubDocDto:
-      type: object
-      properties:
-        alias:
-          type: string
-        id:
-          type: integer
-          format: int64
-        remarks:
-          type: string
-        url:
-          type: string
-      title: QcFinalInspectionSubDocDto
-    WfStepOrderMapDtoV1:
-      type: object
-      properties:
-        advance_percentage_comments:
-          type: string
-        approval_status:
-          type: string
-        audit_status:
-          type: string
-        buffer_date:
-          type: string
-          format: date-time
-        buyer_advance_payment:
-          type: integer
-          format: int64
-        comments:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetOrderCommentsDTO'
-        completion_date:
-          type: string
-          format: date-time
-        due_date:
-          type: string
-          format: date-time
-        factory_advance_payment:
-          type: integer
-          format: int64
-        initial_due_date:
-          type: string
-          format: date-time
-        order_id:
-          type: integer
-          format: int64
-        pending:
-          type: string
-          format: date-time
-        pending_buffer_date:
-          type: string
-          format: date-time
-        qc:
-          type: boolean
-        qc_payload:
-          type: array
-          items:
-            $ref: '#/components/schemas/QCResponsePayload'
-        require_approval:
-          type: string
-        require_due_date:
-          type: string
-        status:
-          type: string
-        step_display_order:
-          type: integer
-          format: int64
-        step_name:
-          type: string
-        step_success_criteria:
-          type: string
-        step_template_id:
-          type: integer
-          format: int64
-        visible_to_client:
-          type: string
-        visible_to_manufacturer:
-          type: string
-        wf_template_id:
-          type: integer
-          format: int64
-        workflow_step_order_map_id:
-          type: integer
-          format: int64
-      title: WfStepOrderMapDtoV1
-    SingleQcDocsOnOrderUpdateResponse:
-      type: object
-      properties:
-        doc:
-          $ref: '#/components/schemas/DocDto'
-        doc_type:
-          type: string
-      title: SingleQcDocsOnOrderUpdateResponse
     SaveTnaDatesOnOrderRequest:
       type: object
       properties:
@@ -2244,228 +2434,48 @@ components:
           type: integer
           format: int64
       title: SaveTnaDatesOnOrderRequest
-    LeadPageDTO:
+    BrandResponse:
       type: object
       properties:
-        current_stage_name:
+        address_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        ask_buyer_wip_on_order:
+          type: boolean
+        billing_address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        brand_name:
           type: string
-        current_user:
-          $ref: '#/components/schemas/UserResponsePayload'
-        last_stage_id:
-          type: integer
-          format: int64
-        lead_generation:
-          $ref: '#/components/schemas/LeadGenerationResponse'
-        time_difference:
-          type: integer
-          format: int64
-      title: LeadPageDTO
-    ParentOrderTnaDatesDto:
-      type: object
-      properties:
-        buyer_eta_date:
-          type: string
-          example: MM-dd-YY
-        confirmation_date:
-          type: string
-          example: MM-dd-YY
-        eta_date:
-          type: string
-          example: MM-dd-YY
-        factory_eta_date:
-          type: string
-          example: MM-dd-YY
-      title: ParentOrderTnaDatesDto
-    OrderDocDto:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/BrandCategoryDto'
+        compliances:
+          type: array
+          items:
+            type: string
         created_by:
           type: string
-        doc_no:
-          type: string
-        doc_type:
-          type: string
-        docs:
-          $ref: '#/components/schemas/DocDto'
         id:
           type: integer
           format: int64
-        is_additional_doc:
-          type: boolean
-        order_id:
-          type: integer
-          format: int64
-        s3_path:
+        legal_address:
+          $ref: '#/components/schemas/AddressSubmitResponsePayload'
+        legal_address_response:
           type: string
-      title: OrderDocDto
-    OrderBuyerPoBaseDto:
-      type: object
-      properties:
-        buyer_po_no:
+        legal_name:
           type: string
-        id:
-          type: integer
-          format: int64
-      title: OrderBuyerPoBaseDto
-    OrderBuyerAssignee:
-      type: object
-      properties:
-        buyerAssigneeId:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        order:
-          $ref: '#/components/schemas/OrderDetail'
-      title: OrderBuyerAssignee
-    QcCuePointDto:
-      type: object
-      properties:
-        activity_end_timestamp:
-          type: integer
-          format: int64
-        activity_name:
-          type: string
-        activity_start_timestamp:
-          type: integer
-          format: int64
-        asset_alias:
-          type: string
-        asset_name:
-          type: string
-        asset_url:
-          type: string
-        cue_point_asset_alias:
-          type: string
-        cue_point_asset_url:
-          type: string
-        cue_point_type:
-          type: string
-        end_duration:
-          type: integer
-          format: int64
-        end_timestamp:
-          type: integer
-          format: int64
-        input_field_name:
-          type: string
-        start_duration:
-          type: integer
-          format: int64
-        start_timestamp:
-          type: integer
-          format: int64
-        user_defined_data:
-          type: object
-        workflow_step_id:
-          type: integer
-          format: int64
-      title: QcCuePointDto
-    QcDocDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        url:
-          type: string
-      title: QcDocDto
-    VariantBuyerPoMappingRequestPayload:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        locked_quantity:
-          type: integer
-          format: int64
-        order_buyer_po:
-          $ref: '#/components/schemas/OrderBuyerPoBaseDto'
-        po_no:
-          type: string
-        quantity:
-          type: integer
-          format: int64
-      title: VariantBuyerPoMappingRequestPayload
-    BrandCategoryDto:
-      type: object
-      properties:
-        category_id:
-          type: integer
-          format: int64
-        category_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: BrandCategoryDto
-    LeadGenerationResponse:
-      type: object
-      properties:
-        brand:
-          $ref: '#/components/schemas/BrandResponse'
-        client_id:
-          type: integer
-          format: int64
-        company:
-          $ref: '#/components/schemas/CompanyDTO'
-        country:
-          type: string
-        email:
-          type: string
-        id:
-          type: integer
-          format: int64
-        lead_approval_status:
-          type: string
-        lead_projection_list:
+        vp_details:
           type: array
           items:
-            $ref: '#/components/schemas/LeadProjectionDTO'
-        name:
-          type: string
-      title: LeadGenerationResponse
-    ShipmentVariant:
-      type: object
-      required:
-      - shipment
-      - variant
-      properties:
-        buyerDiscountAmount:
-          type: number
-        buyerDiscountPercentage:
-          type: number
-        createdBy:
-          type: string
-        customFields:
-          type: object
-        factoryDiscountAmount:
-          type: number
-        factoryDiscountPercentage:
-          type: number
-        id:
-          type: integer
-          format: int64
-        locked:
-          type: boolean
-        quantity:
-          type: integer
-          format: int64
-        shipment:
-          $ref: '#/components/schemas/Shipment'
-        shipmentVariantBuyerPoMappings:
+            $ref: '#/components/schemas/BrandVpDto'
+        vps:
           type: array
           items:
-            $ref: '#/components/schemas/ShipmentVariantBuyerPoMapping'
-        variant:
-          $ref: '#/components/schemas/Variant'
-      title: ShipmentVariant
+            type: integer
+            format: int64
+      title: BrandResponse
     QCLineDetailsDto:
       type: object
       properties:
@@ -2523,226 +2533,88 @@ components:
         video_enabled:
           type: boolean
       title: QCLineDetailsDto
-    Variant:
+    QcFinalInspectionSubDocDto:
       type: object
       properties:
-        buyingPrice:
-          type: number
-        color:
+        alias:
           type: string
-        createdBy:
-          type: string
-        currencyPrice:
-          type: number
-        factoryCurrencyPrice:
-          type: number
-        factoryDollarPrice:
-          type: number
-        finalCurrencyPrice:
-          type: number
-        finalPrice:
-          type: number
         id:
           type: integer
           format: int64
-        identifier:
+        remarks:
           type: string
-        lastQuantityEditor:
+        url:
           type: string
-        lockedQuantity:
-          type: integer
-          format: int64
-        order:
-          $ref: '#/components/schemas/OrderDetail'
-        packagingStatus:
-          type: string
-          enum:
-          - over_packed
-          - packed
-          - partially_packed
-          - unpacked
-        packetVariants:
-          type: array
-          items:
-            $ref: '#/components/schemas/PacketVariants'
-        price:
-          type: number
-        priceLocked:
-          type: boolean
-        proposedQuantity:
-          type: integer
-          format: int64
-        purchaseCgst:
-          type: number
-        purchaseIgst:
-          type: number
-        purchaseSgst:
-          type: number
-        qcQuantity:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int64
-        quantityFinalized:
-          type: boolean
-        sellingCgst:
-          type: number
-        sellingIgst:
-          type: number
-        sellingSgst:
-          type: number
-        shipmentVariants:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentVariant'
-        size:
-          type: string
-        uom:
-          type: string
-        variantBuyerPoMappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/VariantBuyerPoMapping'
-      title: Variant
-    QcDetailResponseDto:
+      title: QcFinalInspectionSubDocDto
+    ManufacturerDocs:
       type: object
       properties:
-        address_id:
+        auditStatus:
+          type: string
+        auditTs:
           type: integer
           format: int64
-        assignee_data:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-        assignee_id:
+        auditorId:
           type: integer
           format: int64
-        buyer_days:
+        createdBy:
+          type: string
+        docCategory:
+          type: string
+        docExpiry:
           type: integer
           format: int64
-        buyer_pos:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderDetailBuyerPODocWithOrdersDto'
-        change_tna_request:
-          $ref: '#/components/schemas/CreateTnaResponsePayload'
-        city:
+        docSubCategory:
           type: string
-        company_name:
+        docUrl:
           type: string
-        confirmation_date:
-          type: string
-          format: date-time
-        created_by:
-          type: string
-        date_created:
-          type: string
-          format: date-time
-        date_update:
-          type: string
-          format: date-time
-        delivery_date:
-          type: string
-          format: date-time
-        description:
-          type: string
-        due_date:
-          type: string
-          format: date-time
-        financial_status:
-          type: string
-        images:
-          type: array
-          items:
-            type: string
-        initial_due_date:
-          type: string
-          format: date-time
-        lead_page_dto:
-          $ref: '#/components/schemas/LeadPageDTO'
-        manufacturer_days:
+        id:
           type: integer
           format: int64
-        manufacturer_id:
-          type: integer
-          format: int64
-        manufacturer_name:
-          type: string
-        margin_data:
-          $ref: '#/components/schemas/OrderMargin'
-        name:
-          type: string
-        ops_assignee_data:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-        ops_assignee_id:
-          type: integer
-          format: int64
-        order_id:
-          type: integer
-          format: int64
-        order_status:
-          type: string
-        order_type:
-          type: string
-        parent_order_id:
-          type: integer
-          format: int64
-        payment_doc:
-          $ref: '#/components/schemas/OrderDocDto'
-        po:
-          $ref: '#/components/schemas/CreatePoRequestPayload'
-        po_doc:
-          $ref: '#/components/schemas/OrderDocDto'
-        price:
-          type: number
-        product_description:
-          type: string
-        quantity:
-          type: integer
-          format: int64
-        request_time:
-          type: string
-          format: date-time
-        rm_name:
-          type: string
-        shipment_mode:
-          type: string
-        sku_data:
-          type: object
-        sku_id:
-          type: string
-        state:
-          type: string
-        status:
-          type: string
-        step_name:
-          type: string
-        style_code:
-          type: string
-        total_no_of_styles:
-          type: integer
-          format: int64
-        variants:
-          type: array
-          items:
-            $ref: '#/components/schemas/VariantResponseInQcPayload'
-        wf_template_id:
-          type: integer
-          format: int64
-        workflow_status:
-          type: string
-      title: QcDetailResponseDto
-    Pair_string_string:
+        manufacturer:
+          $ref: '#/components/schemas/Manufacturer'
+        manufacturerUnit:
+          $ref: '#/components/schemas/ManufacturerUnit'
+      title: ManufacturerDocs
+    ManufacturerEligibleCategories:
       type: object
       properties:
-        key:
+        category:
           type: string
-        left:
+        createdBy:
           type: string
-        right:
+        id:
+          type: integer
+          format: int64
+        manufacturer:
+          $ref: '#/components/schemas/Manufacturer'
+      title: ManufacturerEligibleCategories
+    BrandVpDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        vp_email:
           type: string
-        value:
+        vp_id:
+          type: integer
+          format: int64
+        vp_name:
           type: string
-      title: Pair«string,string»
+      title: BrandVpDto
+    QcFinalInspectionDocDto:
+      type: object
+      properties:
+        doc_type:
+          type: string
+        remarks:
+          type: string
+        sub_documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcFinalInspectionSubDocDto'
+      title: QcFinalInspectionDocDto
     OrderMargin:
       type: object
       properties:
@@ -2858,41 +2730,45 @@ components:
         total_custom_duty:
           type: number
       title: OrderMargin
-    OrderLogisticDocs:
+    QcSamplingDataResponse:
       type: object
       properties:
-        created_by:
+        aql_type:
           type: string
         id:
           type: integer
           format: int64
-        order_logistic_details:
-          $ref: '#/components/schemas/OrderLogisticDetails'
-        s3_url:
-          type: string
-        type:
-          type: string
-        version:
+        sample_size:
           type: integer
           format: int64
-      title: OrderLogisticDocs
-    ShipmentDoc:
+        total_no_of_pass:
+          type: integer
+          format: int64
+        total_no_of_reject:
+          type: integer
+          format: int64
+      title: QcSamplingDataResponse
+    UserSimpleDTO:
       type: object
-      required:
-      - shipmentHop
       properties:
-        createdBy:
+        country_code:
           type: string
-        documentType:
+        department:
           type: string
-        documentUrl:
+        first_name:
           type: string
         id:
           type: integer
           format: int64
-        shipmentHop:
-          $ref: '#/components/schemas/ShipmentHop'
-      title: ShipmentDoc
+        is_primary:
+          type: boolean
+        last_name:
+          type: string
+        phone_number:
+          type: string
+        username:
+          type: string
+      title: UserSimpleDTO
     QcAbortDocDto:
       type: object
       properties:
@@ -2904,28 +2780,54 @@ components:
         url:
           type: string
       title: QcAbortDocDto
-    CopyTnaDatesFromParentRequestPayload:
+    OrderDetailBuyerPODocWithOrdersDto:
       type: object
       properties:
-        orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/SaveTnaDatesOnOrderRequest'
-        parent_order_id:
+        buyer_doc:
+          $ref: '#/components/schemas/OrderDocDto'
+        buyer_po_id:
           type: integer
           format: int64
-      title: CopyTnaDatesFromParentRequestPayload
-    PoType:
-      type: object
-      properties:
-        createdBy:
+        buyer_po_no:
           type: string
         id:
           type: integer
           format: int64
-        name:
+        order_ids:
+          type: array
+          uniqueItems: true
+          items:
+            type: integer
+            format: int64
+        po_type:
           type: string
-      title: PoType
+      title: OrderDetailBuyerPODocWithOrdersDto
+    PreviewTargetOrderTnaDatesResponse:
+      type: object
+      properties:
+        effective_order_dates:
+          $ref: '#/components/schemas/ParentOrderTnaDatesDto'
+        reference_order_dates:
+          $ref: '#/components/schemas/ParentOrderTnaDatesDto'
+        reference_order_id:
+          type: integer
+          format: int64
+        step_data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WfStepOrderMapDtoV1'
+        step_date_info:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+        target_order_dates:
+          $ref: '#/components/schemas/ParentOrderTnaDatesDto'
+        target_order_id:
+          type: integer
+          format: int64
+      title: PreviewTargetOrderTnaDatesResponse
     OrderAudit:
       type: object
       properties:
@@ -2994,6 +2896,146 @@ components:
           type: integer
           format: int64
       title: ShipmentHop
+    RmDetail:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          format: int64
+        categoryName:
+          type: string
+        contactInfo:
+          type: string
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: RmDetail
+    LeadPageDTO:
+      type: object
+      properties:
+        current_stage_name:
+          type: string
+        current_user:
+          $ref: '#/components/schemas/UserResponsePayload'
+        last_stage_id:
+          type: integer
+          format: int64
+        lead_generation:
+          $ref: '#/components/schemas/LeadGenerationResponse'
+        time_difference:
+          type: integer
+          format: int64
+      title: LeadPageDTO
+    ManufacturerAgreementDetails:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        indiaEntityBuySellModelAgreementApprovalDate:
+          type: integer
+          format: int64
+        indiaEntityBuySellModelAgreementDocUrl:
+          type: string
+        indiaEntityBuySellModelAgreementJson:
+          type: string
+        indiaEntityBuySellModelAgreementLocation:
+          type: string
+        indiaEntityBuySellModelAgreementSignatureDocUrl:
+          type: string
+        indiaEntityCommissionModelAgreementApprovalDate:
+          type: integer
+          format: int64
+        indiaEntityCommissionModelAgreementDocUrl:
+          type: string
+        indiaEntityCommissionModelAgreementJson:
+          type: string
+        indiaEntityCommissionModelAgreementLocation:
+          type: string
+        indiaEntityCommissionModelAgreementSignatureDocUrl:
+          type: string
+        manufacturerDetail:
+          $ref: '#/components/schemas/Manufacturer'
+        ukEntityBuySellModelAgreementApprovalDate:
+          type: integer
+          format: int64
+        ukEntityBuySellModelAgreementDocUrl:
+          type: string
+        ukEntityBuySellModelAgreementJson:
+          type: string
+        ukEntityBuySellModelAgreementLocation:
+          type: string
+        ukEntityBuySellModelAgreementSignatureDocUrl:
+          type: string
+        ukEntityCommissionModelAgreementApprovalDate:
+          type: integer
+          format: int64
+        ukEntityCommissionModelAgreementDocUrl:
+          type: string
+        ukEntityCommissionModelAgreementJson:
+          type: string
+        ukEntityCommissionModelAgreementLocation:
+          type: string
+        ukEntityCommissionModelAgreementSignatureDocUrl:
+          type: string
+        usEntityBuySellModelAgreementApprovalDate:
+          type: integer
+          format: int64
+        usEntityBuySellModelAgreementDocUrl:
+          type: string
+        usEntityBuySellModelAgreementJson:
+          type: string
+        usEntityBuySellModelAgreementLocation:
+          type: string
+        usEntityBuySellModelAgreementSignatureDocUrl:
+          type: string
+        usEntityCommissionModelAgreementApprovalDate:
+          type: integer
+          format: int64
+        usEntityCommissionModelAgreementDocUrl:
+          type: string
+        usEntityCommissionModelAgreementJson:
+          type: string
+        usEntityCommissionModelAgreementLocation:
+          type: string
+        usEntityCommissionModelAgreementSignatureDocUrl:
+          type: string
+      title: ManufacturerAgreementDetails
+    QcSamplingDataDto:
+      type: object
+      properties:
+        aql_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        inspection_level_value:
+          type: string
+        pass_count:
+          type: integer
+          format: int64
+        qc_sampling_data_defects:
+          type: array
+          items:
+            $ref: '#/components/schemas/QcSamplingDataDefectsDto'
+        reject_count:
+          type: integer
+          format: int64
+        sample_size:
+          type: integer
+          format: int64
+        total_quantity:
+          type: integer
+          format: int64
+        type:
+          type: string
+      title: QcSamplingDataDto
     ProcessStepsDto:
       type: object
       properties:
@@ -3082,316 +3124,48 @@ components:
           type: integer
           format: int64
       title: ProcessStepsDto
-    Manufacturer:
+    VariantRequestPayload:
       type: object
       properties:
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerAddress'
-        brandName:
-          type: string
-        buyerName:
-          type: string
-        catalougeShootImageAvailable:
-          type: string
-        catalougeSize:
-          type: string
-        createdBy:
-          type: string
-        directors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerDirector'
-        eligibleCategories:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerEligibleCategories'
-        financialBacking:
-          type: string
-        firmType:
-          type: string
-        gaId:
-          type: string
-        hasOwnLabel:
-          type: boolean
-        id:
-          type: integer
-          format: int64
-        manufacturerAgreementDetails:
-          $ref: '#/components/schemas/ManufacturerAgreementDetails'
-        manufacturerBase:
-          $ref: '#/components/schemas/ManufacturerBase'
-        manufacturerDocs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerDocs'
-        manufacturerRatingDetails:
-          $ref: '#/components/schemas/ManufacturerRatingDetails'
-        needAdvancePayment:
-          type: boolean
-        onBoardingTeamMemberName:
-          type: string
-        prevYearTurnover:
+        buying_price:
           type: number
-          format: float
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerProductMap'
-        region:
-          type: string
-        stepsCompleted:
-          type: integer
-          format: int64
-        supplierSubType:
-          type: string
-        supplierType:
-          type: string
-        type:
-          type: string
-        udyamRegistrationCertificatePresent:
-          type: boolean
-        units:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManufacturerUnit'
-        website:
-          type: string
-      title: Manufacturer
-    OrderDetailBuyerPODocWithOrdersDto:
-      type: object
-      properties:
-        buyer_doc:
-          $ref: '#/components/schemas/OrderDocDto'
-        buyer_po_id:
-          type: integer
-          format: int64
-        buyer_po_no:
-          type: string
-        id:
-          type: integer
-          format: int64
-        order_ids:
-          type: array
-          uniqueItems: true
-          items:
-            type: integer
-            format: int64
-        po_type:
-          type: string
-      title: OrderDetailBuyerPODocWithOrdersDto
-    DocDetailsDto:
-      type: object
-      properties:
-        doc_display_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        order_id:
-          type: integer
-          format: int64
-        s3_path:
-          type: string
-        s3_version:
-          type: integer
-          format: int64
-        step_name:
-          type: string
-      title: DocDetailsDto
-    GeniemodeEntityAddress:
-      type: object
-      required:
-      - geniemodeEntity
-      properties:
-        addressId:
-          type: integer
-          format: int64
-        createdBy:
-          type: string
-        geniemodeEntity:
-          $ref: '#/components/schemas/GeniemodeEntity'
-        id:
-          type: integer
-          format: int64
-        type:
-          type: string
-      title: GeniemodeEntityAddress
-    ManufacturerAgreementDetails:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        indiaEntityBuySellModelAgreementApprovalDate:
-          type: integer
-          format: int64
-        indiaEntityBuySellModelAgreementDocUrl:
-          type: string
-        indiaEntityBuySellModelAgreementJson:
-          type: string
-        indiaEntityBuySellModelAgreementLocation:
-          type: string
-        indiaEntityBuySellModelAgreementSignatureDocUrl:
-          type: string
-        indiaEntityCommissionModelAgreementApprovalDate:
-          type: integer
-          format: int64
-        indiaEntityCommissionModelAgreementDocUrl:
-          type: string
-        indiaEntityCommissionModelAgreementJson:
-          type: string
-        indiaEntityCommissionModelAgreementLocation:
-          type: string
-        indiaEntityCommissionModelAgreementSignatureDocUrl:
-          type: string
-        manufacturerDetail:
-          $ref: '#/components/schemas/Manufacturer'
-        ukEntityBuySellModelAgreementApprovalDate:
-          type: integer
-          format: int64
-        ukEntityBuySellModelAgreementDocUrl:
-          type: string
-        ukEntityBuySellModelAgreementJson:
-          type: string
-        ukEntityBuySellModelAgreementLocation:
-          type: string
-        ukEntityBuySellModelAgreementSignatureDocUrl:
-          type: string
-        ukEntityCommissionModelAgreementApprovalDate:
-          type: integer
-          format: int64
-        ukEntityCommissionModelAgreementDocUrl:
-          type: string
-        ukEntityCommissionModelAgreementJson:
-          type: string
-        ukEntityCommissionModelAgreementLocation:
-          type: string
-        ukEntityCommissionModelAgreementSignatureDocUrl:
-          type: string
-        usEntityBuySellModelAgreementApprovalDate:
-          type: integer
-          format: int64
-        usEntityBuySellModelAgreementDocUrl:
-          type: string
-        usEntityBuySellModelAgreementJson:
-          type: string
-        usEntityBuySellModelAgreementLocation:
-          type: string
-        usEntityBuySellModelAgreementSignatureDocUrl:
-          type: string
-        usEntityCommissionModelAgreementApprovalDate:
-          type: integer
-          format: int64
-        usEntityCommissionModelAgreementDocUrl:
-          type: string
-        usEntityCommissionModelAgreementJson:
-          type: string
-        usEntityCommissionModelAgreementLocation:
-          type: string
-        usEntityCommissionModelAgreementSignatureDocUrl:
-          type: string
-      title: ManufacturerAgreementDetails
-    GroupUsersResponse:
-      type: object
-      properties:
-        factory_users:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/UserSimpleDTO'
-      title: GroupUsersResponse
-    QcLineWalkResponse:
-      type: object
-      properties:
-        alias:
-          type: string
-        id:
-          type: integer
-          format: int64
-        position:
-          type: integer
-          format: int64
-        s3_path:
-          type: string
-      title: QcLineWalkResponse
-    ManufacturerProductMap:
-      type: object
-      properties:
-        category:
-          type: string
-        createdBy:
-          type: string
-        id:
-          type: integer
-          format: int64
-        manufacturer:
-          $ref: '#/components/schemas/Manufacturer'
-        name:
-          type: string
-        subType:
-          type: string
-        type:
-          type: string
-      title: ManufacturerProductMap
-    QcSamplingItemDto:
-      type: object
-      properties:
-        alias:
-          type: string
-        cue_point:
-          $ref: '#/components/schemas/QcCuePointDto'
-        id:
-          type: integer
-          format: int64
-        image_url:
-          type: string
-        kind_of_defect:
-          type: string
-        other_defect:
-          type: string
-        other_visual_defect:
-          type: string
-        packing_defect_type:
-          type: string
-        reason_for_failure:
-          type: string
-        status:
-          type: string
-        type_of_defect:
-          type: string
-        visual_defect_category:
-          type: string
-        visual_defect_desc:
-          type: string
-      title: QcSamplingItemDto
-    VariantResponseInQcPayload:
-      type: object
-      properties:
         color:
           type: string
+        currency_price:
+          type: number
+        factory_currency_price:
+          type: number
+        factory_dollar_price:
+          type: number
+        final_currency_price:
+          type: number
+        final_price:
+          type: number
         id:
           type: integer
           format: int64
         identifier:
           type: string
-        locked_quantity:
+        price:
+          type: number
+        qc_quantity:
           type: integer
           format: int64
-        price_locked:
-          type: boolean
         quantity:
           type: integer
           format: int64
         size:
           type: string
+        through_qc:
+          type: boolean
         uom:
           type: string
-      title: VariantResponseInQcPayload
-    WfTemplate:
+        variant_buyer_po_mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantBuyerPoMappingRequestPayload'
+      title: VariantRequestPayload
+    OrderManufacturerAssignee:
       type: object
       properties:
         createdBy:
@@ -3399,14 +3173,49 @@ components:
         id:
           type: integer
           format: int64
-        rmId:
+        manufacturerAssigneeId:
           type: integer
           format: int64
-        type:
+        order:
+          $ref: '#/components/schemas/OrderDetail'
+      title: OrderManufacturerAssignee
+    OrderLogisticCosts:
+      type: object
+      properties:
+        created_by:
           type: string
-        workflowName:
+        custom_duty:
+          type: number
+        custom_duty_cost_type:
           type: string
-      title: WfTemplate
+        custom_duty_per_piece:
+          type: number
+        delivery_charges:
+          type: number
+        freight_cost:
+          type: number
+        harbor_merchandise_fee:
+          type: number
+        id:
+          type: integer
+          format: int64
+        logistic_cost:
+          type: number
+        logistic_cost_per_piece:
+          type: number
+        logistic_cost_type:
+          type: string
+        order_logistic_details:
+          $ref: '#/components/schemas/OrderLogisticDetails'
+        reciprocal_tariff:
+          type: number
+        reciprocal_tariff_cost_type:
+          type: string
+        reciprocal_tariff_per_piece:
+          type: number
+        total_custom_duty:
+          type: number
+      title: OrderLogisticCosts
     LeadProjectionDTO:
       type: object
       properties:
@@ -3427,64 +3236,86 @@ components:
           type: integer
           format: int64
       title: LeadProjectionDTO
-    QcCartonDto:
+    SampleOrderMapping:
       type: object
       properties:
-        carton_no:
-          type: number
-        checksum:
+        createdBy:
           type: string
-        comments:
-          type: string
-        gross_weight:
-          type: number
         id:
           type: integer
           format: int64
-        net_weight:
-          type: number
-        total:
-          type: number
-        type:
+        order:
+          $ref: '#/components/schemas/OrderDetail'
+        sample:
+          $ref: '#/components/schemas/OrderDetail'
+      title: SampleOrderMapping
+    QcSamplingDataDefectsDto:
+      type: object
+      properties:
+        accept_point:
+          type: integer
+          format: int64
+        aql_type:
           type: string
-      title: QcCartonDto
-    GeniemodeEntity:
+        count:
+          type: integer
+          format: int64
+        defect_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        reject_point:
+          type: integer
+          format: int64
+      title: QcSamplingDataDefectsDto
+    UMSUserResponsePayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        created_by:
+          type: string
+        first_name:
+          type: string
+        group_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        whatsapp_opt_in:
+          type: boolean
+      title: UMSUserResponsePayload
+    OrderAddress:
       type: object
       properties:
         addressId:
           type: integer
           format: int64
-        addressList:
-          type: array
-          items:
-            $ref: '#/components/schemas/GeniemodeEntityAddress'
-        allowManualInvoiceNo:
-          type: boolean
-        compliance:
-          type: string
         createdBy:
-          type: string
-        currency:
           type: string
         id:
           type: integer
           format: int64
-        invoiceDeclaration:
-          type: string
-        label:
-          type: string
-        legalName:
-          type: string
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/GeniemodeEntityTags'
-        tallyCurrency:
-          type: string
-        value:
-          type: string
-      title: GeniemodeEntity
-    ManufacturerEligibleCategories:
+        order:
+          $ref: '#/components/schemas/OrderDetail'
+      title: OrderAddress
+    ManufacturerProductMap:
       type: object
       properties:
         category:
@@ -3496,4 +3327,173 @@ components:
           format: int64
         manufacturer:
           $ref: '#/components/schemas/Manufacturer'
-      title: ManufacturerEligibleCategories
+        name:
+          type: string
+        subType:
+          type: string
+        type:
+          type: string
+      title: ManufacturerProductMap
+    QcFinalInspectionThirdPartyResponseDto:
+      type: object
+      properties:
+        final_report:
+          $ref: '#/components/schemas/QcDocDto'
+        final_report_doc_alias:
+          type: string
+        qc_id:
+          type: integer
+          format: int64
+        remark:
+          type: string
+        temporary_doc:
+          $ref: '#/components/schemas/QcDocDto'
+        temporary_doc_alias:
+          type: string
+        variant_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantRequestPayload'
+      title: QcFinalInspectionThirdPartyResponseDto
+    CourierPartner:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: CourierPartner
+    GeniemodeEntityTags:
+      type: object
+      required:
+      - geniemodeEntity
+      - tag
+      properties:
+        createdBy:
+          type: string
+        geniemodeEntity:
+          $ref: '#/components/schemas/GeniemodeEntity'
+        id:
+          type: integer
+          format: int64
+        tag:
+          type: string
+      title: GeniemodeEntityTags
+    GeniemodeEntityAddress:
+      type: object
+      required:
+      - geniemodeEntity
+      properties:
+        addressId:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        geniemodeEntity:
+          $ref: '#/components/schemas/GeniemodeEntity'
+        id:
+          type: integer
+          format: int64
+        type:
+          type: string
+      title: GeniemodeEntityAddress
+    ManufacturerRatingDetails:
+      type: object
+      properties:
+        boughtValue:
+          type: number
+        communicationPercentileRank:
+          type: number
+          format: float
+        completedOrderCount:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        diffDays:
+          type: number
+          format: float
+        id:
+          type: integer
+          format: int64
+        manufacturerDetail:
+          $ref: '#/components/schemas/Manufacturer'
+        ordertnaMetCount:
+          type: integer
+          format: int64
+        receivedMailCount:
+          type: integer
+          format: int64
+        rejectedQcCount:
+          type: integer
+          format: int64
+        sentMailCount:
+          type: integer
+          format: int64
+        soldValue:
+          type: number
+        tnaChangeRequests:
+          type: integer
+          format: int64
+        totalQcCount:
+          type: integer
+          format: int64
+      title: ManufacturerRatingDetails
+    ShipmentDoc:
+      type: object
+      required:
+      - shipmentHop
+      properties:
+        createdBy:
+          type: string
+        documentType:
+          type: string
+        documentUrl:
+          type: string
+        id:
+          type: integer
+          format: int64
+        shipmentHop:
+          $ref: '#/components/schemas/ShipmentHop'
+      title: ShipmentDoc
+    ManufacturerBase:
+      type: object
+      properties:
+        aadharNo:
+          type: integer
+          format: int64
+        capacityPerMonth:
+          type: integer
+          format: int64
+        capacityToGeniemode:
+          type: string
+        capacityUtilization:
+          type: string
+        cin:
+          type: string
+        exportLicenseNo:
+          type: string
+        gstNumber:
+          type: string
+        llpin:
+          type: string
+        name:
+          type: string
+        nid:
+          type: string
+        pan:
+          type: string
+        registrationNo:
+          type: string
+        tan:
+          type: string
+        tin:
+          type: string
+        typeOfCurrentBuyer:
+          type: string
+        vat:
+          type: string
+      title: ManufacturerBase

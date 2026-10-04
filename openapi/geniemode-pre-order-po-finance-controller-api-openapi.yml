@@ -135,6 +135,49 @@ paths:
                 type: string
 components:
   schemas:
+    PoTypeDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      title: PoTypeDto
+    PreOrderPoStyleVariantDto:
+      type: object
+      properties:
+        color:
+          type: string
+        id:
+          type: integer
+          format: int64
+        price:
+          type: number
+        quantity:
+          type: integer
+          format: int64
+        size:
+          type: string
+      title: PreOrderPoStyleVariantDto
+    PreOrderPoStyleDto:
+      type: object
+      properties:
+        currency_price:
+          type: number
+        id:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        style_code:
+          type: string
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreOrderPoStyleVariantDto'
+      title: PreOrderPoStyleDto
     PreOrderPoDto:
       type: object
       properties:
@@ -178,46 +221,3 @@ components:
           type: integer
           format: int64
       title: PreOrderPoDto
-    PreOrderPoStyleVariantDto:
-      type: object
-      properties:
-        color:
-          type: string
-        id:
-          type: integer
-          format: int64
-        price:
-          type: number
-        quantity:
-          type: integer
-          format: int64
-        size:
-          type: string
-      title: PreOrderPoStyleVariantDto
-    PoTypeDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      title: PoTypeDto
-    PreOrderPoStyleDto:
-      type: object
-      properties:
-        currency_price:
-          type: number
-        id:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int64
-        style_code:
-          type: string
-        variants:
-          type: array
-          items:
-            $ref: '#/components/schemas/PreOrderPoStyleVariantDto'
-      title: PreOrderPoStyleDto

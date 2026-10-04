@@ -110,27 +110,58 @@ paths:
           description: 500 message
 components:
   schemas:
-    StepTemplateDto:
+    WfTemplateDto:
       type: object
       properties:
         id:
           type: integer
           format: int64
-        is_hidden:
+        workflow_name:
           type: string
-        require_approver:
+      title: WfTemplateDto
+    OrderShipmentTrackingResponseDto:
+      type: object
+      properties:
+        awb:
           type: string
-        require_due_date:
+        expired:
+          type: boolean
+        order:
+          $ref: '#/components/schemas/OrderDetailSimpleDto'
+        partner:
           type: string
-        step_name:
+          enum:
+          - DHL
+          - FEDEX
+          - UPS
+        sku_response:
+          type: object
+        timestamp:
+          type: integer
+          format: int64
+        tracking_data:
+          type: object
+        wf_step_order_map:
+          $ref: '#/components/schemas/WfStepOrderMapDto'
+      title: OrderShipmentTrackingResponseDto
+    CreateOrderShipmentTrackingRequestPayload:
+      type: object
+      properties:
+        awb:
           type: string
-        step_success_criteria:
+        order_id:
+          type: integer
+          format: int64
+        partner:
           type: string
-        visible_to_client:
-          type: string
-        visible_to_manufacturer:
-          type: string
-      title: StepTemplateDto
+          enum:
+          - DHL
+          - FEDEX
+          - UPS
+        workflow_step_order_map_id:
+          type: integer
+          format: int64
+      title: CreateOrderShipmentTrackingRequestPayload
     WfStepOrderMapDto:
       type: object
       properties:
@@ -180,6 +211,27 @@ components:
         wf_template:
           $ref: '#/components/schemas/WfTemplateDto'
       title: WfStepOrderMapDto
+    StepTemplateDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        is_hidden:
+          type: string
+        require_approver:
+          type: string
+        require_due_date:
+          type: string
+        step_name:
+          type: string
+        step_success_criteria:
+          type: string
+        visible_to_client:
+          type: string
+        visible_to_manufacturer:
+          type: string
+      title: StepTemplateDto
     OrderDetailSimpleDto:
       type: object
       properties:
@@ -189,55 +241,3 @@ components:
         sku_id:
           type: string
       title: OrderDetailSimpleDto
-    CreateOrderShipmentTrackingRequestPayload:
-      type: object
-      properties:
-        awb:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        partner:
-          type: string
-          enum:
-          - DHL
-          - FEDEX
-          - UPS
-        workflow_step_order_map_id:
-          type: integer
-          format: int64
-      title: CreateOrderShipmentTrackingRequestPayload
-    WfTemplateDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        workflow_name:
-          type: string
-      title: WfTemplateDto
-    OrderShipmentTrackingResponseDto:
-      type: object
-      properties:
-        awb:
-          type: string
-        expired:
-          type: boolean
-        order:
-          $ref: '#/components/schemas/OrderDetailSimpleDto'
-        partner:
-          type: string
-          enum:
-          - DHL
-          - FEDEX
-          - UPS
-        sku_response:
-          type: object
-        timestamp:
-          type: integer
-          format: int64
-        tracking_data:
-          type: object
-        wf_step_order_map:
-          $ref: '#/components/schemas/WfStepOrderMapDto'
-      title: OrderShipmentTrackingResponseDto

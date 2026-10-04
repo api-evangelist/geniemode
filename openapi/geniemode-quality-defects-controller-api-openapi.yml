@@ -36,14 +36,6 @@ paths:
           description: 500 message
 components:
   schemas:
-    QualityDefectDto:
-      type: object
-      properties:
-        defect_description:
-          type: string
-        defect_type:
-          type: string
-      title: QualityDefectDto
     QualityDefectResponsePayload:
       type: object
       properties:
@@ -84,3 +76,11 @@ components:
           items:
             $ref: '#/components/schemas/QualityDefectDto'
       title: QualityDefectResponsePayload
+    QualityDefectDto:
+      type: object
+      properties:
+        defect_description:
+          type: string
+        defect_type:
+          type: string
+      title: QualityDefectDto

@@ -494,57 +494,6 @@ paths:
           description: 500 message
 components:
   schemas:
-    TncAcceptedResponsePayload:
-      type: object
-      properties:
-        msg:
-          type: string
-      title: TncAcceptedResponsePayload
-    CreateDemoRequest:
-      type: object
-      properties:
-        client_id:
-          type: integer
-          format: int64
-        for_client:
-          type: boolean
-        for_manufacturer:
-          type: boolean
-      title: CreateDemoRequest
-    CreateDemoResponse:
-      type: object
-      properties:
-        token:
-          type: string
-      title: CreateDemoResponse
-    VpRmDto:
-      type: object
-      properties:
-        rm_id:
-          type: integer
-          format: int64
-        rm_name:
-          type: string
-        vp_id:
-          type: integer
-          format: int64
-        vp_name:
-          type: string
-      title: VpRmDto
-    GetTncDetailResponsePayload:
-      type: object
-      properties:
-        company_address:
-          type: string
-        company_name:
-          type: string
-      title: GetTncDetailResponsePayload
-    SendApprovalEmailRequestPayload:
-      type: object
-      properties:
-        status:
-          type: boolean
-      title: SendApprovalEmailRequestPayload
     ListUserResponseUmsPayload:
       type: object
       properties:
@@ -569,6 +518,51 @@ components:
         username:
           type: string
       title: ListUserResponseUmsPayload
+    VpRmDto:
+      type: object
+      properties:
+        rm_id:
+          type: integer
+          format: int64
+        rm_name:
+          type: string
+        vp_id:
+          type: integer
+          format: int64
+        vp_name:
+          type: string
+      title: VpRmDto
+    CreateDemoResponse:
+      type: object
+      properties:
+        token:
+          type: string
+      title: CreateDemoResponse
+    SendApprovalEmailRequestPayload:
+      type: object
+      properties:
+        status:
+          type: boolean
+      title: SendApprovalEmailRequestPayload
+    GetTncDetailResponsePayload:
+      type: object
+      properties:
+        company_address:
+          type: string
+        company_name:
+          type: string
+      title: GetTncDetailResponsePayload
+    CreateDemoRequest:
+      type: object
+      properties:
+        client_id:
+          type: integer
+          format: int64
+        for_client:
+          type: boolean
+        for_manufacturer:
+          type: boolean
+      title: CreateDemoRequest
     TncAcceptedRequestPayload:
       type: object
       properties:
@@ -576,3 +570,9 @@ components:
           type: integer
           format: int64
       title: TncAcceptedRequestPayload
+    TncAcceptedResponsePayload:
+      type: object
+      properties:
+        msg:
+          type: string
+      title: TncAcceptedResponsePayload

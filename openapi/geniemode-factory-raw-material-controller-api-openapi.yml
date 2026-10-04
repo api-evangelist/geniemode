@@ -119,6 +119,68 @@ paths:
         required: true
 components:
   schemas:
+    GetFactoryRawMaterialResponse:
+      type: object
+      properties:
+        doc_data:
+          $ref: '#/components/schemas/DocDetailsDto'
+        doc_id:
+          type: integer
+          format: int64
+        doc_type:
+          type: string
+        doc_value:
+          type: string
+        factory:
+          $ref: '#/components/schemas/GetFactoryResponsePayload'
+        id:
+          type: integer
+          format: int64
+      title: GetFactoryRawMaterialResponse
+    UpdateFactoryRawMaterialRequest:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        doc_type:
+          type: string
+        doc_value:
+          type: string
+        factory_id:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+      title: UpdateFactoryRawMaterialRequest
+    CreateFactoryFinanceDocRequest:
+      type: object
+      properties:
+        doc_data:
+          $ref: '#/components/schemas/DocDetailsDto'
+        doc_id:
+          type: integer
+          format: int64
+        doc_type:
+          type: string
+        doc_value:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: CreateFactoryFinanceDocRequest
+    CreateFactoryRawMaterialRequest:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateFactoryFinanceDocRequest'
+        factory_id:
+          type: integer
+          format: int64
+      title: CreateFactoryRawMaterialRequest
     UMSUserResponsePayload:
       type: object
       properties:
@@ -151,39 +213,6 @@ components:
         whatsapp_opt_in:
           type: boolean
       title: UMSUserResponsePayload
-    CreateFactoryFinanceDocRequest:
-      type: object
-      properties:
-        doc_data:
-          $ref: '#/components/schemas/DocDetailsDto'
-        doc_id:
-          type: integer
-          format: int64
-        doc_type:
-          type: string
-        doc_value:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: CreateFactoryFinanceDocRequest
-    UpdateFactoryRawMaterialRequest:
-      type: object
-      properties:
-        doc_id:
-          type: integer
-          format: int64
-        doc_type:
-          type: string
-        doc_value:
-          type: string
-        factory_id:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
-      title: UpdateFactoryRawMaterialRequest
     GetFactoryResponsePayload:
       type: object
       properties:
@@ -233,35 +262,6 @@ components:
           type: integer
           format: int64
       title: GetFactoryResponsePayload
-    CreateFactoryRawMaterialRequest:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateFactoryFinanceDocRequest'
-        factory_id:
-          type: integer
-          format: int64
-      title: CreateFactoryRawMaterialRequest
-    GetFactoryRawMaterialResponse:
-      type: object
-      properties:
-        doc_data:
-          $ref: '#/components/schemas/DocDetailsDto'
-        doc_id:
-          type: integer
-          format: int64
-        doc_type:
-          type: string
-        doc_value:
-          type: string
-        factory:
-          $ref: '#/components/schemas/GetFactoryResponsePayload'
-        id:
-          type: integer
-          format: int64
-      title: GetFactoryRawMaterialResponse
     DocDetailsDto:
       type: object
       properties:

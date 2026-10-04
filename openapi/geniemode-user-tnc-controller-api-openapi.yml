@@ -92,31 +92,6 @@ paths:
           description: 500 message
 components:
   schemas:
-    UserTncResponsePayload:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/UserTncDTO'
-      title: UserTncResponsePayload
-    UserTncAcceptedResponse:
-      type: object
-      properties:
-        message:
-          type: string
-      title: UserTncAcceptedResponse
-    ManufacturerTncDto:
-      type: object
-      properties:
-        company_registered_name:
-          type: string
-        contact_person1_email:
-          type: string
-        contact_person1_phone:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: ManufacturerTncDto
     UserTnc:
       type: object
       properties:
@@ -133,6 +108,31 @@ components:
           type: integer
           format: int64
       title: UserTnc
+    UserTncAcceptedResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      title: UserTncAcceptedResponse
+    UserTncResponsePayload:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserTncDTO'
+      title: UserTncResponsePayload
+    ManufacturerTncDto:
+      type: object
+      properties:
+        company_registered_name:
+          type: string
+        contact_person1_email:
+          type: string
+        contact_person1_phone:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: ManufacturerTncDto
     UserTncDTO:
       type: object
       properties:

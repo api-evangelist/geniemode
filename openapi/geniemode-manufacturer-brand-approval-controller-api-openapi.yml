@@ -122,6 +122,47 @@ paths:
         required: true
 components:
   schemas:
+    ManufacturerBrandApprovalRequestPayload:
+      type: object
+      properties:
+        address_id:
+          type: integer
+          format: int64
+        approval_status:
+          type: string
+        brand_id:
+          type: integer
+          format: int64
+        buyer_days:
+          type: integer
+          format: int64
+        checked_other_team_sourcing_similar_products:
+          type: boolean
+        cross_costings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManufacturerBrandApprovalCrossCostingsDto'
+        existing_brand:
+          type: boolean
+        factory_used_by_other_brand:
+          type: boolean
+        manufacturer_unit_id:
+          type: integer
+          format: int64
+        onboarding_reason:
+          type: string
+        planned_business_usd:
+          type: number
+        rm_id:
+          type: integer
+          format: int64
+        tier1_processes:
+          type: string
+        tier2_processes:
+          type: string
+        tier3_processes:
+          type: string
+      title: ManufacturerBrandApprovalRequestPayload
     BrandCategoryDto:
       type: object
       properties:
@@ -134,16 +175,40 @@ components:
           type: integer
           format: int64
       title: BrandCategoryDto
-    ManufacturerBrandApprovalCompliancesDto:
+    AddressSubmitResponsePayload:
       type: object
       properties:
-        compliance_type:
+        address_line1:
           type: string
-        compliances:
-          type: array
-          items:
-            type: string
-      title: ManufacturerBrandApprovalCompliancesDto
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        entity_id:
+          type: integer
+          format: int64
+        entity_type:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+        type:
+          type: string
+      title: AddressSubmitResponsePayload
     ManufacturerBrandApprovalDto:
       type: object
       properties:
@@ -211,81 +276,16 @@ components:
         tier3_processes:
           type: string
       title: ManufacturerBrandApprovalDto
-    ManufacturerBrandApprovalRequestPayload:
+    ManufacturerBrandApprovalCompliancesDto:
       type: object
       properties:
-        address_id:
-          type: integer
-          format: int64
-        approval_status:
+        compliance_type:
           type: string
-        brand_id:
-          type: integer
-          format: int64
-        buyer_days:
-          type: integer
-          format: int64
-        checked_other_team_sourcing_similar_products:
-          type: boolean
-        cross_costings:
+        compliances:
           type: array
           items:
-            $ref: '#/components/schemas/ManufacturerBrandApprovalCrossCostingsDto'
-        existing_brand:
-          type: boolean
-        factory_used_by_other_brand:
-          type: boolean
-        manufacturer_unit_id:
-          type: integer
-          format: int64
-        onboarding_reason:
-          type: string
-        planned_business_usd:
-          type: number
-        rm_id:
-          type: integer
-          format: int64
-        tier1_processes:
-          type: string
-        tier2_processes:
-          type: string
-        tier3_processes:
-          type: string
-      title: ManufacturerBrandApprovalRequestPayload
-    AddressSubmitResponsePayload:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        address_line2:
-          type: string
-        city:
-          type: string
-        contact_person_name:
-          type: string
-        contact_person_number:
-          type: string
-        country:
-          type: string
-        entity_id:
-          type: integer
-          format: int64
-        entity_type:
-          type: string
-        id:
-          type: integer
-          format: int64
-        landmark:
-          type: string
-        name:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-        type:
-          type: string
-      title: AddressSubmitResponsePayload
+            type: string
+      title: ManufacturerBrandApprovalCompliancesDto
     ManufacturerBrandApprovalCrossCostingsDto:
       type: object
       properties:

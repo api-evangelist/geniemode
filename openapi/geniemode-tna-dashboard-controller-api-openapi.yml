@@ -2057,153 +2057,6 @@ paths:
           description: 500 message
 components:
   schemas:
-    PendingDelayOrder:
-      type: object
-      properties:
-        approved_days:
-          type: integer
-          format: int32
-        company_name:
-          type: string
-        confirmation_date:
-          type: integer
-          format: int64
-        confirmed_factory_date:
-          type: integer
-          format: int64
-        days_pushed:
-          type: integer
-          format: int64
-        delay_threshold_days:
-          type: integer
-          format: int32
-        ex_factory_date:
-          type: integer
-          format: int64
-        image_url:
-          type: string
-        last_step:
-          type: string
-        manufacturer_name:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        po_no:
-          type: string
-        reasons:
-          type: array
-          items:
-            $ref: '#/components/schemas/DelayReasonItem'
-        review_note:
-          type: string
-        status:
-          type: string
-        style_code:
-          type: string
-      title: PendingDelayOrder
-    DeliveryPerfRow:
-      type: object
-      properties:
-        entity_id:
-          type: string
-        entity_name:
-          type: string
-        late_orders:
-          type: integer
-          format: int64
-        late_qty:
-          type: integer
-          format: int64
-        ontime_orders:
-          type: integer
-          format: int64
-        ontime_pct_count:
-          type: number
-          format: double
-        ontime_pct_qty:
-          type: number
-          format: double
-        ontime_qty:
-          type: integer
-          format: int64
-      title: DeliveryPerfRow
-    ReviewDelayOrder:
-      type: object
-      properties:
-        buyer_date:
-          type: integer
-          format: int64
-        client_name:
-          type: string
-        days_pushed:
-          type: integer
-          format: int64
-        ex_factory_date:
-          type: integer
-          format: int64
-        factory_name:
-          type: string
-        ops_name:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        reasons:
-          type: array
-          items:
-            $ref: '#/components/schemas/DelayReasonItem'
-        rm_id:
-          type: integer
-          format: int64
-        rm_name:
-          type: string
-        style_code:
-          type: string
-        submitted_at:
-          type: integer
-          format: int64
-        submitted_by_name:
-          type: string
-        vp_name:
-          type: string
-      title: ReviewDelayOrder
-    MyPendingCounts:
-      type: object
-      properties:
-        finance_pending:
-          type: integer
-          format: int64
-        logistics_pending:
-          type: integer
-          format: int64
-        vp_pending:
-          type: integer
-          format: int64
-      title: MyPendingCounts
-    HandoverMetricRow:
-      type: object
-      properties:
-        avg_confirmation_to_handover_days:
-          type: number
-          format: double
-        avg_handover_to_ex_factory_days:
-          type: number
-          format: double
-        entity_id:
-          type: integer
-          format: int64
-        entity_name:
-          type: string
-        entity_type:
-          type: string
-        pre_production_orders:
-          type: integer
-          format: int64
-        production_orders:
-          type: integer
-          format: int64
-      title: HandoverMetricRow
     ScorecardDayDiffRow:
       type: object
       properties:
@@ -2246,20 +2099,29 @@ components:
           type: integer
           format: int64
       title: ScorecardDayDiffRow
-    DelayReasonOption:
+    HandoverMetricRow:
       type: object
       properties:
-        category:
-          type: string
-        id:
+        avg_confirmation_to_handover_days:
+          type: number
+          format: double
+        avg_handover_to_ex_factory_days:
+          type: number
+          format: double
+        entity_id:
           type: integer
           format: int64
-        sort_order:
-          type: integer
-          format: int32
-        sub_category:
+        entity_name:
           type: string
-      title: DelayReasonOption
+        entity_type:
+          type: string
+        pre_production_orders:
+          type: integer
+          format: int64
+        production_orders:
+          type: integer
+          format: int64
+      title: HandoverMetricRow
     OrderTnaDnaResponse:
       type: object
       properties:
@@ -2317,12 +2179,136 @@ components:
           type: integer
           format: int32
       title: OrderTnaDnaResponse
-    OrderDelayReasons:
+    AirOrderRow:
+      type: object
+      properties:
+        classification:
+          type: string
+        client:
+          type: string
+        delivery_mode:
+          type: string
+        factory:
+          type: string
+        freight_cost:
+          type: number
+          format: double
+        marked_at:
+          type: string
+        marked_by:
+          type: string
+        ops:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        owner:
+          type: string
+        rm:
+          type: string
+        style_code:
+          type: string
+        value:
+          type: number
+          format: double
+        vp:
+          type: string
+      title: AirOrderRow
+    ScorecardTotals:
+      type: object
+      properties:
+        air_freight_cost:
+          type: number
+          format: double
+        air_orders:
+          type: integer
+          format: int64
+        air_penalized:
+          type: integer
+          format: int64
+        air_planned:
+          type: integer
+          format: int64
+        air_value:
+          type: number
+          format: double
+        orig_delayed_cnt:
+          type: number
+          format: double
+        orig_delayed_val:
+          type: number
+          format: double
+        orig_disaster_cnt:
+          type: number
+          format: double
+        orig_disaster_val:
+          type: number
+          format: double
+        orig_ontime_cnt:
+          type: number
+          format: double
+        orig_ontime_val:
+          type: number
+          format: double
+        tna_delayed_cnt:
+          type: number
+          format: double
+        tna_delayed_val:
+          type: number
+          format: double
+        tna_disaster_cnt:
+          type: number
+          format: double
+        tna_disaster_val:
+          type: number
+          format: double
+        tna_ontime_cnt:
+          type: number
+          format: double
+        tna_ontime_val:
+          type: number
+          format: double
+        total_orders:
+          type: integer
+          format: int64
+        total_value:
+          type: number
+          format: double
+      title: ScorecardTotals
+    PendingDelayOrder:
       type: object
       properties:
         approved_days:
           type: integer
           format: int32
+        company_name:
+          type: string
+        confirmation_date:
+          type: integer
+          format: int64
+        confirmed_factory_date:
+          type: integer
+          format: int64
+        days_pushed:
+          type: integer
+          format: int64
+        delay_threshold_days:
+          type: integer
+          format: int32
+        ex_factory_date:
+          type: integer
+          format: int64
+        image_url:
+          type: string
+        last_step:
+          type: string
+        manufacturer_name:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        po_no:
+          type: string
         reasons:
           type: array
           items:
@@ -2331,10 +2317,18 @@ components:
           type: string
         status:
           type: string
-        submitted_at:
+        style_code:
+          type: string
+      title: PendingDelayOrder
+    ScorecardMonth:
+      type: object
+      properties:
+        count:
           type: integer
           format: int64
-      title: OrderDelayReasons
+        month:
+          type: string
+      title: ScorecardMonth
     DelayReviewPayload:
       type: object
       properties:
@@ -2344,6 +2338,175 @@ components:
         note:
           type: string
       title: DelayReviewPayload
+    DelayReasonPayload:
+      type: object
+      properties:
+        change_request_id:
+          type: integer
+          format: int64
+        comment:
+          type: string
+        days_pushed:
+          type: integer
+          format: int64
+        doc_id:
+          type: integer
+          format: int64
+        doc_url:
+          type: string
+        doc_urls:
+          type: array
+          items:
+            type: string
+        order_id:
+          type: integer
+          format: int64
+        reason_category:
+          type: string
+        reason_sub_category:
+          type: string
+        scope:
+          type: string
+        step_name:
+          type: string
+      title: DelayReasonPayload
+    OrderTnaDnaStepSummary:
+      type: object
+      properties:
+        buyer_days_pushed:
+          type: integer
+          format: int64
+        completed:
+          type: boolean
+        completion_date:
+          type: integer
+          format: int64
+        completion_delay:
+          type: integer
+          format: int64
+        current_buyer_date:
+          type: integer
+          format: int64
+        current_factory_date:
+          type: integer
+          format: int64
+        date_shift:
+          type: integer
+          format: int64
+        delayed_days:
+          type: integer
+          format: int64
+        due_date:
+          type: integer
+          format: int64
+        factory_days_pushed:
+          type: integer
+          format: int64
+        initial_due_date:
+          type: integer
+          format: int64
+        original_buyer_due_date:
+          type: integer
+          format: int64
+        original_factory_due_date:
+          type: integer
+          format: int64
+        status:
+          type: string
+        step_id:
+          type: integer
+          format: int64
+        step_name:
+          type: string
+        tna_shift_days:
+          type: integer
+          format: int64
+      title: OrderTnaDnaStepSummary
+    ReviewDelayOrder:
+      type: object
+      properties:
+        buyer_date:
+          type: integer
+          format: int64
+        client_name:
+          type: string
+        days_pushed:
+          type: integer
+          format: int64
+        ex_factory_date:
+          type: integer
+          format: int64
+        factory_name:
+          type: string
+        ops_name:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/DelayReasonItem'
+        rm_id:
+          type: integer
+          format: int64
+        rm_name:
+          type: string
+        style_code:
+          type: string
+        submitted_at:
+          type: integer
+          format: int64
+        submitted_by_name:
+          type: string
+        vp_name:
+          type: string
+      title: ReviewDelayOrder
+    ScorecardValueSplit:
+      type: object
+      properties:
+        name:
+          type: string
+        orders:
+          type: integer
+          format: int64
+        pct:
+          type: number
+          format: double
+        rm:
+          type: string
+        type:
+          type: string
+        value:
+          type: number
+          format: double
+      title: ScorecardValueSplit
+    QcPerformanceRow:
+      type: object
+      properties:
+        entity_id:
+          type: integer
+          format: int64
+        entity_name:
+          type: string
+        entity_type:
+          type: string
+        on_time_rate:
+          type: number
+          format: double
+        qc_late:
+          type: integer
+          format: int64
+        qc_on_time:
+          type: integer
+          format: int64
+        qc_pending_overdue:
+          type: integer
+          format: int64
+        qc_total:
+          type: integer
+          format: int64
+      title: QcPerformanceRow
     ScorecardRow:
       type: object
       properties:
@@ -2439,6 +2602,67 @@ components:
           type: number
           format: double
       title: ScorecardRow
+    DelayReasonRow:
+      type: object
+      properties:
+        approved_days:
+          type: integer
+          format: int32
+        client_name:
+          type: string
+        comment:
+          type: string
+        created_at:
+          type: integer
+          format: int64
+        days_pushed:
+          type: integer
+          format: int64
+        doc_id:
+          type: integer
+          format: int64
+        doc_url:
+          type: string
+        doc_urls:
+          type: array
+          items:
+            type: string
+        factory_name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        ops_name:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        owner_name:
+          type: string
+        raised_by:
+          type: integer
+          format: int64
+        reason_category:
+          type: string
+        reason_sub_category:
+          type: string
+        review_note:
+          type: string
+        rm_name:
+          type: string
+        scope:
+          type: string
+        status:
+          type: string
+        step_name:
+          type: string
+        style_code:
+          type: string
+        submitter_name:
+          type: string
+        vp_name:
+          type: string
+      title: DelayReasonRow
     DelayReviewInsights:
       type: object
       properties:
@@ -2507,67 +2731,6 @@ components:
             type: integer
             format: int64
       title: DelayReviewInsights
-    ScorecardTotals:
-      type: object
-      properties:
-        air_freight_cost:
-          type: number
-          format: double
-        air_orders:
-          type: integer
-          format: int64
-        air_penalized:
-          type: integer
-          format: int64
-        air_planned:
-          type: integer
-          format: int64
-        air_value:
-          type: number
-          format: double
-        orig_delayed_cnt:
-          type: number
-          format: double
-        orig_delayed_val:
-          type: number
-          format: double
-        orig_disaster_cnt:
-          type: number
-          format: double
-        orig_disaster_val:
-          type: number
-          format: double
-        orig_ontime_cnt:
-          type: number
-          format: double
-        orig_ontime_val:
-          type: number
-          format: double
-        tna_delayed_cnt:
-          type: number
-          format: double
-        tna_delayed_val:
-          type: number
-          format: double
-        tna_disaster_cnt:
-          type: number
-          format: double
-        tna_disaster_val:
-          type: number
-          format: double
-        tna_ontime_cnt:
-          type: number
-          format: double
-        tna_ontime_val:
-          type: number
-          format: double
-        total_orders:
-          type: integer
-          format: int64
-        total_value:
-          type: number
-          format: double
-      title: ScorecardTotals
     OrderTnaDnaEtaShift:
       type: object
       properties:
@@ -2597,154 +2760,138 @@ components:
           type: integer
           format: int64
       title: OrderTnaDnaEtaShift
-    ScorecardValueSplit:
-      type: object
-      properties:
-        name:
-          type: string
-        orders:
-          type: integer
-          format: int64
-        pct:
-          type: number
-          format: double
-        rm:
-          type: string
-        type:
-          type: string
-        value:
-          type: number
-          format: double
-      title: ScorecardValueSplit
-    AirOrderRow:
-      type: object
-      properties:
-        classification:
-          type: string
-        client:
-          type: string
-        delivery_mode:
-          type: string
-        factory:
-          type: string
-        freight_cost:
-          type: number
-          format: double
-        marked_at:
-          type: string
-        marked_by:
-          type: string
-        ops:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        owner:
-          type: string
-        rm:
-          type: string
-        style_code:
-          type: string
-        value:
-          type: number
-          format: double
-        vp:
-          type: string
-      title: AirOrderRow
-    ReviewerSplit:
+    DelayReasonSummaryRow:
       type: object
       properties:
         approved:
           type: integer
           format: int64
-        avg_granted_days:
-          type: number
-          format: double
-        name:
+        by_category:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        group_key:
           type: string
+        group_label:
+          type: string
+        orders:
+          type: integer
+          format: int64
+        pending_approval:
+          type: integer
+          format: int64
+        reasons:
+          type: integer
+          format: int64
         rejected:
           type: integer
           format: int64
-      title: ReviewerSplit
-    OrderTnaDnaStepChange:
+        total_days:
+          type: integer
+          format: int64
+      title: DelayReasonSummaryRow
+    ScorecardOrderRow:
       type: object
       properties:
-        buffer_date:
-          type: integer
-          format: int64
-        delay_days:
-          type: integer
-          format: int64
-        initial_due_date:
-          type: integer
-          format: int64
-        step_id:
-          type: integer
-          format: int64
-        step_name:
+        bucket_latest:
           type: string
-      title: OrderTnaDnaStepChange
-    DelayReasonRow:
+        bucket_original:
+          type: string
+        buyer_shipment_term:
+          type: string
+        client:
+          type: string
+        confirmed_date:
+          type: string
+        delivery_mode:
+          type: string
+        diff_latest:
+          type: integer
+          format: int64
+        diff_original:
+          type: integer
+          format: int64
+        ex_factory_date:
+          type: string
+        factory:
+          type: string
+        factory_shipment_term:
+          type: string
+        freight_cost:
+          type: number
+          format: double
+        logistics_cost:
+          type: number
+          format: double
+        order_id:
+          type: integer
+          format: int64
+        rm:
+          type: string
+        style_code:
+          type: string
+        value:
+          type: number
+          format: double
+      title: ScorecardOrderRow
+    OrderDelayReasons:
       type: object
       properties:
         approved_days:
           type: integer
           format: int32
-        client_name:
+        reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/DelayReasonItem'
+        review_note:
           type: string
+        status:
+          type: string
+        submitted_at:
+          type: integer
+          format: int64
+      title: OrderDelayReasons
+    OrderTnaDnaEvent:
+      type: object
+      properties:
+        approval_doc_id:
+          type: integer
+          format: int64
+        change_date_doc_id:
+          type: integer
+          format: int64
         comment:
           type: string
         created_at:
-          type: integer
-          format: int64
-        days_pushed:
-          type: integer
-          format: int64
-        doc_id:
-          type: integer
-          format: int64
-        doc_url:
           type: string
-        doc_urls:
-          type: array
-          items:
-            type: string
-        factory_name:
+          format: date-time
+        created_by:
+          type: string
+        finance_approval_status:
           type: string
         id:
           type: integer
           format: int64
-        ops_name:
+        initiated_by:
           type: string
-        order_id:
-          type: integer
-          format: int64
-        owner_name:
+        penalty:
           type: string
         raised_by:
+          type: string
+        raised_on_timestamp:
           type: integer
           format: int64
-        reason_category:
+        step_changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderTnaDnaStepChange'
+        type:
           type: string
-        reason_sub_category:
+        vp_approval_status:
           type: string
-        review_note:
-          type: string
-        rm_name:
-          type: string
-        scope:
-          type: string
-        status:
-          type: string
-        step_name:
-          type: string
-        style_code:
-          type: string
-        submitter_name:
-          type: string
-        vp_name:
-          type: string
-      title: DelayReasonRow
+      title: OrderTnaDnaEvent
     DelayReasonStats:
       type: object
       properties:
@@ -2828,231 +2975,6 @@ components:
           type: integer
           format: int64
       title: DelayReasonStats
-    ScorecardMonth:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int64
-        month:
-          type: string
-      title: ScorecardMonth
-    AirClassifyPayload:
-      type: object
-      properties:
-        classification:
-          type: string
-      title: AirClassifyPayload
-    TnaWeeklyShift:
-      type: object
-      properties:
-        days_pushed:
-          type: integer
-          format: int64
-        orders_affected:
-          type: integer
-          format: int64
-        push_events:
-          type: integer
-          format: int64
-        steps_pushed:
-          type: integer
-          format: int64
-        week_start:
-          type: integer
-          format: int64
-      title: TnaWeeklyShift
-    DelayReasonPayload:
-      type: object
-      properties:
-        change_request_id:
-          type: integer
-          format: int64
-        comment:
-          type: string
-        days_pushed:
-          type: integer
-          format: int64
-        doc_id:
-          type: integer
-          format: int64
-        doc_url:
-          type: string
-        doc_urls:
-          type: array
-          items:
-            type: string
-        order_id:
-          type: integer
-          format: int64
-        reason_category:
-          type: string
-        reason_sub_category:
-          type: string
-        scope:
-          type: string
-        step_name:
-          type: string
-      title: DelayReasonPayload
-    DelayReasonSummaryRow:
-      type: object
-      properties:
-        approved:
-          type: integer
-          format: int64
-        by_category:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-        group_key:
-          type: string
-        group_label:
-          type: string
-        orders:
-          type: integer
-          format: int64
-        pending_approval:
-          type: integer
-          format: int64
-        reasons:
-          type: integer
-          format: int64
-        rejected:
-          type: integer
-          format: int64
-        total_days:
-          type: integer
-          format: int64
-      title: DelayReasonSummaryRow
-    ScorecardVp:
-      type: object
-      properties:
-        rm_count:
-          type: integer
-          format: int64
-        vp_email:
-          type: string
-        vp_name:
-          type: string
-      title: ScorecardVp
-    QcPerformanceRow:
-      type: object
-      properties:
-        entity_id:
-          type: integer
-          format: int64
-        entity_name:
-          type: string
-        entity_type:
-          type: string
-        on_time_rate:
-          type: number
-          format: double
-        qc_late:
-          type: integer
-          format: int64
-        qc_on_time:
-          type: integer
-          format: int64
-        qc_pending_overdue:
-          type: integer
-          format: int64
-        qc_total:
-          type: integer
-          format: int64
-      title: QcPerformanceRow
-    OrderTnaDnaStepSummary:
-      type: object
-      properties:
-        buyer_days_pushed:
-          type: integer
-          format: int64
-        completed:
-          type: boolean
-        completion_date:
-          type: integer
-          format: int64
-        completion_delay:
-          type: integer
-          format: int64
-        current_buyer_date:
-          type: integer
-          format: int64
-        current_factory_date:
-          type: integer
-          format: int64
-        date_shift:
-          type: integer
-          format: int64
-        delayed_days:
-          type: integer
-          format: int64
-        due_date:
-          type: integer
-          format: int64
-        factory_days_pushed:
-          type: integer
-          format: int64
-        initial_due_date:
-          type: integer
-          format: int64
-        original_buyer_due_date:
-          type: integer
-          format: int64
-        original_factory_due_date:
-          type: integer
-          format: int64
-        status:
-          type: string
-        step_id:
-          type: integer
-          format: int64
-        step_name:
-          type: string
-        tna_shift_days:
-          type: integer
-          format: int64
-      title: OrderTnaDnaStepSummary
-    OrderTnaDnaEvent:
-      type: object
-      properties:
-        approval_doc_id:
-          type: integer
-          format: int64
-        change_date_doc_id:
-          type: integer
-          format: int64
-        comment:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        created_by:
-          type: string
-        finance_approval_status:
-          type: string
-        id:
-          type: integer
-          format: int64
-        initiated_by:
-          type: string
-        penalty:
-          type: string
-        raised_by:
-          type: string
-        raised_on_timestamp:
-          type: integer
-          format: int64
-        step_changes:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderTnaDnaStepChange'
-        type:
-          type: string
-        vp_approval_status:
-          type: string
-      title: OrderTnaDnaEvent
     DelayReasonItem:
       type: object
       properties:
@@ -3074,6 +2996,44 @@ components:
         reason_sub_category:
           type: string
       title: DelayReasonItem
+    MyPendingCounts:
+      type: object
+      properties:
+        finance_pending:
+          type: integer
+          format: int64
+        logistics_pending:
+          type: integer
+          format: int64
+        vp_pending:
+          type: integer
+          format: int64
+      title: MyPendingCounts
+    DelayReasonOption:
+      type: object
+      properties:
+        category:
+          type: string
+        id:
+          type: integer
+          format: int64
+        sort_order:
+          type: integer
+          format: int32
+        sub_category:
+          type: string
+      title: DelayReasonOption
+    ScorecardVp:
+      type: object
+      properties:
+        rm_count:
+          type: integer
+          format: int64
+        vp_email:
+          type: string
+        vp_name:
+          type: string
+      title: ScorecardVp
     DelayReasonOptionPayload:
       type: object
       properties:
@@ -3085,47 +3045,87 @@ components:
         sub_category:
           type: string
       title: DelayReasonOptionPayload
-    ScorecardOrderRow:
+    OrderTnaDnaStepChange:
       type: object
       properties:
-        bucket_latest:
-          type: string
-        bucket_original:
-          type: string
-        buyer_shipment_term:
-          type: string
-        client:
-          type: string
-        confirmed_date:
-          type: string
-        delivery_mode:
-          type: string
-        diff_latest:
+        buffer_date:
           type: integer
           format: int64
-        diff_original:
+        delay_days:
           type: integer
           format: int64
-        ex_factory_date:
-          type: string
-        factory:
-          type: string
-        factory_shipment_term:
-          type: string
-        freight_cost:
-          type: number
-          format: double
-        logistics_cost:
-          type: number
-          format: double
-        order_id:
+        initial_due_date:
           type: integer
           format: int64
-        rm:
+        step_id:
+          type: integer
+          format: int64
+        step_name:
           type: string
-        style_code:
+      title: OrderTnaDnaStepChange
+    DeliveryPerfRow:
+      type: object
+      properties:
+        entity_id:
           type: string
-        value:
+        entity_name:
+          type: string
+        late_orders:
+          type: integer
+          format: int64
+        late_qty:
+          type: integer
+          format: int64
+        ontime_orders:
+          type: integer
+          format: int64
+        ontime_pct_count:
           type: number
           format: double
-      title: ScorecardOrderRow
+        ontime_pct_qty:
+          type: number
+          format: double
+        ontime_qty:
+          type: integer
+          format: int64
+      title: DeliveryPerfRow
+    TnaWeeklyShift:
+      type: object
+      properties:
+        days_pushed:
+          type: integer
+          format: int64
+        orders_affected:
+          type: integer
+          format: int64
+        push_events:
+          type: integer
+          format: int64
+        steps_pushed:
+          type: integer
+          format: int64
+        week_start:
+          type: integer
+          format: int64
+      title: TnaWeeklyShift
+    ReviewerSplit:
+      type: object
+      properties:
+        approved:
+          type: integer
+          format: int64
+        avg_granted_days:
+          type: number
+          format: double
+        name:
+          type: string
+        rejected:
+          type: integer
+          format: int64
+      title: ReviewerSplit
+    AirClassifyPayload:
+      type: object
+      properties:
+        classification:
+          type: string
+      title: AirClassifyPayload

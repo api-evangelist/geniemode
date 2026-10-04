@@ -156,15 +156,6 @@ paths:
         required: true
 components:
   schemas:
-    PiComplianceDto:
-      type: object
-      properties:
-        compliance:
-          type: string
-        id:
-          type: integer
-          format: int64
-      title: PiComplianceDto
     UpdatePiFromFinanceRequestPayload:
       type: object
       properties:
@@ -182,3 +173,12 @@ components:
         status:
           type: string
       title: UpdatePiFromFinanceRequestPayload
+    PiComplianceDto:
+      type: object
+      properties:
+        compliance:
+          type: string
+        id:
+          type: integer
+          format: int64
+      title: PiComplianceDto

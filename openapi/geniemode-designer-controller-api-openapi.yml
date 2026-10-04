@@ -635,6 +635,17 @@ components:
     InputStream:
       type: object
       title: InputStream
+    DesignAttributionCountDto:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+        key:
+          type: string
+        label:
+          type: string
+      title: DesignAttributionCountDto
     ByteArrayResource:
       type: object
       properties:
@@ -661,14 +672,3 @@ components:
           type: string
           format: url
       title: ByteArrayResource
-    DesignAttributionCountDto:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int64
-        key:
-          type: string
-        label:
-          type: string
-      title: DesignAttributionCountDto

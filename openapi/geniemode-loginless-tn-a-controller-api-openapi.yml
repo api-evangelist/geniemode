@@ -47,21 +47,6 @@ paths:
           description: 500 message
 components:
   schemas:
-    LoginLessMasterStepDTO:
-      type: object
-      properties:
-        due_date:
-          type: string
-          format: date-time
-        master_step_name:
-          type: string
-        state:
-          type: string
-        sub_step:
-          type: array
-          items:
-            $ref: '#/components/schemas/LoginLessSubstepResponseDTO'
-      title: LoginLessMasterStepDTO
     LoginLessResponse:
       type: object
       properties:
@@ -112,3 +97,18 @@ components:
         work_flow_status:
           type: string
       title: LoginLessSubstepResponseDTO
+    LoginLessMasterStepDTO:
+      type: object
+      properties:
+        due_date:
+          type: string
+          format: date-time
+        master_step_name:
+          type: string
+        state:
+          type: string
+        sub_step:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoginLessSubstepResponseDTO'
+      title: LoginLessMasterStepDTO

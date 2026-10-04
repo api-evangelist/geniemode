@@ -192,48 +192,6 @@ paths:
         required: true
 components:
   schemas:
-    UMSUserResponsePayload:
-      type: object
-      properties:
-        country_code:
-          type: string
-        created_by:
-          type: string
-        first_name:
-          type: string
-        group_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-        id:
-          type: integer
-          format: int64
-        last_name:
-          type: string
-        manager:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-        phone_number:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-        username:
-          type: string
-        whatsapp_opt_in:
-          type: boolean
-      title: UMSUserResponsePayload
-    SendEmailRequest:
-      type: object
-      properties:
-        doc_id:
-          type: integer
-          format: int64
-        factory_id:
-          type: integer
-          format: int64
-      title: SendEmailRequest
     GetAllEnumsResponse:
       type: object
       properties:
@@ -312,6 +270,48 @@ components:
           type: integer
           format: int64
       title: FactoryCreateRequestPayload
+    SendEmailRequest:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        factory_id:
+          type: integer
+          format: int64
+      title: SendEmailRequest
+    UMSUserResponsePayload:
+      type: object
+      properties:
+        country_code:
+          type: string
+        created_by:
+          type: string
+        first_name:
+          type: string
+        group_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        whatsapp_opt_in:
+          type: boolean
+      title: UMSUserResponsePayload
     GetFactoryResponsePayload:
       type: object
       properties:

@@ -112,18 +112,6 @@ paths:
                 $ref: '#/components/schemas/OrderTraceabilityTreeNode'
 components:
   schemas:
-    OrderTraceabilityTreeNode:
-      type: object
-      properties:
-        attributes:
-          $ref: '#/components/schemas/OrderTraceabilityDto'
-        children:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderTraceabilityTreeNode'
-        name:
-          type: string
-      title: OrderTraceabilityTreeNode
     OrderTraceabilityDto:
       type: object
       properties:
@@ -167,3 +155,15 @@ components:
         url:
           type: string
       title: OrderTraceabilityDocDto
+    OrderTraceabilityTreeNode:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OrderTraceabilityDto'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderTraceabilityTreeNode'
+        name:
+          type: string
+      title: OrderTraceabilityTreeNode

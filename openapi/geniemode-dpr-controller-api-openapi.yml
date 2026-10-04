@@ -440,6 +440,108 @@ paths:
           description: 500 message
 components:
   schemas:
+    DprCheckpointDto:
+      type: object
+      properties:
+        checkpoint_identifier:
+          $ref: '#/components/schemas/DprFieldDto'
+        error:
+          type: string
+        line_total:
+          $ref: '#/components/schemas/DprLineTotalDto'
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/DprRowDto'
+        rows_editable:
+          type: boolean
+      title: DprCheckpointDto
+    DprChangeLogDto:
+      type: object
+      properties:
+        change_time:
+          type: string
+          format: date-time
+        user_email:
+          type: string
+        user_id:
+          type: integer
+          format: int64
+      title: DprChangeLogDto
+    DprVariantDto:
+      type: object
+      properties:
+        color:
+          $ref: '#/components/schemas/DprFieldDto'
+        size:
+          $ref: '#/components/schemas/DprFieldDto'
+      title: DprVariantDto
+    DprFieldDto:
+      type: object
+      properties:
+        bg_color:
+          type: string
+        color:
+          type: string
+        error:
+          type: string
+        heading_bg_color:
+          type: string
+        heading_color:
+          type: string
+        input_type:
+          type: string
+        is_editable:
+          type: boolean
+        label:
+          type: string
+        metadata:
+          type: object
+        options:
+          type: string
+        value:
+          type: string
+      title: DprFieldDto
+    DprRowDto:
+      type: object
+      properties:
+        error:
+          type: string
+        stages:
+          $ref: '#/components/schemas/DprStagesDto'
+        variant_details:
+          $ref: '#/components/schemas/DprVariantDto'
+      title: DprRowDto
+    DprStageDetailsDto:
+      type: object
+      properties:
+        actual:
+          $ref: '#/components/schemas/DprProgressPointDto'
+        blank:
+          $ref: '#/components/schemas/DprProgressPointDto'
+        deviation:
+          $ref: '#/components/schemas/DprProgressPointDto'
+        planned:
+          $ref: '#/components/schemas/DprProgressPointDto'
+        stage_name:
+          type: string
+      title: DprStageDetailsDto
+    DprStagesDto:
+      type: object
+      properties:
+        cut:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        emb:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        finish:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        pack:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        stitch:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+        wash:
+          $ref: '#/components/schemas/DprStageDetailsDto'
+      title: DprStagesDto
     DprPlanDto:
       type: object
       properties:
@@ -468,106 +570,12 @@ components:
         preferences:
           type: string
       title: DprPlanDto
-    DprFieldDto:
-      type: object
-      properties:
-        bg_color:
-          type: string
-        color:
-          type: string
-        error:
-          type: string
-        heading_bg_color:
-          type: string
-        heading_color:
-          type: string
-        input_type:
-          type: string
-        is_editable:
-          type: boolean
-        label:
-          type: string
-        metadata:
-          type: object
-        options:
-          type: string
-        value:
-          type: string
-      title: DprFieldDto
     DprLineTotalDto:
       type: object
       properties:
         stages:
           $ref: '#/components/schemas/DprStagesDto'
       title: DprLineTotalDto
-    DprChangeLogDto:
-      type: object
-      properties:
-        change_time:
-          type: string
-          format: date-time
-        user_email:
-          type: string
-        user_id:
-          type: integer
-          format: int64
-      title: DprChangeLogDto
-    DprStageDetailsDto:
-      type: object
-      properties:
-        actual:
-          $ref: '#/components/schemas/DprProgressPointDto'
-        blank:
-          $ref: '#/components/schemas/DprProgressPointDto'
-        deviation:
-          $ref: '#/components/schemas/DprProgressPointDto'
-        planned:
-          $ref: '#/components/schemas/DprProgressPointDto'
-        stage_name:
-          type: string
-      title: DprStageDetailsDto
-    DprRowDto:
-      type: object
-      properties:
-        error:
-          type: string
-        stages:
-          $ref: '#/components/schemas/DprStagesDto'
-        variant_details:
-          $ref: '#/components/schemas/DprVariantDto'
-      title: DprRowDto
-    DprStagesDto:
-      type: object
-      properties:
-        cut:
-          $ref: '#/components/schemas/DprStageDetailsDto'
-        emb:
-          $ref: '#/components/schemas/DprStageDetailsDto'
-        finish:
-          $ref: '#/components/schemas/DprStageDetailsDto'
-        pack:
-          $ref: '#/components/schemas/DprStageDetailsDto'
-        stitch:
-          $ref: '#/components/schemas/DprStageDetailsDto'
-        wash:
-          $ref: '#/components/schemas/DprStageDetailsDto'
-      title: DprStagesDto
-    DprCheckpointDto:
-      type: object
-      properties:
-        checkpoint_identifier:
-          $ref: '#/components/schemas/DprFieldDto'
-        error:
-          type: string
-        line_total:
-          $ref: '#/components/schemas/DprLineTotalDto'
-        rows:
-          type: array
-          items:
-            $ref: '#/components/schemas/DprRowDto'
-        rows_editable:
-          type: boolean
-      title: DprCheckpointDto
     DprProgressPointDto:
       type: object
       properties:
@@ -576,11 +584,3 @@ components:
         total:
           $ref: '#/components/schemas/DprFieldDto'
       title: DprProgressPointDto
-    DprVariantDto:
-      type: object
-      properties:
-        color:
-          $ref: '#/components/schemas/DprFieldDto'
-        size:
-          $ref: '#/components/schemas/DprFieldDto'
-      title: DprVariantDto

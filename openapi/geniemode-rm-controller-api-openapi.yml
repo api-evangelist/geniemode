@@ -132,6 +132,30 @@ paths:
         required: true
 components:
   schemas:
+    UpdateRmRequestPayload:
+      type: object
+      properties:
+        contact_info:
+          type: string
+        country_code:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        rm_id:
+          type: integer
+          format: int64
+        user_email:
+          type: string
+      title: UpdateRmRequestPayload
+    GetRmRequestPayload:
+      type: object
+      properties:
+        rm_id:
+          type: integer
+          format: int64
+      title: GetRmRequestPayload
     RMResponseDto:
       type: object
       properties:
@@ -189,30 +213,6 @@ components:
           type: integer
           format: int32
       title: UpdateRmResponsePayload
-    UpdateRmRequestPayload:
-      type: object
-      properties:
-        contact_info:
-          type: string
-        country_code:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        rm_id:
-          type: integer
-          format: int64
-        user_email:
-          type: string
-      title: UpdateRmRequestPayload
-    GetRmRequestPayload:
-      type: object
-      properties:
-        rm_id:
-          type: integer
-          format: int64
-      title: GetRmRequestPayload
     DeleteRmResponsePayload:
       type: object
       properties:

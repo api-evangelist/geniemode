@@ -121,6 +121,73 @@ paths:
         description: file_content
 components:
   schemas:
+    Pair_string_string:
+      type: object
+      properties:
+        key:
+          type: string
+        left:
+          type: string
+        right:
+          type: string
+        value:
+          type: string
+      title: Pair«string,string»
+    UploadResponsePayload:
+      type: object
+      properties:
+        bucket_name:
+          type: string
+        doc_id:
+          type: integer
+          format: int64
+        error_file:
+          type: string
+          format: byte
+        error_messages:
+          type: array
+          items:
+            type: string
+        filename:
+          type: string
+        key:
+          type: string
+        status:
+          type: string
+        url:
+          type: string
+      title: UploadResponsePayload
+    GetDocumentRequestPayload:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+      title: GetDocumentRequestPayload
+    DocumentSearchRequestPayload:
+      type: object
+      properties:
+        doc_id:
+          type: integer
+          format: int64
+        doc_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        document_name:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        order_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        search:
+          type: string
+      title: DocumentSearchRequestPayload
     Doc:
       type: object
       properties:
@@ -150,73 +217,6 @@ components:
         message:
           type: string
       title: UploadDocumentResponsePayload
-    UploadResponsePayload:
-      type: object
-      properties:
-        bucket_name:
-          type: string
-        doc_id:
-          type: integer
-          format: int64
-        error_file:
-          type: string
-          format: byte
-        error_messages:
-          type: array
-          items:
-            type: string
-        filename:
-          type: string
-        key:
-          type: string
-        status:
-          type: string
-        url:
-          type: string
-      title: UploadResponsePayload
-    DocumentSearchRequestPayload:
-      type: object
-      properties:
-        doc_id:
-          type: integer
-          format: int64
-        doc_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-        document_name:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        order_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-        search:
-          type: string
-      title: DocumentSearchRequestPayload
-    GetDocumentRequestPayload:
-      type: object
-      properties:
-        doc_id:
-          type: integer
-          format: int64
-      title: GetDocumentRequestPayload
-    Pair_string_string:
-      type: object
-      properties:
-        key:
-          type: string
-        left:
-          type: string
-        right:
-          type: string
-        value:
-          type: string
-      title: Pair«string,string»
     DocDetailsDto:
       type: object
       properties:

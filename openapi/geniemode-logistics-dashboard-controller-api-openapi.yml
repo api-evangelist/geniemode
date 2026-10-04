@@ -1767,109 +1767,88 @@ paths:
           description: 500 message
 components:
   schemas:
-    OrderLogisticsDetailsLogisticViewDto:
+    DocDto:
       type: object
       properties:
-        bill_to_address:
-          type: object
-        bill_to_id:
+        doc_display_name:
+          type: string
+        id:
           type: integer
           format: int64
-        buyer_currency:
+        s3_path:
           type: string
-        buyer_payment_type:
-          type: string
-        buyer_po_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderDetailBuyerPODocResponseDto'
-        buyer_shipment_type:
-          type: string
-        company_address:
-          type: object
-        company_address_id:
+        s3_version:
           type: integer
           format: int64
-        factory_payment_type:
-          type: string
-        factory_shipment_type:
-          type: string
-        financial_status:
-          type: string
-        lead_id:
-          type: integer
-          format: int64
-        lead_info:
-          type: object
-        logistics_docs:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/OrderLogisticDocsDto'
-        manufacturer_id:
-          type: integer
-          format: int64
-        manufacturer_name:
-          type: string
-        model_type:
-          type: string
-        order_wise_approval_reasons:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderWiseApprovalReason'
-        shipping_address:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderAddressDto'
-        skus:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLogisticsDetailSkusLogisticsViewDto'
-        total_orders:
-          type: integer
-          format: int32
-        total_price:
-          type: number
-        total_quantity:
-          type: integer
-          format: int64
-      title: OrderLogisticsDetailsLogisticViewDto
-    OrderLogisticsDetailSkusLogisticsEditRequestPayload:
+      title: DocDto
+    FilterValuesDto:
       type: object
       properties:
-        custom_duty:
-          type: number
-        delivery_charges:
-          type: number
-        freight_cost:
-          type: number
-        harbor_merchandise_fee:
-          type: number
-        hsn_code:
+        count:
           type: string
-        hts_code:
+        display_name:
+          type: object
+        extras:
+          type: object
+        id:
           type: string
-        logistic_cost:
-          type: number
-        order_id:
+      title: FilterValuesDto
+    OrderAddressDto:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressResponsePayload'
+        address_id:
           type: integer
           format: int64
-        packaging_list_url:
+        id:
+          type: integer
+          format: int64
+      title: OrderAddressDto
+    OrderLogisticsDetailsLogisticEditRequestPayload:
+      type: object
+      properties:
+        costing_sheet:
           type: string
-        reciprocal_tariff:
-          type: number
-        sku:
+        forwarder_email:
           type: string
-        total_cbm:
-          type: number
-        total_custom_duty:
-          type: number
-        total_net_weight:
-          type: number
-        total_volumetric_weight:
-          type: number
-      title: OrderLogisticsDetailSkusLogisticsEditRequestPayload
+        sku_logistic_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLogisticsDetailSkusLogisticsEditRequestPayload'
+      title: OrderLogisticsDetailsLogisticEditRequestPayload
+    LogisticsDashboardFiltersResponsePayload:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterResponsePayload'
+      title: LogisticsDashboardFiltersResponsePayload
+    CreateCommissionModelInvoiceRequestPayload:
+      type: object
+      properties:
+        bls:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
+        id:
+          type: integer
+          format: int64
+        shipment_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+        shipping_docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
+        supplier_invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
+      title: CreateCommissionModelInvoiceRequestPayload
     CommissionInvoiceDocsDto:
       type: object
       properties:
@@ -1886,118 +1865,6 @@ components:
           type: integer
           format: int64
       title: CommissionInvoiceDocsDto
-    OrderLogisticDocsDto:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-        id:
-          type: integer
-          format: int64
-        s3_url:
-          type: string
-        type:
-          type: string
-        version:
-          type: integer
-          format: int64
-      title: OrderLogisticDocsDto
-    OrderDocDto:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-        created_by:
-          type: string
-        doc_no:
-          type: string
-        doc_type:
-          type: string
-        docs:
-          $ref: '#/components/schemas/DocDto'
-        id:
-          type: integer
-          format: int64
-        is_additional_doc:
-          type: boolean
-        order_id:
-          type: integer
-          format: int64
-        s3_path:
-          type: string
-      title: OrderDocDto
-    ExcelTypesPayload:
-      type: object
-      properties:
-        display_name:
-          type: string
-        hide:
-          type: boolean
-        key:
-          type: string
-        show_price_dropdown:
-          type: boolean
-      title: ExcelTypesPayload
-    DocDto:
-      type: object
-      properties:
-        doc_display_name:
-          type: string
-        id:
-          type: integer
-          format: int64
-        s3_path:
-          type: string
-        s3_version:
-          type: integer
-          format: int64
-      title: DocDto
-    CommissionModelFinalInvoiceLogisticsAssigneeRequestPayload:
-      type: object
-      properties:
-        user_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-      title: CommissionModelFinalInvoiceLogisticsAssigneeRequestPayload
-    OrderLogisticsDetailsLogisticEditRequestPayload:
-      type: object
-      properties:
-        costing_sheet:
-          type: string
-        forwarder_email:
-          type: string
-        sku_logistic_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLogisticsDetailSkusLogisticsEditRequestPayload'
-      title: OrderLogisticsDetailsLogisticEditRequestPayload
-    FilterResponsePayload:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int64
-        filter_display_name:
-          type: string
-        filter_key:
-          type: string
-        filter_values:
-          type: array
-          items:
-            $ref: '#/components/schemas/FilterValuesDto'
-      title: FilterResponsePayload
-    LogisticsDashboardFiltersResponsePayload:
-      type: object
-      properties:
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/FilterResponsePayload'
-      title: LogisticsDashboardFiltersResponsePayload
     ShipmentDashboardSummaryResponse:
       type: object
       properties:
@@ -2014,103 +1881,15 @@ components:
           type: integer
           format: int32
       title: ShipmentDashboardSummaryResponse
-    FilterValuesDto:
+    CommissionModelFinalInvoiceLogisticsAssigneeRequestPayload:
       type: object
       properties:
-        count:
-          type: string
-        display_name:
-          type: object
-        extras:
-          type: object
-        id:
-          type: string
-      title: FilterValuesDto
-    AddressResponsePayload:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        address_line2:
-          type: string
-        city:
-          type: string
-        contact_person_name:
-          type: string
-        contact_person_number:
-          type: string
-        country:
-          type: string
-        id:
-          type: integer
-          format: int64
-        landmark:
-          type: string
-        name:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-      title: AddressResponsePayload
-    OrderLogisticsDetailDto:
-      type: object
-      required:
-      - total_ctns
-      - total_gross_weight
-      properties:
-        changed_shipment_mode:
-          type: string
-        ctns:
-          type: string
-        order_id:
-          type: integer
-          format: int64
-        packaging_list_url:
-          type: string
-        port_of_discharge:
-          type: string
-        port_of_loading:
-          type: string
-        remarks:
-          type: string
-        shipment_mode:
-          type: string
-        total_cbm:
-          type: number
-        total_ctns:
-          type: number
-        total_gross_weight:
-          type: number
-        total_net_weight:
-          type: number
-        total_volumetric_weight:
-          type: number
-      title: OrderLogisticsDetailDto
-    OrderWiseApprovalReason:
-      type: object
-      properties:
-        approval_reasons:
+        user_ids:
           type: array
           items:
-            type: string
-        order_id:
-          type: integer
-          format: int64
-      title: OrderWiseApprovalReason
-    CommissionModelFinalInvoiceLogisticsRequestPayload:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        invoices:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateCommissionModelInvoiceRequestPayload'
-        logistics_remark:
-          type: string
-      title: CommissionModelFinalInvoiceLogisticsRequestPayload
+            type: integer
+            format: int64
+      title: CommissionModelFinalInvoiceLogisticsAssigneeRequestPayload
     OrderLogisticsDetailSkusLogisticsViewDto:
       type: object
       properties:
@@ -2197,6 +1976,162 @@ components:
         total_custom_duty:
           type: number
       title: OrderLogisticsDetailSkusLogisticsViewDto
+    AddressResponsePayload:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        contact_person_name:
+          type: string
+        contact_person_number:
+          type: string
+        country:
+          type: string
+        id:
+          type: integer
+          format: int64
+        landmark:
+          type: string
+        name:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+      title: AddressResponsePayload
+    FilterResponsePayload:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+        filter_display_name:
+          type: string
+        filter_key:
+          type: string
+        filter_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterValuesDto'
+      title: FilterResponsePayload
+    ExcelTypesPayload:
+      type: object
+      properties:
+        display_name:
+          type: string
+        hide:
+          type: boolean
+        key:
+          type: string
+        show_price_dropdown:
+          type: boolean
+      title: ExcelTypesPayload
+    OrderLogisticsDetailDto:
+      type: object
+      required:
+      - total_ctns
+      - total_gross_weight
+      properties:
+        changed_shipment_mode:
+          type: string
+        ctns:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        packaging_list_url:
+          type: string
+        port_of_discharge:
+          type: string
+        port_of_loading:
+          type: string
+        remarks:
+          type: string
+        shipment_mode:
+          type: string
+        total_cbm:
+          type: number
+        total_ctns:
+          type: number
+        total_gross_weight:
+          type: number
+        total_net_weight:
+          type: number
+        total_volumetric_weight:
+          type: number
+      title: OrderLogisticsDetailDto
+    OrderLogisticsDetailsLogisticViewDto:
+      type: object
+      properties:
+        bill_to_address:
+          type: object
+        bill_to_id:
+          type: integer
+          format: int64
+        buyer_currency:
+          type: string
+        buyer_payment_type:
+          type: string
+        buyer_po_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetailBuyerPODocResponseDto'
+        buyer_shipment_type:
+          type: string
+        company_address:
+          type: object
+        company_address_id:
+          type: integer
+          format: int64
+        factory_payment_type:
+          type: string
+        factory_shipment_type:
+          type: string
+        financial_status:
+          type: string
+        lead_id:
+          type: integer
+          format: int64
+        lead_info:
+          type: object
+        logistics_docs:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/OrderLogisticDocsDto'
+        manufacturer_id:
+          type: integer
+          format: int64
+        manufacturer_name:
+          type: string
+        model_type:
+          type: string
+        order_wise_approval_reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderWiseApprovalReason'
+        shipping_address:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderAddressDto'
+        skus:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLogisticsDetailSkusLogisticsViewDto'
+        total_orders:
+          type: integer
+          format: int32
+        total_price:
+          type: number
+        total_quantity:
+          type: integer
+          format: int64
+      title: OrderLogisticsDetailsLogisticViewDto
     OrderDetailBuyerPODocResponseDto:
       type: object
       properties:
@@ -2213,39 +2148,104 @@ components:
         po_type:
           type: string
       title: OrderDetailBuyerPODocResponseDto
-    CreateCommissionModelInvoiceRequestPayload:
+    OrderDocDto:
       type: object
       properties:
-        bls:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        doc_no:
+          type: string
+        doc_type:
+          type: string
+        docs:
+          $ref: '#/components/schemas/DocDto'
         id:
           type: integer
           format: int64
-        shipment_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-        shipping_docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
-        supplier_invoices:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommissionInvoiceDocsDto'
-      title: CreateCommissionModelInvoiceRequestPayload
-    OrderAddressDto:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/AddressResponsePayload'
-        address_id:
+        is_additional_doc:
+          type: boolean
+        order_id:
           type: integer
           format: int64
+        s3_path:
+          type: string
+      title: OrderDocDto
+    CommissionModelFinalInvoiceLogisticsRequestPayload:
+      type: object
+      properties:
         id:
           type: integer
           format: int64
-      title: OrderAddressDto
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateCommissionModelInvoiceRequestPayload'
+        logistics_remark:
+          type: string
+      title: CommissionModelFinalInvoiceLogisticsRequestPayload
+    OrderWiseApprovalReason:
+      type: object
+      properties:
+        approval_reasons:
+          type: array
+          items:
+            type: string
+        order_id:
+          type: integer
+          format: int64
+      title: OrderWiseApprovalReason
+    OrderLogisticDocsDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int64
+        s3_url:
+          type: string
+        type:
+          type: string
+        version:
+          type: integer
+          format: int64
+      title: OrderLogisticDocsDto
+    OrderLogisticsDetailSkusLogisticsEditRequestPayload:
+      type: object
+      properties:
+        custom_duty:
+          type: number
+        delivery_charges:
+          type: number
+        freight_cost:
+          type: number
+        harbor_merchandise_fee:
+          type: number
+        hsn_code:
+          type: string
+        hts_code:
+          type: string
+        logistic_cost:
+          type: number
+        order_id:
+          type: integer
+          format: int64
+        packaging_list_url:
+          type: string
+        reciprocal_tariff:
+          type: number
+        sku:
+          type: string
+        total_cbm:
+          type: number
+        total_custom_duty:
+          type: number
+        total_net_weight:
+          type: number
+        total_volumetric_weight:
+          type: number
+      title: OrderLogisticsDetailSkusLogisticsEditRequestPayload

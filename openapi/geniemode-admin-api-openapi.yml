@@ -240,6 +240,29 @@ components:
     JsonNode:
       type: object
       title: JsonNode
+    UserSirenEventLog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        eventType:
+          type: string
+        id:
+          type: integer
+          format: int64
+        metrics:
+          $ref: '#/components/schemas/JsonNode'
+        occurredAt:
+          type: integer
+          format: int64
+        path:
+          type: string
+        sirenType:
+          type: string
+        userId:
+          type: integer
+          format: int64
+      title: UserSirenEventLog
     SirenPerformanceRowDto:
       type: object
       properties:
@@ -322,26 +345,3 @@ components:
         value:
           $ref: '#/components/schemas/JsonNode'
       title: UserLockState
-    UserSirenEventLog:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        eventType:
-          type: string
-        id:
-          type: integer
-          format: int64
-        metrics:
-          $ref: '#/components/schemas/JsonNode'
-        occurredAt:
-          type: integer
-          format: int64
-        path:
-          type: string
-        sirenType:
-          type: string
-        userId:
-          type: integer
-          format: int64
-      title: UserSirenEventLog

@@ -162,15 +162,6 @@ paths:
                 type: string
 components:
   schemas:
-    AiAuditInvoiceBILDocPayload:
-      type: object
-      properties:
-        ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-      title: AiAuditInvoiceBILDocPayload
     WfStepOrderMapAiAuditDto:
       type: object
       properties:
@@ -201,3 +192,12 @@ components:
             type: integer
             format: int64
       title: FixDueDatesDto
+    AiAuditInvoiceBILDocPayload:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      title: AiAuditInvoiceBILDocPayload

@@ -53,22 +53,6 @@ components:
         name:
           type: string
       title: Person
-    QcSummary:
-      type: object
-      properties:
-        assigned_by:
-          $ref: '#/components/schemas/Person'
-        completion_date:
-          type: integer
-          format: int64
-        qc_date:
-          type: integer
-          format: int64
-        status:
-          type: string
-        type:
-          type: string
-      title: QcSummary
     Margin:
       type: object
       properties:
@@ -100,3 +84,19 @@ components:
         rm:
           $ref: '#/components/schemas/Person'
       title: OrderDnaSummaryResponse
+    QcSummary:
+      type: object
+      properties:
+        assigned_by:
+          $ref: '#/components/schemas/Person'
+        completion_date:
+          type: integer
+          format: int64
+        qc_date:
+          type: integer
+          format: int64
+        status:
+          type: string
+        type:
+          type: string
+      title: QcSummary

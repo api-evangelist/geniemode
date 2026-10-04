@@ -113,38 +113,26 @@ paths:
         required: true
 components:
   schemas:
-    UMSUserResponsePayload:
+    GetFactoryFinanceResponse:
       type: object
       properties:
-        country_code:
-          type: string
-        created_by:
-          type: string
-        first_name:
-          type: string
-        group_ids:
+        collateral:
+          type: boolean
+        docs:
           type: array
           items:
-            type: integer
-            format: int64
+            $ref: '#/components/schemas/CreateFactoryFinanceDocRequest'
+        factory:
+          $ref: '#/components/schemas/GetFactoryResponsePayload'
         id:
           type: integer
           format: int64
-        last_name:
+        loan_amount:
+          type: integer
+          format: int64
+        loan_type:
           type: string
-        manager:
-          $ref: '#/components/schemas/UMSUserResponsePayload'
-        phone_number:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-        username:
-          type: string
-        whatsapp_opt_in:
-          type: boolean
-      title: UMSUserResponsePayload
+      title: GetFactoryFinanceResponse
     CreateFactoryFinanceDocRequest:
       type: object
       properties:
@@ -179,26 +167,38 @@ components:
         loan_type:
           type: string
       title: CreateFactoryFinanceRequestPayload
-    GetFactoryFinanceResponse:
+    UMSUserResponsePayload:
       type: object
       properties:
-        collateral:
-          type: boolean
-        docs:
+        country_code:
+          type: string
+        created_by:
+          type: string
+        first_name:
+          type: string
+        group_ids:
           type: array
           items:
-            $ref: '#/components/schemas/CreateFactoryFinanceDocRequest'
-        factory:
-          $ref: '#/components/schemas/GetFactoryResponsePayload'
+            type: integer
+            format: int64
         id:
           type: integer
           format: int64
-        loan_amount:
-          type: integer
-          format: int64
-        loan_type:
+        last_name:
           type: string
-      title: GetFactoryFinanceResponse
+        manager:
+          $ref: '#/components/schemas/UMSUserResponsePayload'
+        phone_number:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        whatsapp_opt_in:
+          type: boolean
+      title: UMSUserResponsePayload
     GetFactoryResponsePayload:
       type: object
       properties:

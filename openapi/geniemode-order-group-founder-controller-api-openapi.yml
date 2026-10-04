@@ -39,16 +39,6 @@ paths:
         required: true
 components:
   schemas:
-    PoSkusMapping:
-      type: object
-      properties:
-        buyer_po_number:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        id:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        quantity:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-      title: PoSkusMapping
     PoSkus:
       type: object
       properties:
@@ -237,29 +227,6 @@ components:
         variant_margin_percentage:
           $ref: '#/components/schemas/PoMapPayloadDto'
       title: PoSkus
-    PoMapPayloadDto:
-      type: object
-      properties:
-        change_type:
-          $ref: '#/components/schemas/PoChangeTypeDto'
-        value:
-          type: string
-      title: PoMapPayloadDto
-    ChangeOrderGroupStatusRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        response:
-          $ref: '#/components/schemas/PoResponsePayloadDto'
-        status:
-          type: string
-        variants:
-          type: array
-          items:
-            $ref: '#/components/schemas/PoVariantRequestPayload'
-      title: ChangeOrderGroupStatusRequest
     BundleSkuDto:
       type: object
       properties:
@@ -304,17 +271,64 @@ components:
           type: integer
           format: int64
       title: PoVariantRequestPayload
-    PoListDeliveryAddressDto:
+    PoChangeDataDto:
       type: object
       properties:
-        address_id:
-          type: integer
-          format: int64
-        delivery_address:
+        previous_value:
+          type: string
+      title: PoChangeDataDto
+    PoChangeTypeDto:
+      type: object
+      properties:
+        added:
+          $ref: '#/components/schemas/PoChangeDataDto'
+        modify:
+          $ref: '#/components/schemas/PoChangeDataDto'
+        subtracted:
+          $ref: '#/components/schemas/PoChangeDataDto'
+      title: PoChangeTypeDto
+    PoOrder:
+      type: object
+      properties:
+        buyer_price_in_buyer_currency:
           $ref: '#/components/schemas/PoMapPayloadDto'
-        delivery_contact:
+        currency:
           $ref: '#/components/schemas/PoMapPayloadDto'
-      title: PoListDeliveryAddressDto
+        custom_duty_cost:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_duty_cost_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_duty_per_piece:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        custom_unique_id:
+          type: string
+        delivery_charges:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        logistic_cost:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        logistic_cost_per_piece:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        logistic_cost_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        net_margin:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        order_id:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        quantity:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        reciprocal_tariff:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        reciprocal_tariff_cost_type:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        reciprocal_tariff_per_piece:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        sku:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        style_code:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        total_custom_duty:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+      title: PoOrder
     PoResponsePayloadDto:
       type: object
       properties:
@@ -547,61 +561,47 @@ components:
         total_selling_price_currency:
           $ref: '#/components/schemas/PoMapPayloadDto'
       title: PoResponsePayloadDto
-    PoOrder:
+    PoSkusMapping:
       type: object
       properties:
-        buyer_price_in_buyer_currency:
+        buyer_po_number:
           $ref: '#/components/schemas/PoMapPayloadDto'
-        currency:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        custom_duty_cost:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        custom_duty_cost_type:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        custom_duty_per_piece:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        custom_unique_id:
-          type: string
-        delivery_charges:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        logistic_cost:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        logistic_cost_per_piece:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        logistic_cost_type:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        net_margin:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        order_id:
+        id:
           $ref: '#/components/schemas/PoMapPayloadDto'
         quantity:
           $ref: '#/components/schemas/PoMapPayloadDto'
-        reciprocal_tariff:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        reciprocal_tariff_cost_type:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        reciprocal_tariff_per_piece:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        sku:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        style_code:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-        total_custom_duty:
-          $ref: '#/components/schemas/PoMapPayloadDto'
-      title: PoOrder
-    PoChangeTypeDto:
+      title: PoSkusMapping
+    PoMapPayloadDto:
       type: object
       properties:
-        added:
-          $ref: '#/components/schemas/PoChangeDataDto'
-        modify:
-          $ref: '#/components/schemas/PoChangeDataDto'
-        subtracted:
-          $ref: '#/components/schemas/PoChangeDataDto'
-      title: PoChangeTypeDto
-    PoChangeDataDto:
-      type: object
-      properties:
-        previous_value:
+        change_type:
+          $ref: '#/components/schemas/PoChangeTypeDto'
+        value:
           type: string
-      title: PoChangeDataDto
+      title: PoMapPayloadDto
+    ChangeOrderGroupStatusRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        response:
+          $ref: '#/components/schemas/PoResponsePayloadDto'
+        status:
+          type: string
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoVariantRequestPayload'
+      title: ChangeOrderGroupStatusRequest
+    PoListDeliveryAddressDto:
+      type: object
+      properties:
+        address_id:
+          type: integer
+          format: int64
+        delivery_address:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+        delivery_contact:
+          $ref: '#/components/schemas/PoMapPayloadDto'
+      title: PoListDeliveryAddressDto

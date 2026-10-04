@@ -95,13 +95,6 @@ paths:
         required: true
 components:
   schemas:
-    UpdateBusinessOwnerFromFinanceRequestPayload:
-      type: object
-      properties:
-        business_owner_id:
-          type: integer
-          format: int64
-      title: UpdateBusinessOwnerFromFinanceRequestPayload
     PoVariantRequestPayload:
       type: object
       properties:
@@ -123,14 +116,6 @@ components:
           type: integer
           format: int64
       title: PoVariantRequestPayload
-    UpdateGstFromFinanceRequestPayload:
-      type: object
-      properties:
-        variants:
-          type: array
-          items:
-            $ref: '#/components/schemas/PoVariantRequestPayload'
-      title: UpdateGstFromFinanceRequestPayload
     UpdateDiscountFromFinanceRequestPayload:
       type: object
       properties:
@@ -162,6 +147,13 @@ components:
           type: integer
           format: int64
       title: UpdateDiscountFromFinanceRequestPayload
+    UpdateBusinessOwnerFromFinanceRequestPayload:
+      type: object
+      properties:
+        business_owner_id:
+          type: integer
+          format: int64
+      title: UpdateBusinessOwnerFromFinanceRequestPayload
     UpdateDiscountsFromFinanceRequestPayload:
       type: object
       properties:
@@ -170,3 +162,11 @@ components:
           items:
             $ref: '#/components/schemas/UpdateDiscountFromFinanceRequestPayload'
       title: UpdateDiscountsFromFinanceRequestPayload
+    UpdateGstFromFinanceRequestPayload:
+      type: object
+      properties:
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoVariantRequestPayload'
+      title: UpdateGstFromFinanceRequestPayload

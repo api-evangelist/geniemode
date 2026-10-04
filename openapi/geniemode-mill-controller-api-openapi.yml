@@ -253,6 +253,17 @@ paths:
         required: true
 components:
   schemas:
+    MillDocsDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        type:
+          type: string
+        url:
+          type: string
+      title: MillDocsDto
     UploadResponsePayload:
       type: object
       properties:
@@ -277,6 +288,25 @@ components:
         url:
           type: string
       title: UploadResponsePayload
+    MillSignupRequestPayload:
+      type: object
+      properties:
+        email:
+          type: string
+        first_name:
+          type: string
+        ga_id:
+          type: string
+        last_name:
+          type: string
+        password:
+          type: string
+        region:
+          type: string
+        steps_completed:
+          type: integer
+          format: int64
+      title: MillSignupRequestPayload
     MillDto:
       type: object
       properties:
@@ -385,33 +415,3 @@ components:
         type:
           type: string
       title: AddressSubmitResponsePayload
-    MillSignupRequestPayload:
-      type: object
-      properties:
-        email:
-          type: string
-        first_name:
-          type: string
-        ga_id:
-          type: string
-        last_name:
-          type: string
-        password:
-          type: string
-        region:
-          type: string
-        steps_completed:
-          type: integer
-          format: int64
-      title: MillSignupRequestPayload
-    MillDocsDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        type:
-          type: string
-        url:
-          type: string
-      title: MillDocsDto

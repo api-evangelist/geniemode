@@ -198,6 +198,16 @@ paths:
                 $ref: '#/components/schemas/CurrencyConversionDto'
 components:
   schemas:
+    Sort:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+      title: Sort
     CurrencyConversionDto:
       type: object
       properties:
@@ -217,16 +227,25 @@ components:
           type: integer
           format: int64
       title: CurrencyConversionDto
-    Sort:
+    Pageable:
       type: object
       properties:
-        empty:
+        offset:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
           type: boolean
-        sorted:
+        sort:
+          $ref: '#/components/schemas/Sort'
+        unpaged:
           type: boolean
-        unsorted:
-          type: boolean
-      title: Sort
+      title: Pageable
     Page_CurrencyConversionDto:
       type: object
       properties:
@@ -260,22 +279,3 @@ components:
           type: integer
           format: int32
       title: Page«CurrencyConversionDto»
-    Pageable:
-      type: object
-      properties:
-        offset:
-          type: integer
-          format: int64
-        pageNumber:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        paged:
-          type: boolean
-        sort:
-          $ref: '#/components/schemas/Sort'
-        unpaged:
-          type: boolean
-      title: Pageable
