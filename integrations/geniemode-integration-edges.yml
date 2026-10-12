@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/geniemode/integrations
+- https://n8n.io/integrations/geniemode/
+- https://composio.dev/toolkits/geniemode
+- https://monid.ai/tools/geniemode
+checked:
+- https://composio.dev/toolkits/geniemode
+- https://monid.ai/tools/geniemode
+- https://n8n.io/integrations/geniemode/
+- https://zapier.com/apps/geniemode/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
